@@ -1,0 +1,43 @@
+<HTML><HEAD><TITLE>Racial Distribution in US cities</TITLE></HEAD><BODY>
+<APPLET code="spjgraph.class"
+   archive="spjgraph.jar"
+   WIDTH=600 HEIGHT=400 >
+   <PARAM NAME=spjgraph.filename VALUE=map.spj>
+</APPLET>
+<BR><BR>&nbsp;
+<p>
+Here is the S-PLUS code used to make this graph:
+<p>
+<pre>
+usa()
+symbols(census$x, census$y, circles=sqrt(census$Population),inches=0.05,col=2,add=T)
+text(census$x, census$y, paste("",census$AreaName), adj=0, cex=0.5,col=3)
+title("Racial distribution in US cities")
+java.set.page.title("USA map")
+java.set.page.tag("p0")
+java.identify(census$x, census$y,
+	      labels=census$fullname,
+	      actions=java.action.page(paste("p",1:length(census$x),sep="")))
+
+cities <- census$fullname
+for(thecity in sort(cities)) {
+  datum <- census[census$fullname==thecity,]
+  grps <- c("Pct.white","Pct.black","Pct.amerind","Pct.asiapac","Pct.hisp")
+  grp.eng <- c("White","Black","American Indian","Asian/Pacific","Hispanic")
+  x <- unlist(datum[grps])
+  print(barchart(grp.eng ~ x,xlim=c(0,100),xlab="Percent",ylab=""))
+  title(paste("Racial distribution in",thecity))
+  java.set.page.title(if(sum(census$AreaName==datum$AreaName)>1)
+		      {datum$fullname} else {datum$AreaName})
+  java.set.page.tag(paste("p", match(thecity, cities, nomatch=0), sep="", collapse=""))
+  title(xlab="[Click here to return to USA Map]", adj=0.0)
+  java.identify(y1=par("usr")[[3]], y2=par("usr")[[3]]-100, labels="return to map", actions=java.action.page("p0"))
+}
+
+
+
+</pre>
+
+
+</BODY></HTML>
+

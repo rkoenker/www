@@ -1,0 +1,73 @@
+I'm trying to resusitate a fortran function from the Starlink [1] project to compute
+weighted quantiles.  The original function was called KPG1_QNTLx, but I've renamed it
+wquantile and made three modifications:
+
+	o  removed the logical arguments USEWT and INTERP  and set them both to TRUE
+		because I was nervous about passing logicals from R,
+	o  changed the type of Z from REAL to DOUBLE PRECISION for similar, possibly
+		paranoid reasons.
+	o  added some R print statements to (optimistically) aid debugging as described below
+
+On my mac mini doing:
+
+R CMD SHLIB wkuantile.f 
+R
+> source("wkuantile.R")
+
+prints some diagnostics from fortran and then segfaults when it tries to access an
+array with a negative subscript.  It also does this on a couple of linux systems I've
+tried, with the same diagnostic stream. [2] 
+
+Now, here is the odd thing:  things go pear shaped when the SQRT expression below
+is evaluated at a negative argument, and returns an NA -- but this shouldn't happen
+since at least according to what is printed by the R print statements both pieces
+of the argument are (should be) positive:
+
+
+...
+S
+[1] 4630
+N
+[1] 891131
+G
+[1] -213
+Z
+[1] 13.70025
+SD
+[1] NA
+
+ *** caught segfault ***
+address 0xfffffffe06295e14, cause 'memory not mapped'
+
+Here is the contiguous code fragment together with some R print statements:
+
+	 G = S*(N-S)/N
+         CALL INTPR("S",1,S,1)
+         CALL INTPR("N",1,N,1)
+         CALL DBLEPR("G",1,G,1)
+         SD = IDINT( 0.1D0 * SQRT( Z * DBLE( S * ( N - S ) / N ) ) *
+     :           ( 2 * I / N - 1 ) )
+         CALL INTPR("SD",2,SD,1)
+
+So the question (finally!) is how can G be negative when S, N, and N-S
+are all positive?  The tentative answer would seem to be that there is
+some serious corruption in memory, which is plausible I suppose given
+that the subroutine in question is using some rather dubious workarounds
+to make fortran 77 do recursion.  Given that G < 0 it is not surprising
+that since Z > 0, the SQRT call makes SD = NA and things go to hell after
+that.  Using gdb confirms the values reported by R.  In the unlikely event
+that anyone has time and inclination to look into this further I've put
+the relevant files into http://www.econ.uiuc.edu/~roger/research/wkuantile/
+The foregoing results have been reproduced on several systems including
+my mac mini running R 4.0.3 and a linux system running 3.5.2; ironically
+the test case in wkuantile.R runs without segfaulting on my raspberrypi 4.
+Meanwhile, any hints about further debugging steps would be most welcome.
+
+[1]  The Starlink Project was an apparently quite reputable UK astronomy initiative
+that among other things developed software for large scale data analysis. See e.g.
+https://en.wikipedia.org/wiki/Starlink_Project
+
+[2]  It should be noted that the test problem posed in wkuantile.R is of sample
+size 10^6, for smaller problems I've not (yet) seen segfaults, however the rationale
+for the function is to operate on large samples, and by this standard 10^6 is still
+quite moderate.

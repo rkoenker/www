@@ -1,0 +1,14 @@
+#Figure 1 for Prague paper
+postscript("fig.1.ps",horizontal=F,width=6.5,height=4.5,
+                        pointsize=10, font=3)
+n_10^((1:20)/2)
+plot(n,dn(.5,n),type="n",log="x",xlab="sample size",ylab="bandwidth")
+for(tau in c(.5,.75,.95)){
+	lines(n,dn(tau,n))
+	lines(n,dn(tau,n,hs=T),lty=2)
+	}
+text(30,dn(.5,30)+.04,paste(.5))
+text(30,dn(.75,30)+.03,paste(.75))
+text(50,dn(.95,50)+.01,paste(.95))
+frame()
+

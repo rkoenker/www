@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>The Falstaff Estimator</TITLE>
+<META NAME="description" CONTENT="The Falstaff Estimator">
+<META NAME="keywords" CONTENT="falstaff">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="falstaff.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html27" HREF="node3.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html25" HREF="falstaff.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html19" HREF="node1.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html28" HREF="node3.html">Monte Carlo</A>
+<B>Up:</B> <A NAME="tex2html26" HREF="falstaff.html">The Falstaff Estimator</A>
+<B> Previous:</B> <A NAME="tex2html20" HREF="node1.html">Introduction</A>
+<BR> <P>
+<H1><A NAME="SECTION00020000000000000000">The Falstaff Estimator</A></H1>
+<P>
+Stein's (1956) celebrated shrinkage results imply that one can improve upon
+ <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline196" SRC="img6.gif"  >  in Gaussian regression problems with parametric dimension
+ <IMG WIDTH=44 HEIGHT=27 ALIGN=MIDDLE ALT="tex2html_wrap_inline198" SRC="img7.gif"  >  by shrinking  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline196" SRC="img6.gif"  >  toward some fixed point, thereby
+trading bias for variance reduction.  Judge and Bock (1978) treat this
+subject in some detail from an econometric standpoint.  One might 
+characterize this as statistical stoicism - through restraint, self-discipline
+and temperance we achieve the noble purpose of reduced mean square error.
+For others, it may be interpreted as a  form of Bayesian parsimony.
+<P>
+We have no quarrel with such philosophies.  They are fine for those who, like
+La Fontaine's ant, prefer to toil all summer to prepare for the hardships
+of winter.  But who speaks out for the profligacy of the grasshopper, 
+for gluttony and reckless abandon?  
+Can such ideas have a place in the dismal annals of econometrics?
+We beg the gentle reader's momentary indulgence to consider 
+the following foolishly
+profligate estimator:
+<P>
+<BLOCKQUOTE> Augment the <I>p</I>-columns of the initial design matrix <I>X</I>, by <I>q</I>
+<I>randomly generated</I> columns, <I>D</I>.  Let  <IMG WIDTH=83 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline210" SRC="img8.gif"  > , and
+consider estimating the augmented model by ordinary least squares,
+<P> <IMG WIDTH=317 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath212" SRC="img9.gif"  > <P>
+and denote the familiar Eicker-White covariance matrix estimator for 
+ <IMG WIDTH=16 HEIGHT=39 ALIGN=MIDDLE ALT="tex2html_wrap_inline214" SRC="img10.gif"  >  by
+<P> <IMG WIDTH=360 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath216" SRC="img11.gif"  > <P>
+where  <IMG WIDTH=104 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline218" SRC="img12.gif"  >  and  <IMG WIDTH=89 HEIGHT=39 ALIGN=MIDDLE ALT="tex2html_wrap_inline220" SRC="img13.gif"  > .
+Finally, let  <IMG WIDTH=82 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline222" SRC="img14.gif"  > , so  <IMG WIDTH=59 HEIGHT=27 ALIGN=MIDDLE ALT="tex2html_wrap_inline224" SRC="img15.gif"  > , 
+and define the GMM estimator
+of  <IMG WIDTH=10 HEIGHT=27 ALIGN=MIDDLE ALT="tex2html_wrap_inline192" SRC="img4.gif"  > , by solving
+<P> <IMG WIDTH=359 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath228" SRC="img16.gif"  > <P>
+yielding, 
+<P> <IMG WIDTH=358 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath230" SRC="img17.gif"  > <P></BLOCKQUOTE>
+<P>
+This may appear to be the recipe of some demented sack-guzzler, but there
+is method in the madness.  Our first result shows that we are not trading
+bias for variance reduction as in Stein estimation.
+<P>
+<P> <IMG WIDTH=691 HEIGHT=45 ALIGN=BOTTOM ALT="proposition75" SRC="img18.gif"  > <P>
+<P>
+<B>Proof: </B>The argument is essentially that of Kakwani(1967);
+see also  the treatment in Schmidt(1976).  Fix <I>Z</I> and write
+<P> <IMG WIDTH=372 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath242" SRC="img19.gif"  > <P>
+Observe that  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  >  is an even function of <I>u</I>, that is <I>u</I> and -<I>u</I>
+yield the same  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  > .  Since by assumption <I>u</I> and -<I>u</I> have the same
+distribution, it follows that  <IMG WIDTH=53 HEIGHT=35 ALIGN=MIDDLE ALT="tex2html_wrap_inline258" SRC="img21.gif"  >  and 
+ <IMG WIDTH=82 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline260" SRC="img22.gif"  >  have the same distribution.
+And the result then follows by unconditioning on <I>Z</I>.
+ 
+<P>
+We can conclude from this result that any improvement in mean squared error
+acheived by  <IMG WIDTH=18 HEIGHT=35 ALIGN=MIDDLE ALT="tex2html_wrap_inline190" SRC="img3.gif"  >  must be purely a matter of variance reduction.  Since for 
+Gaussian <I>F</I> it is well known that  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline196" SRC="img6.gif"  >  is minimum variance unbiased
+we obviously must narrow the class of <I>F</I>'s to exclude this case.  Our
+next result which is an immediate corollary of Theorem 2.2 of 
+Koenker, Machado, Skeels, and Welsh(1994), henceforth KMSW,
+specifies the class of distributions for which we may expect
+an improvement.
+<P>
+<P> <IMG WIDTH=691 HEIGHT=126 ALIGN=BOTTOM ALT="proposition81" SRC="img23.gif"  > <P>
+<P>
+The first term in this variance expansion is familiar,
+it is the variance that would result had we used the true  <IMG WIDTH=67 HEIGHT=15 ALIGN=BOTTOM ALT="tex2html_wrap_inline286" SRC="img24.gif"  > .
+The second term which is of order  <IMG WIDTH=57 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline288" SRC="img25.gif"  >  may be attributed to 
+the ``heteroscedasticity correction''  of the GMM estimator and 
+is probably less so.  
+It is easy to see that the
+matrix  <IMG WIDTH=28 HEIGHT=28 ALIGN=MIDDLE ALT="tex2html_wrap_inline290" SRC="img26.gif"  >  is positive definite and consequently for 
+distributions with kurtosis greater than 5, the Falstaff estimator,  <IMG WIDTH=18 HEIGHT=35 ALIGN=MIDDLE ALT="tex2html_wrap_inline190" SRC="img3.gif"  > ,
+has strictly smaller asymptotic covariance matrix, to order  <IMG WIDTH=57 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline288" SRC="img25.gif"  > 
+than the Gauss-Markov estimator  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline196" SRC="img6.gif"  > .
+<P>
+Of course, for Gaussian <I>F</I> and other distributions with modest kurtosis the 
+second term contributes a positive component and consequently  the  <IMG WIDTH=18 HEIGHT=35 ALIGN=MIDDLE ALT="tex2html_wrap_inline190" SRC="img3.gif"  > 
+``correction for heteroscedasticity'' is counter-productive.  This degradation
+in performance at the Gaussian model is hardly surprising since classical
+sufficiency arguments as in Rothenberg(1984) imply such a loss is inevitable.
+<P>
+Intuitively, we would expect that ignoring the fact that our observations
+are homoscedastic couldn't help us.  We <I>should</I> be punished for ignoring
+relevant information.  Shouldn't we?
+How then do we gain from the profligate behavior
+of the Falstaff estimator?  How can estimating an artificially expanded
+model and then correcting for heteroscedasticity <I>in an iid error model</I>
+conceivably increase the precision of our estimates?
+To explore these questions we begin by considering the particularly simple
+special case of estimating a scalar location parameter.  Since in this
+case <I>X</I> = 1  an <I>n</I>-vector of ones, the form of  <IMG WIDTH=28 HEIGHT=28 ALIGN=MIDDLE ALT="tex2html_wrap_inline290" SRC="img26.gif"  >  is especially
+simple:   <IMG WIDTH=54 HEIGHT=28 ALIGN=MIDDLE ALT="tex2html_wrap_inline308" SRC="img27.gif"  > ,  <IMG WIDTH=61 HEIGHT=28 ALIGN=MIDDLE ALT="tex2html_wrap_inline310" SRC="img28.gif"  > , and therefore  <IMG WIDTH=62 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline312" SRC="img29.gif"  > , the
+number of augmented columns in <I>D</I>.  Thus our expansion reduces in this
+case to
+<P> <IMG WIDTH=457 HEIGHT=23 ALIGN=BOTTOM ALT="displaymath316" SRC="img30.gif"  > <P>
+In the next section we report on a small monte-carlo experiment designed
+to evaluate the accuracy of this expansion for moderate sample sizes.
+What is the Falstaff estimator <I>doing</I> in this simple location context?
+The Falstaff estimator of location may be expressed as
+<P> <IMG WIDTH=340 HEIGHT=24 ALIGN=BOTTOM ALT="displaymath318" SRC="img31.gif"  > <P>
+Obviously, if  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  >  is proportional to the identity matrix and
+<I>D</I> is orthogonal to <I>X</I> then 
+ <IMG WIDTH=98 HEIGHT=39 ALIGN=MIDDLE ALT="tex2html_wrap_inline326" SRC="img32.gif"  > .  However, generally, all the coordinates of
+ <IMG WIDTH=7 HEIGHT=19 ALIGN=BOTTOM ALT="tex2html_wrap_inline328" SRC="img33.gif"  >  contribute to  <IMG WIDTH=18 HEIGHT=35 ALIGN=MIDDLE ALT="tex2html_wrap_inline190" SRC="img3.gif"  > .  If  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  >  converges in probability
+to a nonstochastic matrix, the iid error assumption ensures that the limit 
+<I>is</I> proportional to the identity.  
+This simply restates the obvious fact that if  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  >  is consistent
+as it would be in the present circumstances if <I>q</I> were fixed, then the Falstaff
+improvement vanishes as  <IMG WIDTH=58 HEIGHT=8 ALIGN=BOTTOM ALT="tex2html_wrap_inline338" SRC="img34.gif"  > .  Whether there may
+be some scope for asymptotic improvement if the sequence of  <IMG WIDTH=23 HEIGHT=27 ALIGN=MIDDLE ALT="tex2html_wrap_inline340" SRC="img35.gif"  >  matrices
+could be chosen to preserve a stochastic contribution from  <IMG WIDTH=18 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline244" SRC="img20.gif"  > 
+remains an open question.
+<P>
+<HR><A NAME="tex2html27" HREF="node3.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html25" HREF="falstaff.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html19" HREF="node1.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html28" HREF="node3.html">Monte Carlo</A>
+<B>Up:</B> <A NAME="tex2html26" HREF="falstaff.html">The Falstaff Estimator</A>
+<B> Previous:</B> <A NAME="tex2html20" HREF="node1.html">Introduction</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 21:16:10 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,39 @@
+<title>QAR paper</title>
+<html>
+<h1> Longitudinal Quantile Regression</h1>
+<p>
+<br>
+<p>
+</body></html>
+
+<STRONG> Quantile Regression for Longitudinal Data
+</STRONG>
+Roger Koenker 
+<br>
+<br>
+The penalized least squares interpretation of
+the classical random effects estimator suggests a possible way forward
+for quantile regression models with a large number of fixed effects.
+Sparse linear algebra and interior point methods for solving large linear
+programs are essential practical tools.
+<br>
+<br>
+This paper appears in 2004 in J. of Mult. Analysis, 91, 74-89.
+
+<br>
+<br>
+A very basic version of the software is available 
+<a href="rq.fit.panel.R">here.</a>
+Note added October 26 2010:  It is now possible to do what is done with this
+code much more easily using the package rqpd available from R-forge:
+<a href="http://rqpd.r-forge.r-project.org">here.</a>
+
+In the context of the usual quantreg package some functionality is provided by the
+function rqss().  The fixed effect parameters can be introduced in the usual
+R way via a factor variable, and the shrinkage, if desired, can be imposed with
+the lasso penalty method.  See ?rqss for further details.
+The paper is available in <a href="long.pdf">pdf.</a>
+<br>
+<br>
+Comments are, of course, always welcome.
+<br>

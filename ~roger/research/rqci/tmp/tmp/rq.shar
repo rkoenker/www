@@ -1,0 +1,1658 @@
+#!/bin/sh
+# This is a shell archive (shar 3.32)
+# made 05/25/1995 03:21 UTC by roger@ysidro.econ.uiuc.edu
+# Source directory /home2/roger/shar
+#
+# existing files WILL be overwritten
+#
+# This shar contains:
+# length  mode       name
+# ------ ---------- ------------------------------------------
+#   6161 -rw-r--r-- Makefile
+#   2110 -rw-r--r-- ReadMe
+#    591 -rw-r--r-- qrq.d
+#    916 -rw-r--r-- ranks.d
+#   4520 -rw-r--r-- rq.d
+#  11352 -rw-r--r-- rq.r
+#  10737 -rw-r--r-- rq.s
+#   1126 -rw-r--r-- rrs.test.d
+#   4113 -rw-r--r-- trq.d
+#   1196 -rw-r--r-- trq.print.d
+#
+if touch 2>&1 | fgrep 'amc' > /dev/null
+ then TOUCH=touch
+ else TOUCH=true
+fi
+# ============= Makefile ==============
+echo "x - extracting Makefile (Text)"
+sed 's/^X//' << 'SHAR_EOF' > Makefile &&
+X# Makefile created by S-PLUS utility CHAPTER, version 3.24
+X# S-PLUS Version 3.2 Release 1 for Sun SPARC, SunOS 4.x : 1993 
+X
+XSHOME=/home/splus3.2
+X
+X#WHICH_LOAD=static.load
+XWHICH_LOAD=dyn.load
+X
+XEXTRA_OBJ_FILES=
+XEXTRA_C_NAMES=
+XEXTRA_F_NAMES=
+X
+X# This is a Makefile produced by the S-PLUS utility CHAPTER. It guides
+X# compilation of C, Ratfor and Fortran source code, loading of the resulting
+X# object code, and installation of functions and helpfiles.
+X# 
+X# Overview: 
+X# ========
+X# 
+X# You will need to attend to a few 'make' macro settings at the top of this
+X# file first.  See the Detailed Instructions below for these. Then, if you
+X# want to compile and load the default set of C and Fortran routines, type
+X# (1) 'make install' to install functions on .Data and thereby enable
+X# building of the default list of compiled routine names, then (2) 'make
+X# load' to compile the object code, build the set of names to load, and load
+X# this object code.  Other, secondary, 'make' targets are 'install.funs' and
+X# 'install.help' ('install' makes both of those), 'clean' (remove only
+X# intermediate object code) and 'virgin' (remove object code, the local
+X# standalone S-PLUS executable if you built it, and the directory
+X# .Data).
+X# 
+X# Detailed Instructions:
+X# =====================
+X# 
+X# 1. On the line near the top that starts with "SHOME=", change the
+X# directory pathname on the right of the equals sign to the pathname of the
+X# top S-PLUS directory on your machine; use Splus SHOME to get this
+X# pathname.
+X# 
+X# 2. Near the top, the macro WHICH_LOAD specifies whether 'make' targets
+X# 'load' and 'all' should make a standalone S-PLUS binary executable named
+X# "local.Sqpe" which includes the local C and Fortran code, or a
+X# dyn.loadable file "rq_l.o" containing only this local code.  To
+X# make a complete standalone executable, WHICH_LOAD should be set to
+X# "static.load"; the only other possible value is "dyn.load".  Make sure a
+X# comment symbol (#) appears in front of the setting you DON'T want.
+X# The default has been set to "static.load".
+X# 
+X# Incidentally, you can always make targets 'static.load' or 'dyn.load'
+X# regardless of the value of WHICH_LOAD. The macro just specifies what the
+X# generic targets 'load' and 'all' should make.
+X# 
+X# 3. Near the top, the macro EXTRA_OBJ_FILES names object files (ending in
+X# ".o") which should be loaded in addition to those which are part of this
+X# chapter.  Add any additional object file names you want to load, separated
+X# by spaces, on the right hand side of the equals sign.  There MUST be
+X# corresponding C (".c"), Ratfor (".r") or Fortran (".f") files present in
+X# this directory.
+X# 
+X# If you add file names to EXTRA_OBJ_FILES, you must also add the names of
+X# the corresponding C functions or Fortran subroutines to the macros
+X# EXTRA_C_NAMES and EXTRA_F_NAMES respectively, underneath EXTRA_OBJ_FILES.
+X# The names added should be as they appear at the source-code level; do not
+X# add leading or trailing underscores unless these are present in the
+X# source-level name.
+X# 
+X# You won't generally need to change any more 'make' macros, or indeed
+X# anything else in this Makefile.
+X# 
+X# 4. The file rq_i.c is a C language source file which will ensure
+X# that the make target 'load' will load C and Fortran routines referenced
+X# only through .C or .Fortran calls in S functions. If rq_i.c does
+X# not exist, it will be made during 'make load' based on the objects in
+X# .Data. If rq_i.c exists already and you have since added new C
+X# or Fortran routine names to EXTRA_C_NAMES and EXTRA_F_NAMES, you must
+X# remove rq_i.c so that it will get remade using this new
+X# information. Do this now.
+X# 
+X# 5. Type 'make install.funs' to create the S functions on .Data.  This
+X# must precede 'make load' in Step 6. (You can install the helpfiles at
+X# this point as well by typing making 'install' instead of 'install.funs'.)
+X# 
+X# 6. Type 'make load'. This will build the list of routines to load, then
+X# compile the C, Ratfor and Fortran source files specified by this Makefile,
+X# and lastly load the routines named on the list into either a standalone
+X# S-PLUS executable or a dyn.loadable file.
+X# 
+X# 7. To remove unnecessary object files, type 'make clean'. This will not
+X# remove the dyn.loadable file rq_l.o or the standalone local.Sqpe.
+X# To clean out everything including .Data and start over, use 'make
+X# virgin'.
+X# 
+X# 8. See the helpfile for the "library" function in S-PLUS for hints on
+X# how to install the new code as a library section.
+X
+X
+X# ========================= End instructions. =============================
+X
+Xdefault : all
+Xinclude $(SHOME)/newfun/lib/S_makefile
+Xchapters=../rq
+XSRC= rq.r
+XOBJ= rq.o $(EXTRA_OBJ_FILES)
+XCFLAGS=-O2
+XFFLAGS=-O2
+XFUNS=force_ld.q rq.s
+XHELPS= ranks.d rrs.test.d rq.d trq.d qrq.d trq.print.d
+XFLAGS=
+XRM=-rm
+X
+Xall load: $(WHICH_LOAD)
+X
+Xstatic.load: rq.a
+X	Splus LOAD $(FLAGS) CHAPTERS='"$(chapters)"'
+X
+Xdyn.load rq_l.o: rq.a
+X	ld -r -o rq_l.o rq_i.o rq.a $(FLAGS)
+X	@echo dynamically loadable file in rq_l.o
+X
+Xrq.a: rq_i.o $(OBJ) 
+X	Splus LIBRARY rq.a rq_i.o $(OBJ)
+X
+Xrq_i.c:
+X	-mkdir .Data
+X	Splus make.init rq .Data
+X
+Xinstall : install.funs install.help
+X
+Xfuns install.funs : $(FUNS) .Data
+X	Splus QINSTALL .Data $(FUNS)
+X
+Xforce_ld.q :
+X	( echo "force.loading <- function(){" ;\
+X	set $(EXTRA_C_NAMES) terminator ;\
+X	while test $$1 != terminator ;\
+X	do \
+X		echo $$1 | sed 's:.*:.C("&"):' ;\
+X		shift ;\
+X	done ;\
+X	set $(EXTRA_F_NAMES) terminator ;\
+X	while test $$1 != terminator ;\
+X	do \
+X		echo $$1 | sed 's:.*:.Fortran("&"):' ;\
+X		shift ;\
+X	done ;\
+X	echo } \
+X	) > $@
+X
+X
+X# force_ld.q :
+X# 	echo "force.loading <- function(){ X\
+X# 		stop(\"should not be executed\") X\
+X# 		# Add .C and .Fortran calls here to force routines to  X\
+X# 		# be loaded. For example, .C(\"fun1\"), .Fortran(\"fun2\"). X\
+X# 	}" | tr X \\012  > $@
+X
+Xhelp install.help : $(HELPS) .Data/.Help
+X	Splus HINSTALL .Data/.Help $(HELPS)
+X	Splus help.findsum .Data
+X
+X.Data :
+X	-mkdir $@
+X.Data/.Help : .Data
+X	-mkdir $@
+X
+Xvirgin : clean virgin.std
+X# add additional cleanup rules/targets above here for target 'virgin'
+Xclean :
+X	$(RM) -f $(OBJ) rq_i.o S_load_time.[oc] core
+Xvirgin.std :
+X	$(RM) -rf .Data
+X	$(RM) -f rq.a local.Sqpe rq_l.o rq_i.c force_ld.q
+SHAR_EOF
+$TOUCH -am 0518145195 Makefile &&
+chmod 0644 Makefile ||
+echo "restore of Makefile failed"
+set `wc -c Makefile`;Wc_c=$1
+if test "$Wc_c" != "6161"; then
+	echo original size 6161, current size $Wc_c
+fi
+# ============= ReadMe ==============
+echo "x - extracting ReadMe (Text)"
+sed 's/^X//' << 'SHAR_EOF' > ReadMe &&
+XQuantreg -- Quantile Regression (Version 2.0)
+X
+XThis is a submission to compute regression quantiles and some related
+Xrank statistics.  It is a revision of a prior submission to incorporate
+Xsome recent develoopments in rank based inference which employ
+Xregression quantile ideas.  The submission  consists of:
+X
+X	rq.r--A ratfor subroutine 
+X
+Xand several S functions:
+X
+X	rq--which directly calls rq.o
+X	trq--which computes analogues of the trimmed mean for regression
+X	trq.print--which prints ls.print style output for trq
+X	qrq--which is called by trq
+X	ranks--which computes a vector of rank statistics from rq() output
+X	rrs.test--which computes tests of linear hypotheses
+X	rq.omega--estimates a scale parameter for the covariance matrix
+X	dn--computes bandwidth for sparsity estimate
+X
+XThese eight functions all reside in a file called rq.s which could be read 
+Xby S with the source() command.  Help files for the S functions are also 
+Xprovided in the directory doc and could be moved to the appropriate .Data/.Help 
+Xdirectory.  
+X
+XThe files were packaged as a unix shar archive.  A Makefile generated by
+Xthe S CHAPTER command has been included to automate this process.  It has
+Xbeen tested on Sun hardware, but may need editing.  With luck you might
+Xtry 
+X		make install
+X		make load
+X		make clean
+X
+XIf this works smoothly then invoking Splus in this directory will
+Xautomatically load the new rq function and you can proceed from there.
+X
+X      This software has been submitted to Statlib and may be freely
+X      used and redistributed for non-commercial purposes.  No guarantees
+X      are offered or implied.  Comments, bug reports, etc are welcome
+X      and should be sent to roger@ysidro.econ.uiuc.edu or to
+X 
+X 				Roger Koenker
+X 				Department of Economics
+X 				University of Illinois
+X 				Champaign, Illinois, 61820
+X 
+XAcknowledgements:  Thanks to all those who have contributed comments
+Xon this software following its initial submission in 1991,  particularly
+Xto Gib Bassett, Steve Portnoy, Jana Jureckova, and Cornelius Gutenbrunner.
+XSpecial thanks  to Pin Ng (U. of Houston) for help in preparing the new 
+Xversion.
+SHAR_EOF
+$TOUCH -am 0524220395 ReadMe &&
+chmod 0644 ReadMe ||
+echo "restore of ReadMe failed"
+set `wc -c ReadMe`;Wc_c=$1
+if test "$Wc_c" != "2110"; then
+	echo original size 2110, current size $Wc_c
+fi
+# ============= qrq.d ==============
+echo "x - extracting qrq.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > qrq.d &&
+X.BG
+X.FN qrq
+X.TL
+XLinearized Quantile Estimation
+X.DN
+XCompute linearized quantiles from rq data structure.
+X.CS
+Xqrq(s, a)
+X.RA
+X.AG s
+Xdata structure returned by the quantile regression function rq with t<0 or t>1.
+X.AG a
+Xthe vector of quantiles for which the corresponding linearized quantiles are to be computed.
+X.RT
+Xa vector of the linearized quantiles corresponding to vector a,
+Xas interpolated from the second row of s$sol.
+X.SA SEE ALSO
+Xrq and  trq  for further detail.
+X.EX
+Xz_qrq(rq(x,y),a)       #assigns z the linearized quantiles 
+X                       #corresponding to vector a.
+X.KW 
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 qrq.d &&
+chmod 0644 qrq.d ||
+echo "restore of qrq.d failed"
+set `wc -c qrq.d`;Wc_c=$1
+if test "$Wc_c" != "591"; then
+	echo original size 591, current size $Wc_c
+fi
+# ============= ranks.d ==============
+echo "x - extracting ranks.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > ranks.d &&
+X.BG
+X.FN ranks
+X.TL
+XFunction to compute ranks from the dual (regression rankscore) process
+X.DN
+X.CS
+Xranks(v, score="wilcoxon")
+X.RA
+X.AG v
+Xregression quantile structure for the model of interest
+X.OA
+X.AG score
+XThe score function desired.  Currently implemented score functions are
+XWilcoxon, Normal, and Sign which are asymptotically optimal for the
+Xlogistic, Gaussian and Laplace error models respectively.
+X.RT
+XThe function returns two components one is the ranks, the other is a
+Xscale factor which is the L_2 norm of the score function.  All score
+Xfunctions should be normalized to have mean zero.
+X.SE
+X.DT
+X.SH REFERENCES
+XGutenbrunner, C., J. Jureckova,  Koenker, R. and  Portnoy, S.(1993)
+XTests of Linear Hypotheses  based on Regression Rank Scores",
+XJournal of Nonparametric Statistics, (2), 307-331.
+X.SA
+XSee also rq, rrs.test
+X.EX
+Xranks(rq(stack.x,stack.loss))
+X.KW regression quantiles, ranks, regression rankscores
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 ranks.d &&
+chmod 0644 ranks.d ||
+echo "restore of ranks.d failed"
+set `wc -c ranks.d`;Wc_c=$1
+if test "$Wc_c" != "916"; then
+	echo original size 916, current size $Wc_c
+fi
+# ============= rq.d ==============
+echo "x - extracting rq.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > rq.d &&
+X.BG
+X.FN rq
+X.TL
+XQuantile Regression
+X.DN
+XPerform a quantile regression on a design matrix, x, of explanatory variables and a vector, y, of responses. 
+X.CS
+Xrq(x, y, tau=-1, alpha=.1, dual=F, int=T, tol=1e-4, ci = T, method="score",
+Xinterpolate=T, tcrit=T, hs=T)
+X.PP
+X.RA
+X.AG x
+Xvector or matrix of explanatory variables.  If  a  matrix,
+Xeach  column represents a variable and each row represents
+Xan observation (or case).  This should not contain  column
+Xof  1s unless the argument intercept is FALSE.  The number
+Xof rows of x should equal the number of elements of  y,  and
+Xthere  should  be fewer columns than rows.  
+XIf x is missing, rq() computes the ordinary
+Xsample quantile(s) of y.
+X.AG y
+Xresponse vector with as many observations as the number of rows of x. 
+X.OA
+X.AG tau
+Xdesired quantile. If tau is missing or outside the range [0,1]
+Xthen all the regression quantiles are computed and the corresponding primal and dual solutions are returned.
+X.AG alpha
+Xlevel of significance for the confidence intervals; default is set at 10%.
+X.AG dual
+Xreturn the dual solution if TRUE (default).
+X.AG int
+Xflag for intercept; if TRUE (default) an intercept term is included in the regression.
+X.AG tol
+Xtolerance parameter for rq computations.
+X.AG ci
+Xflag for confidence interval; if TRUE (default) the confidence intervals are 
+Xreturned.
+X.AG method
+Xif method="score" (default), ci is computed using regression rank score inversion;
+Xif method="sparsity", ci is computed using sparsity function.
+X.AG interpolate
+Xif TRUE (default), the smoothed confidence intervals are returned.
+X.AG tcrit
+Xif tcrit=T (default), a finite sample adjustment of the critical point is
+Xperformed using Student's t quantile, else the standard Gaussian quantile is 
+Xused.
+X.AG hs
+Xlogical flag to use Hall-Sheather's sparsity estimator (default); otherwise Bofinger's
+Xversion is used.
+X.RT If tau is in [0,1] the function returns:
+X.RC coef
+Xthe estimated parameters of the tau-th conditional quantile function.
+X.RC resid
+Xthe estimated residuals of the tau-th conditional quantile function.
+X.RC dual
+Xthe dual solution (if dual=T).
+X.RC h
+Xthe index of observations in the basis.
+X.RC ci
+Xconfidence intervals (if ci=T).
+X.RT If tau isn't in [0,1] the function returns:
+X.RC sol
+Xa  (p+2) by m matrix whose first row contains the 'breakpoints'
+Xtau_1,tau_2,...tau_m, of the quantile function, 
+Xi.e. the values in [0,1] at which the
+Xsolution changes, row two contains the corresponding quantiles
+Xevaluated at the mean design point, i.e. the inner product of
+Xxbar and b(tau_i), and the last p rows of the matrix give b(tau_i).
+XThe solution b(tau_i) prevails from tau_i to tau_i+1.
+X.RC dsol
+Xthe matrix of dual solutions corresponding to the primal solutions in sol.
+XThis is an n by m matrix whose ij-th entry is 1 if y_i > x_i b(tau_j), 
+Xis 0 if y_i < x_i b(tau_j),  and is between 0 and 1 otherwise, i.e. if
+Xthe residual is zero.  See Gutenbrunner and Jureckova(1991) for a
+Xdetailed discussion of the statistical interpretation of dsol.
+X.RC h
+Xthe matrix of observations indices in the basis corresponding to sol or dsol.
+X.EX
+Xrq(stack.x,stack.loss,.5)  #the l1 estimate for the stackloss data
+Xrq(stack.x,stack.loss,tau=.5,ci=T,method="score")  #same as above with 
+X	#regression rank score inversion confidence interval
+Xrq(stack.x,stack.loss,.25)  #the 1st quartile, 
+X	#note that 8 of the 21 points lie exactly 
+X	#on this plane in 4-space
+Xrq(stack.x,stack.loss,-1)   #this gives all of the rq solutions
+Xrq(y=rnorm(10),method="sparsity")	#ordinary sample quantiles
+X.SH METHOD
+XThe algorithm used is a modification of the Barrodale and Roberts
+Xalgorithm for l1-regression, l1fit in S, and is described in detail
+Xin Koenker and d"Orey(1987).
+X.KW regression quantiles, robust estimation, L-estimators
+X.SH REFERENCES
+X[1] Koenker, R.W. and Bassett, G.W. (1978). Regression quantiles, Econometrica, 46, 33-50.
+X
+X[2] Koenker, R.W. and d'Orey (1987). Computing Regression Quantiles. Applied Statistics, 36, 383-393.
+X
+X[3] Gutenbrunner, C. Jureckova, J. (1991). 
+XRegression quantile and regression rank score process in the 
+Xlinear model and derived statistics, Annals of Statistics, 20, 305-330.
+X
+X[4] Koenker, R.W. and d'Orey (1994).  Remark on Alg. AS 229: Computing Dual
+XRegression Quantiles and Regression Rank Scores, Applied Statistics, 43, 410-414.
+X
+X[5] Koenker, R.W. (1994). Confidence Intervals for Regression Quantiles, in
+XP. Mandl and M. Huskova (eds.), Asymptotic Statistics, 349-359, Springer-Verlag,
+XNew York.
+X
+X.SH SEE ALSO
+Xtrq and qrq for further details and references.
+X.PP
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 rq.d &&
+chmod 0644 rq.d ||
+echo "restore of rq.d failed"
+set `wc -c rq.d`;Wc_c=$1
+if test "$Wc_c" != "4520"; then
+	echo original size 4520, current size $Wc_c
+fi
+# ============= rq.r ==============
+echo "x - extracting rq.r (Text)"
+sed 's/^X//' << 'SHAR_EOF' > rq.r &&
+X#     this software has been submitted to statlib and may be freely
+X#     used and redistributed for non-commercial purposes.  no guarantees
+X#     are offered or implied.  comments, bug reports, etc are welcome
+X#     and should be sent to roger@ysidro.econ.uiuc.edu or to
+X#
+X#				roger koenker
+X#				department of economics
+X#				university of illinois
+X#				champaign, illinois, 61820
+X#
+X#
+Xsubroutine rq(m,nn,m5,n2,n4,a,b,t,toler,ift,x,e,s,wa,wb,nsol,ndsol,sol,dsol,lsol,h,qn,cutoff,ci,tnmat,big,lci1)
+X#
+X#     number of observations
+X#     number of parameters
+X#     m+5
+X#     n+2
+X#     n+4
+X#     a is the x matrix
+X#     b is the y vector
+X#     t, the desired quantile
+X#     toler, smallest detectable |x-y|/x machine precision to the 2/3
+X#     ift exit code:
+X#		0-ok
+X#		else dimensions inconsistent
+X#     x the parameter estimate betahat
+X#     e is the residual vector
+X#     s is an integer work array
+X#     wa is a real work array
+X#     wb is another real work array
+X#     nsol is an estimated (row) dimension of the primal solution array say 3*m; minimum value = 2
+X#     ndsol is an estimated (row) dimension of the dual solution array say 3*m; minimum value = 2
+X#     sol is the primal solution array
+X#     dsol is the dual solution arry
+X#     lsol is the actual dimension of the solution arrays
+X#     h is the matrix of basic observations indices
+X#     qn is the vector of residuals variances from the projection of each column of the x matrix on the remaining columns
+X#     cutoff, the critical point for N(0,1)
+X#     ci is the matrix of confident intervals
+X#     tnmat is the matrix of the JGPK rank test statistics
+X#     big, large positive finite floating-point number
+X#     utilization:  if you just want a solution at a single quantile you
+X#     needn't bother with sol, nsol, etc, if you want all the solutions
+X#     then set theta to something <0 and sol and dsol will return all the
+X#     estimated quantile solutions.
+X#     the algorithm  is a slightly modified version of algorithm as 229
+X#     described in koenker and d'orey, "computing regression quantiles,
+X#     applied statistics, pp. 383-393.
+X#
+Xinteger i,j,k,kl,kount,kr,l,lsol,m,m1,m2,m3,m4,m5,ift
+Xinteger n,n1,n2,nsol,ndsol,out,s(m),h(nn,nsol)
+Xinteger nn,n4,idxcf
+Xlogical stage,test,init,iend,lup
+Xlogical lci1,lci2,skip
+Xreal a1,aux,b1,big,d,dif,pivot,smax,t,t0,t1,tnt
+Xreal min,max,toler,zero,half,one,two
+Xreal b(m),sol(n2,nsol),a(m,nn),x(nn),wa(m5,n4),wb(m)
+Xreal sum,e(m),dsol(m,ndsol)
+Xreal qn(nn),cutoff,ci(4,nn),tnmat(4,nn),tnew,told,tn
+Xdata zero/0.00/
+Xdata half/0.50/
+Xdata one/1.00/
+Xdata two/2.00/
+X#
+X#  check dimension parameters
+X#
+Xn=nn
+Xift = 0
+Xwa(m+2,nn+1) = one
+Xif (m5!=m+5)
+X	ift = 3
+Xif (n2!=n+2)
+X	ift = 4
+Xif (n4!=n+4)
+X	ift = 5
+Xif (m<=zero||n<=zero)
+X	ift = 6
+Xif (ift<=two) {
+X#
+X#  initialization
+X#
+X	iend = .true.
+X	lci2 = .false.
+X	lup = .true.
+X	skip = .false.
+X	idxcf = 0
+X	tnew = zero
+X	tn = zero
+X	m1 = m+1
+X	n1 = n+1
+X	n3 = n+3
+X	m2 = m+2
+X	m3 = m+3
+X	m4 = m+4
+X	do j = 1,n{
+X		x(j) = zero
+X		}
+X	do i = 1,m
+X		e(i) = zero
+X	if (t<zero||t>one) {
+X		t0 = one/float(m)-toler
+X		t1 = one-t0
+X		t = t0
+X		iend = .false.
+X		lci1 = .false.
+X		}
+X	repeat { #0
+X		do i = 1,m {
+X			k = 1
+X			do j = 1,nn
+X				if (k<=nn){
+X					if(j==idxcf)
+X						skip = .true.
+X					else
+X						skip = .false.
+X					if(!skip){
+X						wa(i,k) = a(i,j)
+X						k = k+1
+X						}
+X					}	
+X			wa(i,n4) = n+i
+X			wa(i,n2) = b(i)
+X			if (idxcf != 0)
+X				wa(i,n3) = tnew*a(i,idxcf)
+X			else
+X				wa(i,n3) = zero
+X			wa(i,n1) = wa(i,n2)-wa(i,n3)
+X			if (wa(i,n1)<zero)
+X				do j = 1,n4
+X					wa(i,j) = -wa(i,j)
+X			}
+X		do j = 1,n {
+X			wa(m4,j) = j
+X			wa(m2,j) = zero
+X			wa(m3,j) = zero
+X			do i = 1,m {
+X				aux = sign(one,wa(m4,j))*wa(i,j)
+X				wa(m2,j) = wa(m2,j)+aux*(one-sign(one,wa(i,n4)))
+X				wa(m3,j) = wa(m3,j)+aux*sign(one,wa(i,n4))
+X				}
+X			wa(m3,j) = two*wa(m3,j)
+X			}
+X		dif = zero
+X		init = .false.
+X		if(!lci2){
+X#compute the columns means
+X			do k = 1,n {
+X				wa(m5,k) = zero
+X				do i = 1,m{
+X					wa(m5,k) = wa(m5,k)+a(i,k)
+X					}
+X				wa(m5,k) = wa(m5,k)/float(m)
+X				}
+X			}
+X		lsol = 1
+X		kount = 0
+X		repeat { #1
+X#
+X# compute new marginal costs
+X#
+X			do j = 1,n{
+X				wa(m1,j) = wa(m2,j)+wa(m3,j)*t
+X				}
+X			if (!init) {
+X#
+X# stage 1
+X#
+X# determine the vector to enter the basis
+X#
+X				stage = .true.
+X				kr = 1
+X				kl = 1
+X				go to 30
+X				}
+X			repeat { #2
+X#
+X# stage 2
+X#
+X				stage = .false.
+X				repeat { #3
+X#
+X# determine the vector to enter the basis
+X#
+X					max = -big
+X					do j = kr,n {
+X						d = wa(m1,j)
+X						if (d<zero) {
+X							if (d>(-two))
+X								next 1
+X							d = -d-two
+X							}
+X						if (d>max) {
+X							max = d
+X							in = j
+X							}
+X						}
+X					if (max<=toler)
+X						break 2
+X					if (wa(m1,in)<=zero) {
+X						do i = 1,m4
+X							wa(i,in) = -wa(i,in)
+X						wa(m1,in) = wa(m1,in)-two
+X						wa(m2,in) = wa(m2,in)-two
+X						}
+X					repeat { #4
+X#
+X# determine the vector to leave the basis
+X#
+X						k = 0
+X						do i = kl,m {
+X							d = wa(i,in)
+X							if (d>toler) {
+X								k = k+1
+X								wb(k) = wa(i,n1)/d
+X								s(k) = i
+X								test = .true.
+X								}
+X							}
+X						repeat { #5
+X							if (k<=0)
+X								test = .false.
+X							else {
+X								min = big
+X								do i = 1,k
+X									if (wb(i)<min) {
+X										j = i
+X										min = wb(i)
+X										out = s(i)
+X										}
+X								wb(j) = wb(k)
+X								s(j) = s(k)
+X								k = k-1
+X								}
+X#
+X# check for linear dependence in stage 1
+X#
+X							if (!test&&stage)
+X								break 1
+X							if (!test)
+X								break 5
+X							pivot = wa(out,in)
+X							if (wa(m1,in)-pivot-pivot<=toler){
+X								go to 10
+X								}
+X							do j = kr,n3 {
+X								d = wa(out,j)
+X								wa(m1,j) = wa(m1,j)-d-d
+X								wa(m2,j) = wa(m2,j)-d-d
+X								wa(out,j) = -d
+X								}
+X							wa(out,n4) = -wa(out,n4)
+X							} #5
+X						do i = 1,m4 {
+X							d = wa(i,kr)
+X							wa(i,kr) = wa(i,in)
+X							wa(i,in) = d
+X							}
+X						kr = kr+1
+X						go to 20
+X#
+X# pivot on wa(out,in)
+X#
+X						10  do j = kr,n3
+X							if (j!=in)
+X								wa(out,j) = wa(out,j)/pivot
+X						do i = 1,m3
+X							if (i!=out) {
+X								d = wa(i,in)
+X								do j = kr,n3
+X									if (j!=in)
+X										wa(i,j) = wa(i,j)-d*wa(out,j)
+X								}
+X						do i = 1,m3
+X							if (i!=out)
+X								wa(i,in) = -wa(i,in)/pivot
+X						wa(out,in) = one/pivot
+X						d = wa(out,n4)
+X						wa(out,n4) = wa(m4,in)
+X						wa(m4,in) = d
+X						kount = kount+1
+X						if (!stage)
+X							break 1
+X#
+X# interchange rows in stage 1
+X#
+X						kl = kl+1
+X						do j = kr,n4 {
+X							d = wa(out,j)
+X							wa(out,j) = wa(kount,j)
+X							wa(kount,j) = d
+X							}
+X						20  if (kount+kr==n1)
+X							break 2
+X						30  max = -one
+X						do j = kr,n
+X							if (abs(wa(m4,j))<=n) {
+X								d = abs(wa(m1,j))
+X								if (d>max) {
+X									max = d
+X									in = j
+X									}
+X								}
+X						if (wa(m1,in)<zero)
+X							do i = 1,m4
+X								wa(i,in) = -wa(i,in)
+X						} #4
+X					} #3
+X				} #2
+X			if (kr==1) {
+X				do j = 1,n {
+X					d = abs(wa(m1,j))
+X					if (d<=toler||two-d<=toler){
+X						ift = 1
+X						wa(m2,nn+1) = zero
+X						go to 80
+X						}
+X					}
+X				}
+X			80 kount = 0
+X			sum = zero
+X			if (!lci2){
+X				do i = 1,kl-1 {
+X					k = wa(i,n4)*sign(one,wa(i,n4))
+X					x(k) = wa(i,n1)*sign(one,wa(i,n4))
+X					}
+X				}
+X			do i = 1,n {
+X				kd = abs(wa(m4,i))-n
+X				dsol(kd,lsol) = one+wa(m1,i)/two
+X				if (wa(m4,i)<zero)
+X					dsol(kd,lsol) = one-dsol(kd,lsol)
+X				if (!lci2){
+X					sum = sum+x(i)*wa(m5,i)
+X					sol(i+2,lsol) = x(i)
+X					h(i,lsol) = kd
+X					}
+X				}
+X			do i = kl,m {
+X				kd = abs(wa(i,n4))-n
+X				if (wa(i,n4)<zero)
+X					dsol(kd,lsol) = zero
+X				if (wa(i,n4)>zero)
+X					dsol(kd,lsol) = one
+X				}
+X			if (!lci2){
+X				sol(1,lsol) = smax
+X				sol(2,lsol) = sum
+X				do i=1,m
+X					dsol(i,lsol+1) = dsol(i,lsol)
+X				}
+X			if (lci2){
+X# compute next theta
+X				a1 = zero
+X				do i = 1,m {
+X					a1 = a1+a(i,idxcf)*(dsol(i,lsol)+t-one)
+X					}
+X				tn = a1/sqrt(qn(idxcf)*t*(one-t))
+X				if (abs(tn)<cutoff){
+X					if (lup)
+X						smax = big
+X					else
+X						smax = -big
+X					do i =1,kl-1 {
+X						k = wa(i,n4)*sign(one,wa(i,n4))
+X						sol(k,1) = wa(i,n2)*sign(one,wa(i,n4))
+X						sol(k,2) = wa(i,n3)*sign(one,wa(i,n4))/tnew
+X						}
+X					do i = kl,m {
+X						a1 = zero
+X						b1 = zero
+X						k = wa(i,n4)*sign(one,wa(i,n4))-n
+X						l = 1
+X						do j = 1,n{
+X							if (j==idxcf)
+X								l = l+1
+X							a1 = a1 + a(k,l)*sol(j,1)
+X							b1 = b1 + a(k,l)*sol(j,2)
+X							l = l+1
+X							}
+X						tnt = (b(k)-a1)/(a(k,idxcf)-b1)
+X						if (lup){
+X							if (tnt>tnew)
+X								if (tnt<smax){
+X									smax = tnt
+X									out = i
+X									}
+X							}
+X						else {
+X							if (tnt<tnew)
+X								if (tnt>smax){
+X									smax = tnt
+X									out = i
+X									}
+X							}
+X						}
+X					if (lup){
+X						told = tnew 
+X						tnew = smax + toler
+X						ci(3,idxcf) = told - toler
+X						tnmat(3,idxcf) = tn
+X						if (!(tnew < big-toler)){
+X							ci(3,idxcf) = big
+X							ci(4,idxcf) = big
+X							tnmat(3,idxcf) = tn
+X							tnmat(4,idxcf) = tn
+X							lup = .false.
+X							go to 70
+X							}
+X						}
+X					else{
+X						told = tnew 
+X						tnew = smax - toler
+X						ci(2,idxcf) = told + toler
+X						tnmat(2,idxcf) = tn
+X						if (!(tnew > -big+toler)){
+X							ci(2,idxcf) = -big
+X							ci(1,idxcf) = -big
+X							tnmat(2,idxcf) = tn
+X							tnmat(1,idxcf) = tn
+X							lup = .true.
+X							go to 60
+X							}
+X						}
+X#update the new marginal cost
+X					do i = 1,m{
+X						wa(i,n3) = wa(i,n3)/told*tnew
+X						wa(i,n1) = wa(i,n2) - wa(i,n3)
+X						}
+X					do j = kr,n3{
+X						d = wa(out,j)
+X						wa(m1,j) = wa(m1,j) -d -d
+X						wa(m2,j) = wa(m2,j) -d -d
+X						wa(out,j) = -d
+X						}
+X					wa(out,n4) = -wa(out,n4)
+X					init = .true.
+X					}
+X				else{
+X					if (lup){
+X						ci(4,idxcf) = tnew - toler
+X						tnmat(4,idxcf) = tn
+X						lup = .false.
+X						go to 70
+X						}
+X					else{
+X						ci(1,idxcf) = tnew + toler
+X						tnmat(1,idxcf) = tn
+X						lup = .true.
+X						go to 60
+X						}
+X					}
+X				}
+X			if ((iend)&&(!lci2))
+X				go to 40
+X			if (!lci2){
+X				init = .true.
+X				lsol = lsol+1
+X				do i = 1,m
+X					s(i) = zero
+X				do j = 1,n
+X					x(j) = zero
+X#
+X#  compute next t
+X#
+X				smax = two
+X				do j = 1,n {
+X					b1 = wa(m3,j)
+X					a1 = (-two-wa(m2,j))/b1
+X					b1 = -wa(m2,j)/b1
+X					if (a1>=t)
+X						if (a1<smax) {
+X							smax = a1
+X							dif = (b1-a1)/two
+X							}
+X					if (b1>t)
+X						if (b1<smax) {
+X							smax = b1
+X							dif = (b1-a1)/two
+X							}
+X					}
+X				tnt = smax+toler*(one+abs(dif))
+X				if (tnt>=t1+toler)
+X					iend = .true.
+X				t = tnt
+X				if (iend)
+X					t = t1
+X				}
+X			} #1
+X		wa(m2,nn+1) = two
+X		ift = 2
+X		go to 50
+X		40  if (lsol>2) {
+X			sol(1,1) = zero
+X			sol(1,lsol) = one
+X			do i = 1,m {
+X				dsol(i,1) = one
+X				dsol(i,lsol) = zero
+X				dsol(i,lsol+1) = zero
+X				}
+X			}
+X		l = kl-1
+X		do i = 1,l
+X			if (wa(i,n1)<zero)
+X				do j = kr,n4
+X					wa(i,j) = -wa(i,j)
+X		50  sum = zero
+X		if(!lci2){
+X			do i = kl,m {
+X				k = wa(i,n4)*sign(one,wa(i,n4))
+X				d = wa(i,n1)*sign(one,wa(i,n4))
+X				sum = sum+d*sign(one,d)*(half+sign(one,d)*(t-half))
+X				k = k-n
+X				e(k) = d
+X				}
+X			wa(m2,n2) = kount
+X			wa(m1,n2) = n1-kr
+X			wa(m1,n1) = sum
+X			}
+X		if (wa(m2,nn+1)==two)
+X			break 1
+X		if (!lci1)
+X			break 1
+X		if (!lci2){
+X			lci2 = .true.
+X			n = nn-1
+X			n1 = n+1
+X			n2 = n+2
+X			n3 = n+3
+X			n4 = n+4
+X		60	idxcf = idxcf+1
+X			if (idxcf>nn)
+X				break 1
+X		70	if (lup){
+X				tnew = x(idxcf)+toler
+X				told = tnew
+X				ci(3,idxcf) = x(idxcf)
+X				tnmat(3,idxcf) = zero
+X				}
+X			else{
+X				tnew = x(idxcf)-toler
+X				told = tnew
+X				ci(2,idxcf) = x(idxcf)
+X				tnmat(2,idxcf) = zero
+X				}
+X			}
+X		} #0
+X	# restore the original value of dual when ci is true
+X	do i=1,m
+X		dsol(i,lsol) = dsol(i,lsol+1)
+X	}
+Xreturn
+Xend
+SHAR_EOF
+$TOUCH -am 0517205995 rq.r &&
+chmod 0644 rq.r ||
+echo "restore of rq.r failed"
+set `wc -c rq.r`;Wc_c=$1
+if test "$Wc_c" != "11352"; then
+	echo original size 11352, current size $Wc_c
+fi
+# ============= rq.s ==============
+echo "x - extracting rq.s (Text)"
+sed 's/^X//' << 'SHAR_EOF' > rq.s &&
+X"qrq"<-
+Xfunction(s, a)
+X{
+X#computes linearized quantiles from rq data structure
+X#s is the rq structure e.g. rq(x,y)
+X#a is a vector of quantiles required
+X	if(min(a) < 0 || max(a) > 1) stop("alphas out of range [0,1]")
+X	r <- s$sol[1,  ]
+X	q <- s$sol[2,  ]
+X	q <- c(q[1], q)
+X	J <- length(r)
+X	r <- c(0, (r[1:J - 1] + r[2:J])/2, 1)
+X	u <- rep(0, length(a))
+X	for(k in 1:length(a)) {
+X		i <- sum(r < a[k])
+X		w <- (a[k] - r[i])/(r[i + 1] - r[i])
+X		u[k] <- w * q[i + 1] + (1 - w) * q[i]
+X	}
+X	u
+X}
+X"rq"<-
+Xfunction(x, y, tau = -1, alpha = 0.10000000000000001, dual = F, int = T, tol
+X	 = 0.0001, ci = T, method="score", interpolate = T, tcrit = T, hs=T)
+X{
+X#function to compute regression quantiles
+X	if(!is.loaded(symbol.For("rq")))
+X		dyn.load("rq_l.o")
+X	if((tau<=0 || tau>=1) && ci){
+X		warning("cannot compute confidence intervals for all tau")
+X		ci <- F
+X		}
+X	if(ci && method != "score" && method != "sparsity"){
+X		stop("method has to be ``score'' or ``sparsity''")
+X		}
+X	if(missing(x)) {
+X		x <- matrix(rep(1, length(y)), length(y))
+X		int <- FALSE
+X		if(ci && method=="score"){
+X			warning("method has been set to ``sparsity'' to compute confidence interval for sample quantile")
+X			method <- "sparsity"
+X			}
+X		}
+X	else{
+X		x <- as.matrix(x)
+X		if(int) 
+X			x <- cbind(1, x)
+X		else if(ncol(x)==1 && ci && method=="score"){
+X			warning("method has been set to ``sparsity'' to compute confidence interval when x has only one column with no intercept")
+X			method <- "sparsity"
+X			}
+X		}
+X	big <- .Machine$single.xmax
+X	x <- as.matrix(x)
+X	p <- ncol(x)
+X	n <- nrow(x)
+X	if(n != length(y))
+X		stop("x and y don't match n")
+X	nsol <- 2
+X	ndsol <- 2
+X	if(tcrit)
+X		cutoff <- qt(1 - alpha/2, n - p)
+X        else 
+X		cutoff <- qnorm(1 - alpha/2)
+X	if(ci){
+X		xxinv <- solve(crossprod(x))
+X		qn <- 1/diag(xxinv)
+X		}
+X	else
+X		qn <- rep(0,p)
+X	t.orig <- tau
+X	if(tau < 0 || tau > 1 || (ci && method=="sparsity")) {
+X		nsol <- 3 * n
+X		lci1 <- F
+X		ndsol <- nsol
+X		tau <- -1
+X		}
+X	else {
+X		if(!ci)
+X			lci1 <- F
+X		else lci1 <- T
+X		}
+X	z <- .Fortran("rq",
+X		as.integer(n),
+X		as.integer(p),
+X		as.integer(n + 5),
+X		as.integer(p + 2),
+X		as.integer(p + 4),
+X		as.single(x),
+X		as.single(y),
+X		as.single(tau),
+X		as.single(tol),
+X		flag = as.integer(1),
+X		coef = single(p),
+X		resid = single(n),
+X		integer(n),
+X		single((n + 5) * (p + 4)),
+X		single(n),
+X		as.integer(nsol),
+X		as.integer(ndsol),
+X		sol = single((p + 2) * nsol),
+X		dsol = single(n * ndsol),
+X		lsol = as.integer(0),
+X		h = integer(p * nsol),
+X		qn = as.single(qn),
+X		cutoff = as.single(cutoff),
+X		ci = single(4 * p),
+X		tnmat = single(4 * p),
+X		as.single(big),
+X		as.logical(lci1))
+X	tau <- t.orig
+X	if(z$flag != 0)
+X		warning(switch(z$flag,"Solution may be nonunique",
+X		"Premature end - possible conditioning problem in x."))
+X	if(tau < 0 || tau > 1) {
+X		z$sol <- matrix(z$sol, p + 2, z$lsol)
+X		if(length(dimnames(x)[[2]]) == 0) {
+X			if(int)
+X				xn <- c("Intercept", paste("X", 1:(p - 1), sep
+X				   = ""))
+X			else xn <- paste("X", 1:p, sep = "")
+X			}
+X		else {
+X			xn <- dimnames(x)[[2]]
+X			if(int)
+X				xn[1] <- "Intercept"
+X			}
+X		dimnames(z$sol) <- list(c("Probility", "Quantile", xn), NULL)
+X		z$h <- matrix(z$h, p, z$lsol)
+X		if(dual) {
+X			z$dsol <- matrix(z$dsol, n, z$lsol)
+X			z[c("sol", "dsol", "h")]
+X			}
+X		else z[c("sol", "h")]
+X		}
+X	else {
+X		if(ci){
+X			if(method=="score") {
+X				if(interpolate){
+X					Tn <- matrix(z$tnmat, nrow = 4)
+X					Tci <- matrix(z$ci, nrow = 4)
+X					Tci[3,] <- Tci[3,] + (cutoff - abs(Tn[3,
+X					]))/abs(Tn[4,] - Tn[3,]) * abs(Tci[4,] - 					Tci[3,])
+X					Tci[2,] <- Tci[2,] - (cutoff - abs(Tn[2,
+X					]))/abs(Tn[1,] - Tn[2,]) * abs(Tci[1,] - 					Tci[2,])
+X					Tci[2,  ][is.na(Tci[2,  ])] <-  - big
+X					Tci[3,  ][is.na(Tci[3,  ])] <- big
+X					dimnames(Tci)<-list(c("Lower Bound",
+X					"Lower Bound","Upper Bound",
+X					"Upper Bound"),NULL)
+X					if(dual)
+X						return(coef = z$coef, resid = 
+X						z$resid, dual = z$dsol[1:n], 
+X						h = z$h[1:p], ci = Tci[2:3,  ])
+X					else 
+X						return(coef = z$coef, resid = 
+X						z$resid, h = z$h[1:p], ci = 
+X						Tci[2:3,  ])
+X					}
+X				else {
+X					Tci <- matrix(z$ci,nrow=4)
+X					dimnames(Tci)<-list(c("Lower Bound",
+X					"Lower Bound","Upper Bound",
+X					"Upper Bound"),NULL)
+X					if(dual)
+X						return(coef = z$coef, resid = 
+X						z$resid, dual = z$dsol[1:n], 
+X						h = z$h[1:p], ci = Tci, Tn = 
+X						matrix(z$tnmat, nrow = 4))
+X					else return(coef = z$coef, resid = 
+X						z$resid, h = z$h[1:p], ci = 
+X						Tci, Tn = matrix(z$tnmat, 
+X						nrow = 4))
+X					}
+X				}
+X			else if(method=="sparsity"){
+X				z$sol<-matrix(z$sol,p+2,z$lsol)
+X				z$dsol<-matrix(z$dsol,n,z$lsol)
+X				z$h <- matrix(z$h,p,z$lsol)
+X				se<-diag(rq.omega(z,tau,hs=hs)*xxinv)^.5
+X				Tci<-matrix(0,2,p)
+X				dimnames(Tci)<-list(c("Lower Bound",
+X				"Upper Bound"),NULL)
+X				isol <- sum(z$sol[1,]<=tau)
+X				Tcoef<-z$sol[3:(p+2),isol]
+X				Tci[1,]<-Tcoef-cutoff*se
+X				Tci[2,]<-Tcoef+cutoff*se
+X				if(dual)
+X					return(coef=Tcoef, resid=as.single(
+X					y-x%*%Tcoef), dual = z$dsol[,isol], 
+X					h = z$h[,isol], ci=Tci)
+X				else 
+X					return(coef=Tcoef, resid=as.single(
+X					y-x%*%Tcoef), h = z$h[,isol], ci=Tci)
+X				}
+X			}
+X		else {
+X			if(dual)
+X				return(coef = z$coef, resid = z$resid, dual = 
+X				z$dsol[1:n], h = z$h[1:p])
+X			else 
+X				return(coef = z$coef, resid = z$resid, h = 
+X				z$h[1:p])
+X			}
+X		}
+X}
+X"rq.omega"<-
+Xfunction(z, tau = 0.5, hs = F, tol = 0.0001)
+X{
+X#computes omega^2=tau(1-tau)/f^2(xi_a) for se of rq's
+X#uses linearized eqf from the full rq-process see function qrq()
+X#bandwidth is either Bofinger (hs=F) or Hall-Sheather (hs=T)
+X#z is the rq structure 
+X	dn <- dn(tau, nrow(z$dsol), hs = hs)
+X	low <- tau-dn
+X	up <- tau+dn
+X	if(low<0 || up>1){
+X		warning("bandwidth is truncated to [0,1]")
+X		low <- z$sol[1,2]
+X		up <- z$sol[1,ncol(z$sol)-1]
+X		}
+X	q <- qrq(z, c(low, up))
+X	shat <- diff(q)/(2 * dn)
+X	tau * (1 - tau) * shat^2
+X}
+X"dn"<-
+Xfunction(p, n, hs = F)
+X{
+X	PI <- 3.1415899999999999
+X	x0 <- qnorm(p)
+X	f0 <- (1/sqrt(2 * PI)) * exp(.Uminus((x0^2/2)))
+X	if(hs == T)
+X		n^(-1/3) * qnorm(1 - 0.025000000000000001)^(2/3) * ((1.5 * f0^2
+X			)/(2 * x0^2 + 1))^(1/3)
+X	else n^-0.20000000000000001 * ((4.5 * f0^4)/(2 * x0^2 + 1)^2)^
+X			0.20000000000000001
+X}
+X"trq"<-
+Xfunction(x, y, a1 = 0.1, a2, z, int = T, method = "primal", tol = 0.0001)
+X{
+X#compute trimmed regression quantiles
+X#z is the rq strcture 
+X	if(missing(a2)) a2 <- a1
+X	if(a1 < 0 || a2 < 0)
+X		stop("trimming proportion negative.")
+X	if(a1 + a2 - 1 > tol)
+X		stop("trimming proportion greater than 1.")
+X	if(method!="primal" && method!="dual")
+X		stop("invalid method: should be 'primal' or 'dual'.")
+X	x <- as.matrix(x)
+X	if(missing(z))
+X		z <- rq(x, y,  , int, tol)
+X	p <- z$sol[1,  ]
+X	q <- matrix(z$sol[ - c(1, 2),  ], nrow(z$sol) - 2, ncol(z$sol))
+X	n <- nrow(z$dsol)
+X	s <- NULL
+X	if(length(dimnames(x)[[2]]) == 0)
+X		dimnames(x) <- list(NULL, paste("X", 1:(nrow(q) - 1), sep = "")
+X			)
+X	if(int) {
+X		x <- cbind(1, x)
+X		dimnames(x)[[2]][1] <- "Intercept"
+X	}
+X	xbar <- apply(x, 2, "mean")
+X	xxinv <- solve(t(x) %*% x)
+X	if(abs(a1 + a2 - 1) <= tol) {
+X#single quantile case
+X		i <- sum(p < a1)
+X		s$coef <- q[, i]
+X		names(s$coef) <- dimnames(x)[[2]]
+X		s$resid <- y - x %*% s$coef
+X		PI <- 3.14159
+X		x0 <- qnorm(a1)
+X		d0 <- (1/sqrt(2 * PI)) * exp( - (x0^2/2))
+X		d0 <- ((4.5 * d0^4)/(2 * x0^2 + 1)^2)^0.2
+X		d <- d0 * (length(s$resid) - length(s$coef))^(-0.2)
+X		if(d > min(a1, 1 - a1))
+X			d <- min(a1, 1 - a1)
+X		s$d <- d
+X		i <- sum(p < a1 + d)
+X		j <- sum(p < a1 - d)
+X		shat <- as.numeric(xbar %*% t(q[, i] - q[, j]))/(2 * d)
+X		s$int <- int
+X		s$v <- a1 * (1 - a1) * shat^2
+X		s$cov <- s$v * xxinv
+X	}
+X	else {
+X#real trimming
+X		p1 <- p[-1]
+X		f <- 1/(1 - a1 - a2)
+X		d <- pmax((pmin(p1, 1 - a2) - c(a1, pmax(p1[ - length(p1)],
+X			a1))), 0)
+X		if(method == "primal") {
+X			s$coef <- q[, 1:length(p1)] %*% t(d) * f
+X			s$resid <- y - x %*% s$coef
+X			s$int <- int
+X		}
+X		else {
+X#Jureckova-Gutenbrunner trimmed least squares
+X			i <- max(1, sum(p < a1))
+X			g <- (z$dsol[, i + 1] - z$dsol[, i])/(p[i + 1] - p[
+X				i])
+X			wa <- z$dsol[, i] + (a1 - p[i]) * g
+X			j <- sum(p < 1 - a2)
+X			g <- (z$dsol[, j + 1] - z$dsol[, j])/(p[j + 1] - p[
+X				j])
+X			wb <- z$dsol[, j] + (1 - a2 - p[j]) * g
+X			wt <- wa - wb
+X			if(min(wt) < 0)
+X				warning("some weights negative!")
+X			s <- lsfit(x, y, abs(wt), int = F)
+X		}
+X#now compute covariance matrix estimate
+X		mu <- xbar %*% s$coef
+X		v <- d %*% t((z$sol[2, 1:length(d)] - mu)^2)
+X		k <- qrq(z, c(a1, a2)) - mu
+X		v <- v + a1 * k[1]^2 + a2 * k[2]^2 + (a1 * k[1] + a2 * k[2])^2
+X		names(s$coef) <- dimnames(x)[[2]]
+X		s$v <- as.vector(f^2 * v)
+X		s$cov <- s$v * xxinv
+X	}
+X	s
+X}
+X"trq.print"<-
+Xfunction(trq.out, digits = 4)
+X{
+X	n <- length(trq.out$resid)
+X	p <- length(trq.out$coef)
+X	options(warn = -1)
+X	if(trq.out$int) {
+X		df.num <- p - 1
+X		fstat <- c(trq.out$coef[-1] %*% solve(trq.out$cov[-1, -1]) %*%
+X			t(trq.out$coef[-1]))/df.num
+X	}
+X	else {
+X		df.num <- p
+X		fstat <- trq.out$coef %*% solve(trq.out$cov) %*% t(trq.out$coef
+X			)/df.num
+X	}
+X	pvalue <- 1 - pf(fstat, df.num, (n - p))
+X	cat(paste("Winsorized Standard Error of Regression= ", format(round(
+X		sqrt(trq.out$v), digits)), "\n", "N = ", format(n), 
+X		",  F-statistic = ", format(round(fstat, digits)), " on ",
+X		format(df.num), " and ", format((n - p)), " df, ", "p-value = ",
+X		format(round(pvalue, digits)), "\n\n", sep = ""))
+X	regstat <- c(sqrt(trq.out$v), n, fstat, df.num, (n - p), pvalue)
+X	names(regstat) <- c("rse", "n", "F.stat", "df.num", "df.den", "p.value"
+X		)
+X	err <- sqrt(diag(trq.out$cov))
+X	tstat <- c(trq.out$coef/err)
+X	tabcoef <- cbind(trq.out$coef, err, tstat, 2 * (1 - pt(abs(tstat),
+X		n - p)))
+X	dimnames(tabcoef) <- list(names(trq.out$coef), c("coef", "std.err",
+X		"t.stat", "p.value"))
+X	options(warn = 0)
+X	print(round(tabcoef, digits))
+X	invisible(list(summary = regstat, coef.table = tabcoef))
+X}
+X"ranks"<-
+Xfunction(v, score = "wilcoxon")
+X{
+X	A2 <- 1
+X	if(score == "wilcoxon") {
+X		J <- ncol(v$sol)
+X		dt <- v$sol[1, 2:J] - v$sol[1, 1:(J - 1)]
+X		ranks <- as.vector((0.5 * (v$dsol[, 2:J] + v$dsol[, 1:(J - 1)]) %*%
+X			dt) - 0.5)
+X		return(ranks, A2 = 1/12)
+X	}
+X	else if(score == "normal") {
+X		J <- ncol(v$sol)
+X		dt <- v$sol[1, 2:J] - v$sol[1, 1:(J - 1)]
+X		dphi <- c(0, phi(qnorm(v$sol[1, 2:(J - 1)])), 0)
+X		dphi <- diff(dphi)
+X		ranks <- as.vector((((v$dsol[, 2:J] - v$dsol[, 1:(J - 1)]))) %*% (
+X			dphi/dt))
+X		return(ranks, A2)
+X	}
+X	else if(score == "sign") {
+X		j.5 <- sum(v$sol[1,  ] < 0.5)
+X		w <- (0.5 - v$sol[1, j.5])/(v$sol[1, j.5 + 1] - v$sol[1, j.5])
+X		r <- w * v$dsol[, j.5 + 1] + (1 - w) * v$dsol[, j.5]
+X		return(ranks = 2 * r - 1, A2)
+X	}
+X	else stop("invalid score function")
+X}
+X"rrs.test"<-
+Xfunction(x0, x1, y, v, score = "wilcoxon")
+X{
+X	if(missing(v) || is.null(v$dsol))
+X		v <- rq(x0, y, dual = T)
+X	r <- ranks(v, score)
+X	x1hat <- as.matrix(qr.resid(qr(cbind(1, x0)), x1))
+X	sn <- as.matrix(t(x1hat) %*% r$ranks)
+X	sn <- t(sn) %*% solve(crossprod(x1hat)) %*% sn/r$A2
+X	return(sn, rank = r$ranks)
+X}
+SHAR_EOF
+$TOUCH -am 0517200595 rq.s &&
+chmod 0644 rq.s ||
+echo "restore of rq.s failed"
+set `wc -c rq.s`;Wc_c=$1
+if test "$Wc_c" != "10737"; then
+	echo original size 10737, current size $Wc_c
+fi
+# ============= rrs.test.d ==============
+echo "x - extracting rrs.test.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > rrs.test.d &&
+X.BG
+X.FN rrs.test
+X.TL
+XFunction to compute regression rankscore test of linear hypothesis
+X.DN
+XTests the hypothesis that b_1 = 0 in the quantile regression model
+X
+X	y = X_0 b_0 + X_1 b_1 + u 
+X.CS
+Xrrs.test(x0, x1, y, v, score="wilcoxon")
+X.RA
+X.AG x0
+Xmatrix of maintained regressors, a column of ones is appended automatically
+X.AG x1
+Xmatrix of regressors under test
+X.OA
+X.AG y
+Xresponse variable may be omitted if v is provided
+X.AG v
+Xregression quantile structure from rq(x0,y)
+X.AG score
+Xscore function for test (see ranks())
+X.RT
+X.RC sn
+XTest statistic is asymptotically Chi-squared with rank(X1) degrees of freedom.
+X.RC rank
+Xvector of ranks
+X.SE
+X.DT
+X.SH REFERENCES
+X[1] Gutenbrunner, C., J. Jureckova,  Koenker, R. and  Portnoy, S.(1993)
+X"Tests of Linear Hypotheses  based on Regression Rank Scores",
+XJournal of Nonparametric Statistics, (2), 307-331.
+X
+X[2] Koenker, R.W. and d'Orey (1994).  "Remark on Alg. AS 229: Computing Dual
+XRegression Quantiles and Regression Rank Scores", Applied Statistics, 43, 410-414.
+X
+X.SA
+Xrq, ranks
+X.EX
+Xrrs.test(stack.x[,1:2],stack.x[,3],stack.loss)
+X.KW regression quantiles, ranks, regresion rankscores
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 rrs.test.d &&
+chmod 0644 rrs.test.d ||
+echo "restore of rrs.test.d failed"
+set `wc -c rrs.test.d`;Wc_c=$1
+if test "$Wc_c" != "1126"; then
+	echo original size 1126, current size $Wc_c
+fi
+# ============= trq.d ==============
+echo "x - extracting trq.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > trq.d &&
+X.BG
+X.FN trq
+X.TL
+XFunction to compute analogues of the trimmed mean 
+Xfor the linear regression model.
+X.DN
+XThe function returns 
+Xa regression trimmed mean and some associated test statistics.
+XThe proportion a1 is trimmed from the lower tail and a2 from the upper tail.
+XIf a1+a2=1 then a result is returned for the a1 quantile.
+XIf a1+a2<1 two methods of trimming are possible described below as
+X"primal" and "dual". The function "trq.print" may be used to print results in the style of ls.print.
+X.CS
+Xtrq(x, y, a1=0.1, a2,  int=T, z,  method="primal", tol=1e-4)
+X.RA
+X.AG x
+Xvector or matrix of explanatory variables.  If  a  matrix,
+Xeach  column represents a variable and each row represents
+Xan observation (or case).  This should not contain  column
+Xof  1s unless the argument intercept is FALSE.  The number
+Xof rows of x should equal the number of elemants of  y,  and
+Xthere  should  be fewer columns than rows.  Missing values
+Xare not  allowed.
+X.AG y
+Xreponse vector with as many observations as the number of rows of x.  
+XMissing value are not allowed.
+X.OA
+X.AG a1
+Xthe lower trimming proportion; defaults to .1 if missing.
+X.AG a2
+Xthe upper trimming proportion; defaults to a1 if missing.
+X.AG int
+Xflag for intercept; if TRUE, an intercept term is included in regrssion model. 
+XThe default includes an intercept term.
+X.AG z
+Xstructure returned by the function 'rq' with t <0 or >1. If missing, the function rq(x,y,int=int) is automatically called to generate this argument.
+XIf several calls to trq are anticipated for the same data this avoids
+Xrecomputing the rq solution for each call.
+X.AG method
+Xmethod to be used for the trimming. 
+XIf the choice is "primal", as is the default, a trimmed mean 
+Xof the primal regression quantiles  is computed based on the sol array 
+Xin the 'rq' structure. 
+XIf the method is "dual", a weighted least-squares fit is done 
+Xusing the dual solution in the 'rq' structure to construct weights.
+XThe former method is discussed in detail in Koenker and Potnoy(1987)
+Xthe latter in Ruppert and Carroll(1980) and Gutenbrunner and Jureckova(1991).
+X.AG tol
+XTolerance parameter for rq computions
+X.RT
+X.RC coef
+Xestimated coeficient vector
+X.RC resid
+Xresiduals from the fit.
+X.RC cov
+Xthe estimated covariance matrix for the coeficient vector. 
+X.RC v
+Xthe scaling factor of the covariance matrix under iid error assumption:
+Xcov=v*(x'x)^(-1).
+X.RC wt
+Xthe weights used in the least squares computation,  Returned only when
+Xmethod="dual".
+X.RC d
+Xthe bandwidth used to compute the sparsity function. 
+XReturned only when a1+a2=1.
+X.EX
+Xz_rq(x,y)  #z gets the full regression quantile structure
+Xtrq(x,y,.05,z=z)  #5% symmetric primal trimming 
+Xtrq(x,y,.01,.03,method="dual")  #1% lower and 3% upper trimmed least-
+X			    #squares fit. 
+Xtrq.print(trq(x,y)) #prints trq results in the style of ls.print.
+X.KW regression quantiles, robust regression, trimmed mean
+X.SH METHOD
+Xdetails of the methods may be found in Koenker and Portnoy(1987) for
+Xthe case of primal trimming and in Gutenbrunner and Jureckova(1991) for
+Xdual trimming.
+XOn the estimation of the covariance matrix for individual quantiles,
+Xsee Koenker(1987) and the discussion in Hendricks and Koenker(1991).
+XThe estimation of the covariance matrix under  non-iid
+Xconditions is an open research problem.  
+X.SH REFERENCE
+XBassett, G., and Koenker, R. (1982), "An Empirical Quantile Function 
+Xfor Linear Models With iid Errors," 
+X.ul
+XJournal of the American Statistical Association,
+X77, 407-415.
+X.PP
+XKoenker, R.W. (1987), "A Comparison of Asymptotic Methods of Testing
+Xbased on L1 Estimation," in Y. Dodge (ed.) 
+X.ul
+XStatistical Data Analysis Based on the L1 norm and Related Methods,
+XNew York:  North-Holland.
+X.PP
+XKoenker, R. W., and Bassett, G.W (1978), "Regression Quantiles",
+X.ul
+XEconometrica,
+X46, 33-50.
+X.PP
+XKoenker, R., and Portnoy, S. (1987), "L-Estimation for Linear Models",
+X.ul
+XJournal of the American Statistical Association,
+X82, 851-857.
+X.PP
+XRuppert, D. and Carroll, R.J. (1980), "Trimmed Least Squares Estimation
+Xin the Linear Model", 
+X.ul
+XJournal of the American Statistical Association, 75, 828-838.
+X.SH SEE ALSO
+Xrq and qrq for further details.
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 trq.d &&
+chmod 0644 trq.d ||
+echo "restore of trq.d failed"
+set `wc -c trq.d`;Wc_c=$1
+if test "$Wc_c" != "4113"; then
+	echo original size 4113, current size $Wc_c
+fi
+# ============= trq.print.d ==============
+echo "x - extracting trq.print.d (Text)"
+sed 's/^X//' << 'SHAR_EOF' > trq.print.d &&
+X.BG
+X.FN trq.print
+X.TL
+XPrint a Trimmed Regression Quantile Summary
+X.DN
+XPrints out a summary of a trimmed quantile regression (using trq) including the standard error of the residuals, the overall F-statistic and t-statistics and standard errors for each coefficient.
+X.CS
+Xtrq.print(trq.out, digits=4)
+X.RA
+X.AG trq.out
+Xa list like the output from trq.
+X.OA
+X.AG digits
+Xthe number of significant digits that should be printed.
+X.RT
+Xan invisible list with the following components:
+X.RC summary
+Xa vector containig the winsorized standard error of regression, 
+Xthe number of observations, the overall F-statistic for the regression, 
+Xthe degrees of freedom and the p-value for the F-statistic. 
+XWhen a1+a2=1, residual winsorized standard
+Xerror is the the square root of a Siddiqui-type estimate of the asymtotic
+Xvariance of the a1-quantile.
+X.RC coef.table
+Xa matrix with columns containing the regrssion coefficients, their standard error,the t-statistic for testing if the coefficient os zero and the two sided p-value for the t statistic.
+X.SE
+Xa summary of the regression (like the returned value) is printed out.
+X.SA
+Xtrq, lsfit, and ls.print for further reference.
+X.EX
+Xtrq.print(trq(x,y))
+X.KW ~keyword
+X.WR
+SHAR_EOF
+$TOUCH -am 0517200595 trq.print.d &&
+chmod 0644 trq.print.d ||
+echo "restore of trq.print.d failed"
+set `wc -c trq.print.d`;Wc_c=$1
+if test "$Wc_c" != "1196"; then
+	echo original size 1196, current size $Wc_c
+fi
+exit 0

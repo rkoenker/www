@@ -1,0 +1,678 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+                                
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>R, MySQL, LM and quantreg</title>
+                        
+  <meta name="author" content="Alvaro A. Novo">
+            
+  <meta name="description" content="Large datasets, least squares, quantile regression and the R language">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#0000ff" alink="#000088" vlink="#ff0000">
+<table cellpadding="2" cellspacing="2" border="0" width="75%" align="Center">
+  <tbody>
+    <tr valign="Top">
+      <td valign="Top">                                                 
+                                       
+      <div align="Center"> &nbsp;&nbsp; &nbsp; <br>
+                                    
+      <h3>Statistical Analysis of Large Datasets</h3>
+                                    
+      <h3>An Exploration of <a href="http://www.r-project.org">R</a> - <a href="#MySQL">
+MySQL</a> Interface</h3>
+ &nbsp;&nbsp; &nbsp; <a href="mailto:roger@ysidro.econ.uiuc.edu"></a><br>
+                              
+      <table cellpadding="0" cellspacing="2" border="0" width="50%">
+        <tbody>
+          <tr valign="Top">
+            <td valign="Top">                                           
+    
+            <div align="Center"><a href="mailto:roger@ysidro.econ.uiuc.edu">
+Roger Koenker</a><br>
+University of Illinois<br>
+            </div>
+            </td>
+          </tr>
+          <tr valign="Top">
+            <td valign="Top">                                           
+    
+            <div align="Center"><a href="mailto:anovo@linuxfan.com"></a><br>
+            </div>
+            </td>
+          </tr>
+          <tr valign="Top">
+            <td valign="Top">                                    
+            <div align="Center"><a href="mailto:anovo@linuxfan.com">&Aacute;lvaro
+A. Novo</a><br>
+            </div>
+                                    
+            <div align="Center">University of Illinois<br>
+            </div>
+            </td>
+          </tr>
+                                
+        </tbody>                        
+      </table>
+      <a href="#Least_Squares">      <br>
+      <br>
+Least Squares</a><br>
+      <a href="#Quantile_Regression"> Quantile Regression</a><br>
+      <br>
+      </div>
+      </td>
+    </tr>
+        <tr valign="Top">
+      <td valign="Top"><a name="Least_Squares"></a><br>
+	  <b>LM: Least Squares on
+Large Datasets</b><br>
+      <br>
+We illustrate the approach with a model for infant birth weight based on
+the 1999 U.S. Detailed Natality Survey. The dataset contains roughly 2.4
+million observations on 18 variables when loaded into R it requires about
+275 MB of RAM. Furthermore, any nontrivial statistical procedure like least
+squares will further increase the memory requirements to values beyond the
+capabilities of the vast majority of R users.<br>
+      <br>
+With that in mind, we have been experimenting with techniques that would
+allow users to compute least squares solutions with extremely large datasets,
+while maintaining memory requirements at low (common) levels. The principles
+of ourpackage are:<br>
+      <br>
+      
+      <blockquote><code>0) Given N observations on a MySQL server;</code><br>
+<code>1) Determine variables needed for X,y,w, etc<br>
+<code>2) While (n &lt; N)<br>
+{ &nbsp;&nbsp; &nbsp;         </code>                                   
+       
+        <blockquote><code>fetch a block of n rows. <br>
+accumulate  X'X and X'y<br>
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </code></blockquote>
+          <code>}</code><br>
+          </code></blockquote>
+          
+          <blockquote><code>3) Compute least squares solution by Cholesky.<br>
+            </code></blockquote>
+Here's a synopsis of the example included in the documentation of LM, which
+we (naturally) limit to 500 observations on 3 variables. Later, we will report
+on an example with 2,376,497 observations on 18 variables. <br>
+            <br>
+We run the example over the network using a 56k V.90 modem connection with
+an Athlon 750 MHz with 384 MB of RAM powered by Linux 2.2.17 SuSE 6.4. The
+MySQL server is version 3.22.32. R-1.2.0 takes about 12 seconds to source
+and execute the code below:<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;                              
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;             
+            <table cellpadding="0" cellspacing="0" border="0" width="75%">
+              <tbody>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>&gt; library(LM)</small></samp></td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>&gt; m &lt;-&nbsp; MySQL()</small></samp><br>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>&gt; mycon &lt;- dbConnect(m,
+user='%', dbname="LM", </small></samp></td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>+ &nbsp;&nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; host="galton.econ.uiuc.edu")</small></samp></td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><small><samp>&gt;&nbsp; rs &lt;- dbExecStatement(
+mycon, "SELECT * FROM LMData </samp></small></td>
+                </tr>
+                <tr valign="Top">
+ <td valign="Top"><small><samp>+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  </samp></small><small><samp>WHERE                  </samp></small><small><samp>
+ID &lt; 501" )</samp></small><small><br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </small></td>
+                </tr>
+                <tr valign="Top">
+ <td valign="Top"><small><samp>&gt; summary(LM( weight ~ momage + boy, data=rs,
+conn=mycon,</samp></small><samp><small> &nbsp; &nbsp;   NumStdErr=TRUE ))<br>
+                  <br>
+ </small></samp></td>
+                </tr>
+                                <tr valign="Top">
+                  <td valign="Top"><samp><small>Call:</small></samp><br>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>LM(formula = weight ~ momage
++ boy, data = rs, NumStdErr = TRUE, conn = mycon)</small></samp><big><br>
+                  </big></td>
+                </tr>
+                                                        
+              </tbody> 
+            </table>
+            <samp><small><br>
+            </small><small>Residuals:</small><small><br>
+ </small></samp>                                                
+            <table cellpadding="0" cellspacing="0" border="0" width="75%">
+              <tbody>
+                <tr valign="Top">
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>Min<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>1Q <br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>Median<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>3Q<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>Max <br>
+                  </samp></small></div>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>-2766.41<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>-314.82<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>45.06<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>350.15<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>1265.74</samp></small><br>
+                  </div>
+                  </td>
+                </tr>
+                                                        
+              </tbody>                                                
+            </table>
+            <samp><small> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+            <br>
+            </small><small>Coefficients: &nbsp; &nbsp; &nbsp; &nbsp; </small></samp>
+                                                
+            <table cellpadding="0" cellspacing="0" border="0" width="75%">
+              <tbody>
+                <tr valign="Top">
+                  <td valign="Top"><small><samp><br>
+                  </samp></small></td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp> Estimate</samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>Std. Error<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>t value<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>Pr(&gt;|t|)<br>
+                  </samp></small></div>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><small><samp>(Intercept) <br>
+                  </samp></small></td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>2947.916<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>123.967<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>23.780<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>&lt;2e-16<br>
+                  </samp></small></div>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><small><samp><big><big><big>momage</big></big></big>
+ &nbsp; &nbsp; &nbsp; <br>
+                  </samp></small></td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>11.121<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>4.411<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>2.521<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>0.0120<br>
+                  </samp></small></div>
+                  </td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><small><samp><big><big>boy </big></big>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+                  </samp></small></td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>119.983<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>50.519<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>2.375<br>
+                  </samp></small></div>
+                  </td>
+                  <td valign="Top">                                     
+                                 
+                  <div align="Right"><small><samp>0.0179</samp></small><br>
+                  </div>
+                  </td>
+                </tr>
+                                                        
+              </tbody>                                                
+            </table>
+            <samp><small><br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </small></samp>              
+                               
+            <table cellpadding="0" cellspacing="0" border="0" width="80%">
+              <tbody>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>Residual standard error:563.2
+on 497 degrees of freedom</small><small><br>
+                  </small></samp></td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>Multiple R-Squared: 0.0248,&nbsp;
+Adjusted R-squared: 0.02088</small><small><br>
+                  </small></samp></td>
+                </tr>
+                <tr valign="Top">
+                  <td valign="Top"><samp><small>F-statistic: 6.321 on 2 and
+497 degrees of freedom,&nbsp; &nbsp; p-value: 0.001947</small></samp><br>
+                  </td>
+                </tr>
+                                                        
+              </tbody>                                                
+            </table>
+            <samp><small><br>
+            </small></samp><br>
+            <br>
+In the next example, we run a model with 16 left-hand side variableson 2,376,497
+observations. We run the example on a 100Mbps network with a dual Pentium
+III at 650 MHz with 512 MB of RAM powered by Linux 2.2.16-SMP SuSE 6.4. <br>
+            <br>
+It takes only about 10.5 minutes to complete. And, total memory usage never
+exceeds 115 MB.<br>
+            <br>
+These numbers may not seem too impressive, but if we consider that in order
+to load the ascii dataset to R with 'scan' it used all 512 MB of RAM
+plus some 300 MB of swap space, there are certainly substantial memory gains.
+Furthermore, just re-opening R with the dataset in .RData takes over 2.5 minutes
+and requires 272 MB! 
+We were unable to use `read.table'; it drained all
+memory resources (1GB = RAM + swap)!
+We also used the package 'stataread' which turned out to be the
+fastest and less memory intensive. Finally, MySQL also seems quite
+efficient reading ascii data, it took only 3 min. 41.31 sec.<br>
+            <br>
+It's possible to reduce memory requirements by fetching fewer observations
+at a time; in our example we fetched 100,000 each time. This will <b>not</b>
+necessarily result in longer waiting times, but it's certainly more feasible.
+It appears that most of the time is occupied loading each block into a dataframe.
+In a separate exercise, fetching data from a MySQL server took approximately
+the same time as reading the data from text files with '<i>read.table</i>
+' (<i>scan</i> is faster). So, it would be interesting to investigate whether
+significant efficiency gains are possible in this phase of the process. We
+would be very interested in comments about this aspect of LM.<small><br>
+            </small><br>
+                                                                        
+                                                                        
+    
+            <hr align="Center" width="80%" size="2"><br>
+            <b>Download Area:</b><br>
+            <br>
+            <b> </b><a href="http://www.econ.uiuc.edu/~roger/research/rq/LM_0.1.tar.gz">
+LM - Version 0.1-0</a><br>
+And the also the required <a href="http://cran.r-project.org/src/contrib/Devel/RMySQL_0.2-3.tar.gz">
+RMySQL</a> package.<br>
+            <br>
+                                                                        
+                                                                        
+    
+            <hr align="Center" width="80%" size="2"><br>
+            </td>
+          </tr>
+          <tr valign="Top">
+            <td valign="Top"><a name="Quantile_Regression"></a><br>
+			<b>Quantile
+Regression</b><br>
+            <br>
+The LM development project can be considered to be a successful feasibility
+study for a comparable functionality for quantile regression. We hope to have
+an alpha version of the quantile regression software in the near future. Stay
+tuned for further developments.<br>
+            <br>
+                                                                        
+                                                                        
+    
+            <hr align="Center" width="80%" size="2"><br>
+                                                      <a name="MySQL"></a><b>
+MySQL</b><br>
+                  <br>
+In order to use our package(s), you need to have access to a MySQL server,
+either locally or remotely. Therefore, we will briefly describe the installation,
+administration and client use of MySQL.<br>
+                  <br>
+You can skip this section altogether if you have experience with MySQL.<br>
+                  <br>
+MySQL is a Relational DataBase Management System (RDBMS) available at <a href="http://www.mysql.com">
+http://www.mysql.com</a>, free of charge under the conditions described in
+the site.<br>
+                  <br>
+                  <b>Installation<br>
+                  <br>
+                  </b>You will need at least a MySQL client (to talk with
+a MySQL server). MySQL is available for several OS (<a href="http://www.mysql.com/downloads/mysql-3.22.html">Unix, Linux, FreeBSD</a> and Windows). If you don't have access to a server,
+please consider installing your own server. Under SuSE 6.4, we installed
+the following rpm packages: mysqlclnt (the client), mysql (the server), mysqllib
+(libraries) and mysqldev (development files and libraries).<br>
+                  <b><br>
+                  </b><br>
+For additional instructions please refer to the <a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Installing.html#Installing">
+manual</a>&nbsp; provided by MySQL, which is quite thorough. We encourage
+you to read at least the <a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Privilege_system.html#Privilege_system">
+security tips</a>.<br>
+                  <br>
+                  <b>Administration<br>
+                  <br>
+                  <br>
+ </b>This is intended to be a brief introduction to administering a server
+and it is fully based on our experience with SuSE 6.4.<br>
+                  <br>
+Once you have installed MySQL server, you need to:<br>
+                  <br>
+0) Start the mysql daemon (e.g. rcmysql start);<br>
+1) Assign a password to the user root (the administrator):<br>
+                                                                  
+            <blockquote><small><samp><font color="#ff6666"> root@galton$</font>
+ mysqladmin -u root password yourpasswd</samp></small><br>
+                    </blockquote>
+2) Add a user with certain access privileges to databases. For illustrative
+purposes, we will consider the user "dummy" and the database "dbdummy" restricting
+access from the localhost and "world.dummy.org". <br>
+                            
+              <blockquote><br>
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          
+                     
+                <table cellpadding="2" cellspacing="2" border="1" width="100%">
+                  <tbody>
+                    <tr valign="Top">
+                      <td valign="Top"><small><samp><font color="#ff6666">
+anovo@galton$</font> mysql -u root -p mysql</samp></small><br>
+                      <br>
+a) Update the 'user' table<br>
+                      <br>
+                      <small><samp><font color="#ff6666">mysql&gt;</font>
+ insert into user (host,user,password)</samp></small><br>
+                      <small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font>
+&nbsp; values('localhost','dummy',password('NOTeasy'));</samp></small><br>
+                      <small><samp><font color="#ff6666">mysql&gt;</font>
+ insert into user (host,user,password)</samp></small><br>
+                      <small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font>
+&nbsp; values('world.dummy.org','dummy',password('NOTeasy'));</samp></small><br>
+                      <br>
+b) Update the 'db' table<br>
+                      <br>
+                      <small><samp><font color="#ff6666">mysql&gt;</font>
+ insert into db</samp></small><br>
+                      <small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font>
+ (host,db,user,Select_priv,Insert_priv,Update_priv,Delete_priv,</samp></small><br>
+                      <small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font>
+&nbsp; Create_priv,Drop_priv)</samp></small><br>
+                      <small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font>
+ values ('%','dbdummy','dummy','Y','Y','Y','Y','Y','Y');</samp></small><br>
+                      <br>
+c) Create the necessary database (dbdummy). First, exit mysql. Then,<br>
+                      <br>
+                      <small><samp><font color="#ff6666">anovo@galton$</font>
+ mysqladmin -u root -p create dbdummy</samp></small><br>
+                      <small><samp><font color="#ff6666">enter password:</font>
+ *******</samp></small><br>
+                      <br>
+                      <font color="#ff6666"><small><samp>Database "dbdummy"
+created</samp></small></font><br>
+                      <br>
+d) Reload the server <br>
+                      <br>
+                      <small><samp><font color="#ff6666">anovo@galton$ </font>
+mysqladmin -u root -p reload;</samp></small><br>
+                      <small><samp><font color="#ff6666">enter password:</font>
+ *******</samp></small><br>
+                      </td>
+                    </tr>
+                                                      
+                  </tbody>                                              
+ 
+                </table>
+                <br>
+                      </blockquote>
+3) Create and load the data into tables. <br>
+   Notice that we gave permission to 'dummy' ( see 2b) ).<br>
+                                 
+                <blockquote><samp><small><font color="#ff6666"><br>
+                  </font></small></samp>                                
+   
+                  <table cellpadding="2" cellspacing="2" border="1" width="100%">
+                    <tbody>
+                      <tr valign="Top">
+                        <td valign="Top"><small><samp><font color="#ff6666">
+dummy@galton$</font> mysql -p dbdummy</samp></small><br>
+                        <small><samp><font color="#ff6666">enter password:</font>
+ *******</samp></small><br>
+                        <br>
+                        <font color="#ff6666"><small><samp>Welcome to the
+MySQL monitor.&nbsp; </samp></small></font><br>
+                        <font color="#ff6666"><small><samp>Commands end with
+; or \g.</samp></small></font><br>
+                        <font color="#ff6666"><small><samp>Your MySQL connection
+id is 5602 </samp></small></font><br>
+                        <font color="#ff6666"><small><samp>to server version:
+3.22.32</samp></small></font><br>
+                        <br>
+                        <font color="#ff6666"><small><samp>Type 'help' for
+help.</samp></small></font><br>
+                        <br>
+
+<big><font color="#ff6666"><small><samp><small>mysql&gt;</small></samp></small></font></big><small><samp>
+CREATE TABLE dummynat(</samp></small><br>
+                        <small><samp> &nbsp;&nbsp; <b><font color="#ff6666">
+-&gt;</font></b> ID INT NOT NULL AUTO_INCREMENT,</samp></small><br>
+<small><samp> &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b>
+ birmon smallint unsigned not null,</samp></small><br>
+<small><samp> &nbsp;&nbsp; <font color="#ff6666">-&gt;</font> weight
+float not null,</samp></small><br>
+<small><samp> &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b>
+ boy tinyint unsigned not null,</samp></small><br>
+<small><samp> &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b>
+ momage float not null,</samp></small><br>
+                        <small><samp> &nbsp;&nbsp; <b><font color="#ff6666">
+-&gt;</font></b> PRIMARY KEY (ID));</samp></small><br>
+                        <samp><small><font color="#ff6666">Query OK, 0 rows
+affected (0.00sec)</font></small></samp><br>
+                        </td>
+                      </tr>
+                                        
+                    </tbody>                                    
+                  </table>
+ </blockquote>
+                  <br>
+4) Although we defined the fields (e.g. birmon) and their characteristics
+(e.g., smallint,float, tinyint, not null), our table is still empty, we need
+to load the (ascii) data into the server:<br>
+                  
+                  <blockquote><br>
+                    
+                    <table cellpadding="2" cellspacing="2" border="1" width="100%">
+                      <tbody>
+                        <tr valign="Top">
+                          <td valign="Top"><small><samp><font color="#ff6666">
+mysql&gt;</font> LOAD DATA LOCAL INFILE"~/projects/sql-r/births.txt"</samp></small><br>
+                          <small><samp><font color="#ff6666"> &nbsp;&nbsp;
+-&gt;</font> INTO TABLE dummynat FIELDS TERMINATED BY ' ' </samp></small><br>
+                          <small><samp> &nbsp;&nbsp; <b><font color="#ff6666">
+-&gt;</font></b> (birmon, weight, boy, momage);</samp></small><br>
+                          <font color="#ff6666"><small><samp>Query OK, 2376497
+rows affected(3 min 41.31sec)</samp></small></font><br>
+                          <font color="#ff6666"><small><samp>Records: 2376497&nbsp;
+Deleted: 0&nbsp; Skipped: 0&nbsp; Warnings: 0</samp></small></font><br>
+                          </td>
+                        </tr>
+                      
+                      </tbody>                    
+                    </table>
+                    <br>
+                          </blockquote>
+We created a table named 'dummynat' with the following fields (variables):
+ID, birmon, weight, boy, momage. The fields of statistical interest are birmon
+(month of birth), weight (in grams), boy (indicator) and momage (mom's age).
+ID is an identification field to which we assign a PRIMARY KEY. (The text
+in red represents the MySQL prompt; our input is in black). Notice how we
+omitted the field ID from our LOAD statement; ID is automatically created
+(and incremented).<br>
+                          <br>
+                          <b>Client Use</b><br>
+                          <br>
+This section illustrates basic SQL statements to retrieve specific pieces
+of information contained in 'dummynat' table.<br>
+                    
+                    <blockquote><br>
+                      
+                      <table cellpadding="2" cellspacing="2" border="1" width="100%">
+                        <tbody>
+                          <tr valign="Top">
+                            <td valign="Top"><small><samp><font color="#ff6666">
+mysql&gt;</font> SHOW tables;</samp></small><br>
+                            <small><samp><font color="#ff6666">+--------------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">| Tables in
+LM |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+--------------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">| dummynat
+&nbsp; &nbsp; |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+--------------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">1 row in set
+(0.16 sec)</font></samp></small><br>
+                            <br>
+                            <small><samp><font color="#ff6666">mysql&gt;</font>
+ SELECT * FROM dummynat LIMIT 2;</samp></small><br>
+                            <small><samp><font color="#ff6666">+----+--------+---------+-----+--------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">| ID | birmon
+| weight&nbsp; | boy | momage |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+----+--------+---------+-----+--------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|&nbsp;&nbsp;
+ 1|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    1 | 4054.00 | &nbsp; 0 |&nbsp; 36.00 |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|&nbsp;&nbsp;
+ 2|&nbsp;&nbsp; &nbsp;&nbsp;   2 | 3487.00 | &nbsp; 0 |&nbsp; 20.00 |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+----+--------+---------+-----+--------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">2 rows inset
+(0.22 sec)</font></samp></small><br>
+                            <br>
+                            <small><samp><font color="#ff6666">mysql&gt;</font>
+ SELECT weight FROM dummynat WHERE boy=1 AND momage&gt;40;</samp></small><br>
+                            <small><samp><font color="#ff6666">+--------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">| weight |</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+--------+</font></samp></small><br>
+                            <SMALL><Samp><font color="#ff6666">|  3799.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  3459.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  4014.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  2268.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  2580.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  3146.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  3125.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  3525.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  2268.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  2965.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">|  3771.00|</font></samp></small><br>
+                            <small><samp><font color="#ff6666">+--------+</font></samp></small><br>
+                            <small><samp><font color="#ff6666">11 rows in
+set (0.24 sec)</font></samp></small><br>
+                            </td>
+                          </tr>
+                        
+                        </tbody>                      
+                      </table>
+                      <br>
+                            </blockquote>
+                            <br>
+                            <br>
+devshed.com has several references. An introduction to MySQL Administration
+is given <a href="http://www.devshed.com/Server_Side/MySQL/Administration/">
+here</a> and first principles can be found <a href="http://www.devshed.com/Server_Side/MySQL/Intro/">
+here</a>.<br>
+                            <br>
+                  <br>
+                                                                        
+                                                                        
+                    
+                      <hr align="Center" width="80%" size="2"></td>
+                </tr>
+                                                                        
+                                                              
+                  </tbody>                                              
+                                                                       
+                </table>
+<small><small>Page created by
+                <a href="mailto:anovo@linuxfan.com"> &Aacute;lvaro A. Novo</a>
+, Dec. 25, 2000</small></small><small><small><br>
+            </small></small><small><small>Updated by __ , __ </small></small><br>
+                
+                </body>
+                </html>

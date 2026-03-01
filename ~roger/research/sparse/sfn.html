@@ -1,0 +1,25 @@
+<title>Sparse Methods for Quantile Regression </title>
+<html>
+<h1> Sparse Frisch-Newton Algorithms for Quantile Regression</h1>
+<p>
+<br>
+<p>
+</body></html>
+Several recent developments in quantile regression are crucially dependent on sparse
+linear algebra to accelerate computations.  In two papers Pin Ng and I describe
+modifications of the Frisch-Newton interior point methods proposed in an earlier
+Statistical Science paper with Steve Portnoy, that exploit sparse structure
+in the design matrix of the QR problem.
+<br>
+<a href="alg5.pdf">Inequality Constrained Quantile Regression,</a> 
+<br>
+<a href="fn3.pdf">A Sparse Frisch-Newton Algorithm for Quantile Regression,</a> 
+<br>
+Experimental R code for the Candes and Tao Dantzig selector is available 
+<a href="Dantzig.R">here,</a> A pure R version of the interior point LP
+solver is <a href="lpfnc.R">here,</a>.  This should be equivalent to the
+(much faster) fortran implementation of the same algorithm available in
+my quantreg R package.  Note that if one specifies sparse = TRUE in the
+Dantzig function, then it will call the fortran version from the quantreg
+package. 
+<br>

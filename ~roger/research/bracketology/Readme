@@ -1,0 +1,38 @@
+# The original data file is in .xls format provided by on cd by Steve Heston, (Fin, U Md.)
+# at the instigation of Dan Bernhardt.  It was kindly transformed into a cvs file
+# by Marek Jocek.  The contortions detailed in read.R  were used to prepare a data
+# frame suitable for fitting QR ratings models.
+
+Editing of the bball.csv file was done to rationalize some discrepancies in
+the team names.  To see the details of these edits one would need to do diff
+on the relevant files.
+
+For the 2004-05 season, I've hand edited the season to remove games after
+March 13th which was selection sunday  -- this file is called ncaap.d and
+made another file ncaat.d which is just the 64 games in the 2005 ncaa tournament.
+I've also ordered the first 33 games of ncaa.d so that they correspond to the
+order of the "official" bracket as it appears in 
+
+	http://en.wikipedia.org/wiki/2005_NCAA_Men%27s_Division_I_Basketball_Tournament
+
+The source file ncaa.R does some plotting of fitted densities for the games
+of the 2005 NCAA tournament based on fitting of the model. 
+
+The file tournament contains a simulation experiment for the tournament as it
+was seeded in the standard single elimination format.
+
+The file NCAABB20045.xls  is Heston's "better quality" 2004-5 data and
+includes "totals" for the ncaa tournament games which is used in the
+penultimate section of the paper.  This data was matched by eye/hand
+so craveat emptor.  A file with just these totals that is matched to
+the order of the data.frame G produced by ncaa.R is called totals.d.
+
+I've archived a version of the project as of April 1, 2007 -- see directory
+archive. This version was a complete revision of the whole exercise after
+the discovery that the initial drafts were improperly using the tournament
+games in the estimation.  So the archived version has correct figures,
+but incorrect text for the paper based on estimation using only the regular
+season.  The new revision will try to update the estimation after each
+round of the tournament.
+
+

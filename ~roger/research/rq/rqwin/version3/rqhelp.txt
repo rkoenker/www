@@ -1,0 +1,248 @@
+Quantile Regression (rq)
+
+
+DESCRIPTION:
+       Perform  a  quantile  regression on a design matrix, x, of
+       explanatory variables and a vector, y, of responses.
+
+USAGE:
+       rq(x, y, tau=-1, alpha=.1, dual=F, int=T, tol=1e-4, ci = T, method="score",
+       interpolate=T, tcrit=T, hs=T)
+
+
+REQUIRED ARGUMENTS:
+x:     vector or matrix of explanatory variables.  If  a  matrix,
+       each  column represents a variable and each row represents
+       an observation (or case).  This should not contain  column
+       of  1s unless the argument intercept is FALSE.  The number
+       of rows of x should equal the number of  elements  of   y,
+       and  there   should   be fewer columns than rows.  If x is
+       missing, rq() computes the ordinary sample quantile(s)  of
+       y.
+y:     response vector with as many observations as the number of
+       rows of x.
+
+OPTIONAL ARGUMENTS:
+tau:   desired quantile. If tau is missing or outside  the  range
+       [0,1]  then  all the regression quantiles are computed and
+       the corresponding primal and dual solutions are  returned.
+alpha:   level  of significance for the confidence intervals; de-
+       fault is set at 10%.
+dual:  return the dual solution if TRUE (default).
+int:   flag for intercept; if TRUE (default) an intercept term is
+       included in the regression.
+tol:   tolerance parameter for rq computations.
+ci:    flag for confidence interval; if TRUE (default) the confi-
+       dence intervals are returned.
+method:  if method="score" (default), ci is  computed  using  re-
+       gression rank score inversion; if method="sparsity", ci is
+       computed using sparsity function.
+interpolate:  if TRUE (default), the smoothed  confidence  inter-
+       vals are returned.
+tcrit:   if  tcrit=T (default), a finite sample adjustment of the
+       critical point is performed using  Student's  t  quantile,
+       else the standard Gaussian quantile is used.
+hs:     logical  flag  to  use Hall-Sheather's sparsity estimator
+       (default); otherwise Bofinger's version is used.
+
+VALUE:
+coef:  the estimated parameters of the tau-th  conditional  quan-
+       tile function.
+resid:   the  estimated residuals of the tau-th conditional quan-
+       tile function.
+dual:  the dual solution (if dual=T).
+h:     the index of observations in the basis.
+ci:    confidence intervals (if ci=T).
+
+VALUE:
+sol:   a  (p+2) by m matrix whose first row contains the  'break-
+       points'  tau_1,tau_2,...tau_m,  of  the quantile function,
+       i.e. the values in [0,1] at which  the  solution  changes,
+       row  two contains the corresponding quantiles evaluated at
+       the mean design point, i.e. the inner product of xbar  and
+       b(tau_i), and the last p rows of the matrix give b(tau_i).
+       The solution b(tau_i) prevails from tau_i to tau_i+1.
+dsol:  the matrix of dual solutions corresponding to  the  primal
+       solutions  in  sol.   This is an n by m matrix whose ij-th
+       entry is 1 if y_i > x_i  b(tau_j),  is  0  if  y_i  <  x_i
+       b(tau_j),   and  is between 0 and 1 otherwise, i.e. if the
+       residual is zero.  See  Gutenbrunner  and  Jureckova(1991)
+       for  a  detailed discussion of the statistical interpreta-
+       tion of dsol.
+h:     the matrix of observations indices  in  the  basis  corre-
+       sponding to sol or dsol.
+
+EXAMPLES:
+       rq(stack.x,stack.loss,.5)  #the l1 estimate for the stackloss data
+       rq(stack.x,stack.loss,tau=.5,ci=T,method="score")  #same as above with
+                      #regression rank score inversion confidence interval
+       rq(stack.x,stack.loss,.25)  #the 1st quartile,
+                      #note that 8 of the 21 points lie exactly
+                      #on this plane in 4-space
+       rq(stack.x,stack.loss,-1)   #this gives all of the rq solutions
+       rq(y=rnorm(10),method="sparsity")  #ordinary sample quantiles
+
+METHOD:
+       The  algorithm used is a modification of the Barrodale and
+       Roberts algorithm for l1-regression, l1fit in  S,  and  is
+       described in detail in Koenker and d"Orey(1987).
+
+REFERENCES:
+       [1]  Koenker,  R.W.  and  Bassett, G.W. (1978). Regression
+       quantiles, Econometrica, 46, 33-50.
+
+       [2] Koenker, R.W. and d'Orey (1987). Computing  Regression
+       Quantiles. Applied Statistics, 36, 383-393.
+
+       [3]  Gutenbrunner,  C.  Jureckova,  J. (1991).  Regression
+       quantile and regression rank score process in  the  linear
+       model  and  derived  statistics, Annals of Statistics, 20,
+       305-330.
+
+       [4] Koenker, R.W. and d'Orey (1994).  Remark  on  Alg.  AS
+       229:  Computing  Dual  Regression Quantiles and Regression
+       Rank Scores, Applied Statistics, 43, 410-414.
+
+       [5] Koenker, R.W. (1994). Confidence Intervals for Regres-
+       sion  Quantiles, in P. Mandl and M. Huskova (eds.), Asymp-
+       totic Statistics, 349-359, Springer-Verlag, New York.
+
+
+SEE ALSO:
+       trq and qrq for further details and references.
+
+
+
+
+
+
+Linearized Quantile Estimation (qrq)
+
+
+DESCRIPTION:
+       Compute linearized quantiles from rq data structure.
+
+USAGE:
+       qrq(s, a)
+
+REQUIRED ARGUMENTS:
+s:      data  structure returned by the quantile regression func-
+       tion rq with t<0 or t>1.
+a:     the vector of quantiles for which the  corresponding  lin-
+       earized quantiles are to be computed.
+
+VALUE:
+       a vector of the linearized quantiles corresponding to vec-
+       tor a, as interpolated from the second row of s$sol.
+
+SEE ALSO:
+       rq and  trq  for further detail.
+
+EXAMPLES:
+       z_qrq(rq(x,y),a)       #assigns z the linearized quantiles
+                              #corresponding to vector a.
+
+
+
+
+
+
+
+
+Function  to compute analogues of the trimmed mean for the linear
+regression model. (trq)
+
+
+DESCRIPTION:
+       The function returns a regression trimmed  mean  and  some
+       associated  test statistics.  The proportion a1 is trimmed
+       from the lower tail  and  a2  from  the  upper  tail.   If
+       a1+a2=1 then a result is returned for the a1 quantile.  If
+       a1+a2<1 two methods of trimming are possible described be-
+       low  as  "primal" and "dual". The function "trq.print" may
+       be used to print results in the style of ls.print.
+
+USAGE:
+       trq(x, y, a1=0.1, a2,  int=T, z,  method="primal", tol=1e-4)
+
+REQUIRED ARGUMENTS:
+x:     vector or matrix of explanatory variables.  If  a  matrix,
+       each  column represents a variable and each row represents
+       an observation (or case).  This should not contain  column
+       of  1s unless the argument intercept is FALSE.  The number
+       of rows of x should equal the number of  elemants  of   y,
+       and  there   should   be fewer columns than rows.  Missing
+       values are not  allowed.
+y:     reponse vector with as many observations as the number  of
+       rows of x.  Missing value are not allowed.
+
+OPTIONAL ARGUMENTS:
+a1:     the lower trimming proportion; defaults to .1 if missing.
+a2:    the upper trimming proportion; defaults to a1 if  missing.
+int:   flag for intercept; if TRUE, an intercept term is included
+       in regrssion model.  The  default  includes  an  intercept
+       term.
+z:      structure  returned by the function 'rq' with t <0 or >1.
+       If missing, the function rq(x,y,int=int) is  automatically
+       called to generate this argument.  If several calls to trq
+       are anticipated for the same data this avoids  recomputing
+       the rq solution for each call.
+method:   method  to  be used for the trimming.  If the choice is
+       "primal", as is the default, a trimmed mean of the  primal
+       regression  quantiles   is computed based on the sol array
+       in the 'rq' structure.  If the method is "dual", a weight-
+       ed  least-squares  fit  is done using the dual solution in
+       the 'rq'  structure  to  construct  weights.   The  former
+       method  is discussed in detail in Koenker and Potnoy(1987)
+       the latter in Ruppert and Carroll(1980)  and  Gutenbrunner
+       and Jureckova(1991).
+tol:   Tolerance parameter for rq computions
+
+VALUE:
+coef:  estimated coeficient vector
+resid:  residuals from the fit.
+cov:   the estimated covariance matrix for the coeficient vector.
+v:     the scaling factor of the covariance matrix under iid  er-
+       ror assumption: cov=v*(x'x)^(-1).
+wt:     the  weights  used in the least squares computation,  Re-
+       turned only when method="dual".
+d:     the bandwidth used to compute the sparsity function.   Re-
+       turned only when a1+a2=1.
+
+EXAMPLES:
+       z_rq(x,y)  #z gets the full regression quantile structure
+       trq(x,y,.05,z=z)  #5% symmetric primal trimming
+       trq(x,y,.01,.03,method="dual")  #1% lower and 3% upper trimmed least-
+                                    #squares fit.
+       trq.print(trq(x,y)) #prints trq results in the style of ls.print.
+
+METHOD:
+       details  of  the methods may be found in Koenker and Port-
+       noy(1987) for the case of primal trimming  and  in  Guten-
+       brunner and Jureckova(1991) for dual trimming.  On the es-
+       timation of the covariance  matrix  for  individual  quan-
+       tiles,  see  Koenker(1987) and the discussion in Hendricks
+       and Koenker(1991).  The estimation of the  covariance  ma-
+       trix  under   non-iid conditions is an open research prob-
+       lem.
+
+REFERENCE:
+       Bassett, G., and Koenker, R. (1982), "An  Empirical  Quan-
+       tile  Function for Linear Models With iid Errors," Journal
+       of the American Statistical Association, 77, 407-415.
+
+       Koenker, R.W. (1987), "A Comparison of Asymptotic  Methods
+       of  Testing  based  on  L1  Estimation," in Y. Dodge (ed.)
+       Statistical Data Analysis Based on the L1 norm and Related
+       Methods, New York:  North-Holland.
+
+       Koenker, R. W., and Bassett, G.W (1978), "Regression Quan-
+       tiles", Econometrica, 46, 33-50.
+
+       Koenker, R., and Portnoy,  S.  (1987),  "L-Estimation  for
+       Linear  Models", Journal of the American Statistical Asso-
+       ciation, 82, 851-857.
+
+       Ruppert, D.  and  Carroll,  R.J.  (1980),  "Trimmed  Least
+       Squares  Estimation  in  the Linear Model", Journal of the
+       American Statistical Association, 75, 828-838.

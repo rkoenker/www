@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Monte Carlo</TITLE>
+<META NAME="description" CONTENT="Monte Carlo">
+<META NAME="keywords" CONTENT="falstaff">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="falstaff.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html37" HREF="node4.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html35" HREF="falstaff.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html29" HREF="node2.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html38" HREF="node4.html">Morals</A>
+<B>Up:</B> <A NAME="tex2html36" HREF="falstaff.html">The Falstaff Estimator</A>
+<B> Previous:</B> <A NAME="tex2html30" HREF="node2.html">The Falstaff Estimator</A>
+<BR> <P>
+<H1><A NAME="SECTION00030000000000000000">Monte Carlo</A></H1>
+<P>
+In this Section we report on a brief Monte Carlo experiment designed
+to evaluate the performance of the Falstaff estimator of location.
+We limit the choice of error densities to the Student t family in order to
+exploit a simple normal/independent  variance reduction technique.
+Instead of simply simply generating t-variates and directly computing
+mean squared errors of the estimators we generate observations from
+the model  <IMG WIDTH=75 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline344" SRC="img36.gif"  > 
+for  <IMG WIDTH=97 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline346" SRC="img37.gif"  >  and  <IMG WIDTH=98 HEIGHT=37 ALIGN=MIDDLE ALT="tex2html_wrap_inline348" SRC="img38.gif"  > .
+This enables us to compute the optimal (weighted least squares) estimator
+<I>conditional of the  <IMG WIDTH=12 HEIGHT=17 ALIGN=MIDDLE ALT="tex2html_wrap_inline350" SRC="img39.gif"  > 's</I>.  Since this estimator as a known
+distribution we can remove this source of variability from the Monte
+Carlo and focus on the departure of our estimators from this
+idealized, but obviously unattainable estimator.  This is most easily
+accomplished by replacing the realized <I>n</I>-vector <I>y</I> by the standardized
+vector  <IMG WIDTH=113 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline356" SRC="img40.gif"  >  where
+ <IMG WIDTH=116 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline358" SRC="img41.gif"  >  and
+ <IMG WIDTH=261 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline360" SRC="img42.gif"  > .
+See, e.g. Simon (1976) for further details.
+<P>
+We consider three choices of the degrees of freedom parameter of the
+t-distribution:  <IMG WIDTH=95 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline362" SRC="img43.gif"  >  and six choices of the sample
+size  <IMG WIDTH=179 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline364" SRC="img44.gif"  > .  
+The coefficient of kurtosis is unbounded for the t(1) and t(3)
+distributions, and equals 9 for the t(5).
+For each configuration we consider
+9 versions of the the Falstaff estimator with the <I>q</I>-dimension of the 
+augmentation matrix varying from 0 to 8.  Obviously, <I>q</I>=0 provides the
+benchmark, ordinary least squares estimator against which we will
+compare the performance of the other estimators.  For each configuration
+the augmentation matrix, <I>D</I>, is generated as iid from the standard
+normal distribution. And 10,000 replications are done for each
+configuration.
+<P>
+Figure 1 presents the results of the simulation.  Columns of the
+array of figures correspond to the three t distributions, and rows to
+the six sample sizes.  The horizontal line in each figure represents
+performance of the sample mean, corresponding to the Falstaff estimator
+with <I>q</I>=0.  The curve plotted in each panel represents the performance,
+measured by mean squared error,
+of the other Falstaff estimators relative to the sample mean for each
+configuration.  
+The vertical bars represent 95 percent confidence intervals for the
+point estimates represented by the curve.
+When the line drops below the horizontal line it indicates
+improvement in performance over that of the sample mean.  Thus, for the
+Cauchy,  <IMG WIDTH=43 HEIGHT=13 ALIGN=BOTTOM ALT="tex2html_wrap_inline374" SRC="img45.gif"  > , cases there is dramatic improvement over the entire
+range of <I>q</I> simulated in the experiment.  For the Student on 3
+degrees of freedom configurations, there is improvement for modest <I>q</I>
+when the sample size is small, and improvement over the entire range
+when the sample size is larger.  In the last column of the array, 
+corresponding to the Student on 5 degrees of freedom, the results show
+no improvement from the Falstaff estimator for the smallest sample sizes,
+10 and 15, slight improvement at <I>n</I>=25 for <I>q</I>=2, and significant
+improvement for the larger sample sizes, for moderate <I>q</I>. 
+These results confirm the theoretical conclusions of the second-order
+asymptotics, and also indicate that the choice of an optimal <I>q</I> is
+rather delicately tied to the degree of non-normality of the error
+density and the sample size.  See Koenker and Machado (1996) for a more 
+serious theoretical consideration of this aspect of the GMM problem.
+<P>
+<P><P><HR><A NAME="tex2html37" HREF="node4.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html35" HREF="falstaff.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html29" HREF="node2.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html38" HREF="node4.html">Morals</A>
+<B>Up:</B> <A NAME="tex2html36" HREF="falstaff.html">The Falstaff Estimator</A>
+<B> Previous:</B> <A NAME="tex2html30" HREF="node2.html">The Falstaff Estimator</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 21:16:10 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

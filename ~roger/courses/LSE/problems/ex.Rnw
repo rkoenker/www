@@ -1,0 +1,513 @@
+\documentclass[a4paper]{amsart}
+\usepackage{fancyvrb} 
+\usepackage{harvard}
+\usepackage{url}
+
+%% markup commands for code/software
+\let\code=\texttt
+\let\pkg=\textbf
+\let\proglang=\textsf
+
+\SweaveOpts{keep.source=TRUE}
+
+\title{Some Exercises on Quantile Regression}
+\thanks{Version:  \today .  These exercises were originally developed for a 
+short course given under the
+auspices of  CEMMAP at UCL, 20-22 February, 2003.  My thanks to Andrew Chesher
+and the Department of Economics at UCL for their hospitality on that occasion, 
+and as always to the NSF for continuing research support. 
+The exercises have been expanded somewhat for new short courses under the 
+auspices of CREATES in Aarhus, 21-23 June, 2010, and at the LSE, 16-17 May, 2011. }
+\author{Roger Koenker}
+\begin{document}
+\bibliographystyle{econometrica}
+
+\maketitle
+
+\pagestyle{myheadings}
+\markboth{\sc Exercises in Quantile Regression}{\sc Roger Koenker}
+
+\section*{Introduction}
+These exercises are intended to provide an introduction to quantile regression computing
+and illustrate some econometric applications of quantile regression methods.  For 
+purposes of the course my intention would be to encourage all students to do the first
+exercise, which gives an overview of the quantile regression software in R in the context
+of an elementary bivariate Engel curve example.  The remaining exercises are more
+open ended.  I would like students to choose one of these exercises according to their
+own special interests.  Given the brief duration of the course, it is obviously
+unrealistic to expect answers to these questions at the end of the course, but
+I would be happy to get responses via email should you choose to continue working on
+them after the course is finished. 
+
+<<echo=false>>= 
+options(continue=" ")
+options(width=60) 
+@
+
+\subsection*{A Word on Software}  There is now some quantile regression functionality
+in most statistical software systems.  Not surprisingly, I have a strong preference 
+for the implementation provide by the \pkg{quantreg} package of R, since I've
+devoted a considerable amount of effort to writing it.  R is a dialect of John Chambers's
+S language and provides a very general, very elegant environment for data analysis
+and statistical research.  It is fair to say that R is now the vehicle of choice
+within the statistical computing community.  It remains to be seen whether it can
+make serious inroads into econometrics, but I firmly believe that it is a worthwhile
+investment for the younger cohorts of econometricians.  R is public domain software
+and can be freely downloaded from the CRAN website.  There is extensive documentation
+also available from CRAN under the heading manuals.  For unix based systems it is
+usual to download R in source form, but it is also available in binary form for most
+common operating systems.  There are several excellent introductions
+to R available in published form, in addition to the Introduction to R available in
+pdf from the CRAN website.  I would particularly recommend \citeasnoun{Dalgaard} and
+\citeasnoun{VR.mass}.  On the CRAN website there are also, under the heading
+"contributed", introductions to R in Danish, French, German, Spanish Italian,
+and a variety of other languages all of which can be freely downloaded in pdf.
+I've prepared a brief R FAQ that I will distribute with the course materials for
+the LSE short course.
+
+For purposes of this course a minimal knowledge of R will suffice.  R can be
+freely downloaded, and I hope that most students will bring a laptop so that
+they have access to R during the course sessions.
+Clicking the R icon should produce a window in which
+R will be running.  To quit R, you just type \code{q()}, you will be prompted
+to answer whether you want to save the objects that were created during the session;
+responding ``yes'' will save the session objects into a file called .RData,
+responding ``no'' will simply quit without saving.  Online help is provided
+in two modes:  if you know what you are looking for, you can type, for example
+\code{?rq} and you will get a description of the \code{rq} command, alternatively
+you can type \code{help.start()} and a browser help window should pop up and you
+can type more general key words or phrases to search for functionality.  
+
+R is intended to be a convenient interactive language and you can do many things
+on the fly by just typing commands into the R console, or even by pointing and
+clicking at one of the GUI interfaces, but I find that it is often preferable to
+save R commands into a file and execute a group of 
+commands -- this encourages a more reproducible style of research -- and can
+be easily done using the \code{source("commands.R")} command.  Saving output
+is a bit more complicated since there are many forms of output, graphics are
+usually saved in either postscript or pdf form, and tables can be saved in latex
+format for subsequent inclusion in documents.  Together with Achim Zeileis,
+U. of Innsbruck,  I've written a paper in {\it J. of Applied Econometrics}
+on reproducible research strategies that describes some of these things in more
+detail.  The paper and some other ranting and raving about reproducibility are
+also available from my homepage by clicking first on ``papers'' and then on 
+``Reproducible Econometric Research.''
+
+An aspect of reproducibility that is rarely considered in econometrics is the
+notion of ``literate programming.''  The idea of literate programming was first
+broached by Donald Knuth in 1984;  Knuth essentially advocated merging code
+and documentation for code in such a way that the code was self documenting
+and the exposition was self-documenting as well, since the code that generated
+the reported computations was embedded.  In the R language this viewpoint
+has been implemented by Leisch's Sweave which can be considered to be a dialect
+of latex that allows the user to embed R chunks that are executed prior to latex
+compilation.  The document that you are now reading was written in Sweave and
+can be viewed in its original form in the course problems directory as the file
+\code{ex.Rnw}.
+
+\section*{Problem 1:  A Family of Engel Curves}
+This is a simple bivariate linear quantile regression exercise designed to explore some
+basic features of the \code{quantreg} software in R.  The data consists of
+observations on household food expenditure and household income of 235 working
+class Belgian familes taken from the well-known study of  Ernst Engel (1857).
+
+1.  Read the data.  The data can be downloaded from the website specified in class.
+You will see that it has a conventional ascii format with a header line indicating the
+variable names, and 235 lines of data, one per household.  This can be read in R by
+the command
+
+<<>>=
+url <- "http://www.econ.uiuc.edu/~roger/courses/LSE/data/engel.data"
+d <- read.table(file = url, header=TRUE) #data is now in matrix "d"
+attach(d) #attaching makes the variables accessible by name.
+@
+
+2.  Plot the data.  After the attach command the data is available using the names
+in the header, so we can plot the scatter diagram as:
+
+\begin{center}
+<<>>=
+plot(x,y) 
+@
+\end{center}
+
+
+3.  Replot with some better axis labels and superimpose some quantile 
+regression lines on the scatter plot.
+
+\begin{center}
+<<fig=TRUE>>=
+require(quantreg)
+plot(x,y,cex=.25,type="n",xlab="Household Income", 
+	ylab="Food Expenditure")
+points(x,y,cex=.5,col="blue")
+abline(rq(y~x,tau=.5),col="blue")
+abline(lm(y~x),lty=2,col="red") #the dreaded ols line
+taus <- c(.05,.1,.25,.75,.90,.95)
+f <- rq(y ~ x, tau = taus)
+for( i in 1:length(taus)){
+        abline(coef(f)[,i],col="gray")
+        }
+@
+\end{center}
+
+Note that you have to load the quantreg package before invoking the \code{rq()} command.
+Careful inspection of the plot reveals that the ols fit is severely biased at low
+incomes due to a few outliers. 
+The plot command has a lot of options to fine tune the plot.  There is a convenient
+looping structure, but beware that it can be slow in some applications.  In
+\code{rq()} there are also many options:  the first argument is a ``formula'' that 
+specifies
+the model that is desired, in this case we want to fit the simple bivariate linear model
+so it is just \code{y\~{}x} if we had two covariates we could say, e.g. \code{y\~{}x+z}.
+
+4.  If we wanted to see all the distinct quantile regression solutions for this
+example we could specify a tau outside the range [0,1], e.g.
+
+<<>>=
+z <- rq(y~x,tau=-1)
+@
+
+Now if you look at components of the structure  \code{z} that are  returned by the command,
+you can see for example the primal solution in \code{z\$sol}, and the dual solution 
+in \code{ z\$dsol}.   In interactive mode just typing the name of some R object
+causes the program to print the object in some more or less easily intelligible manner.
+Now, if you want to estimate the conditional quantile function of \code{y} at a specific 
+value of \code{x} and plot it you can do something like this:
+
+\begin{center}
+<<fig=TRUE>>=
+#Poor is defined as at the .1 quantile of the sample distn
+x.poor <- quantile(x,.1) 
+#Rich is defined as at the .9 quantile of the sample distn
+x.rich <- quantile(x,.9) 
+ps <- z$sol[1,]
+qs.poor <- c(c(1,x.poor)%*%z$sol[4:5,])
+qs.rich <- c(c(1,x.rich)%*%z$sol[4:5,])
+#now plot the two quantile functions to compare
+plot(c(ps,ps),c(qs.poor,qs.rich),type="n",
+	xlab=expression(tau),ylab="quantile")
+plot(stepfun(ps,c(qs.poor[1],qs.poor)),do.points=FALSE,add=TRUE)
+plot(stepfun(ps,c(qs.poor[1],qs.rich)),do.points=FALSE,add=TRUE)
+#for conditional densities you could use akj()...
+@
+\end{center}
+
+A nice feature of R is that documentation of functions usually includes some
+examples of their usage.  These examples can be ``run'' by simply typing
+\code{example(SomeFunctionName)}, so for example when you type \code{example(rq)}
+you get a plot somewhat like the one you have just done ``by hand.''  In a second
+plot you get a pair of coefficient plots that depict the estimate intercept and
+slope coefficients as a function of $\tau$ and provide a confidence band.  More
+on this later.  If you look carefully at the code being executing by in these
+examples you will see that you didn't need to download the data from the url 
+specified, the Engel data is available directly from the \pkg{quantreg} package
+using the statement \code{data(engel)}.  But it is often handy to be able to
+download data from the web.  There are quite a lot of tools for handling web
+data sources, but this is another story entirely. 
+
+If you look carefully at the plots of the two estimated quantile functions that 
+you made you will see minor violations of the expected monotonicity of these
+functions.  This may or may not be regarded as a mortal sin, depending on your
+religious convictions.  One way to deal with this, recently suggested by \citeasnoun{CFVG}
+is to ``rearrange'' the estimated functions.  See the the documentation for
+this function using the usual strategy: \code{?rearrange}.  To see an example
+of how this works try typing:  \code{example(rearrange)}.
+
+5.  Now let's consider some formal testing.  For starters suppose we just estimate
+two quartile fits and look at the default output:
+
+<<>>=
+fit.25 <- rq(y~x,tau=.25)
+summary(fit.25)
+fit.75 <- rq(y~x,tau=.75)
+summary(fit.75)
+@
+
+By default the confidence intervals that are produced use the rank inversion method.
+This is fine for judging whether covariates are significant at particular quantiles
+but suppose that we wanted to test that the slopes were the same at the  two quantiles? 
+This is done with the \code{anova} command as follows:
+
+<<>>=
+anova(fit.25,fit.75)
+@
+
+This is an example of a general class of tests proposed in \citeasnoun{KB.82b}
+It is instructive to look at the code for the command \code{anova.rq} to see how this 
+test is carried out.  The Wald approach is used and the asymptotic covariance matrix
+is estimated using the approach of \citeasnoun{HK.92}.
+It also illustrates a  general syntax for testing in R adapted to 
+the QR situation.  If you have two models
+that are nested, with fits say \code{f0} and \code{f1}, then \code{anova(f0,f1)} 
+should test whether the restricted
+model is correct.  One needs to be careful however to check that the hypothesis that
+is intended, is really the one that the anova command understands, see \code{?anova.rq}
+for further details on the QR version of this.  If you have more than two quantiles
+and want to do a joint test that all the slope coefficients are the same at all the
+quantiles you can use \code{anova(ft1,ft2,ft3,ft4)}.  
+
+In very large problems the rank inversion
+approach to confidence intervals is quite slow, and it is better to use another method.
+There are several choices.  By default the computational method employs a variant of
+the Barrodale and Roberts (simplex-like) algorithm, for problems with sample size
+greater than about 5000 it is preferable to use interior point methods by using
+the \code{method="fn"}, flag in the call to \code{rq}.  
+When this "Frisch-Newton" version of the
+algorithm is used, rank test confidence intervals are not provided by summary
+instead a form of the Wald test is returned.  Various options can be specified
+to produce various estimates of the standard errors as described below.
+These Wald forms of estimating standard errors  are also possible to achieve with
+the default \code{method="br"} setting by adding for example the flag \code{se=nid}.  
+Details of the algorithms are provided in 
+\citeasnoun{KO.87}, \citeasnoun{KO.93}, for the ``BR'' method and  \citeasnoun{PK.1997}
+for the ``Frisch-Newton'' method.
+
+Standard inference results are obtained by calling summary, e.g.
+<<>>=
+fit <- rq(y~x,tau=.27,method="fn")
+summary(fit)
+@
+by default summary produces estimates of the asymptotic covariance matrix based on
+the approach described in \citeasnoun{HK.92},  an alternative approach
+suggested by \citeasnoun{Pow.89} can be obtained by specifying \code{se="ker"}.  
+There are further
+details and options regarding bandwidth and controlling the nature of what is 
+returned by the summary command, see \code{?summary.rq} for these details.
+
+At this point it would be useful to compare and contrast the various estimation
+and inference options that are available.  Try estimating the simple model used
+above with both the \code{method = "br")} and 
+\code{method = "fn")} choices, and then compare some of the \code{se} options
+in \code{summary.rq}. 
+
+6.  The magic of logarithms.  Thus far we have considered  Engel functions that are
+linear in form, and the scatter as well as the QR testing has revealed a strong
+tendency for the dispersion of food expenditure to increase with household income.
+This is a particularly common form of heteroscedasticity.  If one looks more carefully
+at the fitting, one sees interesting departures from symmetry that would not be likely
+to be revealed by the typical textbook testing for heteroscedasticity, however.
+One common remedy for symptoms like this would be to reformulate the model
+in log linear terms.  It is interesting to compare what happens after the log 
+transformation with what we have already seen.  Consider the following plot:
+\begin{center}
+<<fig=TRUE>>=
+plot(x,y,log="xy",xlab="Household Income", ylab="Food Expenditure")
+taus <- c(.05,.1,.25,.75,.90,.95)
+abline(rq(log10(y)~log10(x),tau=.5),col="blue")
+for( i in 1:length(taus)){
+       abline(rq(log10(y)~log10(x),tau=taus[i]),col="gray")
+       }
+@
+\end{center}
+Note that the flag \code{log="xy"} produces a plot with log-log axes, and for
+convenience of axis labeling these logarithms are base 10, so the subsequent fitting
+is also specified as base 10 logs for plotting purposes, even though base 10 logarithms
+are {\it unnatural} and would never be used in reporting numerical results.
+This looks much more like a classical iid error regression model, although again some
+departure from symmetry is visible.  An interesting exercise is to conduct some
+formal testing for departures from the iid assumption of the type already considered
+above.  This is left as an exercise for the reader.  
+
+
+\section*{Problem 2:  Nonparametric Quantile Regression}
+Nonparametric quantile regression is most easily considered within a locally polynomial
+framework.  Locally linear fitting can be carried out by the following function,
+provided in the \code{quantreg} package:
+
+<<>>=
+"lprq" <-
+function(x, y, h, m=50 , tau=.5)
+{
+        xx <- seq(min(x),max(x),length=m)
+        fv <- xx
+        der <- xx
+        for(i in 1:length(xx)) {
+                z <- x - xx[i]
+                wx <- dnorm(z/h)
+                r <- rq(y~z, weights=wx, tau=tau)
+                fv[i] <- r$coef[1.]
+                der[i] <- r$coef[2.]
+        }
+        list(xx = xx, fv = fv, der = der)
+}
+@
+If you read through the function carefully you will see that it is just a matter
+of computing a quantile regression fit at each of $m$ equally spaced $x$-values
+over the support of the observed $x$ points.  The function value estimates  
+are returned as \code{fv} and the first derivative estimates at the $m$ points
+are returned as \code{der}.  As usual you can specify $\tau$, but now you also
+need to specify a bandwidth \code{h}.
+
+1.  Begin by exploring the effect of the \code{h} and \code{tau} arguments for
+fitting the motorcycle data.  Note that fitting derivatives requires larger bandwidth
+and larger sample size to achieve the same precision obtainable by function fitting.
+You are encouraged to substitute a more economic data set for the ubiquitous motorcycle
+data, its only advantage in the current context is that you can easily find examples 
+to compare in the nonparametric regression literature.
+
+2.  Adapt \code{lprq} so that it does locally quadratic rather than linear fitting
+and compare performance.
+
+3.  Another general strategy for nonparametric quantile regression that is relatively
+simple to adapt to R uses regression splines.  The function \code{bs()} in the
+package \code{splines} gives a very flexible way to construct B-spline basis 
+expansions.  For example you can fit a model like this:
+
+<<>>=
+require(splines)
+url <- "http://www.econ.uiuc.edu/~roger/courses/LSE/data/motorcycle.data"
+d <- read.table(file = url, header=TRUE) 
+fit <- rq(y~bs(x,df=5),tau=.33, data = d)
+@
+which fits a piecewise cubic polynomial with knots (breakpoints in the third derivative)
+at quintiles of the $x$'s.  You can also explicitly specify the knot sequence and the order
+of the spline.  One advantage of this approach is that it is very easy to add a partially
+linear model component.  So if there is another covariate, say z, we can add a parametric
+component like this: 
+<<eval=FALSE>>=
+fit <- rq(y~bs(x,df=5)+z,tau=.33)
+@
+This avoids complications of backfitting when using kernel methods for partially
+linear models.  Compare some fitting using the spline approach with that 
+obtained with the local polynomial kernel approach.
+
+4.  Yet another even more appealing approach to univariate nonparametric 
+smoothing involves penalty
+methods as described for example in \citeasnoun{KNP.94}
+In recent work, \citeasnoun{KM.02},  this approach has been extended to bivariate
+nonparametric regression, and more recently to a general class of additive models.
+Again, partially linear models are easily adapted, and there are easy ways to impose
+monotonicity and convexity on the fitted functions.  In large problems it is essential
+to take advantage of the sparsity of the linear algebra.  This is now feasible using
+special versions of the interior point algorithm for quantile regression and the SparseM
+package, \citeasnoun{KN.03}.  The paper \citeasnoun{K.10} describes some recent
+developments of inference apparatus for these models.  Further development of
+these methods would be aided by some additional experience with real data.
+
+An important feature of these additive models is that it is possible to impose
+monotonocity and/or convexity/concavity on the individual components.  There are
+also relatively new methods for doing inference and prediction as well as plotting.
+As usual you can experiment with these methods by trying the \code{example()}
+function on methods like \code{summary.rqss}, \code{plot.rqss}, and \code{predict.rqss}. 
+But more interesting would be to try new examples based on real data.
+
+\section*{Problem 3:  Quantile Regression Survival Analysis}
+Quantile regression as proven to be a particularly attractive approach for univariate
+survival analysis (aka duration modeling).  The classical accelerated failure time 
+model
+\[
+\log (T_i) = x_i^\top \beta + u_i
+\]
+with iid errors $u_i$, can be easily extended to consider,
+\begin{equation}
+\label{eq.qraft}
+Q_{\log (T_i)} (\tau | x_i)  = x_i^\top \beta (\tau),
+\end{equation}
+yielding a flexible, yet parametrically parsimonious, approach.  
+
+In this problem you are asked to explore such models in the context of the Pennsylvania
+reemployment bonus experiment conducted in 1988-89.
+In this period new claimants for unemployment insurance were
+randomized into one of several treatment groups or a control group.  Control participants
+abided by the usual rules of the unemployment insurance system; treatment participants
+were offered a cash bonus to be awarded if the claimant was certifiably reemployed within
+a specified qualification period.  For simplicity we will focus on only one of the
+treatment groups, those offered a bonus of 6 times their weekly benefit provided
+reemployment was established within 12 weeks.  For this group the bonus averaged about
+\$ 1000 for those collecting it.  The data will be available in the form of an R data
+set called \code{Penn46.data} in the same directory as we have indicated for
+the prior datasets.  This can be read into R using the same procedure as
+was used for the Engel data.  For a more detailed analysis incorporating  
+the other treatments, see \citeasnoun{KB.01}.  See \citeasnoun{KX.02} for further details
+on approaches to inference for these models. 
+
+In this application interest naturally focuses on the effect of the binary, randomized
+treatment.  How does the bonus influence the distribution of the duration of unemployment?
+The Lehmann quantile treatment effect (QTE) is a natural object of empirical attention. 
+
+1.  Explore some specifications of the QR model (\ref{eq.qraft}) and compare to fitting
+the Cox proportional hazard specification.  See \code{require(survival)} for functions
+to estimate the corresponding Cox models.   Note that covariate effects in the Cox
+models are necessarily scalar in nature, so for example the treatment effect must
+either increase, or decrease unemployment durations over the whole range of the
+distribution, but it cannot decrease durations in the lower tail and increase them
+in the upper tail -- unless the model is specified with distinct baseline hazard
+functions for the two groups.  See \citeasnoun{KG.01} for some further details on
+the relationship between the QR survival model and the Cox model.
+
+2.  Explore some formal inference options to try to narrow the field of interesting
+specifications.  See for example the discussion in \citeasnoun{KX.02} on tests
+based on the whole QR process.
+
+\section*{Problem 4:  Quantile Autoregression}
+Consider a simple linear QAR model,
+\[
+y_t = \alpha_1 (u_t) y_{t-1} + \alpha_0 (u_t)  \quad t = 0, 1, ... , T
+\]
+where $u_t$ is iid $U[0,1]$.  Suppose that $\alpha_1 (u) = 0.85 + 0.25 u$ and
+$\alpha_0 (u) = \Phi^{-1} (u)$ with $\Phi$ denoting the standard normal distribution
+function.  Simulate a realization of this process with $T = 1000$ and estimate
+and plot the QAR coefficients, comparing them to the usual OLS estimates.
+
+Verify whether or not the process is stationary.  In your realization of the
+process check to see whether $y_{t-1}$ stays in the region for which the conditional
+quantile function of $y_t$ is monotone.  What is the usual OLS estimate of
+the AR(1) model estimating in this case?  Check the residuals from the OLS
+fit to see if they exhibit any suspicious features that would reveal what
+is unusual here.
+
+\section*{Problem 5:  Portfolio Choice}
+This problem deals with the ``pessimistic portfolio allocation'' proposed in
+\citeasnoun{BKK.03}.  The paper employs a highly artificial example.  Your task,
+should you decide to accept it, is to produce a more realistic example using
+real data.  Software implementing the methods of the paper is available as an R
+package called \code{qrisk}.  This is {\it not} a CRAN package, but it is 
+available from the url, \url{http://www.econ.uiuc.edu/~roger/research/risk/risk.html}
+The R function \code{qrisk} in this package computes optimal
+portfolio weights based on a matrix of observed, or simulated, asset returns using
+a specified form of pessimistic Choquet preferences.  
+
+\section*{Problem 6:  Inequality Decomposition}
+The extensive literature on the measurement of inequality has devoted considerable
+attention to the question of how to decompose changes in measurements of inequality.
+If we observe increases in the Gini coefficient in a particular region over some
+sample period, can we attribute these changes in some way to underlying changes in
+covariates, or to changes in the effects of these covariates?  QR offers a convenient
+general approach to this question.  Suppose that we have estimated a garden variety
+wage equation model in QR form,
+\begin{equation}
+\label{eq.wage}
+Q_{\log y} (\tau |x) = x^\top \beta (\tau),
+\end{equation}
+and we would like to compute a conditional Gini coefficient.
+
+Recall that the Lorenz function of a univariate distribution with quantile function, $Q$,
+is given by,
+\[
+\lambda (t) = \mu^{-1} \int_0^t Q(s)ds
+\]
+where $\mu = \int_0^1 Q(s)ds$ is the mean of the distribution.  The Gini coefficient is simply
+twice the area between $\lambda (t)$ and the 45 degree line,
+\[
+\gamma = 1 - 2 \int_0^1 \lambda (t)dt.
+\]
+
+1.  Given the linear decomposition of the conditional quantile function in (\ref{eq.wage})
+and the fact that the Gini coefficient is a linear functional of the quantile function,
+formulate a conditional Gini decomposition for log wages, and interpret it.
+
+2.  Over time we may wish to ``explain'' changes in {\it the} Gini coefficient by 
+considering changes in the wage structure -- which we can interpret as $\beta (\tau)$
+in (\ref{eq.wage}) -- and changes in the characteristics of the population -- which are
+captured by the evolution of the distribution of $x$.  This way of thinking enables us 
+to consider thought experiments such as, ``How would Gini have evolved if the
+wage structure were fixed at some initial condition, but population characteristics
+changed according to some specified pattern, historical or otherwise''.  Or alternatively,
+suppose that we fix population characteristics and consider the evolution of the
+the conditional components of Gini as $\beta_t (\tau)$ changes over time.  Decompositions
+of this type have been considered in recent work of \citeasnoun{MM.01}.  
+The Gini decomposition has also been recently considered 
+by \citeasnoun{ABD} I would love to see a further applications along these lines.
+\bibliography{abbrev,references}
+\end{document}

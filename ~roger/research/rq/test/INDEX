@@ -1,0 +1,12 @@
+plot.table.rq            Plot Table of Quantile Regression Results
+ranks                    Quantile Regression Ranks
+rq                       Quantile Regression
+rq.fit.br                Quantile Regression Fitting by Exterior Point
+                         Methods
+rq.fit.fn                Quantile Regression Fitting via Interior Point
+                         Methods
+rq.object                Linear Quantile Regression Object
+rq.process.object        Linear Quantile Regression Process Object
+rrs.test                 Quantile Regression Rankscore Test
+summary.rq               Summary method for Quantile Regression
+table.rq                 Table of Quantile Regression Results

@@ -1,0 +1,20 @@
+
+#This is a S batch file for Table 5.1 of the JE paper with BJPark
+sink("test.rq.2.oo")
+options(echo=T)
+nlrq(wom,c(0,0),k=2)
+nlrq(bard,c(1,1,1),k=2)
+nlrq(beale,c(1,0.1),k=2)
+nlrq(biggs ,c(1,8,2,2,2,2),k=2)
+nlrq(brown ,c(25,5,-5,-1),k=2)
+nlrq(el1 ,c(1,2),k=2)
+nlrq(el2 ,c(1,1,1),k=2)
+nlrq(madsen ,c(3,1),k=2)
+nlrq(osb1 ,c(.5,1.5,-1,.01,.02),k=2)
+nlrq(osb2,c(1.3,.65,.65,.7,.6,3,5,7,2,4.5,5.5),k=2)
+nlrq(powell ,c(3,-1,0,1),k=2)
+nlrq(rosen ,c(-1.2,1),k=2)
+nlrq(watson ,c(1,1,1,1),k=2)
+nlrq(wood,c(0,0,0,0),k=2)
+nlrq(stack ,c(0,0,0,0),k=2)
+

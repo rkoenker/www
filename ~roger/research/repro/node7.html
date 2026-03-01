@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Packaging and unpackaging.</TITLE>
+<META NAME="description" CONTENT="Packaging and unpackaging.">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html80" HREF="node8.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html78" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html72" HREF="node6.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html81" HREF="node8.html">Conclusions</A>
+<B>Up:</B> <A NAME="tex2html79" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html73" HREF="node6.html">Tables</A>
+<BR> <P>
+<H1><A NAME="SECTION00060000000000000000">Packaging and unpackaging.</A></H1>
+<P>
+Once a project is completed it is convenient to have some way to package the 
+components so that they can be easily conveyed to others.   The UNIX 
+convention for this is <TT>tar</TT> + <TT>gzip</TT>.  A hierarchy of directories including the 
+current one is easily collected into a single file with the command
+<BLOCKQUOTE> <TT>tar cvf - . &gt;/tmp/project.tar</TT>
+</BLOCKQUOTE>
+which produces a file <TT>project.tar</TT> in the <TT>/tmp</TT> directory.  The only 
+delicate aspect of this is to avoid putting the target tar file into the 
+hierarchy being tarred since this creates an infinite loop.
+Compression can then be done using either <TT>compress</TT> or <TT>gzip</TT>, the 
+latter seems preferable since it is somewhat more efficient than the 
+older <TT>compress</TT>.
+Tar files may include data, <font size=-1><small>SPLUS</small></font> functions, 
+<font size=-1><small>FORTRAN</small></font> source, postscript files, even binary load modules.  
+Unpackaging project archives is also straightforward. The Unix commands
+<TT>uncompress</TT> and <TT>gunzip</TT> may be used together with <TT>tar</TT>.
+<P>
+Of course, often, one has only a handful of files that one would like to 
+package up for email transmission.  This is most conveniently done with 
+a shell archive, see the man page for the command <I>shar</I> for details.  Most of the submissions 
+to statlib are available in this format at the website 
+<TT>http://www.statlib.cmu.edu</TT>.  You might also explore the packaging 
+of software, data, and text at the our local site <TT>http://www.econ.uiuc.edu</TT>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

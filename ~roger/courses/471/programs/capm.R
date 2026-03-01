@@ -1,0 +1,30 @@
+
+# R function to read stock prices from Yahoo and convert to excess returns
+# Useage:  d <- capmRead(c("IBM","KO","GE"))
+capmRead <- function(symbols,start = "1998-01-01"){
+require(tseries)
+require(zoo)
+fom <-function(x) as.Date(sub("..$","01",format(x)))
+
+# Riskfree Data
+x <- get.hist.quote("^irx",start=start,quote="Close")
+x <- aggregate(x,fom,head,1)
+rkfree <- diff(log(x))
+
+# Market Data 
+x <- get.hist.quote("^gspc",start=start,quote="Close")
+x <- aggregate(x,fom,head,1)
+market <- diff(log(x))
+
+capm <- market - rkfree
+for(firm in symbols){
+        x <- get.hist.quote(firm, start = start, quote = "AdjClose")
+        x <- aggregate(x, fom, head, 1)
+        x <- diff(log(x)) - rkfree
+        capm <- merge(capm,x)
+        }
+capm <- merge(capm,rkfree)
+dimnames(capm)[[2]] <- c("market",symbols,"rkfree")
+as.data.frame(capm)
+}
+

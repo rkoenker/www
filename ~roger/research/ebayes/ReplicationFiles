@@ -1,0 +1,19 @@
+# Replication Files: INVIDIOUS COMPARISONS: RANKING AND SELECTION AS COMPOUND DECISIONS
+Figure_3.1 figs/fig_FDR_homovar.pdf figs/ndpanel.R
+Figure_4.1 figs/thresh_eg_normaldiscrete_zeronull.pdf figs/thresh_eg_normaldiscrete_zeronull.R
+Figure_4.2 figs/nn2.pdf figs/nn2.R
+Figure_4.3 figs/nd.pdf figs/nd.R
+Figure_4.4 figs/Ceg12.pdf figs/Ceg12.R
+Figure_4.5 figs/Ceg1_obj.pdf figs/Ceg1_obj.R
+Figure_5.1 figs/nix.pdf figs/nixa.R
+Figure_5.2 figs/nixc.pdf figs/nixc.R
+Figure_7.1 tabs/nt1-10a.pdf tabs/nt1-10a.R tabs/nt1-10.Rda
+Figure_7.2 figs/LAmodel.pdf figs/LAmodel.R
+Figure_8.1 Dfigs/conflict.pdf Dfigs/conflict.R Dfigs/fit1d.R
+Figure_8.2 Dfigs/GPrho.pdf Dfigs/GPrho.R
+Figure_B.1 figs/ndpanel.pdf figs/ndpanel.R
+Figure_B.2 figs/ndpanelc.pdf figs/ndpanelc.R
+Table_7.1 tabs/LArankinga1.tex tabs/LArankinga1.R tabs/LAranking_sim.R figs/LAmodel.Rda tabs/LAranking_sim.Rda
+Table_8.1 tabs/naive_31_1d.tex tabs/naive_31_1d.R tabs/fit1d.R Dfigs/D.Rda
+Table_8.2 tabs/TM.tex tabs/TM.R tabs/fit1d.R
+Table_B.1 tabs/normal_discrete_panela1.tex tabs/normal_discrete_panela1.R tabs/normal_discrete_panel.R tabs/normal_discrete_panel.Rda tabs/MAP-NIX.R tabs/MAP-NIX.Rda

@@ -1,0 +1,134 @@
+%!PS-Adobe-1.0
+%%Creator: matej:roger (roger koenker)(null)
+%%Title: nlrq.s
+%%CreationDate: Thu Mar 31 14:22:34 1994
+%%DocumentFonts: Courier-Bold Courier
+% lib/enscript.pro -- prolog for enscript files
+% Copyright (c) 1985 Adobe Systems, Inc.
+% last edit: shore Mon Mar 11 09:10:08 1985
+% changed translate for landscape -mah Sat Jan 13 16:16:41 MET 1990
+save/EnscriptJob exch def
+/StartEnscriptDoc{$enscript begin}def
+/$enscript 20 dict def $enscript begin
+/EndEnscriptDoc{end}def
+/S/show load def
+/X{exch 0 rmoveto S}def
+/Y{exch 0 exch rmoveto S}def
+/B{3 1 roll moveto S}def
+/F{$fd exch get setfont}def
+/StartPage{/svpg save def .05 dup scale}def
+/EndPage{svpg restore showpage}def
+/DoPreFeed{/statusdict where
+ {dup/prefeed known{exch/prefeed exch put}{pop pop}ifelse}if}def
+% Letter:
+% /Landscape{90 rotate 0 -15840 translate}def
+% A4:
+%/Landscape{90 rotate 540 -15720 translate}def
+/Landscape{90 rotate 540 -16480 translate}def
+/SetUpFonts
+ {dup/$fd exch array def{findfont exch scalefont $fd 3 1 roll put}repeat}def
+end
+StartEnscriptDoc % end fixed prolog
+1 200 /Courier-Bold
+0 200 /Courier
+2 SetUpFonts
+%%EndProlog
+%%Page: ? 1
+StartPage
+1 F
+900 15735 (nlrq.s        Tue Mar 22 12:16:38 1994        1)B
+0 F
+900 15295("nlrq"<-)B
+900 15075(function\(model, t, k = 2, theta = .5, big=1e+20, nit.max = 100, )B
+1860 14855(eps = 1e-07, beta = 0.97\))B
+900 14635({)B
+900 14415(#function to compute nonlinear rq estimate)B
+900 14195(#)B
+840(t is the initial value of the unknown parameter)X
+900 13975(#)B
+840(model is a user-provided function which returns components)X
+900 13755(#)B
+1800(f=\(f_i \(x_i , t\))X
+900 13535(#)B
+1800(J=\(grad f_i \))X
+900 13315(#)B
+840(theta is the desired quantile)X
+900 13095(#)B
+840(k is the number of Meketon steps per iteration)X
+900 12875(#)B
+840(eps and eta are tolerance parameters)X
+900 12655(#)B
+900 12435(#function returns)B
+900 12215(#)B
+840(coef is the value of the parameter at the solution)X
+900 11995(#)B
+840(obj is the value of the objective function at the solution)X
+900 11775(#)B
+840(nit is the number of "Meketon steps" taken)X
+1860 11555(m <- model\(t\))B
+1860 11335(n <- length\(m$f\))B
+1860 11115(w <- rep\(0, n\))B
+1860 10895(snew <- sum\(rho.rq\(m$f,theta\)\))B
+1860 10675(sold <- big)B
+1860 10455(nit <- 0)B
+1860 10235(while\(sold - snew > eps & nit < nit.max\) {)B
+2820 10015(z <- mek.rq\(m$J, m$f, k, w, theta=theta, int = F, )B
+4740 9795(eps = eps, beta = beta\))B
+2820 9575(step <- z$coef)B
+2820 9355(t0 <- t)B
+2820 9135(l <- nlminb\(start = 1, objective = model.step.rq, lower = 0, )B
+3780 8915(upper = 1, model = model, t0 = t, theta=theta,)B
+3780 8695(step = step\)$parameters)B
+2820 8475(t <- t0 + l * step)B
+2820 8255(m <- model\(t\))B
+2820 8035(sold <- snew)B
+2820 7815(snew <- sum\(rho.rq\(m$f,theta\)\))B
+2820 7595(w <- lsfit\(m$J, z$w, int = F\)$resid)B
+2820 7375(w1 <- max\(pmax\(w,0\)\))B
+2820 7155(if\(w1>theta\))B
+3780 6935(w <- w*theta/\(w1 + eps\))B
+2820 6715(w0 <- max\(pmax\(-w,0\)\))B
+2820 6495(if\(w0>1-theta\))B
+3780 6275(w <- w*\(1-theta\)/\(w0 + eps\))B
+2820 6055(print\(c\(t, l, sum\(rho.rq\(m$f,theta\)\)\)\))B
+2820 5835(nit <- nit+1)B
+1860 5615(})B
+1860 5395(return\(coef=t,obj=snew,nit=nit\))B
+900 4955(})B
+900 4735("rho.rq"<-)B
+900 4515(function\(u,theta\){theta*pmax\(u,0\)+\(theta - 1\)*pmin\(u,0\)})B
+900 4295("mek.rq"<-)B
+900 4075(function\(x, y, kmax = 1000, w, theta=.5, int = T, big=1e+20,)B
+1860 3855(eps = 1e-06, beta = 0.97\))B
+900 3635({)B
+1860 3415(if\(int == T\))B
+2820 3195(x <- cbind\(1, x\))B
+1860 2975(yw <- big)B
+1860 2755(k <- 1)B
+1860 2535(while\(k <= kmax & yw - crossprod\(y, w\) > eps\) {)B
+2820 2315(d <- pmin\(theta  - w, 1 - theta + w\))B
+2820 2095(z <- lsfit\(x, y, d^2, int = F\))B
+2820 1875(yw <- sum\(rho.rq\(z$resid,theta\)\))B
+2820 1655(k <- k + 1)B
+2820 1435(s <- z$resid * d^2)B
+EndPage
+%%Page: ? 2
+StartPage
+1 F
+900 15735 (nlrq.s        Tue Mar 22 12:16:38 1994        2)B
+0 F
+2820 15295(alpha <- max\(eps, pmax\(s/\(theta  - w\), -s/\(1 - theta + w\)\)\))B
+2820 15075(w <- w + \(beta/alpha\) * s)B
+1860 14855(})B
+1860 14635(coef <- z$coef)B
+1860 14415(return\(coef, w\))B
+900 14195(})B
+900 13975("model.step.rq"<-)B
+900 13755(function\(lambda, t0, step, model, theta\))B
+900 13535({)B
+1860 13315(sum\(rho.rq\(model\(t0 + lambda * step\)$f, theta\)\))B
+900 13095(})B
+EndPage
+%%Trailer
+EndEnscriptDoc
+EnscriptJob restore

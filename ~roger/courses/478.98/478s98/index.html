@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>No Title</TITLE>
+<META NAME="description" CONTENT="No Title">
+<META NAME="keywords" CONTENT="478s98">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="478s98.css">
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1"
+ HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif_gr.gif"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif_gr.gif">   
+<BR>
+<B> Next:</B> <A NAME="tex2html2"
+ HREF="node1.html">References</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<P>
+University of Illinois Department of Economics <BR>
+Spring 1998 Roger Koenker
+<DIV ALIGN="CENTER">
+<BIG>
+ Economics 478 <BR>
+<B>Topics in Semiparametric Econometrics</B>
+</BIG></DIV>
+<P>
+<BR>
+<BR>
+This course is a research seminar in semiparametric methods in
+econometrics.  The objective of the course from a student viewpoint
+should be to write a research paper of potentially publishable quality,
+either as an exploratory venture directed toward finding a thesis topic,
+or as an opportunity to explore a new area in some depth just for the
+fun of it.
+<P>
+The course will be organized as an informal seminar.  
+There will be no text 
+<EM>per se</EM>, but there will be a considerable range of readings from the 
+current literature.  
+There will be no exams only a required term paper,
+and there will be periodic student presentations of course material.
+The topics covered in the course can be tailored somewhat to student
+demand.  There are a few topics in which I have a current research interest,
+and for which I think there might be some scope for constructive interaction 
+in a course of this type.  I will try to encourage toward these topics
+in an effort to increase effective collaboration among students in the
+course.  Not surprisingly, many of these topics have some connection
+to quantile regression, although in some cases this connection is rather
+speculative.
+<P>
+In the first class I will try to describe and motivate the topics I have
+identified and provide some basic bibliography.
+<P>
+In the second week I would like to get down to business by discussing
+a group of recent papers on estimating treatment effects.  This is a
+topic on which there is considerable recent activity by both econometricians
+and statisticians and I believe that it is worthwhile for the entire class
+to take a close look at a few of these papers.  I have prepared a xeroxed
+collection of papers which will be distributed through Up Close, 
+one of the campus copy centers.
+<P>
+In the third week I would like to reconsider some classical readings on
+instrumental variable methods focusing on the connection between LIML
+canonical correlation and some related eigenvalue problems.  The objective
+will be to begin to forge a link between the treatment effect discussion
+of the previous week and this older literature which would eventually
+result in a more refined approach to IV methods for quantile regression.
+<P>
+In the fourth week I will discuss some recent developments on numerical
+methods for quantile regression, and raise some questions about my
+ongoing project to revise the software distribution for Splus for
+quantile regression.  This discussion is likely to focus on extensions
+of existing methods for inference.
+<P>
+In subsequent weeks there will be a sequence of mini-lectures by students
+to report progress on their research.  Since the scope for these
+presentations will be rather severely constrained by the size of the
+class, I am investigating schemes which would enable students to ``present''
+research results on lab web pages.  This would enable us to share bibliography,
+software and other materials in an efficient and timely manner.  I hope
+to provide some tutorial material on this in the first weeks of class.
+to provide some tutorial material on this in the first weeks of class.
+Some basic material related to the course, including this document, is
+available on the web at
+<TT>http://www.econ.uiuc.edu/&nbsp;roger/courses/478/478.html</TT>.
+There will also be an expanded version of the bibliography 
+which appears below which will
+be available on the web.  One of the byproducts of the course
+will be an expanded version of this bibliography.
+<P>
+I would strongly recommend that you to begin to 
+learn L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>Xand Splus as part of
+the research process. Some (hopefully helpful) hints on this are
+available in my paper ``Reproducible Econometrics'' which I will distribute
+in class.  
+The book by (<A
+ HREF="node1.html#VR:1997">Venables and Ripley, 1997</A>)  is highly recommended
+for Splus.  (<A
+ HREF="node1.html#Lamp:1994">Lamport, 1994</A>) is the definitive introduction to L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X.
+<P><DL COMPACT>
+<DT>1.
+<DD><B>Endogoneity, Sample Selection, and Treatment Effects</B>
+There is a strongly revived interest in the statistical fundementals
+of estimating treatment effect models in observational and experimental
+studies exemplified by recent work by 
+(<A NAME="tex2html5"
+ HREF="node1.html#aai:1997">Abadie, Angrist, and Imbens, 1997</A>; <A NAME="tex2html6"
+ HREF="node1.html#air:1996">Angrist, Imbens, and Rubin, 1996</A>; <A NAME="tex2html7"
+ HREF="node1.html#heckman:1996">Heckman, 1996</A>; <A NAME="tex2html8"
+ HREF="node1.html#ai:1994">Imbens and Angrist, 1994</A>; <A NAME="tex2html9"
+ HREF="node1.html#Manski:1997">Manski, 1997</A>).
+This will be our first topic and I think that it will provide a useful
+fresh look at the basic idea of instrumental variables
+which is one of the few, really original, ideas in econometrics.
+After reading some of these new papers, I would like to take a week
+to revisit some of the classical literature on IV's, LIML and related
+topics from the 1950's.  This literature will, I hope, lead us into
+a deeper consideration of how to apply these ideas to the next topic.
+<P><DT>2.
+<DD><B>Open Problems in Quantile Regression</B>
+<P>
+I would like to devote some time to what I regard as important open research
+problems in quantile regression.  These might include some of the following:
+<P><UL>
+<LI> Computational methods for quantile regression 
+(<A NAME="tex2html10"
+ HREF="node1.html#F.1997">Fitzenberger, 1997</A>; <A NAME="tex2html11"
+ HREF="node1.html#KP.96">Koenker and Park, 1996</A>; <A NAME="tex2html12"
+ HREF="node1.html#K.1997">Koenker, 1997</A>; <A NAME="tex2html13"
+ HREF="node1.html#PK.1997">Portnoy and Koenker, 1997</A>; <A NAME="tex2html14"
+ HREF="node1.html#P.1997">Portnoy, 1997</A>)
+<LI> Panel data and random effects models 
+(<A NAME="tex2html15"
+ HREF="node1.html#Twins">Arias, Hallock, and Sosa, 1997</A>; <A NAME="tex2html16"
+ HREF="node1.html#Chay">Chay, 1995</A>; <A NAME="tex2html17"
+ HREF="node1.html#mark:horo:1995">Markatou and Horowitz, 1995</A>; <A NAME="tex2html18"
+ HREF="node1.html#rock:1983">Rocke, 1983</A>)
+<LI> Instrumental variable methods and l1 canonical correlation 
+(<A NAME="tex2html19"
+ HREF="node1.html#Amem:82">Amemiya, 1982</A>; <A NAME="tex2html20"
+ HREF="node1.html#amma.93">Ammann, 1993</A>; <A NAME="tex2html21"
+ HREF="node1.html#Twins">Arias, Hallock, and Sosa, 1997</A>; <A NAME="tex2html22"
+ HREF="node1.html#P:83">Powell, 1983</A>)
+<LI> Influence robust quantile regression (<A NAME="tex2html23"
+ HREF="node1.html#HP:97">He and Portnoy, 1997</A>; <A NAME="tex2html24"
+ HREF="node1.html#RH:97">Rousseeuw and Hubert, 1996</A>; <A NAME="tex2html25"
+ HREF="node1.html#JWW:88">de&nbsp;Jongh, de&nbsp;Wet, and Welsh, 1988</A>)
+<LI> Recursive estimation in time-series, ARMA, GARCH, etc. 
+(<A NAME="tex2html26"
+ HREF="node1.html#engl:hols:rupp:1988">Englund, Holst, and Ruppert, 1988</A>; <A NAME="tex2html27"
+ HREF="node1.html#hols:1985">Holst, 1985</A>,<A NAME="tex2html28"
+ HREF="node1.html#hols:1987"> 1987</A>; <A NAME="tex2html29"
+ HREF="node1.html#KZ.96">Koenker and Zhao, 1996</A>; <A NAME="tex2html30"
+ HREF="node1.html#rupp:1985">Ruppert, 1985</A>)
+<LI> Binary Response Models with Heteroscedasticity and
+Manski's Maximum Score Estimator (<A NAME="tex2html31"
+ HREF="node1.html#horo">Horowitz, 1992</A>; <A NAME="tex2html32"
+ HREF="node1.html#mt:86">Manski and Thompson, 1986</A>; <A NAME="tex2html33"
+ HREF="node1.html#M.75">Manski, 1975</A>,<A NAME="tex2html34"
+ HREF="node1.html#M.85"> 1985</A>)
+<LI> Multivariate quantiles and principal curves 
+(<A NAME="tex2html35"
+ HREF="node1.html#CC">Chakraborty and Chaudhuri, 1995</A>; <A NAME="tex2html36"
+ HREF="node1.html#Chak">Chakraborty, 1996</A>; <A NAME="tex2html37"
+ HREF="node1.html#Chd.96">Chaudhuri, 1996</A>; <A NAME="tex2html38"
+ HREF="node1.html#hast:stue:1989">Hastie and Stuetzle, 1989</A>; <A NAME="tex2html39"
+ HREF="node1.html#kolt">Koltchinskii, 1997</A>; <A NAME="tex2html40"
+ HREF="node1.html#Liu">Liu, 1990</A>; <A NAME="tex2html41"
+ HREF="node1.html#niin:oja:1995">Niinimaa and Oja, 1995</A>; <A NAME="tex2html42"
+ HREF="node1.html#niin:oja:tabl:1990">Niinimaa, Oja, and Tableman, 1990</A>; <A NAME="tex2html43"
+ HREF="node1.html#NON">Ninimaa, Oja, and Nyblom, 1992</A>; <A NAME="tex2html44"
+ HREF="node1.html#oja:niin:1985">Oja and Niinimaa, 1985</A>; <A NAME="tex2html45"
+ HREF="node1.html#Oja.83">Oja, 1983</A>; <A NAME="tex2html46"
+ HREF="node1.html#RS">Ramsay and Silverman, 1997</A>; <A NAME="tex2html47"
+ HREF="node1.html#Small:1990">Small, 1990</A>,<A NAME="tex2html48"
+ HREF="node1.html#Small"> 1997</A>)
+<LI> Rank based inference and related bootstrapping methods 
+(<A NAME="tex2html49"
+ HREF="#parz:wei:ying:1994">, </A>; <A NAME="tex2html50"
+ HREF="node1.html#B.94">Buchinsky, 1994</A>,<A NAME="tex2html51"
+ HREF="node1.html#Bu.95"> 1995</A>; <A NAME="tex2html52"
+ HREF="node1.html#Fitz.96">Fitzenberger, 1996</A>; <A NAME="tex2html53"
+ HREF="node1.html#GJ.92">Gutenbrunner and Jureckova, 1992</A>; <A NAME="tex2html54"
+ HREF="node1.html#GJKP.94">Gutenbrunner, Jureckova, Koenker, and Portnoy, 1993</A>; <A NAME="tex2html55"
+ HREF="node1.html#G.94">Gutenbrunner, 1994</A>; <A NAME="tex2html56"
+ HREF="node1.html#Hahn">Hahn, 1995</A>; <A NAME="tex2html57"
+ HREF="node1.html#horo:97">Horowitz, 1996</A>; <A NAME="tex2html58"
+ HREF="node1.html#KM.98">Koenker and Machado, 1998</A>; <A NAME="tex2html59"
+ HREF="node1.html#K.94">Koenker, 1994</A>,<A NAME="tex2html60"
+ HREF="node1.html#K.96"> 1996</A>)
+</UL>
+<P><DT>3.
+<DD><B>Comparison of Density and Nonparametric Regression Methods</B>
+<P>
+The time seems right for another look at the pros and cons of various
+nonparametric methods currently available in the literature.  In
+particular, I would like to compare current kernel methods with the
+sieve-like methods of the (<A NAME="tex2html61"
+ HREF="node1.html#FG:1996">Fenton and Gallant, 1996</A>; <A NAME="tex2html62"
+ HREF="node1.html#GT:1997">Gallant and Tauchen, 1997</A>) SNP approach and the
+log-spline methods of (<A
+ HREF="node1.html#SHKT">Stone, Hansen, Kooperberg, and Truong, 1997</A>) and others.  There are some interesting
+current applications to options pricing which might be an interesting
+case study here.
+<P><DT>4.
+<DD><B>Ecological Regression and Spatial Statistics</B>
+<P>
+There is an interesting new book by a political scientist (<A
+ HREF="node1.html#King">King, 1997</A>)
+on the ecological regression fallacy which draws interesting
+parallels to current work on the statistical theory of image
+processing and tomography, and is also connected to current advances
+in spatial statistics, see for example (<A
+ HREF="node1.html#Small">Small, 1997</A>).
+There are interesting connections to density estimation, nonparametric
+quantile regression and other topics which are suggested by these
+developments.
+<P><DT>5.
+<DD><B>Average Derivative Estimation, Single Indices, 
+and the Transformation Model</B>
+<P>
+There is still considerable scope for drawing together methods for
+estimating transformation models using a variety of techniques 
+closely associated with some of the topics listed above.  Here
+there are also deeper theoretical issues relating to adaptive estimation.
+Single index models have a large literature in econometrics, see e.g.
+(<A NAME="tex2html63"
+ HREF="node1.html#cds:1997">Chaudhuri, Doksum, and Samarov, 1997</A>; <A NAME="tex2html64"
+ HREF="node1.html#Stoker">Stoker, 1992</A>) 
+Survival analysis is an important application in this context,
+as is the connection to discrete choice models.
+There are also interesting connections to rank statistics, see 
+(<A NAME="tex2html65"
+ HREF="node1.html#G:1997">Gutenbrunner, 1997</A>; <A NAME="tex2html66"
+ HREF="node1.html#Han:1987">Han, 1987</A>).
+<P></DL>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS">&#160;</A>
+<UL>
+<LI><A NAME="tex2html3"
+ HREF="node1.html#SECTION00010000000000000000">
+References</A>
+<LI><A NAME="tex2html4"
+ HREF="node2.html#SECTION00020000000000000000">
+About this document ... </A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1"
+ HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif_gr.gif"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif_gr.gif">   
+<BR>
+<B> Next:</B> <A NAME="tex2html2"
+ HREF="node1.html">References</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Roger Koenker</I>
+<BR><I>1/20/1998</I>
+</ADDRESS>
+</BODY>
+</HTML>

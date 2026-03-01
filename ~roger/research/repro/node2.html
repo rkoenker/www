@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Reproducible Simulation</TITLE>
+<META NAME="description" CONTENT="Reproducible Simulation">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html31" HREF="node3.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html29" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html23" HREF="node1.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html32" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<B>Up:</B> <A NAME="tex2html30" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html24" HREF="node1.html">Introduction</A>
+<BR> <P>
+<H1><A NAME="SECTION00020000000000000000">Reproducible Simulation</A></H1>
+<P>
+The following code illustrates a function to conduct a monte-carlo experiment 
+designed to compare the computational efficiency of several algorithms for  <IMG WIDTH=9 HEIGHT=24 ALIGN=MIDDLE ALT="tex2html_wrap_inline521" SRC="img2.gif"  > 
+(median) regression.
+<P>
+<PRE></PRE>
+<P>
+&quot;monte&quot;&lt;-
+function(run, ns = c(20000, 40000, 80000, 120000), ps = c(4, 8, 16), R = 5, 
+    methods = expression(lm(y  <IMG WIDTH=10 HEIGHT=4 ALIGN=BOTTOM ALT="tex2html_wrap515" SRC="img3.gif"  >  x), l1fit(x, y), rqfn(x, y), RQFN(x, y)), 
+    dfx = expression(matrix(rnorm(p * n), n, p)), dfy = expression(rnorm(n)
+    ), mse = list(2, c(3, 4)))
+{
+    version &lt;- 5    #function for timing experiments for rqn paper 
+#Input:
+#    ns-a vector of sample sizes
+#    ps-a vector of parameter dimensions, intercept will be appended
+#    R -number of replications of each n,p pair
+#    methods-methods to be compared should be of the form:
+#        expression(lm(y <IMG WIDTH=10 HEIGHT=4 ALIGN=BOTTOM ALT="tex2html_wrap515" SRC="img3.gif"  > x),l1fit(x,y),rqfn(x,y),RQFN(x,y))
+#        this is a list which can be evaluated as eval(methods[[i]])
+#    dfx-expression to generate design matrix
+#    dfy-expression to generate response vectors
+#    mse-list describing how to evaluate accuracy:
+#        1.  benchmark method (number in methods list)
+#        2.  new methods  under test (numbers in methods list)
+#
+#Output:
+#    result-data structure with the components
+#        times-array of timings
+#        err  -root mse of bhat for new methods vis a vis benchmark
+#        seed -initial .Random.seed
+#    doc-attribute of result describing in detail how it was created    
+#
+    options(object.size = 150000000)    
+    #checking for dynloading now occurs in the rq functions
+#do the biggest problem first in case there are memory problems
+    ns &lt;- rev(sort(ns))
+    ps &lt;- rev(sort(ps))
+    times &lt;- array(0, c(length(methods), R, length(ps), length(ns)))
+    err &lt;- array(0, c(length(mse[[2]]), R, length(ps), length(ns)))
+    seed &lt;- .Random.seed
+    for(i in 1:length(ns)) {
+        n &lt;- ns[i]
+        print(paste(&quot;n=&quot;, n))
+        for(j in 1:length(ps)) {
+            p &lt;- ps[j]
+            print(paste(&quot;p=&quot;, p))
+            b &lt;- matrix(0, p + 1, length(methods))
+            x &lt;- eval(dfx)
+            m &lt;- x for(k in 1:R) {
+                y &lt;- m + eval(dfy)
+                for(l in 1:length(methods)) {
+                  times[l, k, j, i] &lt;- unix.time(b[, l] &lt;- eval(
+                    methods[[l]])$coef)[1]
+                }
+                err[, k, j, i] &lt;- sqrt(apply((b[, mse[[2]]] - b[
+                  , mse[[1]]])<B> <IMG WIDTH=6 HEIGHT=7 ALIGN=BOTTOM ALT="tex2html_wrap517" SRC="img4.gif"  > </B>2, 2, &quot;mean&quot;))
+            }
+        }
+    }
+    dimnames(times) &lt;- list(paste(methods), NULL, paste(&quot;p=&quot;, ps, sep = &quot;&quot;),
+        paste(&quot;n=&quot;, ns, sep = &quot;&quot;))
+    result &lt;- list(times = times, err = err, seed = seed, dfx = dfx, dfy = 
+        dfy)
+    doc(result) &lt;- how.created(paste(&quot;Test&quot;, run, &quot;on&quot;, unix(&quot;hostname&quot;)), 
+        text = F)
+    return(result)
+}
+<P>
+Notice first that we have 4 default methods to compare:  
+one is the function  <IMG WIDTH=40 HEIGHT=10 ALIGN=BOTTOM ALT="tex2html_wrap_inline523" SRC="img5.gif"  >  provided by S, two are new functions
+which we will describe in further detail below, <TT>rqfn, RQFN</TT>, and the fourth is 
+the standard least squares function   <IMG WIDTH=65 HEIGHT=26 ALIGN=MIDDLE ALT="tex2html_wrap_inline525" SRC="img6.gif"  >  which will serve as 
+a benchmark to evaluate the performance of the  <IMG WIDTH=9 HEIGHT=24 ALIGN=MIDDLE ALT="tex2html_wrap_inline521" SRC="img2.gif"  >  algorithms.  The use of the 
+function 
+<BLOCKQUOTE> <TT>methods_expression()</TT>
+</BLOCKQUOTE>
+provides a convenient general way to introduce the methods in the form of a list 
+through which we may loop, using the function
+<BLOCKQUOTE> <TT>eval(methods[[i]]).</TT>
+</BLOCKQUOTE>
+Similarly we introduce methods for generating the data as 
+illustrated by the specifications of <TT>dfx</TT> and <TT>dfy</TT> in the function calling 
+sequence.  Specification of the sample sizes and parametric dimension of the 
+model are introduced simply as vectors, again to facilitate looping.
+<P>
+The function begins by organizing the work to be done so that the most challenging 
+problems, the largest ones in this case, come first.  This way if the simulation 
+fails due to memory constraints, for example, it is likely to do so immediately.  
+An array is then initialized for the results of the experiment and the current 
+value of <TT>.Random.seed</TT> is stored for future reference.
+The storage of <TT>.Random.seed</TT> is critical to reproducibility.  By simply
+reassigning <TT>.Random.seed</TT> at any future point to the value <TT>seed</TT>
+and reexecuting the function <TT>monte</TT> we may reproduce the precise results of 
+experiment.  Of course this claim must be qualified somewhat if the experiment is 
+conducted on different hardware, but the portability of the  <font size=-1><small>SPLUS</small></font> random 
+number generator assures that sequence of random numbers generated will be the 
+same up to machine precision even across machines.  Thus <TT>seed</TT> will be a 
+crucial component in what is returned by the function <TT>monte.</TT>
+<P>
+The next few lines loop through the configurations of the experiment with the 
+timing result, the first component (user-time) of <TT>unix.time</TT>, in the array 
+<TT>times</TT>.  Since looping is notoriously slow in  <font size=-1><small>SPLUS</small></font> it is worth pausing to 
+comment briefly on efficiency considerations for the experiment at this point.
+It may be noted that the number of replications of the experiment is small, 5 
+according to the default set in the calling experiment.  This is probably 
+atypical of most experiments in  econometrics.  Here we are doing a small 
+number of very large problems, while it would be more typical to do a 
+large number of much smaller problems.  In the latter case it would be 
+<I>highly</I> desirable to incorporate the replications into a single call, 
+a lower level <font size=-1><small>FORTRAN</small></font> or C call, passing, for example, a matrix of <I>y</I>'s 
+to each element of the <TT>methods</TT>.   This is unnecessary in the 
+present instance and probably infeasible as well due to memory
+constraints.  We will have more to say about the issue of looping in the 
+next section.
+It is also important in the present application to evaluate the accuracy
+of the solutions computed by the new methods <TT>rqrn</TT> and <TT>RQFN</TT>.
+This is done in the array <TT>err</TT> which reports root mean squared errors
+for these solutions relative to the answer provided by <TT>l1fit</TT>.
+<P>
+Once the array <TT>times</TT> has been filled we can assign dimension labels to it.
+This is facilitated by the form of the vectors <TT>ns</TT>, <TT>ps</TT> and the list 
+<TT>methods</TT> using the <TT>paste</TT> function.  Then the result of the 
+experiment is packaged as a list consisting of the components.
+<UL><LI> the array <TT>times</TT><LI> the array <TT>err</TT><LI> the <TT>seed</TT><LI> <TT>dfx</TT> describing how <TT><I>x</I></TT> was generated<LI> <TT>dfy</TT> describing how <TT><I>y</I></TT> was generated
+</UL>
+<P>
+Finally, we conclude the call to <TT>monte</TT> by creating a documentation attribute
+for the list <TT>result</TT> using the assignment,
+<BLOCKQUOTE> <TT>doc(result) <IMG WIDTH=14 HEIGHT=6 ALIGN=BOTTOM ALT="tex2html_wrap_inline535" SRC="img7.gif"  > how.created(paste(...),text=F)</TT>
+</BLOCKQUOTE>
+This has the effect of appending several additional pieces of information to the 
+outcome of the experiment which serve to identify precisely how it was created.
+This is illustrated in the next display.  A typical call to monte might look like,
+<BLOCKQUOTE> <TT>m.5_mont(5)</TT>
+</BLOCKQUOTE>
+Typically, we wouldn't want to execute this interactively, so it would be 
+reasonable to put this command in a file, say <TT>mc.s</TT> 
+and at the system prompt, type
+<BLOCKQUOTE> <TT><font size=-1><small>SPLUS</small></font> &lt;mc.s &lt;&amp; mc.o &amp;</TT>
+</BLOCKQUOTE>
+which begins an <font size=-1><small>SPLUS</small></font> process which is run in the background.  
+It takes input from 
+<TT>mc.s</TT> and put output, including diagnostic output, into the file <TT>mc.o</TT>.
+Since <font size=-1><small>SPLUS</small></font> doesn't commit assignments until it concludes successfully, one way 
+to monitor progress of a job of this type is to put print statements of the form
+<BLOCKQUOTE> <TT>print(paste(&quot;k=&quot;,k))</TT>
+</BLOCKQUOTE>
+in the loop construct, which will allow the user to check the output file <TT>mc.o</TT>
+periodically to see where in the k-loop the job has arrived.
+The output <TT>m.5</TT> looks like this:
+<P>
+<PRE></PRE>
+<P>
+ <IMG WIDTH=723 HEIGHT=639 ALIGN=BOTTOM ALT="tex2html_wrap_inline537" SRC="img8.gif"  > err:
+<P>
+, , 1, 1
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 3.414232e-05 1.566616e-05 4.964434e-06 4.395257e-05 4.359341e-05
+[2,] 3.414232e-05 1.566619e-05 4.964458e-06 4.395101e-05 4.359344e-05
+<P>
+, , 2, 1
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 8.338684e-06 8.136083e-07 1.523099e-05 1.507634e-05 1.681484e-05
+[2,] 8.338627e-06 8.135856e-07 1.523034e-05 1.507631e-05 1.681402e-05
+<P>
+, , 3, 1
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 2.216078e-05 3.553101e-06 1.787060e-07 1.443290e-07 1.174932e-07
+[2,] 2.215855e-05 3.553141e-06 1.787061e-07 1.443649e-07 1.175176e-07
+<P>
+, , 1, 2
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 5.675161e-06 2.087732e-05 3.657927e-05 7.909246e-06 2.421033e-05
+[2,] 5.675195e-06 2.087763e-05 3.657925e-05 7.909236e-06 2.420965e-05
+<P>
+, , 2, 2
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 1.085759e-06 2.920666e-06 6.352805e-06 5.974413e-06 7.780196e-06
+[2,] 1.085678e-06 2.927971e-06 6.352803e-06 5.974751e-06 7.780130e-06
+<P>
+, , 3, 2
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 2.024797e-07 1.828511e-07 1.799722e-07 3.088179e-06 2.973498e-07
+[2,] 2.074590e-07 1.892743e-07 1.799714e-07 3.088172e-06 2.973314e-07
+<P>
+, , 1, 3
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 5.652814e-07 1.100742e-05 3.460726e-05 1.387323e-05 4.565225e-07
+[2,] 5.642479e-07 1.100742e-05 3.460725e-05 1.387323e-05 4.556660e-07
+<P>
+, , 2, 3
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 2.654629e-07 2.151161e-07 3.984395e-05 2.589425e-05 1.905348e-05
+[2,] 2.654589e-07 2.149446e-07 3.984391e-05 2.583213e-05 1.905358e-05
+<P>
+, , 3, 3
+             [,1]       [,2]         [,3]         [,4]         [,5] 
+[1,] 6.891924e-08 3.6193e-05 5.676117e-08 1.431328e-07 1.365530e-06
+[2,] 6.865607e-08 3.6193e-05 5.648426e-08 1.432799e-07 1.365537e-06
+<P>
+, , 1, 4
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 1.334859e-06 8.979264e-07 2.673230e-06 8.003513e-07 2.444837e-06
+[2,] 1.334141e-06 8.978599e-07 2.673231e-06 8.004130e-07 1.692292e-06
+<P>
+, , 2, 4
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 3.549152e-07 1.582878e-07 9.958417e-06 4.616344e-07 4.836977e-07
+[2,] 3.549160e-07 1.582885e-07 9.954472e-06 4.614458e-07 4.702986e-07
+<P>
+, , 3, 4
+             [,1]         [,2]         [,3]         [,4]         [,5] 
+[1,] 3.603852e-07 1.116334e-07 4.817329e-08 2.730610e-07 1.963181e-07
+[2,] 3.598513e-07 1.115358e-07 4.821597e-08 2.824074e-07 1.964258e-07
+<P>
+<I>seed</I>:
+ [1] 21 61 59  7 40  2 33 62 52 13 55  3
+<P>
+dfx:
+expression(matrix(rnorm(p * n), n, p))
+<P>
+<I>dfy</I>:
+<I>expression</I>(<I>rnorm</I>(<I>n</I>))
+<P>
+<I>attr</I>(, ;<I>SPMquot</I>;<I>doc</I>;<I>SPMquot</I>;):
+<I>attr</I>(, ;<I>SPMquot</I>;<I>doc</I>;<I>SPMquot</I>;)what:
+attr(, &quot;doc&quot;)<I>what</I>comment:
+[1] &quot;Test 5 on ragnar.econ.uiuc.edu&quot;
+<P>
+attr(, &quot;doc&quot;)<I>what</I>call:
+monte(5)
+<P>
+attr(, &quot;doc&quot;)<I>what</I>version:
+[1] 5
+<P>
+attr(, &quot;doc&quot;)<I>what</I>env:
+[1] &quot;.Data&quot;                                   
+[2] &quot;/usr/local/splus/splus/.Functions&quot;       
+[3] &quot;/usr/local/splus/stat/.Functions&quot;        
+[4] &quot;/usr/local/splus/s/.Functions&quot;           
+[5] &quot;/usr/local/splus/s/.Datasets&quot;            
+[6] &quot;/usr/local/splus/stat/.Datasets&quot;         
+[7] &quot;/usr/local/splus/splus/.Datasets&quot;        
+[8] &quot;/usr/local/splus/library/local/.Data&quot;    
+[9] &quot;/usr/local/splus/library/local/.Datasets&quot;
+<P>
+attr(, &quot;doc&quot;)<I>when</I>:
+[1] ;<I>SPMquot</I>;<I>Sun Sep</I>  8 20:12:03 <I>CDT</I> 1996;<I>SPMquot</I>;
+<P>
+<I>attr</I>(, ;<I>SPMquot</I>;<I>doc</I>;<I>SPMquot</I>;)who:
+[1] &quot;roger&quot;
+<P>
+Note that in addition to the main components <TT>times, err, 
+seed, dfx, dfy</TT> of <TT>m.3</TT> we have 4 documentation components:
+<UL><LI> a comment indicating that the experiment was conducted on the machine<BR> 
+<TT>ragnar.econ.uiuc.edu</TT><LI> a ``call'' component indicating the calling sequence used<LI> a ``version'' component indicating the version numbers, if any, of the 
+function which involved the document creation<LI> the search list at the time of creation<LI> the time of invocation<LI> the user who invoked it
+</UL>
+<P>
+Together the components of <TT>result</TT> assigned to <TT>m.5</TT> constitute a 
+detailed description of how the experiment was conducted and how it would 
+be reproduced.  The functions used to create the documentation attribute are not 
+part of <font size=-1><small>SPLUS</small></font> 3.3 but were contributed by Jeff Marcus and developed further by
+Z. Todd Taylor.  They <I>are</I> accessible from <TT>splus.local</TT> on 
+<TT>ragnar.econ.uiuc.edu</TT>, however, as are a significant number of other bells 
+and whistles for <font size=-1><small>SPLUS</small></font>.
+<P>
+<HR><A NAME="tex2html31" HREF="node3.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html29" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html23" HREF="node1.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html32" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<B>Up:</B> <A NAME="tex2html30" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html24" HREF="node1.html">Introduction</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

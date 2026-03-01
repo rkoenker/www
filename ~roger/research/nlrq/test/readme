@@ -1,0 +1,46 @@
+#This is an archive of software and test problems for the paper
+An Interior Point Algorithm for Nonlinear Quantile Regression
+by Roger Koenker and BJ Park
+This version was prepared March 31 1994 in Prague
+
+
+Problems and Questions regarding this software should be directed to
+
+	Roger Koenker, 
+	Department of Economics, 
+	University of Illinois,
+	Champaign, IL 61820, USA
+
+	roger@ysidro.econ.uiuc.edu
+
+This software may be redistributed for any non-commercial purpose.
+
+The archive contains the following files
+
+data.s		S+ files which should be installed with source("data.s")
+		These files contain the S+ source for the function
+		nlrq() which contains the algorithm, all lower level
+		functions it calls, and the problem specific code for
+		all of the test problems used in the paper.
+nlrq.d		S+ documentation file for the function nlrq, which
+		should be installed in some appropriate .Help directory
+		i.e. cp nlrq.d .Data/.Help/nlrq
+test.rq.1.s	An S+ source file which runs the complete suite of test
+		problems using the k=1 setting (Meketon steps per
+		iteration =1) invoking this in S+ (source("test.rq.1.s")
+		produces a file test.rq.1.oo which may be compared with
+		the .o files below)
+test.rq.2.s	An S+ source file which runs the complete suite of test
+		problems using the k=2 setting (Meketon steps per
+		iteration =2) invoking this in S+ (source("test.rq.2.s")
+		produces a file test.rq.2.oo which may be compared with
+		the .o files below)
+test.rq.1.o	An S+ source output file for the complete suite of test
+		problems using the k=1 setting (Meketon steps per
+		iteration =1)
+test.rq.2.o	An S+ source output file for the complete suite of test
+		problems using the k=2 setting (Meketon steps per
+		iteration =2)
+text		directory containing postscript files of various pieces
+		of the paper see readme file there for details.
+

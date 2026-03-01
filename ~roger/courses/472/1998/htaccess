@@ -1,0 +1,5 @@
+deny from all
+allow from .uiuc.edu
+allow from .fe.unl.pt
+allow from .wiwi.hu-berlin.de
+AuthType Basic

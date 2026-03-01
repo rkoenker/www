@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Graphics</TITLE>
+<META NAME="description" CONTENT="Graphics">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html60" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html58" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html52" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html61" HREF="node6.html">Tables</A>
+<B>Up:</B> <A NAME="tex2html59" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html53" HREF="node4.html">Is this really necessary?</A>
+<BR> <P>
+<H1><A NAME="SECTION00040000000000000000">Graphics</A></H1>
+<P>
+S<font size=-1><small>PLUS</small></font> provides an extremely sophisticated graphics environment which has 
+recently
+been extended in important directions by the incorporation of trellis graphics, 
+offering a general approach to the idea of ``small multiples''advocated by 
+Tufte (1992).  
+It would be foolish to entertain a general introduction to this topic, 
+the reader might wich to consult Cleveland (1993) which is itself a good
+example of reproducible research,
+all of the data and <TT>S</TT> code required to produce the figures in the 
+book are easily available over the internet.
+We will only illustrate some basic ideas related to reproducibility of graphics
+and their incorporation into LaTeX documents.
+<P>
+A few general principles seem obvious:
+<P>
+<UL><LI> Try to avoid serious computation in graphics applications; isolate 
+computationally intensive aspects into a preliminary stage in which experimental 
+results are generated, leaving the graphics phase to concentrate on effective 
+presentation of the results.<LI> Each final figure in a manuscript deserves a source file which fully describes 
+how it was created, and therefore permits the user to recreate, or modify the 
+figure easily.<LI> Final figures should be generated in postscript format so that they can be 
+efficiently incorporated into LaTeX at the optimal available resolution.
+</UL>
+It may appear too doctrinaire to insist on LaTeX formatting of research papers.
+Of course, there are many other possible text processing environments, and 
+I will confess to resisting the transition from Troff to TeX 
+for several years 
+after it appeared inevitable.  Other environments may be fine for literary 
+adventures in economics, but only TeX, 
+and preferably LaTeX is suitable for the 
+stringent demands of serious econometrics.
+This document was prepared with the  aid of the <TT>amsart</TT> formatting
+style described in Goossens, Mittelbach and Samarin (1994).
+<P>
+The following <font size=-1><small>SPLUS</small></font> commands illustrate a source file 
+used to generate Figure 4.1.  
+<TT>latex.table</TT> in the following way,
+<PRE></PRE>
+<P>
+#this is a plot to compare lm with several l1 timings
+#output from m.4 and m.5 is structured in the following way:
+#m.[56]$times is an array with dimensions 4 x 5  x 3 x 4
+postscript(&quot;fig.4.1.ps&quot;,horizontal=F,font=7,pointsize=10,width=6.5,height=4.5)
+par(mfrow=c(1,3))
+ps_c(16,8,4)
+for(i in 3:1){
+    m.5.m_apply(m.5$times,c(1,3,4),&quot;median&quot;)
+    m.6.m_apply(m.6$times,c(1,3,4),&quot;median&quot;)
+    z_c(20,40,80,120)*100
+    z_c(z,z*10)
+    plot(z,c(rev(m.6.m[2,i,]),rev(m.5.m[2,i,])),type=&quot;l&quot;,
+        log=&quot;xy&quot;,xlab=&quot;n&quot;,ylab=&quot;seconds&quot;)
+    lines(z,c(rev(m.6.m[1,i,]),rev(m.5.m[1,i,])),lty=2)
+    lines(z,c(rev(m.6.m[3,i,]),rev(m.5.m[3,i,])),lty=3)
+    lines(z,c(rev(m.6.m[4,i,]),rev(m.5.m[4,i,])),lty=4)
+    legend(4000,500,c(&quot;l1fit&quot;,&quot;lm&quot;,&quot;rqfn&quot;,&quot;RQFN&quot;),lty=1:4)
+    title(paste(&quot;p=&quot;,ps[i]))
+    }
+frame()
+<P>
+This was accomplished simply by the command
+<BLOCKQUOTE> <TT>source(&quot;fig.4.1.s&quot;)</TT>
+</BLOCKQUOTE>
+in <font size=-1><small>SPLUS</small></font>, which produced the file <TT>fig.4.1.ps</TT> which was then incorporated into 
+the present document with the following LaTeX convention.
+<P>
+<PRE>\begin{figure}[hbt]
+\begin{center}
+{\includegraphics{fig.4.1.ps}}
+\begin{caption}
+{Timing comparison of three algorithms  for median regression:
+Times are in seconds for the median of five replications for iid Gaussian
+data.  The solid line represents the timings for the simplex-based
+Barrodale and Roberts algorithm, the {\tt rqfn} dashed line represents
+a primal-dual interior point algorithm, {\tt RQFN} uses a preprocessing
+step and the {\tt rqfn} algorithm, and the dotted line represents least
+squares timing based on ${\tt lm(x \sim y)}$ as a benchmark}
+\end{caption}
+\end{center}
+\end{figure}</PRE>
+<P>
+<P> <IMG WIDTH=817 HEIGHT=17 ALIGN=BOTTOM ALT="figure272" SRC="img9.gif"  > <P>
+<P>
+Note that this approach 
+allows one to modify the figure by rerunning the <font size=-1><small>SPLUS</small></font> code without having 
+to modify the LaTeX document.  Of course, other device drivers, notably <TT>motif()</TT>
+provide an indispensible service in preliminary, exploratory stages of 
+preparing graphics.
+We might also note that the inclusion of code into LaTeX documents is
+facilitated by the use of the verbatim environoment in LaTeX and the
+package <TT>alltt</TT> written by Lamport(1992).  The S function <TT>S_to_tex</TT>
+written by John Chambers and available from <TT>Statlib</TT> is a useful
+translation device in preparing code for LaTeX inclusion.
+<P>
+<HR><A NAME="tex2html60" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html58" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html52" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html61" HREF="node6.html">Tables</A>
+<B>Up:</B> <A NAME="tex2html59" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html53" HREF="node4.html">Is this really necessary?</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

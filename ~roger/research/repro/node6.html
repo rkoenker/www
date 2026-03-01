@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Tables</TITLE>
+<META NAME="description" CONTENT="Tables">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html70" HREF="node7.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html68" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html62" HREF="node5.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html71" HREF="node7.html">Packaging and unpackaging.</A>
+<B>Up:</B> <A NAME="tex2html69" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html63" HREF="node5.html">Graphics</A>
+<BR> <P>
+<H1><A NAME="SECTION00050000000000000000">Tables</A></H1>
+<P>
+Tables are often a necessary evil and again <font size=-1><small>SPLUS</small></font>, augmented by some 
+independently written functions provides a good set of tools.  Consider the 
+relatively simple problem of making the experimental output <TT>m.3</TT>
+described above into a table in which each group of <I>R</I> timings is 
+represented by its median.  In <font size=-1><small>SPLUS</small></font> the array of medians is 
+easily computed as for the previous figures,
+<BLOCKQUOTE> <TT>m.3.m_apply(m.3, c(1,3,4),&quot;median&quot;)</TT>
+</BLOCKQUOTE>
+To make this into the table appearing below, we use Alan Zalovsky's function 
+<TT>latex.table</TT> in the following way,
+<PRE></PRE>
+<P>
+#output from m.4 and m.5 is structured in the following way:
+#m.[56] <IMG WIDTH=668 HEIGHT=464 ALIGN=MIDDLE ALT="tex2html_wrap_inline563" SRC="img10.gif"  > times,c(1,3,4),&quot;median&quot;)
+m.6.m_apply(m.6times,c(1,3,4),&quot;median&quot;)
+#reorder elements of these arrays
+m.5.m_m.5.m[c(1,4,3,2),3:1,4:1]
+m.6.m_m.6.m[c(1,4,3,2),3:1,4:1]
+table.4.1_rbind(cbind(m.6.m[,1,],m.5.m[,1,]),
+	cbind(m.6.m[,2,],m.5.m[,2,]),
+	cbind(m.6.m[,3,],m.5.m[,3,]))
+dimnames(table.4.1)_list(rep(methods,3),paste(&quot;n=&quot;,z,sep=&quot;&quot;))
+latex.table(table.4.1,dec=3,
+        rowlabel=&quot;&quot;,rgroup=paste(&quot;p=&quot;,ps),n.rgroup=c(4,4,4),label=&quot;&quot;,
+        caption=&quot;Median Timings for Median Regression&quot;)
+<P>
+Like our graphics functions this produces a file, this time consisting of 
+LaTeX commands, which can be incorporated into a document with the command,
+<PRE></PRE> 
+which produces the following table.
+<P>
+<P><A NAME="401">&#160;</A><BR>
+<STRONG>Table 1:</STRONG> Median Timings for Median Regression<A NAME="">&#160;</A><BR>
+<P>
+Again, it is possible to alter the form of the table without changing
+the form of the LaTeX document.  As with all the <font size=-1><small>SPLUS</small></font> 
+commands we have mentioned thus far, 
+further details about the commands can be found using the <font size=-1><small>SPLUS</small></font> command
+<TT>help(function.name)</TT>.  This raises the important point that one of 
+the responsibilities of writing new <font size=-1><small>SPLUS</small></font> functions which may be used by other 
+eventually is to provide documentation for each of them.  
+Obviously, these <TT>.d</TT>
+documentation files should be provided in the archive associated with each 
+project.  Details on documentation generation are given in each of the basic 5
+texts.  We might also remind the reader that the new <font size=-1><small>SPLUS</small></font> interface to the help 
+facility which can be initialized with the command
+<BLOCKQUOTE> <TT>help.start(gui=&quot;motif&quot;)</TT>
+</BLOCKQUOTE>
+on our xterms, for example, provides a key-word based search engine which is often
+successful in identifying new tools which are helpful in carrying a project 
+forward.
+<P>
+<HR><A NAME="tex2html70" HREF="node7.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html68" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html62" HREF="node5.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html71" HREF="node7.html">Packaging and unpackaging.</A>
+<B>Up:</B> <A NAME="tex2html69" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html63" HREF="node5.html">Graphics</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,34 @@
+Installing rq -- Quantile Regression (Version 3.0)
+
+This version of the library is intended for Splus5.x and was developed
+on Suns.  I would appreciate hearing about problems on other systems.
+There is still some flux in the 5.x versions of dumpChapter, etc. so
+some of the advice below may contradict to some degree more official
+advice available in Chambers Programming with Data, or V&R Splus
+Programming Complements.  
+
+Recipe:
+
+	make a fresh directory rq -- for the brave at heart with su
+		status this could be in $SHOME/library 
+	cd rq
+	S CHAPTER
+	untar the library into rq
+	S make
+	cat rq.q|S
+	cp help.sgm/* .Data/__Shelp
+
+(For S read whatever you call S on your machine...)
+
+
+If make works, it should produce an S.so file.  On our system there
+have been problems with resolving references to some fortran library
+functions.  See the makefile  for LOCAL_LIBS.
+
+
+Comments on any aspects of this software would be much appreciated!
+
+url:   http://www.econ.uiuc.edu                Roger Koenker   
+email  roger@ysidro.econ.uiuc.edu              Department of Economics
+vox:   217-333-4558                            University of Illinois
+fax:   217-244-6678                            Champaign, IL 61820

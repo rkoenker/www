@@ -1,0 +1,53 @@
+This is TeX, Version 3.14159 (C version 6.1e) (format=latex 95.9.4)  9 JUL 1996 10:37
+**bilias
+(bilias.tex
+LaTeX2e <1995/06/01> patch level 3
+(/opt/texmf/tex/latex/unpacked/article.cls
+Document Class: article 1995/06/26 v1.3g Standard LaTeX document class
+(/opt/texmf/tex/latex/unpacked/size12.clo
+File: size12.clo 1995/06/26 v1.3g Standard LaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+No file bilias.aux.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 20.
+[1
+
+] [2] (bilias.aux) ) 
+Here is how much of TeX's memory you used:
+ 228 strings out of 10957
+ 2167 string characters out of 72967
+ 48588 words of memory out of 262141
+ 3127 multiletter control sequences out of 9500
+ 6683 words of font info for 24 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 22i,5n,21p,110b,113s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on bilias.dvi (2 pages, 7516 bytes).

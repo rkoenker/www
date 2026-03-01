@@ -1,0 +1,338 @@
+\batchmode
+\documentclass[12pt]{amsart}
+\makeatletter
+\usepackage{latexsym}
+\usepackage{graphics}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\textwidth}{135mm}
+\setlength{\textheight}{205mm}
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{10mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textwidth}{6in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\renewenvironment {proof}{\noindent {\bf Proof:\ }}{\hfill{ \rule{2mm}{2mm}}}
+
+\newtheorem {assumption}{Assumption}
+
+\newtheorem {lemma}{Lemma}
+
+\newtheorem {result}{Result}
+
+\newtheorem {remark}{Remark}
+
+\newtheorem {proposition}{Proposition}
+
+\newtheorem {corollary}{Corollary}
+
+\newtheorem {theorem}{Theorem}
+
+\newenvironment {apabib}{
+  \noindent
+\begin{center}
+{\bf{ R}EFERENCES}
+\end{center}
+\vspace{-3mm}
+\begin{list}{}{
+  \topsep	   0mm
+  \leftmargin	  10mm
+  \parsep	   0mm
+  \listparindent -10mm}
+  \item[]\strut\par}{
+\end{list}}
+
+\def\endbox{{$\sqcap$}\llap{$\sqcup$}}
+
+\def\hbeta{\hat \beta_n}
+
+\def\tbeta{\tilde \beta_n}
+
+\def\Jureckova{Jure\v{c}kov\'{a}}
+
+\def\Vninv{\hat V_n^{-1}}
+
+\makeatother
+\newenvironment{tex2html_wrap}{}{}
+\newwrite\lthtmlwrite
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newbox\sizebox
+\begin{document}
+\pagestyle{empty}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \begin{displaymath}y_i = \sum_{j=1}^n x_{ij} \beta_j + u_i \qquad i = 1, ... , n.\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\{ u_i \}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline184: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\tilde \beta_n$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline190: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\beta$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline192: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat \beta_n = (X'X)^{-1} X'y$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline194: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat \beta_n$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline196: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$p \ge 3$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline198: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$Z = [ X \, D ]$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline210: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\hat \delta_n = (Z'Z)^{-1} Z'y\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat \delta_n$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline214: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\hat V_n = (Z'Z)^{-1} Z'RZ(Z'Z)^{-1}\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$R =  diag (r_i^2)$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline218: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$r = y - Z \hat \delta$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline220: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$G = [ I_p \, 0 ]'$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline222: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\delta = G\beta$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline224: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\min ( \hat \delta   - G \beta)' \hat V_n^{-1} (\hat \delta   - G \beta),\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\tilde \beta_n = (G' \hat V_n^{-1} G )^{-1} G' \hat V_n^{-1}  \hat \delta_n.\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{proposition}If $F$ is symmetric about zero, then 
+$\tilde \beta_n$ is symmetrically distributed about $\beta$, and if it
+exists, $E \tilde \beta_n = \beta$.
+\end{proposition}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\tilde \beta_n = \beta + (G' \hat V_n^{-1} G )^{-1} G' \hat V_n^{-1} u .\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat V_n $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline244: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\tilde \beta_n - \beta $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline258: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$-(\tilde \beta_n - \beta )$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline260: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{proposition}Under the conditions of Theorem 2.2 of KMSW(1994)
+with $\{u_i\}$ iid and
+$k(F) = E u_1^4/ \sigma^4$, we have the variance expansion,
+\begin{displaymath}Var ( \root \of n ( \tilde \beta_n - \beta ) = \sigma^2 \Omega_n + 
+n^{-1} \sigma^2 ( 5 - k(F) ) \Omega_{2n} + o(n^{-1}),\end{displaymath}
+where $\Omega_n = (G'H_n G)^{-1} = (X'X/n)^{-1},$ $H_n = Z'Z/n$,
+$\Omega_{2n} = \Omega_n G'M_n G \Omega_n$, and 
+$M_n = n^{-1} \sum z_i z_i ' [H_n-G(G'H_n G)^{-1} G' ] z_i z_i'.$
+\end{proposition}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$V = \sigma^2 I$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline286: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$O(n^{-1})$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline288: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\Omega_{2n} $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline290: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$G = e_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline308: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$Gz_i = 1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline310: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\Omega_{2n} = q$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline312: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}Var ( \root \of n ( \tilde \beta_n - \beta ) = \sigma^2 [ 1 + 
+( 5 - k(F) ) q/n ] + o(n^{-1}).\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\tilde \beta_n = e_1 ' \hat V_n^{-1} \hat \delta / e_1 ' \hat V_n^{-1} e_1.\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\tilde \beta_n = \hat \beta_n = \bar y$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline326: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat \delta$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline328: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$n \rightarrow \infty$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline338: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$D_n$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline340: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$y_i = z_i/v_i$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline344: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$z_i \sim {\mathcal N} (0,1)$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline346: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$v_i \sim \sqrt{\chi_{\nu}^2 /\nu}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline348: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$v_i$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline350: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\tilde y = (y - \hat \mu )/{\hat \sigma}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline356: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$ \hat \mu = (v'v)^{-1} v'z$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline358: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\hat \sigma^2 = z'(I - v(v'v)^{-1} v')z/(n-1)$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline360: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\nu \in \{ 1,3,5 \}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline362: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\{ 10,15,25,50,75,100 \}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline364: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\nu = 1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline374: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{figure}[!]
+\begin{center}
+\resizebox{\textwidth}{!}
+{\includegraphics{../fig.1.ps}}
+\end{center}
+\end{figure}
+}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+
+\end{document}

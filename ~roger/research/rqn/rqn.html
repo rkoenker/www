@@ -1,0 +1,77 @@
+<title>Hare and Tortoise</title>
+<html>
+<h1>The Gaussian Hare and the Laplacian Tortoise</h1>
+<h1>Computability of l1 vs l2 Regression Estimators</h1>
+<h1>By:  Stephen Portnoy and Roger Koenker</h1>
+<p>
+<br>
+<p>
+</body></html>
+<center>
+<img src="ht.jpeg"> 
+<center>
+<br>
+<center>
+ABSTRACT
+
+<br>
+Since Gauss(1821), it has been generally accepted that l_2
+methods of combining observations by minimizing sums of squared errors have
+significant computational advantages over earlier l_1 methods based on
+minimization of absolute errors advocated by Boscovich, Laplace and others.
+However, l_1 methods are known to have significant robustness
+advantages over l_2
+methods in many applications, and related quantile regression methods
+provide a useful, complementary approach to classical least-squares
+estimation of statistical models.
+Combining recent advances in interior point methods for solving linear
+programs with a new statistical preprocessing approach for l_1-type
+problems, we show that l_1 methods can be made competitive with l_2
+methods in terms of computational speed throughout the entire range
+of problem sizes, including those based on massive datasets.
+
+<br>
+This paper has appeared (with discussion) in Statistical Science,
+in the November, 1997 issue.
+Related software, which is written in  
+<a href="rqn.s">S</a> and <a href="rqn.b">ratfor</a>
+is also available.  
+<br>
+<br>
+A new version of this code is available in 
+<a href="http://www.nuff.ox.ac.uk/Users/Doornik">Ox. </a>
+The
+<a href="rq.ox">Ox version</a>
+is quite concise and (almost) as fast as the fortran.
+It should be emphasized that the this new "interior point" approach
+to computing quantile regression estimates is still somewhat experimental.
+For problems of modest size and for a more developed approach to software
+for inference in quantile regression, the simplex approach embodied in
+the earlier Splus/Fortran code available ... is probably preferable.
+Comments on any of this are most welcome. 
+For an alternative explanation of what is going on in the paper you
+could look <a href="steroids.html">here.</a><br>. 
+
+Some details on the provenance of the above picture may be of interest:
+
+The background is taken from a wood engraving by J.J. Grandville from
+Fables de La Fontaine, Paris, 1838, and reprinted in AESOP Five Centuries
+of Illustrated Fables, selected by J.J. McKendry, Metropolitan Museum of Art:
+New York.
+
+The picture of Gauss is taken from a 1803 Portrait by J.C.A. Schwartz which
+appears as the frontispiece in Gauss: A Biographical Study, by W.K. Buhler,
+Springer-Verlag: New York.
+
+The picture of Laplace is taken from Cauchy:  Un Mathematicien Legitimiste
+au XIXe Siecle, by Bruno Belhoste, Belin: Paris.  No source is specified for
+this picture.   
+
+<br>
+<br>
+Problems or questions regarding this software should be directed to
+<a href="mailto:roger@ysidro.econ.uiuc.edu"> roger@ysidro.econ.uiuc.edu</a>
+<br>
+This software may be redistributed for any non-commercial purpose.
+<br>
+<br>

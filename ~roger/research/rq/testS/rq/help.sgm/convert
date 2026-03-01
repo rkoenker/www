@@ -1,0 +1,7 @@
+#This is a csh script so you (might) need to be in csh to execute it
+#convert .sgm files to oldstyle .d files for Splus documentation.
+#note that the function sgml2roff is not part of the regular Splus distribution
+
+foreach file (`ls *.sgm`)
+	Splus5 sgml2roff  $file >$file:r.d
+end

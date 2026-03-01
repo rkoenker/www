@@ -1,0 +1,11 @@
+This directory contains the postscript images of the contents
+of the paper An interior point algorithm for nonlinear quantile
+regression by R Koenker  and BJ Park.  The files are as follows
+
+nlrq.ps		body of paper
+title.ps	title page
+appendix.ps	appendix of descriptions of test problems
+table51.ps	test problem results
+table52.ps	test problem results
+alg.ps		S+ code for algorithm
+out.ps		is the paper bits catted together for LJ Wei 5/01

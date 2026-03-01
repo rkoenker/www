@@ -1,0 +1,23 @@
+This file contains some comments on the differences between the S and R
+version of the quantile regression package.
+
+1.  in rq() I use in R the idiom
+
+	m <- eval(m, sys.frame(sys.parent()))
+
+but in S this causes problems in the function rrs.test() so I have
+reverted to the more conventional
+
+	m <- eval(m, sys.parent())
+
+If someone could explain this to me, I would be eternally grateful for at
+least 10 minutes.
+
+2.  There are several occurances of the  function oldClass() in the Splus
+version.  These appear as class() in the R version.  Will R eventually
+adopt the PwD conventions?
+
+3.  Documentation files must be converted.  For the moment this involves
+converting .sgm  files to .d files for old S style and then conversion
+to .Rd for R.  The first step is accomplished by use of sgml2roff obtained
+from BTL see directory Sdoc.  And the second step by the R function d2Rd. 

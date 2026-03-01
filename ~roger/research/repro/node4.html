@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Is this really necessary?</TITLE>
+<META NAME="description" CONTENT="Is this really necessary?">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html50" HREF="node5.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html48" HREF="node3.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html44" HREF="node3.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html51" HREF="node5.html">Graphics</A>
+<B>Up:</B> <A NAME="tex2html49" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<B> Previous:</B> <A NAME="tex2html45" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<BR> <P>
+<H2><A NAME="SECTION00031000000000000000">Is this really necessary?</A></H2>
+<P>
+One should be sure that it is really ``worth it'' before embarking on 
+a <font size=-1><small>FORTRAN</small></font> project.  I like to have an affirmative answer to each of the 
+following questions:
+<UL><LI> Is this going to really save time in some appropriately discounted sense?  
+Surprisingly, the answer to this is often, yes, since the function can easily 
+speed things up by several orders of magnitude, base 10.<LI> Is this a function I'll use a year from now?  This is a more stringent test.<LI> Am I sure that there isn't a better way to write this in S?  This can only be 
+answered definitively after considerable experience with the language, but many useful hints are available in the books by Venables and Ripley (1996) 
+and Spector(1994)  as well as in <font size=-1><small>SNEWS</small></font> and other places.
+</UL>
+<P>
+Once you are convinced that this is a necessary evil you should muster all
+the available tools.   Many would say that <font size=-1><small>FORTRAN</small></font>, 
+like Latin, is a dead language and puts one at an immediate disadvantage.  This is 
+certainly true for some applications, particularly those involving a serious 
+graphics component or character string manipulation.  But for purely 
+numerical applications <font size=-1><small>FORTRAN</small></font> continues to serve quite well.  I prefer the 
+<font size=-1><small>FORTRAN</small></font> dialect Ratfor, developed at Bell Labs by Kernighan and 
+Plauger(1976).  It provides much of the syntactical structure of C, but 
+represents only a modest investment - the entire literature on learning the 
+dialect is the classic 25 page tutorial written by Kernighan  
+which is a model of clarity.
+We will not pretend to elaborate on how to write Ratfor;  
+we  simply illustrate the language through an example of Ratfor code.
+<P>
+<PRE></PRE>
+<P>
+#This is a ratfor implementation of the floyd-revest quantile algorithm-SELECT
+#Reference:  CACM 1975, alg #489, p173, algol-68 version
+#As originally proposed:  mmax=600, and cs=cd=.5
+#Translation by Roger Koenker August, 1996.
+#Calls blas routine dswap 
+subroutine select(n,x,l,r,k,mmax,cs,cd)
+integer n,m,l,r,k,ll,rr,i,j,mmax
+double precision  x(n),z,s,d,t,cs,cd
+while(r&gt;l){
+    if(r-l&gt;mmax){
+        m=r-l+1
+        i=k-l+1
+        fm=dfloat(m)
+        z=log(fm)
+        s=cs*exp(2*z/3)
+        d=cd*sqrt(z*s*(m-s)/fm)*sign(1.,i-m/2)
+        ll=max(l,k-i*s/fm +d)
+        rr=min(r,k+(m-i)*s/fm +d)
+        call select(n,x,ll,rr,k,mmax,cs,cd)
+        }
+    t=x(k)
+    i=l
+    j=r
+    call dswap(1,x(l),1,x(k),1)
+    if(x(r)&gt;t)call dswap(1,x(r),1,x(l),1)
+    while(i&lt;j){
+        call dswap(1,x(i),1,x(j),1)
+        i=i+1
+        j=j-1
+        while(x(i)&lt;t)i=i+1
+        while(x(j)&gt;t)j=j-1
+        }
+    if(x(l)==t)
+        call dswap(1,x(l),1,x(j),1)
+    else{
+        j=j+1
+        call dswap(1,x(j),1,x(r),1)
+        }
+    if(j&lt;=k)l=j+1
+    if(k&lt;=j)r=j-1
+    }
+return
+end
+<P>
+This is a pathbreaking algorithm development by Floyd and Rivest 
+(1975) which computes the ordinary sample 
+quantiles in an asymptotically 
+linear number of comparisons in the sample size.  The algorithm, as displayed, 
+is a straightforward translation from the Algol given in the 
+original paper.  Note the recursive call.
+<P>
+Given the <font size=-1><small>FORTRAN</small></font>, how is it incorporated into <font size=-1><small>SPLUS</small></font>?  This is inevitably system 
+dependent; we will focus the discussion on the local environment on
+<TT>ragnar</TT>.  
+To illustrate this we provide a simple function which calls <TT>select</TT>
+in order to compute a sample quantile.
+<P>
+<PRE></PRE>
+<P>
+&quot;kuantile&quot;&lt;-
+function(x, p = 0.5, mmax = 600, cs = 0.5, cd = 0.5)
+{
+    if(!is.loaded(symbol.For(&quot;kuantile&quot;)))
+        dyn.load(&quot;src/rqfn/fn.o&quot;)
+    n &lt;- length(x)
+    if(p &lt; 0 | p &gt; 1)
+        stop(&quot;p outside [0,1]&quot;)
+    z &lt;- .Fortran(&quot;kuantile&quot;,
+        as.integer(n),
+        as.double(x),
+        p = as.double(p),
+        q = double(1),
+        as.integer(mmax),
+        as.double(cs),
+        as.double(cs))
+    return(z$q)
+}
+<P>
+This function calls the following ratfor function 
+<PRE></PRE>
+<P>
+#function to compute pth quantile of a sample of n observations
+subroutine kuantile(n,x,p,q,mmax,cs,cd)
+integer n,k,l,r,mmax
+double precision  x(n),p,q,cs,cd
+if(p&lt;0 | p&gt;1) {call dblepr(&quot;sparsity bandwidth problem: p=&quot;,30,p,1);return}
+l=1
+r=n
+k=nint(p*n)
+call select(n,x,l,r,k,mmax,cs,cd)
+q=x(k)
+return
+end
+<P>
+which in turns calls <TT>select</TT>. 
+Note that the calling sequence requires the character name of the function 
+to be the first argument, 
+the remaining arguments are just as they appear in the <font size=-1><small>FORTRAN</small></font>.
+Debugging often requires us to print intermediate results from the <font size=-1><small>FORTRAN</small></font>, 
+this is somewhat idiosyncratic in current versions of <font size=-1><small>SPLUS</small></font>, but can be 
+accomplished with the calls
+<BLOCKQUOTE> <TT>call intpr (&quot;name&quot;,4,ivar,n)</TT> <BR> 
+<TT>call realpr (&quot;rname&quot;,5,rvar,p)</TT><BR> 
+<TT>call dblepr (&quot;dname&quot;,5,dvar,p)</TT>
+</BLOCKQUOTE>
+where the character string provides an identifying label, and the final 
+integer argument specifies the number of elements of the variable we desire to 
+print.  See the ratfor code above for an example of the use of these calls.
+<P>
+In situations in which there are only one or two subroutines required for 
+a <font size=-1><small>FORTRAN</small></font> function we may produce an object module corresponding to the source 
+file <TT>f.r</TT> by invoking the command
+<BLOCKQUOTE> <TT>f77 -c f.r</TT>
+</BLOCKQUOTE>
+This produces a file <TT>f.o</TT> which can be, in most Unix systems at least, 
+dynamically loaded into <font size=-1><small>SPLUS</small></font> with the command
+<BLOCKQUOTE> <TT>dyn.load (&quot;f.o&quot;)</TT>
+</BLOCKQUOTE>
+<P>
+In more complicated situations with many subroutines it is convenient
+to have a makefile to automate the compilation process.  Now we  illustrate
+the makefile for the function <TT>rqn</TT> which underlies the <TT>rqfn</TT>  and 
+<TT>RQFN</TT> functions mentioned above.  
+<PRE></PRE>
+<P>
+#This is a Makefile for the new frisch-newton RQ routine
+#The compile flags are intended to optimize for ragnar
+CFLAGS = -c -xarch=v8 -xchip=super2 -O4
+LFLAGS = -r -dn /usr/local/SUNWspro/SC4.0/lib/v8/libsunperf.a
+<P>
+fn.o: fnc.o glob.o sparsity.o
+	ld fnc.o glob.o sparsity.o (<I>LFLAGS</I>) -<I>o fn</I>.<I>o</I>
+<I>fnc</I>.<I>o</I>: <I>fnc</I>.<I>r</I>
+	<I>f</I>77 (CFLAGS) fnc.r
+glob.o: glob.r
+	f77 (<I>CFLAGS</I>) <I>glob</I>.<I>r</I>
+<I>sparsity</I>.<I>o</I>: <I>sparsity</I>.<I>r</I>
+	<I>f</I>77 (CFLAGS) sparsity.r
+clean:
+	rm fnc.o fn.o
+<P>
+Invoking <TT>make</TT> induces an evaluation of what elements of the code 
+require recomplilation, and in the load step of the present example links several 
+<TT>.o</TT> files together into one dynamically loadable module.
+<P>
+Note also in this makefile that the flags for the compile step are chosen 
+to optimize performance for the Sparc 20 architecture of <TT>ragnar</TT>.  In the 
+load step the library <TT>libsunperf.a</TT>  
+is referenced, enabling access to a broad array of linear
+algebra routines from LAPACK and elsewhere which are again tuned 
+for good performance on the Sparc 20.
+See the files in the <TT>ragnar</TT> directory <TT>/usr/local/SUNWspro/READMEs</TT> 
+for further details on this library.
+<P>
+The use of the library is an excuse to emphasize the obvious, 
+but often overlooked, 
+fact that it is always desirable to seek out and use well-established library 
+routines rather than risk reinventing them yourself.  This is particularly true of 
+basic linear algebra subroutines which have reached an extremely refined state of 
+development in the <TT>BLAS</TT> provided by <TT>LAPACK</TT>.
+<P>
+<HR><A NAME="tex2html50" HREF="node5.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html48" HREF="node3.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html44" HREF="node3.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html51" HREF="node5.html">Graphics</A>
+<B>Up:</B> <A NAME="tex2html49" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<B> Previous:</B> <A NAME="tex2html45" HREF="node3.html">Linking FORTRAN to SPLUS</A>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

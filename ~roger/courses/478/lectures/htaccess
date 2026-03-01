@@ -1,0 +1,4 @@
+deny from all
+allow from .uiuc.edu 
+AuthType Basic
+

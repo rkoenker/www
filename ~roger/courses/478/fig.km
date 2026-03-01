@@ -1,0 +1,15 @@
+#some data analysis for meyer data for 472
+#d_data.frame(read.table(data,header=T))
+#library(survival,first=T)
+attach(d)
+
+#cox survival curves 
+ben2_ben^2
+z_coxph(Surv(dur,cens) ~ ben+ben2+wage)
+postscript("km.ps",horizontal=F,width=5.5,height=4.5,
+                        font=7,pointsize=12)
+plot(survfit(Surv(dur,cens)~strata(ben>log(100))),lty=1:2)
+legend(20,.8,c("low","high"),lty=1:2)
+frame()
+
+

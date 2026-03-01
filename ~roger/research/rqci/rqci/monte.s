@@ -1,0 +1,11 @@
+#Monte-carlo outer loop
+dyn.load("boot.o")
+aa.1.1_monte(n=50,dfx=1,dfy=1)
+#a.1.3_monte(n=50,dfx=1,dfy=3)
+#a.1.8_monte(n=50,dfx=1,dfy=8)
+#a.3.1_monte(n=50,dfx=3,dfy=1)
+aa.3.3_monte(n=50,dfx=3,dfy=3)
+#a.3.8_monte(n=50,dfx=3,dfy=8)
+#a.8.1_monte(n=50,dfx=8,dfy=1)
+#a.8.3_monte(n=50,dfx=8,dfy=3)
+aa.8.8_monte(n=50,dfx=8,dfy=8)

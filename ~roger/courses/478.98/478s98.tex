@@ -1,0 +1,171 @@
+\input{preamble}
+\begin{document}
+\bibliographystyle{econometrica}
+
+
+\noindent
+University of Illinois \hfill Department of Economics \\
+Spring 1998 \hfill Roger Koenker
+\begin{center}
+\large{
+{ Economics 478 \\
+{\bf Topics in Semiparametric Econometrics}}}
+\end{center}
+
+\vspace{3mm}
+This course is a research seminar in semiparametric methods in
+econometrics.  The objective of the course from a student viewpoint
+should be to write a research paper of potentially publishable quality,
+either as an exploratory venture directed toward finding a thesis topic,
+or as an opportunity to explore a new area in some depth just for the
+fun of it.
+
+The course will be organized as an informal seminar.  
+There will be no text 
+{\em per se}, but there will be a considerable range of readings from the 
+current literature.  
+There will be no exams only a required term paper,
+and there will be periodic student presentations of course material.
+The topics covered in the course can be tailored somewhat to student
+demand.  There are a few topics in which I have a current research interest,
+and for which I think there might be some scope for constructive interaction 
+in a course of this type.  I will try to encourage toward these topics
+in an effort to increase effective collaboration among students in the
+course.  Not surprisingly, many of these topics have some connection
+to quantile regression, although in some cases this connection is rather
+speculative.
+
+In the first class I will try to describe and motivate the topics I have
+identified and provide some basic bibliography.
+
+In the second week I would like to get down to business by discussing
+a group of recent papers on estimating treatment effects.  This is a
+topic on which there is considerable recent activity by both econometricians
+and statisticians and I believe that it is worthwhile for the entire class
+to take a close look at a few of these papers.  I have prepared a xeroxed
+collection of papers which will be distributed through Up Close, 
+one of the campus copy centers.  
+
+In the third week I would like to reconsider some classical readings on
+instrumental variable methods focusing on the connection between LIML
+canonical correlation and some related eigenvalue problems.  The objective
+will be to begin to forge a link between the treatment effect discussion
+of the previous week and this older literature which would eventually
+result in a more refined approach to IV methods for quantile regression.
+
+In the fourth week I will discuss some recent developments on numerical
+methods for quantile regression, and raise some questions about my
+ongoing project to revise the software distribution for Splus for
+quantile regression.  This discussion is likely to focus on extensions
+of existing methods for inference.
+
+In subsequent weeks there will be a sequence of mini-lectures by students
+to report progress on their research.  Since the scope for these
+presentations will be rather severely constrained by the size of the
+class, I am investigating schemes which would enable students to ``present''
+research results on lab web pages.  This would enable us to share bibliography,
+software and other materials in an efficient and timely manner.  I hope
+to provide some tutorial material on this in the first weeks of class.
+to provide some tutorial material on this in the first weeks of class.
+Some basic material related to the course, including this document, is
+available on the web at
+{\tt http://www.econ.uiuc.edu/~roger/courses/478/478.html}.
+There will also be an expanded version of the bibliography 
+which appears below which will
+be available on the web.  One of the byproducts of the course
+will be an expanded version of this bibliography. 
+
+
+
+
+I would strongly recommend that you to begin to 
+learn \LaTeX and Splus as part of
+the research process. Some (hopefully helpful) hints on this are
+available in my paper ``Reproducible Econometrics'' which I will distribute
+in class.  
+The book by \cite{VR:1997}  is highly recommended
+for Splus.  \cite{Lamp:1994} is the definitive introduction to \LaTeX.
+
+
+
+\begin{enumerate}
+
+\item {\bf Endogoneity, Sample Selection, and Treatment Effects}
+
+There is a strongly revived interest in the statistical fundementals
+of estimating treatment effect models in observational and experimental
+studies exemplified by recent work by 
+\cite{air:1996,aai:1997,heckman:1996,ai:1994,Manski:1997}.
+This will be our first topic and I think that it will provide a useful
+fresh look at the basic idea of instrumental variables
+which is one of the few, really original, ideas in econometrics.
+After reading some of these new papers, I would like to take a week
+to revisit some of the classical literature on IV's, LIML and related
+topics from the 1950's.  This literature will, I hope, lead us into
+a deeper consideration of how to apply these ideas to the next topic.
+
+
+\item{\bf Open Problems in Quantile Regression}
+
+I would like to devote some time to what I regard as important open research
+problems in quantile regression.  These might include some of the following:
+
+\begin{itemize}
+\item Computational methods for quantile regression 
+\cite{PK.1997,K.1997,P.1997,F.1997,KP.96}
+\item  Panel data and random effects models 
+\cite{Chay,Twins,rock:1983,mark:horo:1995}
+\item Instrumental variable methods and l1 canonical correlation 
+\cite{Amem:82,P:83,amma.93,Twins}
+\item Influence robust quantile regression \cite{RH:97,HP:97,JWW:88}
+\item Recursive estimation in time-series, ARMA, GARCH, etc. 
+\cite{KZ.96,hols:1985,hols:1987,engl:hols:rupp:1988,rupp:1985}
+\item Binary Response Models with Heteroscedasticity and
+Manski's Maximum Score Estimator \cite{M.75,M.85,mt:86,horo}
+\item Multivariate quantiles and principal curves 
+\cite{Oja.83,NON,oja:niin:1985,niin:oja:tabl:1990,niin:oja:1995,CC,Chak,Chd.96,Liu,RS,Small:1990,Small,kolt,hast:stue:1989}
+\item Rank based inference and related bootstrapping methods 
+\cite{K.94,K.96,B.94,Bu.95,Hahn,GJ.92,GJKP.94,horo:97,parz:wei:ying:1994,Fitz.96,G.94,KM.98}
+\end{itemize}
+
+\item{\bf Comparison of Density and Nonparametric Regression Methods}
+
+The time seems right for another look at the pros and cons of various
+nonparametric methods currently available in the literature.  In
+particular, I would like to compare current kernel methods with the
+sieve-like methods of the \cite{FG:1996,GT:1997} SNP approach and the
+log-spline methods of \cite{SHKT} and others.  There are some interesting
+current applications to options pricing which might be an interesting
+case study here.
+
+
+\item {\bf Ecological Regression and Spatial Statistics}
+
+There is an interesting new book by a political scientist \cite{King}
+on the ecological regression fallacy which draws interesting
+parallels to current work on the statistical theory of image
+processing and tomography, and is also connected to current advances
+in spatial statistics, see for example \cite{Small}.
+There are interesting connections to density estimation, nonparametric
+quantile regression and other topics which are suggested by these
+developments.
+
+\item {\bf Average Derivative Estimation, Single Indices, 
+and the Transformation Model}
+
+There is still considerable scope for drawing together methods for
+estimating transformation models using a variety of techniques 
+closely associated with some of the topics listed above.  Here
+there are also deeper theoretical issues relating to adaptive estimation.
+Single index models have a large literature in econometrics, see e.g.
+\cite{Stoker,cds:1997} 
+Survival analysis is an important application in this context,
+as is the connection to discrete choice models.
+There are also interesting connections to rank statistics, see 
+\cite{Han:1987,G:1997}.
+
+\end{enumerate}
+
+
+\bibliography{478s98}
+\end{document}

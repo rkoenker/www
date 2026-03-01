@@ -1,0 +1,115 @@
+<title> Reproducibility</title>
+<html>
+<body background="home-back.jpeg">
+<h1>Reproducibility in Econometrics Research</h1>
+<br>
+<br>
+<p>
+This page is an attempt to encourage a dialogue about reproducibility in
+econometric research.  Like the weather, reproducibility of research is
+a topic of frequent discussion, but little action.  Experience suggests
+that mandates by journals and the NSF notwithstanding, research in both
+econometric theory and applications remains difficult to reproduce.  This
+is particularly true for students or new Ph.ds in the field who, quite
+properly, are reluctant to approach senior colleagues about "filling
+in the gory details" of what they may have done a decade ago.
+
+<p>
+An entertaining case study in reproducibilty is the recent paper by Brian
+Kernighan and others about recreating a early Bell Labs memo on computer
+typesetting:  <a href="http://www.eprg.org/papers/202paper.pdf">archaeology.</a>.
+I particularly liked the comment: 
+"But computer archaeology has its problems. To paraphrase George Santayana, 
+'Those who do not archive the past are condemned to recreate it.'”
+
+A recent experience of mine illustrates this point.  Since the late 1970's
+I've used the preprocessor ratfor written by Brian Kernighan at Bell Labs as a way to bypass
+the nastier aspects of Fortran while avoiding the pain and suffering of learning
+C and its derivatives.  The downside of this laziness is that periodically when
+ratfor is again needed I had to scurry around and find a version for whatever
+new hardware/software I currently had.  By 2020 this was proving to be quite
+difficult; it is not that there aren't various versions floating around the
+internet, there are quite a few, even ones that are adapted to f90.  However
+finding a version that installed easily proved difficult.  Eventually I came
+upon a version for the classical f77 that is being maintained by Brian Gaeke
+to whom I am eternally grateful.  For future reference and the benefit of 
+other lost souls I'm providing a link to a tar.gz image 
+<a href="research/repro/ratfor-1.05.tar.gz">here.</a>
+A copy of the original "manual" for ratfor by Brian Kernighan is also made
+available <a href="research/repro/ratfor.pdf">here.</a>  It is a model of
+the art of documentation -- everything you need to know in 10 pages!
+
+<p>
+A related issue is reproducibility in mathematics.  This might seem to be 
+more straightforward:  one just needs to read the proofs and decide whether
+they hold together.  However there are often gaps that memory fails to fill,
+and references that are overlooked.  I've written a 2 page tutorial on how
+to write mathematics intended for graduate students in econometrics.  It is
+somewhat idiosyncratic in that it advocates a somewhat more modular approach
+that mimics structured programming for software.  The note is available
+<a href="research/repro/lemmas.pdf">here.</a>
+
+
+<p>
+Central archives for data and programs have not met with widespread acceptance
+in econometrics.  There is no archive in econometrics which plays the
+important role that <a href="http://lib.stat.cmu.edu">statlib</a> used to
+play in statistics.  But no central archive can ever
+serve the full function required of providing complete details of published
+work in a transparent form, easily accessible by a worldwide audience.  If
+this is to be realized, it seems it must happen in a decentralized manner.
+Individual researchers must be convinced that it is in their own interest
+to provide details as part of the effort to encourage the dissemination
+of their ideas.  Of (mostly historical interest there is an early draft of
+a note on reproducible research available
+<a href="research/repro/repro.pdf">here.</a>
+
+<p>
+There are many impediments, not the least of which is the "Tower of Babel"
+of econometric software.  But this should not prevent us from making a start.
+In this spirit we suggest adopting the following general principles taken from
+recent work by <a href="http://playfair.stanford.edu/~donoho">David Donoho:</a>
+<br> 
+<br> 
+<img src="gifs/red.gif"> <b>
+All the code underlying figures and tables is made available
+</b>
+<br> 
+<img src="gifs/red.gif"> <b>
+Together with the underlying software environment necessary to execute
+that code
+</b>
+<br> 
+<img src="gifs/red.gif"> <b>
+Together with documentation of both the tools and environment
+</b>
+<br> 
+<img src="gifs/red.gif"> <b>
+Using standard internet methods (ftp, www) for anonymous access.
+</b>
+<br> 
+<br> 
+A new review essay on the subject written with Achim Zeileis is available
+from <a href="research/repro">here.</a>
+Some notes along similar lines are available in
+<a href="research/repro/protocol.pdf">Protocol for Simulations in R.</a>
+These notes include some suggestions for using R on our clusters.
+A file used as an example in this document can be downloaded from this
+page as <a href="research/repro/plink.R">plink.R.</a>
+<p>
+<p>
+I would very much like to have comments on all of this, 
+I would particularly like to encourage others to suggest other
+www links which provide other examples of this sort.  We
+would also welcome comments on further elucidation of the principles
+proposed above and ways to make them more operational.
+
+<p>
+Last Revised on November 2020 by Roger Koenker
+<p>
+<img src="gifs/envelope.gif"> <a href="mailto:roger@ysidro.econ.uiuc.edu">
+roger@ysidro.econ.uiuc.edu</a>
+<p>
+</body>
+</html>
+

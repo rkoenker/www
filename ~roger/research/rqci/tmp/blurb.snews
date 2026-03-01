@@ -1,0 +1,44 @@
+I have submitted a revision of my quantile regression software for S(+)
+to Statlib.  It may now be obtained by sending the message:
+
+	send quantreg from S
+
+to statlib@stat.cmu.edu.  The new version contains several new functions
+which implement new forms of rank tests  for the linear model 
+based on dual quantile regression process and are described in:
+
+[1] Gutenbrunner, C. Jureckova, J. (1991). 
+Regression quantile and regression rank score process in the 
+linear model and derived statistics, Annals of Statistics, 20, 305-330.
+
+[2] Gutenbrunner, C. Jureckova, J.  Koenker, R. and Portnoy, S. (1993). 
+Tests of Linear Hypotheses  based on Regression Rank Scores,
+Journal of Nonparametric Statistics,  2, 307-331.
+
+
+The algorithm, like the original quantreg submission is based on a
+modification of the Barrodale and Roberts l_1 regression algorithm
+for details see:
+
+[3] Koenker, R.W. and d'Orey (1994).  Remark on Alg. AS 229: Computing Dual
+Regression Quantiles and Regression Rank Scores, Applied Statistics, 43, 410-414
+
+Finally, inverting one of the  rank tests yields an interesting new way
+to compute confidence intervals for quantile regression.  This is
+described in:
+
+[4] Koenker, R.W. (1994). Confidence Intervals for Regression Quantiles, in
+P. Mandl and M. Huskova (eds.), Asymptotic Statistics, 349-359, Springer-Verlag,
+New York.
+
+The functions in quantreg do not incorporate recent work on computing
+quantile smoothing splines or nonlinear quantile regression estimation,
+but I hope statlib version of these functions will follow shortly.
+
+Comments on any aspect of this submission are most welcome.
+
+
+						Roger Koenker	
+roger@ysidro.econ.uiuc.edu			Department of Economics
+voice: 217-333-4558				University of Illinois
+fax:   217-244-6678				Champaign, IL 61820

@@ -1,0 +1,57 @@
+---
+output: html_document
+---
+#An Amusing Problem [^*] 
+
+[^*]:Version:  `r format(Sys.time(),  "%b %d %Y")`.    Transcript of a fragment of class notes taken  by Stephen Portnoy from a course given, circa 1967, at Stanford by Charles Stein.}
+
+
+We observe [a single observation!] $X \sim \mathcal{N} (\xi, \sigma^2)$, with both
+$\xi$ and $\sigma$ unknown.  Construct a confidence set for $\xi$, i.e.
+
+$$
+\mathbb{P}_{\xi , \sigma} \{ \xi \in (\underline{\xi}(X)
+  , \bar \xi (X) \} \geq 1 - \alpha,
+$$
+
+for all $(\xi , \sigma)$, with $\bar \xi (X) = c |X|$, and
+$\underline{\xi}(X) = -c |X|$, for $c > 0$.
+
+Let $X = \xi + \sigma Y$, then
+
+$$
+\begin{align*}
+\mathbb{P} \{ |\xi| < c|X| \} &= \mathbb{P} \{ |\xi| < c|\xi + \sigma Y| \}\\
+&= \mathbb{P} \{ |\xi|/\sigma < c|\xi/\sigma +  Y| \}
+\end{align*}
+$$
+
+so by symmetry,
+
+$$
+\begin{align*}
+\inf_{\lambda \geq 0} \mathbb{P} \{ |\xi| < c|X| \} 
+	&= \inf_{\lambda \geq 0} \mathbb{P} \{ \lambda < c|\lambda + Y| \}\\
+	&= \inf_{\lambda \geq 0} [\mathbb{P} \{ Y > - \lambda,  \lambda < c \lambda + Y \}
+	+ \mathbb{P} \{ Y < - \lambda,  \lambda < -c (\lambda + Y) \}]\\
+	&= \inf_{\lambda \geq 0} [\mathbb{P} \{ Y > - \lambda,  Y < \lambda/c - \lambda \}
+	+ \mathbb{P} \{ Y < - \lambda,  Y < - \frac{1+c}{c} \lambda \}]\\
+	&= \inf_{\lambda \geq 0} [\mathbb{P} \{ Y > \lambda/c - \lambda \}
+	+ \mathbb{P} \{ Y < - \lambda - \lambda/c \}]
+\end{align*}
+$$
+
+This is the probability  of the complement of the interval of length
+$2\lambda/c$, centered at $-\lambda$.  [Now optimize, over $\lambda$ 
+for each $c$, and then find $c$ to achieve level $\alpha$.  Using the
+R function `Findc` below one obtains $c_{0.05}  \approx 9.68$.]
+
+```{r, eval=FALSE}
+Findc <- function(alpha){
+    U <- function(c, a) {
+       coverage <- function(z,c) 1 - pnorm(-z + z/c) + pnorm(-z - z/c)
+       optimize(coverage, c(0,5), c = c)$obj - (1 - a)
+       }
+    uniroot(U, c(1, 20), a = alpha)$root
+}
+```

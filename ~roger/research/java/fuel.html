@@ -1,0 +1,17 @@
+<HTML><HEAD><TITLE>Scatterplot of fuel.frame</TITLE></HEAD><BODY>
+<APPLET code="spjgraph.class" archive="spjgraph.jar" WIDTH=600 HEIGHT=400>
+   <PARAM NAME=spjgraph.filename VALUE=fuel.spj>
+</APPLET>
+<BR><BR>&nbsp;
+<p>
+Here is the S-PLUS code used to make this graph:
+<p>
+<pre>
+plot(fuel.frame[["Weight"]],fuel.frame[["Fuel"]])
+java.identify(fuel.frame[["Weight"]],
+	      fuel.frame[["Fuel"]],
+	      labels=dimnames(fuel.frame)[[1]])
+title("Move mouse over a point to see the element name")
+</pre>
+</BODY></HTML>
+

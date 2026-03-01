@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+            
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>R, MySQL, LM and quantreg</title>
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#0000ff" alink="#000088" vlink="#ff0000">
+<table cellpadding="2" cellspacing="2" border="0" width="75%" align="Center">
+  <tbody>
+    <tr valign="Top">
+      <td valign="Top">                                    
+      <div align="Center"><b>The <a href="http://www.r-project.org">R</a>
+ Language and <a href="#MySQL">MySQL</a></b><br>
+      <br>
+Statistical Analysis of 10<sup>n</sup> x p Datasets<br>
+      <br>
+      <a href="#Least_Squares">      Least Squares</a><br>
+      <a href="#Quantile_Regression"> Quantile Regression</a><br>
+      <br>
+      </div>
+      </td>
+    </tr>
+    <tr valign="Top">
+      <td valign="Top"><a name="MySQL"></a><b>MySQL</b><br>
+      <br>
+In order to use our package(s), you need to have access to a MySQL server,
+either locally or remotely. <br>
+      <br>
+MySQL is a Relational DataBase Management System (RDBMS) available at <a href="http://www.mysql.com">
+http://www.mysql.com</a>, free of charge under the conditions described in
+the site.<br>
+      <br>
+If you need to setup your own MySQL server, please refer to the <a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Installing.html#Installing">
+instructions</a> provided by MySQL. The manual is quite thorough and we encourage
+you to read at least the <a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Privilege_system.html#Privilege_system">
+security tips</a>.<br>
+      <br>
+devshed.com has several references. An introduction to MySQL Administration
+is given <a href="http://www.devshed.com/Server_Side/MySQL/Administration/">
+here</a> and first principles can be found <a href="http://www.devshed.com/Server_Side/MySQL/Intro/">
+here</a>.<br>
+      <br>
+If you have privilegies to create a table under a particular database, then
+you may find useful the next example. We created a table named jepnat with
+the following fields (variables): ID, birmon, weight, boy, momage. The fields
+of statistical interest are birmon (month of birth), weight (in grams), boy
+(indicator) and momage (mom's age). ID is an identification field to which
+we assign a PRIMARY KEY. (The text in bold red represents the MySQL prompt;
+our input is in black).<b><br>
+      <br>
+ <font color="#ff6666">mysql&gt;</font></b> CREATE TABLE jepnat(<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> ID INT NOT NULL AUTO_INCREMENT,<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> birmon smallint unsigned
+not null,<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> weight float notnull,<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> boy tinyint unsigned
+not null,<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> momage float notnull,<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> PRIMARY KEY (ID));<br>
+      <b><font color="#ff6666">Query OK, 0 rows affected (0.00 sec)</font></b><br>
+      <br>
+Although we defined the fields (e.g. birmon) and their characteristics (e.g.,
+smallint, float, tinyint, not null), our table is still empty, we need to
+load the (ascii) data into the server:<br>
+      <br>
+      <b><font color="#ff6666">mysql&gt;</font></b> LOAD DATA LOCAL INFILE
+"~/projects/sql-r/births.txt"<br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> INTO TABLE jepnat
+FIELDS TERMINATED BY ' ' <br>
+ &nbsp;&nbsp; <b><font color="#ff6666">-&gt;</font></b> (birmon, weight,boy,
+momage);<br>
+      <b><font color="#ff6666">Query OK, 2376497 rows affected (3 min 41.31
+sec)<br>
+Records: 2376497&nbsp; Deleted: 0&nbsp; Skipped: 0&nbsp; Warnings: 0<br>
+      </font></b><br>
+Notice how we omitted the field ID from our LOAD statement; ID is automatically
+created (and incremented).<br>
+      <br>
+                  
+      <hr align="Center" width="80%" size="2">      </td>
+    </tr>
+    <tr valign="Top">
+      <td valign="Top"><a name="Least_Squares"></a><b>Least Squares</b><br>
+      <br>
+A dataset with 2,000,000 observations per 18 variables loaded into R requires
+over 275MB of RAM. Furthermore, any statistically procedure, for example,
+least squares will further increase the memory requirements to values not
+available to the vast majority of R users (128MB is standard). <br>
+      <br>
+With that in mind, we developed a package, <b>LM</b>, to compute least squares
+with extremely large datasets, while maintaining memory requirements at low
+(common) levels. The principles of our package are:<br>
+      <br>
+                              
+      <blockquote>1) Keep the data in the MySQL server;<br>
+2) <code>While (n &lt; N)<br>
+{ &nbsp;&nbsp; &nbsp;         </code>                        
+        <blockquote><code>fetch a % of the N rows, say, nper rows.<br>
+compute x'x and x'y<br>
+X'X = X'X + x'x<br>
+X'Y = X'Y + x'y<br>
+n = n + nper &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </code></blockquote>
+          <code>}</code><br>
+          </blockquote>
+                                                  
+          <blockquote>3) Upon fetching all <code>N</code> observations estimate
+the coefficients and statistics of relevance.<br>
+            </blockquote>
+Here's a synopsis of the example included in the documentation of LM:<br>
+            <br>
+            <small>&gt; library(LM)</small><small><br>
+            </small><small>&gt; m &lt;-&nbsp; MySQL()</small><small><br>
+            </small><small>&gt; mycon &lt;- dbConnect(m, user='%', dbname="LM",
+            </small><small><br>
+            </small><small>+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+host="galton.econ.uiuc.edu")</small><small><br>
+&gt; rs &lt;- dbExecStatement( mycon, "SELECT * FROM LMData WHERE <br>
++ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ID &lt; 501" )</small><br>
+            <small>&gt; summary(LM( weight ~ momage + boy, data=rs, conn=mycon,<br>
+ + &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NumStdErr=TRUE ))</small><br>
+            <br>
+            <small>Call:</small><small><br>
+            </small><small>LM(formula = weight ~ momage + boy, data = rs,
+NumStdErr = TRUE, </small><small><br>
+            </small><small> &nbsp;&nbsp; conn = mycon)</small><small><br>
+            </small><small><br>
+            </small><small>Residuals:</small><small><br>
+            </small><small> &nbsp; &nbsp; &nbsp; &nbsp; Min &nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; 1Q &nbsp; Median &nbsp; &nbsp; &nbsp; 3Q &nbsp;&nbsp;&nbsp;
+&nbsp; Max </small><small><br>
+            </small><small>-2766.41&nbsp; -314.82 &nbsp;&nbsp; &nbsp; 45.06
+&nbsp; 350.15&nbsp; 1265.74 </small><small><br>
+            </small><small><br>
+            </small><small>Coefficients:</small><small><br>
+            </small><small> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; Estimate&nbsp; Std. Error&nbsp; t value &nbsp; Pr(&gt;|t|)</small><small><br>
+            </small><small>(Intercept) 2947.916 &nbsp;&nbsp; 123.967&nbsp;
+23.780&nbsp; &lt;2e-16</small><small><br>
+            </small><small>momage &nbsp; &nbsp; &nbsp; 11.121 &nbsp; &nbsp;
+&nbsp; 4.411 &nbsp;&nbsp; 2.521 &nbsp;&nbsp; 0.0120</small><small><br>
+            </small><small>boy &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 119.983
+&nbsp;&nbsp; &nbsp; 50.519 &nbsp;&nbsp; 2.375 &nbsp;&nbsp; 0.0179</small><small><br>
+            </small><small><br>
+            </small><small>Residual standard error: 563.2 on 497 degreesof
+freedom</small><small><br>
+            </small><small>Multiple R-Squared: 0.0248, &nbsp; &nbsp; Adjusted
+R-squared: 0.02088 </small><small><br>
+            </small><small>F-statistic: 6.321 on 2 and 497 degrees of freedom,
+&nbsp; &nbsp; p-value: 0.001947 </small><small><br>
+            </small><small><br>
+            </small>                                    
+            <hr align="Center" width="80%" size="2"><br>
+            <b>Download Area:</b><br>
+            <br>
+            <b> </b><a href="http://www.econ.uiuc.edu/~anovo/LM_0.1-0.tar.gz">
+LM - Version 0.1-0</a><br>
+And the also the required <a href="http://cran.r-project.org/src/contrib/Devel/RMySQL_0.2-3.tar.gz">
+RMySQL</a> package.<br>
+            <br>
+                                    
+            <hr align="Center" width="80%" size="2"><br>
+            </td>
+          </tr>
+          <tr valign="Top">
+            <td valign="Top"><a name="Quantile_Regression"></a><b>Quantile
+Regression</b><br>
+            <br>
+This section is still under alpha development. Please check back periodically.<br>
+            <br>
+                                    
+            <hr align="Center" width="80%" size="2"><br>
+            <br>
+            <small><small>Page created by <a href="mailto:anovo@linuxfan.com">
+Alvaro A. Novo</a>, Dec. 25, 2000</small></small><small><small><br>
+            </small></small><small><small>Updated by __ , __ </small></small><br>
+            </td>
+          </tr>
+                                          
+        </tbody>                              
+      </table>
+                              
+      </body>
+      </html>

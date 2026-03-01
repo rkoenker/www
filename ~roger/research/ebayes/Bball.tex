@@ -1,0 +1,1380 @@
+%        File: Bball.tex
+%     Created: Tue May 29 03:00 PM 2012 C
+% Last Change: Tue May 29 03:00 PM 2012 C
+%
+\documentclass[12pt]{amsart}
+\usepackage{latexsym,amssymb}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{harvard}
+\usepackage{eulervm}
+\usepackage{epsfig,subfigure}
+\usepackage{color}
+
+\setlength{\textheight}{205mm}
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{10mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textwidth}{6in}
+\def\RR{\mathbb{R}}
+\def\EB{\mathbb{E}}
+\def\VB{\mathbb{V}}
+\def\OO{\mathcal O}
+\def\DD{\mathcal D}
+\def\BB{\mathcal B}
+\def\PP{\mathbb{P}}
+\def\LL{\mathcal L}
+\def\II{\mathcal I}
+\def\EE{\mathcal E}
+\def\FF{\mathcal F}
+\def\NN{\mathcal N}
+\def\XX{\mathcal X}
+\def\SS{\mathcal S}
+\def\GG{\mathcal G}
+\def\CC{\mathcal C}
+\def\AA{\mathcal A}
+\def\TT{\mathcal T}
+\def\HH{\mathcal H}
+\def\JJ{\mathcal J}
+\def\KK{\mathcal K}
+\def\PP{\mathbb{P}}
+\def\LL{\mathcal L}
+\def\II{\mathcal I}
+
+\def\Polya{P\'olya }
+\def\Renyi{R\'enyi }
+\def\diag{\mbox{diag}}
+\def\TV{\bigvee_\Omega }
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\renewcommand{\abstractname}{Abstract}
+\def\argmax{\text{argmax}}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\renewenvironment{proof}{\noindent {\bf Proof.\ }}{\hfill{\rule{2mm}{2mm}}}
+\renewenvironment{remark}{\noindent {\bf Remark.\ }} {\hfill{ \rule{2mm}{2mm}}}
+\renewenvironment{example}{\noindent {\bf Example.\O}}
+
+
+\begin{document}
+\bibliographystyle{econometrica}
+\title{Unobserved Heterogeneity in Longitudinal Data: \\
+An Empirical Bayes Perspective}
+
+\author{Jiaying Gu}
+\author{Roger Koenker}
+\thanks{Preliminary Version:  \today .    This research was partially supported by NSF grant
+SES-11-53548.  All computational results of this paper can be reproduced with
+the R packages REBayes, \citeasnoun{REBayes},  and Rmosek, \citeasnoun{Rmosek}, 
+and code available from the authors on request.
+The Rmosek package provides a convenient R interface to the Mosek optimization
+language of \citeasnoun{mosek}.  We would like to express our appreciation to
+participants in the CeMMaP-UCL, Harvard-MIT, Georgetown, Rutgers, Cornell and 
+University of Maryland econometrics
+workshops for valuable comments while retaining full responsibility for all errors of
+omission and commission.}
+
+\begin{abstract}
+	Empirical Bayes methods for Gaussian and binomial compound decision problems
+	involving longitudinal data are considered.  A new convex optimization formulation of 
+	the nonparametric (Kiefer-Wolfowitz) maximum likelihood estimator for mixture models is used
+	to construct nonparametric Bayes rules for compound decisions.  The methods
+	are illustrated with some simulation examples as well as an application to
+	predicting baseball batting averages.  Comparisons with nonparametric Bayesian
+	methods based on Dirichlet process priors are also provided.
+\end{abstract}
+\maketitle
+\pagestyle{myheadings}
+\markboth{\sc Empirical Bayesball}{\sc Gu and Koenker}
+%\begin{quote}
+%	{\footnotesize{\it
+%	It is a truth universally acknowledged, that a statistician in
+%	possession of a good shrinkage estimator must be desirous of 
+%	predicting baseball batting averages. 
+%	
+%	\hspace{50mm} Jane (Yogi) Austen}}
+%	%It is a truth universally acknowledged, that a single man in 
+%	%possession of a good fortune, must be in want of a wife. (Jane Austen)
+%\end{quote}
+\section{Introduction}
+Unobserved heterogeneity has become a pervasive concern throughout applied econometrics.  
+%No where is this more true than in survival analysis where 
+%unobserved heterogeneity is often referred to as frailty.  
+Longitudinal data presents special opportunities and challenges for models of 
+unobserved heterogeneity; in virtually all econometric applications involving
+panel data there will be some form of latent, i.e. unobserved, individual specific
+effects.  Classical methods adopt either a differencing strategy designed to
+purge these effects, or some form of shrinkage method to mitigate their undesirable
+``incidental parameter'' effect.  In this paper we will describe some new 
+nonparametric empirical Bayes methods for estimation and
+prediction in panel data models with unobserved heterogeneity, and compare
+and contrast them with some existing nonparametric Bayesian proposals.
+
+As stressed in recent work of Efron (2010, 2011), empirical Bayes methods pioneered
+\nocite{Efron.10}
+\nocite{efron.11}
+by Robbins (1951, 1956) provide a statistical framework for many contemporary
+``big data''  applications.  Although they predate the development of hierarchical
+Bayes methods exemplified in the work of \citeasnoun{LS} and \citeasnoun{LC},
+they share many common features.  The transition from parametric to nonparametric
+empirical Bayes methods brings exciting new opportunities that greatly expand the
+flexibility of existing approaches to panel data modeling and its treatment of
+unobserved heterogeneity.
+
+We will begin with a brief review of some developments in empirical Bayes methods
+beginning with \citeasnoun{Robbins.51}, touching on the connections to Stein rule 
+methods and finally evolving into modern nonparametric mixture variants.  In
+Section 3 we extend the predominant Gaussian location mixture framework to accommodate
+nonparametric location {\it and scale} mixtures in the classical Gaussian panel
+data setting.  Section 4 presents some simulation evidence to illustrate the
+performance of the new methods, and Section 5 describes an extended application
+that illustrates both estimation and prediction aspects of the new methods including,
+notably, the introduction of covariate effects via profile likelihood methods.
+
+In sharp contrast to the classical Gaussian hierarchical Bayes framework for panel
+data, or its frequentist analogues, the nonparametric mixture formulation of our
+proposed methods offers a much more flexible view of unobserved heterogeneity
+while preserving most of the virtues of the likelihood formalism. 
+
+\section{Empirical Bayes:  A Brief Review}
+
+Given a simple parametric model, there is a natural temptation
+to complicate it by admitting that those immutable natural constants that
+constitute the model's original parameters might instead be random.  One of the
+earliest examples of this type is the classical Gaussian random effects,
+compound decision problem introduced by \citeasnoun{Robbins.51}.  We observe
+independent $Y_1, \cdots , Y_n$ each Gaussian with common variance, $\sigma^2$
+but individual specific means, $Y_i \sim \NN (\mu_i , \sigma^2)$.  Our 
+objective is to estimate all the $\mu_i$'s subject to squared error loss,
+\[
+\LL_2 (\hat \mu , \mu ) = \| \hat \mu - \mu \|_2^2 = 
+\sum_{i=1}^n (\hat \mu_i - \mu_i)^2.
+\]
+The naive (unbiased) solution would simply set $\hat \mu_i = Y_i$,
+but the usual presumption in such circumstances would be that the observations
+have some common genesis, and consequently we may be able to ``borrow
+strength''  from the full sample to improve upon these myopic predictions
+based on a single observation.
+
+Suppose we believed that the $\mu_i$ were drawn
+iid-ly from the distribution, $F$, so the $Y_i$'s would have convolution
+density $g(y) = \int \phi ((y - \mu)/\sigma)/\sigma dF(\mu)$:  What would
+the Reverend Bayes advise?  Elementary exponential family theory yields
+the following proposition.  
+%Appendix A contains a concise proof. 
+
+\begin{proposition}
+	For $Y_i \sim \NN(\mu_i , \sigma^2)$ and $\{ \mu_i \}$ iid $F$,
+	the Bayes rule under $\LL_2$ loss is:
+	\begin{equation}
+	\delta(y) = y + \sigma^2 g^\prime (y) / g(y)
+	\label{eq.Tweedie}
+	\end{equation}
+	and $\delta (y)$ is non-decreasing in $y$.
+\end{proposition}
+\citeasnoun{efron.11} refers to  \eqref{eq.Tweedie} as Tweedie's formula
+citing Robbins's (1956) \nocite{Robbins.56} attribution of it to M.C.K.
+Tweedie.  Of course one may well ask:  Where did this $F$ come from?  And
+this question leads us inevitably toward estimation of the density, $g$, and 
+hence to the empirical Bayes paradigm.  When $F$ comes from a finite 
+dimensional parametric family there are several prominent special cases.
+
+\subsection{Some Parametric Examples}
+\begin{enumerate}
+	\item Suppose $\sigma^2 = 1$ and we believed that the $\mu_i$'s were iid
+$\NN (0 , \sigma_0^2)$, so the $Y_i$'s are iid $\NN (0 , 1 + \sigma_0^2)$, 
+the Bayes rule would be,
+\[
+\delta (y) = \left ( 1 - \frac{1}{1 + \sigma_0^2} \right ) y.
+\]
+Thus, we shrink our naive estimates all toward zero.  When $\sigma_0^2$
+is unknown, $S = \sum Y_i^2 \sim (1 + \sigma_0^2) \chi_n^2$, and
+recalling that an inverse $\chi_n^2$ random variable has expectation,
+$(n-2)^{-1}$, we obtain the Stein rule in its simplest form:
+\[
+\hat \delta (y) = \left ( 1 - \frac{n-2}{S} \right ) y.
+\]
+\item When, slightly more generally, $\mu_i \sim \NN (\mu_0 , \sigma_0^2)$
+we shrink instead  toward the prior mean,
+\[
+\delta (y) = \mu_0 + \left ( 1 - \frac{1}{1 + \sigma_0^2} \right ) (y - \mu_0),
+\]
+and estimating the prior parameters costs us one degree of freedom, so
+we obtain the celebrated James-Stein estimator,
+\[
+\hat \delta (y) = \bar Y_n + \left ( 1 - \frac{n-3}{S} \right ) 
+(y - \bar Y_n),
+\]
+for $\bar Y_n = n^{-1} \sum Y_i$ and $S = \sum (Y_i - \bar Y_n)^2.$
+
+\item If each observation has its own {\it known} variance:
+$Y_i \sim \NN(\mu_i, \sigma_i^2)$ and $\mu_i \sim \NN(\mu_0 , \sigma_0^2)$,
+as might be plausible in the case that each $Y_i$ is from a different 
+measuring device each with known precision, or as in the ubiquitous baseball 
+batting average examples, as in \citeasnoun{brown.08} and \citeasnoun{JZ.10},
+in which binomial variances depend upon a known number of ``at bats'' in 
+the initial period.  In such cases we have the Bayes rule,
+\[
+\delta (y_i) 
+= \mu_0 + \left( 1 - \frac{\sigma_i^2}{\sigma_0^2 + \sigma_i^2} \right ) (y_i - \mu_0 )
+\]
+\item Further generalizing, we may wish to replace $\mu_0$ by a function of 
+observable covariates, say $z_i^\top \beta_0$. Then, as in
+\citeasnoun{JZ.10}, we obtain a positive-part James-Stein estimator,
+\[
+\hat \delta (y_i) = \left( 1 - 
+\frac{p-2}{\sum (z_i^\top \hat \beta/\sigma_i)^2} \right )_+ 
+z_i^\top \hat \beta + 
+\left (1 - \frac{n - p-2}{\sum (y_i - z_i^\top \hat \beta)^2/\sigma_i^2} \right )_+ 
+(y_i - z_i^\top \hat \beta)
+\]
+where $p$ denotes the dimension of $\beta$ and $(u)_+ = u I(u > 0)$.  
+
+\item Another important class of examples arises from the assumption  of sparsity,
+	that is, an assertion that most of the $\mu_i$ are probably zero.  \citeasnoun{JS}
+	consider a model in which,
+	\[
+	dF(\mu) = (1-w) \delta_0 (\mu) + w \varphi_\nu (\mu )
+	\]
+	where with probability $(1-w)$, $\mu = 0$, while with probability $w$
+	it is drawn from a density, $\varphi$, with scale parameter, $\nu$.
+	They compare performance of several hard and soft threshholding rules
+	in addition to empirical Bayes procedures that estimate the parameters
+	$w$ and $\nu$.  
+\end{enumerate}
+The simulation designs of \citeasnoun{JS} have served as a benchmark
+for several more recent studies of empirical Bayes methods including
+\citeasnoun{BG}, \citeasnoun{JZ}, and  \citeasnoun{KM},  all of which
+explore non-parametric estimation of the Gaussian mixture model.
+
+\subsection{Non-parametric Estimation of the Gaussian Mixture Model}
+When we lack confidence in a particular parametric specification of
+the mixing distribution, $F$, we are faced with a serious quandary.
+It is apparent that we need a non-parametric estimate of $F$, and in
+our Gaussian location mixture setting this is tantamount to solving
+a deconvolution problem.  Deconvolution is notoriously difficult as demonstrated
+by \citeasnoun{carrollhall.88} and \citeasnoun{fan.91}, but before we
+despair a second look at Tweedie's formula \eqref{eq.Tweedie} reveals
+that we don't really {\it need} an estimate of $F$, we need only estimate
+the mixture density $g$, a task that can be accomplished at standard univariate
+non-parametric convergence rates for smooth densities.  Smoothness is ensured
+by the Gaussian convolution whatever $F$ might be.
+
+Kernel density estimation as proposed by \citeasnoun{BG} seems to be the natural
+approach, but in addition to the familiar, but still unsettling, requirement 
+of selecting a bandwidth, the kernel estimator has the drawback that 
+it does not enforce the monotonicity of the Bayes rule.  The
+latter failing can be addressed by a further monotonization step, or by a
+penalization approach as suggested in \citeasnoun{KM}.  However, a more direct
+approach is possible via the Kiefer-Wolfowitz non-parametric maximum likelihood
+estimator.  This approach was first proposed by \citeasnoun{JZ} for the
+Gaussian compound decision problem, employing the EM algorithm as a computational
+strategy. 
+
+The EM algorithm has been the standard approach to computing the 
+Kiefer-Wolfowitz non-parametric MLE since it was originally suggested by 
+\citeasnoun{Laird}; \citeasnoun{HeckmanSinger}
+constitutes an influential econometric application.  However, EM has notoriously slow
+convergence in these applications, and this fact introduces what is, in effect, a
+new smoothing parameter into the computational strategy controlled by the stopping
+criterion of the algorithm.  \citeasnoun{KM}  have recently proposed an alternative
+computational method for the Kiefer-Wolfowitz MLE that circumvents these problems.  For
+a broad class of mixture problems, the Kiefer-Wolfowitz estimator can be formulated 
+as a convex optimization problem and solved efficiently by modern interior point methods.  
+
+In the next section we will describe how these methods can be extended 
+to longitudinal data, first for location and scale mixtures
+separately, then for location-scale mixtures and finally for location
+scale mixtures with covariate effects.  In contrast to compound 
+decision problems with cross sectional data, richer longitudinal data 
+offers new opportunities permitting more complex structure of  unobserved 
+heterogeneity. 
+
+\section{Estimating Gaussian Mixtures with Longitudinal Data}
+
+Extending the Gaussian compound decision problem with one location parameter per
+observation to unbalanced longitudinal observations in which we have $m_i$ 
+observations on each individual is straightforward.  Assuming for convenience
+that we have unit variance for the noise so $u_{it} \sim \NN(0,1)$, we have,
+\[
+y_{it} = \mu_i + u_{it}, \quad t = 1, \cdots , m_i, \quad i = 1, \cdots , n,
+\]
+but sufficiency reduces the problem to our third example with 
+$\hat \mu_i = m_i^{-1} \sum_{i=1}^{m_i} y_{it} \sim \NN (\mu_i , m_i^{-1} )$.
+When the $\mu_i$'s are iid from $F$, we can write the log likelihood of the
+observed $y_{it}$'s as,
+\[
+\ell (F | y ) = \sum_{i=1}^n \log ( \sqrt{m_i} \int 
+\phi( \sqrt{m_i} (\hat \mu_i - \mu)) dF(\mu)
+\]
+Optimizing over the infinite dimensional $F$ necessitates some form of discrete
+approximation.  As in earlier EM implementations, such as that of \citeasnoun{JZ},
+we take $F$ to have a piecewise constant (Lebesgue) density on a relatively fine
+grid containing the empirical support of the observed $\hat \mu_i$'s.  With
+a few hundred grid intervals we can obtain a quite accurate estimate.  Further
+refinement is always possible as discussed in \citeasnoun{KM}, but already with
+a uniform grid with 300 points we have very precise positioning of the mass points
+of the mixing distribution, more precise than the statistical accuracy of the mass
+locations would justify.  Letting $f_j :
+j = 1, \cdots , p$ denote the function values of $dF$ on this grid, we can express
+the constrained maximum likelihood problem as,
+\begin{equation}
+	\max_f \{ \sum_{i=1}^n \log (g_i) \; | \; g = A f , \; 
+	\sum_{j=1}^p f_j \Delta_j = 1, \; f \geq 0 \},
+	\label{eq.PL}
+\end{equation}
+where $A = (A_{ij} = ( \sqrt{m_i} \int \phi( \sqrt{m_i} (\hat \mu_i - \mu)))$ and
+$\Delta_j$ is the $j$th grid spacing.  As posed, the problem is evidently
+convex, and therefore has a unique solution.  It is well-known, going back to
+\citeasnoun{KW} and \citeasnoun{Laird}, that variational solutions to the
+original problem are discrete with fewer than $n$ atoms.  It is somewhat
+difficult to appreciate this result by viewing EM solutions, since the number
+of EM iterations required to obtain an accurate solution would test the patience
+of the most diligent researchers.  But interior point methods make this discreteness
+easily apparent.  Since the number of non-negligible $\hat f_i > 0$ obtained is
+typically much smaller than $n$, often only a handful of points, even in 
+large samples, this also guides our judgement regarding the adequacy of the original grid.
+Again, larger $n$ might justify a refinement of the grid at very modest increase in
+computational effort.
+
+The dual formulation of primal problem \eqref{eq.PL} has proven to be somewhat more 
+efficient from a computational viewpoint.  The dual can be expressed as
+\begin{equation}
+	\max_\nu \{ \sum_{i=1}^n \log (\nu_i) |  A^\top \nu \leq n 1_n, \nu \geq 0 \},
+	\label{eq.DL}
+\end{equation}
+see \citeasnoun{KM} for further details.
+
+
+
+
+\subsection{Estimating Gaussian Scale Mixtures}
+Gaussian scale mixtures can be estimated in much the same way that we have
+described for location mixtures.  Suppose we now observe,
+\[
+y_{it} = \sigma_i u_{it}, \quad t = 1, \cdots , m_i, \quad i= 1, \cdots , n
+\]
+with $u_{it} \sim \NN (0,1)$.  Sufficiency again reduces the sample to
+$n$ observations on $s_i = m_i^{-1} \sum_{t=1}^{m_i} y_{it}^2$, and thus
+$2 r_i s_i/\sigma_i^2$ with $r_i = m_i / 2$ has the gamma distribution with
+shape parameter, $r_i$ and scale parameter $\sigma_i^2 / r_i$, i.e.
+\[
+\gamma (s_i | r_i,  \sigma_i^2 ) = \frac{1}{\Gamma (r_i) (\sigma_i^2/r_i)^{r_i}}
+s_i^{r_i-1} \exp \{ - s_i r_i /\sigma_i^2 \},
+\]
+and the marginal density of $s_i$ when the $\sigma_i^2$ are iid from $F$ is
+\[
+g(s_i ) = \int \gamma (s_i | r_i, \sigma^2 ) dF(\sigma^2).
+\]
+To estimate $F$ we can proceed exactly as before except that now the matrix
+$A$ has typical element $\gamma(s_i | \sigma_j^2)$ for $\sigma_j^2$ on
+a fine grid covering the support of the sample $s_i$'s. 
+\subsection{Estimating Gaussian Location-Scale Mixtures}
+When both location and scale are heterogeneous we must combine the strategies
+already described.  We should emphasize here that the scope for modeling 
+heterogeneity for the scale parameter would not be possible with cross 
+sectional data since individuals are then  only measured once. The model is now,
+\[
+y_{it} = \mu_i  + \sigma_i u_{it}, \quad t = 1, \cdots , m_i, 
+\quad i= 1, \cdots , n
+\]
+with $u_{it} \sim \NN (0,1)$.  We will provisionally assume that $\mu_i \sim F_\mu$ and
+$\sigma_i^2 \sim F_{\sigma^2}$ are independent.  Again, we have sufficient
+statistics:
+\[
+\hat \mu_i | (\mu_i , \sigma_i^2) \sim \NN (\mu_i, \sigma_i^2/m_i )
+\]
+and
+\[
+s_i | (r_i , \sigma_i^2 ) \sim \gamma ( s_i | r_i , \sigma_i^2/r_i ),
+\]
+where $r_i = ( m_i - 1) /2$, and the log likelihood becomes,
+\[
+\ell (F_\mu , F_{\sigma^2} | y) = \sum_{i=1}^n \log \int \int
+\gamma(s_i | r_i , \sigma^2 /r_i ) \sqrt{m_i} 
+\phi (\sqrt{m_i} (\hat \mu_i - \mu_i)/\sigma)/\sigma 
+dF_\mu (\mu) dF_{\sigma^2} (\sigma^2)
+\]
+Since the scale component of the log likelihood is additively separable from the location
+component, we can solve for $\hat F_{\sigma^2}$ in a preliminary step, as
+in the previous subsection, and then solve for the $\hat F_\mu$ distribution.
+In fact, under the independent prior assumption, we can  re-express the Gaussian
+component of the likelihood as Student-$t$ and thereby eliminate the dependence on
+$\sigma$ in the Kiefer-Wolfowitz problem for estimating $F_\mu$.   This is highly
+convenient for estimation purposes, however it should be stressed that prediction
+restores the interdependence on both $F_\mu$ and $F_\sigma$ as we discuss in more
+detail below.
+
+When the independence assumption is implausible, and this may be typical of econometric
+applications where there is some portfolio aspect of the problem that makes $\mu_i$'s and
+$\sigma_i$'s positively correlated, we can construct two dimensional grids.  This makes
+the constraint matrix, $A$, somewhat unwieldy, but raises no new issues in principle.
+After a brief discussion of testing for parameter heterogeneity, we will compare and
+contrast the foregoing methods in simulations and an application to predicting 
+baseball batting averages.
+
+
+
+A natural question at this point might be:  How do we know whether we {\it need}
+to bother with all this?  Can we make some preliminary test for parameter
+heterogeneity?  There is an extensive literature on this topic:
+\citeasnoun{Chesher.84} and \citeasnoun{Cox.83} constitute notable contributions  
+drawing connections to the \citeasnoun{White82} information matrix test.
+Many of the proposals that have been made can be formulated
+as $C(\alpha)$ tests as in \citeasnoun{Neyman.59} and  
+\citeasnoun{NeymanScott.66}.  The $C(\alpha)$ formulation can be viewed
+as an extended form of the Rao score test that among other things can
+accommodate general forms of nuisance parameter estimation. 
+\citeasnoun{Gu13} provides a detailed theoretical treatment of
+$C(\alpha)$ tests for parameter heterogeneity, and  \citeasnoun{GKV} compares 
+their performance to that of likelihood ratio tests.
+In Appendix B we provide a detailed discussion of the $C(\alpha)$ test for homogeneity
+for variances in the longitudinal Gamma model that is employed in the application section.
+
+
+\section{Empirical Bayes Prediction:  Some Simulation Evidence}
+To develop some intuition about empirical Bayes methods we will consider some 
+simple illustrative examples in this section before turning to our main
+empirical application.
+
+\subsection{Gaussian Location Mixtures}
+Suppose that we have a random sample from the model: $y_i = \mu_i + u_i$ with
+iid $u_i \sim \NN (0,1)$, and iid $\mu_i \sim \frac{2}{3} \delta_{-h} + 
+\frac{1}{3} \delta_{2h}$ as in \citeasnoun{Chen.95}.  Here, $\delta_a$ denotes
+the distribution with point mass one at the point $a$.  If we were successful
+in estimating the $\mu_i$ distribution, we would expect that Tweedie's formula
+\eqref{eq.Tweedie} should deliver predictions that correctly shrink the
+original observations toward their respective $\mu_i$'s.  In this sense the
+prediction problem becomes one closely related to classification.  In Figure \ref{fig.ex1}
+we illustrate this situation with $n = 400$ and $h = 0.5$, which represents a 
+fairly challenging problem.  In the left panel we have the estimated mixing
+distribution in red, with the target distribution represented in blue.
+The larger of the two actual mass points at $x = -0.5$ is quite accurately
+estimated, however the smaller mass point at $x = 1$ is split into two
+pieces by the Kiefer-Wolfowitz estimate.  The true mixture distribution
+in blue in the middle panel appears to be reasonably accurately estimated
+by the red curve.  The corresponding Bayes rules in the right panel show
+that the empirical Bayes rule (in red) shrinks a little too aggressively
+in the left tail, and not quite agressively enough in the right tail, compared
+to the omniscient  Bayes rule in blue.  But we should hasten to add that it
+represents an enormous improvement over the unbiased (naive) decision rule,
+$\hat \mu_i = y_i$, depicted in grey.
+
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{Tweedie/ex1.pdf}}}
+  \end{center}
+  \caption{{Empirical Bayes estimation for the Chen (1995) example:  A sample
+  of 400 observations from the model with $y_i = \mu_i + u_i$ with
+  iid $u_i \sim \NN (0,1)$, and iid $\mu_i \sim \frac{2}{3} \delta_{-h} + 
+  \frac{1}{3} \delta_{2h}$, is illustrated by the histogram in the middle
+  panel and the ``rug plots'' in the adjacent panels.  The Kiefer-Wolfowitz
+  estimate of the mixing distribution is illustrated in the left panel in
+  red, with the target distribution in blue.  The corresponding estimate of
+  the mixture density and Bayes rule appear in the other panels contrasted 
+  to their blue target functions.  The unbiased, naive decision rule is
+  depicted in the right panel in grey.}}
+  \label{fig.ex1}
+\end{figure}
+
+Replacing the two mass point distribution by $\mu_i \sim U[-h, 2h]$
+yields an even more challenging problem.  The Kiefer-Wolfowitz  estimator
+tries valiantly to mimic the uniform mixture by a discrete mixture as
+illustrated in Figure \ref{fig.ex2}.  The two point mixing distribution 
+appearing in the left panel does not seem to be a very satisfactory 
+surrogate for the uniform, but as can be seen in the middle panel, it
+does a remarkably good job of imitating the correct mixture density.
+The Bayes rule comparison in the right panel again illustrates that
+the shrinkage in the tails is not ideal, but much preferable to the
+naive, unbiased rule.
+
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{Tweedie/ex2.pdf}}}
+  \end{center}
+  \caption{{Empirical Bayes estimation for the Chen (1995) example:  A sample
+  of 400 observations from the model with $y_i = \mu_i + u_i$ with
+  iid $u_i \sim \NN (0,1)$, iid $\mu_i \sim U[-h, 2h]$, and $h = 0.5$,
+  is illustrated by the histogram in the middle
+  panel and the ``rug plots'' in the adjacent panels.  The Kiefer-Wolfowitz
+  estimate of the mixing distribution is illustrated in the left panel in
+  red, with the target distribution in blue.  The corresponding estimate of
+  the mixture density and Bayes rule appear in the other panels contrasted 
+  to their blue target functions.  The unbiased, naive decision rule is
+  depicted in the right panel in grey.}}
+  \label{fig.ex2}
+\end{figure}
+
+\subsection{Gamma Scale Mixtures}
+
+To explore the performance of empirical Bayes methods for gamma scale mixtures
+we illustrate a couple of similar cases to those appearing in the previous
+subsection.  We first consider the longitudinal model, 
+\[
+y_{it} = \mu_i + \sigma_i u_{it}, \quad t = 1, \cdots, m, \quad i=1,\cdots , n,
+\]
+with iid $u_{it} \sim \NN (0,1)$, and
+$\sigma_i^2 \sim F$.
+We take
+$m = 11$ and $n = 400$.  We will provisionally ignore the heterogeneity
+in the $\mu_i$, or to be more explicit, adopt the naive practice of estimating
+them by $\bar y_i$.  Denoting the individual specific variance estimates by
+$x_i =  (m-1)^{-1} \sum (y_{it} - \bar y_i)^2$, and their population
+counterparts by $\theta_i = \sigma_i^2$, the $\{x_i\}$ are then distributed
+as Gamma with shape parameter, $r = (m-1)/2$, scale parameter $\theta_i /r$,
+and density,
+\[
+\gamma( x_i | \theta_i ) = \frac{1}{\Gamma(r) (\theta_i /r)^r} x_i^{r-1} 
+\exp( - x_i r / \theta_i ).
+\]
+Thus, the marginal density of the sample variances is,
+\[
+g(x) = \int \gamma (x | \theta ) dF(\theta).
+\]
+The Bayes rule under squared error loss for $\theta_i$ given $x_i$,
+originally derived by \citeasnoun{Robbins.82}, is given in the following 
+proposition.  Again, it should be stressed that the Bayes rule depends only 
+on the mixture density, $g$, and not directly on the mixing distribution, $F$.
+Of course, indirectly the Bayes rule {\it does} depend on $F$ and in particular
+the flat portions of the Bayes rule figures representing the points of attraction
+of Bayes shrinkage are essentially determined by the location of the estimated mass
+points of $F$.  This is particularly crucial in the tails where even small mass points
+of $\hat F$ can exert a large influence on the shrinkage.  Whether this sensitivity
+can be lessened by replacing the Gaussian mixture assumption by something heavier
+tailed constitutes an intriguing question for future research.  The next proposition
+describes the Bayes rule for Gamma mixtures.
+\begin{proposition}
+	For $X_i \sim \Gamma(r, \theta_i/r)$ and $\{ \theta_i \}$ iid $F$,
+	the Bayes rule under $\LL_2$ loss is:
+	\begin{equation}
+		\delta(x) = r x^{r-1} \int_x^\infty y^{1-r} g(y) dy /g(x) 
+	\label{eq.Tweediev}
+	\end{equation}
+	and $\delta (x)$ is non-decreasing in $x$.
+\end{proposition}
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{Tweedie/exv1.pdf}}}
+  \end{center}
+  \caption{{Empirical Bayes estimation for Gamma mixture example:  A sample
+  of $n =400$ and $m = 11$ observations from the model 
+  $y_{it} = \mu_i + \sigma_i u_{it}$ 
+  with iid $u_{it} \sim \NN (0,1)$, iid $\sigma_i^2 \sim
+  \frac{2}{3} \delta_{1.5} + \frac{1}{3} \delta_3$.  
+  is illustrated by the histogram in the middle
+  panel and the ``rug plots'' in the adjacent panels.  The Kiefer-Wolfowitz
+  estimate of the mixing distribution is illustrated in the left panel in
+  red, with the target distribution in blue.  The corresponding estimate of
+  the mixture density and Bayes rule appear in the other panels contrasted 
+  to their blue target functions.  The unbiased, naive decision rule is
+  depicted in the right panel in grey.  The brown line represents the 
+  linearized empirical Bayes rule proposed in Robbins (1982)}}.
+  \label{fig.exv1}
+\end{figure}
+
+In Figure \ref{fig.exv1} we illustrate a
+typical outcome in a format like that of the previous  figures.  
+In this example we take $F$ to be the two point distribution:
+$\frac{2}{3} \delta_{1.5} + \frac{1}{3} \delta_3$.  
+The two point mixing distribution is quite well estimated by the Kiefer-Wolfowitz
+procedure, and the mixture density appears to be quite accurate as well.
+The empirical Bayes rule slightly over estimates the variances in the upper
+tail since it slightly overestimates the location of the upper mass point.
+But as for the previous examples, there is an enormous improvement over the
+naive decision rule represented by the grey line.  The brown line represents
+the linearized empirical Bayes rule proposed in \citeasnoun{Robbins.82}.
+
+\subsection{Gaussian Location Scale Mixtures}
+
+We now would like to consider joint estimation of location and scale mixtures
+in the context of our longitudinal model.  We will maintain the assumption that
+$\mu_i$'s and $\sigma_i^2$'s are drawn independently, so we only have to estimate
+two univariate mixing densities rather than a general bivariate density.
+We illustrate the procedure with an example that combines a three point distribution
+for $\mu$ and a three point distribution for $\sigma^2$.  Maximizing the likelihood
+appear in Section 2.3, we obtain the estimates appearing in the first two panels
+of Figure \ref{fig1.exv3} for the location and scale parameters respectively.  As
+in the previous figures, estimates appear in red, and the true mixing distribution
+is represented by the blue lines.  Focusing initially on the location parameter,
+the third panel of the figure depicts the histogram of the observed $\hat \mu_i =
+\bar y_i$ with the estimated marginal density superimposed in red, and the true
+marginal density superimposed in blue.  Finally, in the
+last panel of the figure we illustrate the empirical and idealized Bayes rule
+for the $\mu_i$'s.  This version of the Bayes rule presumes that prediction is
+based on knowledge of a location estimate, but nothing about the scale
+parameter beyond the distribution represented by the estimated mixing distribution.
+Even though the mixing distribution of the location parameter has a few extraneous
+mass points, the Bayes rule is remarkably accurate.  
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{Tweedie/fig1exv3.pdf}}}
+  \end{center}
+  \caption{{Empirical Bayes estimation for Gaussian location-scale mixture:  
+  A sample of $n = 800$ and $m = 11$ observations from the model 
+  $y_{it} = \mu_i + \sigma_i u_{it}$ 
+  with iid $u_{it} \sim \NN (0,1)$, 
+  iid $\mu_i \sim \frac{1}{3} \delta_{-0.5} + \frac{1}{3} \delta_1+ \frac{1}{3} \delta_3$, and  
+  iid $\sigma_i^2 \sim \frac{1}{3} \delta_{0.5} + \frac{1}{3} \delta_2 + \frac{1}{3} \delta_4$,  
+  is illustrated by the histogram in the middle panel The Kiefer-Wolfowitz
+  estimate of the mixing distributions is illustrated in the two left panels in
+  red, with the target distribution in blue.  The corresponding estimate of
+  the mixture density and the Bayes rule appear in the other panels contrasted 
+  to their blue target functions.}} 
+  \label{fig1.exv3}
+\end{figure}
+
+How much can be gained by using an individual specific estimate of variance?  To explore
+this question,  we generate data from a simple Gaussian mixture model that
+combines the prior three point mean and three point variance mixture:
+$y_{it} = \mu_i + \sigma_i u_{it}$ with iid $u_{it} \sim \NN (0,1)$, 
+iid $\mu_i \sim \frac{1}{3} \delta_{-0.5} + \frac{1}{3} \delta_1+ \frac{1}{3} \delta_3$, and  
+iid $\sigma_i^2 \sim \frac{1}{3} \delta_{0.5} + \frac{1}{3} \delta_2 + \frac{1}{3} \delta_4$,  
+A typical realization of this model is illustrated in Figure \ref{fig1.exv3}
+where we see that both the mean and variance mixture are quite well estimated.
+The marginal density of the $\bar y$'s is shown in the third panel, first as
+simply a histogram of the observed values, then (in red) as an estimate based on the
+Kiefer-Wolfowitz estimate of the mixing densities, and finally (in blue) as the
+true population mixture.  In the far right panel we illustrate two versions of
+the Bayes rule:  one (in red) based on the Kiefer-Wolfowitz estimate, the other
+(in blue) based on the true mixing distributions.  The naive estimate appears as in
+light grey line in this panel.  These Bayes rules are conditional
+only on the observed $\bar y$ with the variance effect integrated out. Thus,
+when we see a value of $\bar y$ near one of the mass points in $\{ -0.5, 1, 3\}$, 
+the Bayes rule shrinks aggressively toward the corresponding $\mu$.
+Between these values, the predicted $\mu$, being a conditional mean, takes 
+intermediate values.  Extreme values of $\bar y$ in either tail again get
+aggressively  shrunk toward the extreme points  of the estimated prior.
+
+The situation we have just described is artificial in sense that we effectively
+are assuming that we have observed $\bar y_i$ for each cross sectional unit,
+but apparently have forgotten to compute the associated variance estimate.  If
+we now rectify this oversight, we can consider a two dimensional Bayes rule
+that maps $(\bar y_i , S_i)$ pairs into predictions of the $\mu_i$'s. Using
+the same data and the estimates underlying Figure \ref{fig2.exv3} we illustrate
+a contour plot of the this two dimensional Bayes rule in Figure \ref{fig2.exv3}.
+We see that for central values of $\bar y_i$ the contours are essentially
+vertical indicating the variance is uninformative about the mean, however
+for outlying values of $\bar y_i$ the nonlinearity of the Bayes rule is apparent
+with large observed variances making us more uncertain about the $\mu_i$'s.
+
+When $\bar y$ is in the extremes,  the Bayes rule should shrink its estimate of $\mu$
+to the extreme mass points at -0.5 and 3, but since the estimated prior has smaller
+mass points nearby very extreme observations are attracted to these values.
+In both tails one can see the effect of the variance estimate on this shrinkage effect;
+when the estimated variance is small  then  there is more shrinkage to the nearest
+mass point of the $\mu$ distribution.  When the observed variance is large, then
+the posterior for $\mu$ is more evenly divided among several mass points and
+consequently the posterior mean is more central.  For example,
+when $\bar y = 1.5$ and the estimated variance is low, then
+we can be quite confident that the observation comes from the $\mu = 1$ population.
+Similarly when $\bar y = -1.5$  and the estimated variance is low, we can be
+confident that this is a $\mu = -0.5$ observation.  However, in either of these
+cases as the variance increases our confidence ebbs, and the Bayes rule
+assigns more probability to the other nearby mass points.  For central values of
+$\bar y$ the contours are nearly vertical indicating that the observed
+variance is not informative in this region.  The observed pairs $(\bar y_i , S_i)$
+are superimposed on the contours to give some sense of their dispersion.
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{.8 \textwidth}{!}{{\includegraphics{Tweedie/fig2exv3.pdf}}}
+  \end{center}
+  \caption{{Bayes Rule for Gaussian location-scale mixture:  
+  Based on the observations from Figure \ref{fig1.exv3} we
+  illustrate the two dimensional Bayes rule for the mean parameter $\mu$ as
+  a contour plot.}}
+  \label{fig2.exv3}
+\end{figure}
+
+This form of the Bayes rule clearly illustrates that variances are informative
+about the means in such circumstances, but it remains to be seen to what degree
+they are quantitatively important in reducing the mean squared error of our
+predictions of the mean.  To evaluate this we conducted a small simulation
+experiment in which we generated 1000 replications from the model described
+above and compared MSE's for 5 $\hat \mu_i$'s:  the naive $\hat \mu_i = \bar y_i$,
+the Bayes Rule based only on the estimated distribution of means and variances
+conditional on only the $\bar y_i$'s as in Figures \ref{fig1.exv3}, and conditional
+on both $\bar y_i$ and $S_i$ as in Figure \ref{fig2.exv3}, and the two corresponding
+Bayes rules based on the true mixing distributions.  The MSEs for these estimators
+were 0.2800, 0.1575, 0.1595, 0.1570, and 0.1569 respectively.  Clearly, Bayes 
+shrinkage is very successful in improving upon the naive predictions, and the
+(Kiefer-Wolfowitz) empirical Bayes predictions are almost as good as
+knowing the true mixing distribution, even for this modest, $n = 800, \; m = 11$ 
+sample size, but the expected improvement from conditioning on the observed, 
+individual-specific variance estimates is practically negligible.  Greater separation of the 
+two variances might be expected to reveal more improvement.  But rather than 
+pursuing further simulation exercises we now turn to 
+a more realistic model including covariate effects.
+
+\subsection{Covariate Effects}
+Having seen how to estimate the Gaussian location-scale mixture model we will now
+briefly describe how to introduce covariate effects into the model, which now takes the form,
+\[
+y_{it} = x_{it} \beta + \alpha_{i} + \sigma_{i} u_{it}.
+\]
+Given a $\beta$ it is easy to see that,
+\[
+\bar y_{i} | \alpha_{i}, \beta, \sigma_{i}^{2} \sim 
+\mathcal{N}(\alpha_{i} + \bar x_{i} \beta, \sigma_{i}^{2})
+\]
+so the sufficient statistic for $\alpha_{i}$ is $\bar y_{i} - \bar x_{i} \beta$. 
+Similarly, the sufficient statistic for $\sigma_{i}^{2}$ can be defined as,  
+\[
+S_{i} = \frac{1}{m_{i}-1} \sum_{t=1}^{m_{i}} ( y_{it} - x_{it} \beta - (\bar y_{i} - \bar x_{i} \beta))^{2}
+\]
+and $S_{i} | \beta, \sigma_{i}^{2} \sim \gamma (r_{i}, \sigma_{i}^{2}/r_{i})$, 
+where as before, $r_{i} = (m_{i}-1)/2$. Apparently, using the familiar panel data terminology, 
+the sufficient statistic for $\alpha_{i}$ contains the between information, while the 
+within information, deviations from the individual means, is contained in the $S_{i}$. 
+A note of caution should be added however since the orthogonality of the within and between 
+information enjoyed by the classical Gaussian panel data model no longer holds in this 
+general mixture setting. This can be seen more clearly by examining the likelihood function, 
+\begin{align*}
+L(\beta, h) &= \prod _{i=1}^{n} g ((\alpha, \beta, \sigma) | y_{i1}, \dots, y_{im_{i}}) \\
+& = \prod_{i=1}^{n} \int \int \prod_{t=1}^{m_{i}} \sigma_i^{-1}
+\phi((y_{it} - x_{it} \beta - \alpha_{i})/\sigma_{i})
+h(\alpha_{i}, \sigma_{i}) d\alpha_{i} d\sigma_{i}\\
+& = K \prod_{i=1}^{n}S_{i} ^{1-r_{i}} \int \int \sigma_i^{-1} 
+\phi((\bar y_{i} - \bar x_{i} \beta - \alpha_{i})/\sigma_{i}) 
+\frac{e^{-R_{i}}R_{i}^{r_{i}}}{S_{i} \Gamma(r_{i})} h(\alpha_{i}, \sigma_{i}) d\alpha_{i} d\sigma_{i} 
+\end{align*} 
+where $R_{i} = r_{i} S_{i} / \sigma_{i}^{2}$ and $K = \prod_{i=1}^{n}
+\Big ( \frac{\Gamma(r_{i})}{r_{i}^{r_{i}}} (1/\sqrt{2\pi})^{m_{i}-1} ) \Big)$. 
+
+Even with the independent prior assumption,  
+$h(\alpha_{i}, \sigma_{i}) = h_\alpha(\alpha_{i}) h_{\sigma}(\sigma_{i})$, 
+the likelihood does not factor because the Gaussian piece depends on both $\alpha_{i}$ and 
+$\sigma_{i}$. However, the fact that $S_{i}$, hence the Gamma piece of the likelihood, 
+does not depend on $\alpha_{i}$ provides a convenient estimation strategy by using the Gamma 
+mixture to estimate $h_{\sigma}$, and a Studentized version of the Gaussian mixture, 
+$(\bar y_{i} - \bar x_{i} \beta - \alpha_{i})/\sqrt{S_{i}} \sim t_{m_{i}-1}$, 
+for estimating $h_{\alpha}$. Including covariates adapts this estimation strategy:
+Given a $\beta$ we estimate the two mixing distributions and then evaluate the full profile
+likelihood.  We will illustrate this approach in the next section.
+This approach is related to  recent work by \citeasnoun{Bonhomme} on grouped patterns of
+heterogeneity in panel data, although the estimation methods employed there based
+on clustering algorithms are quite different.
+ 
+\section{Empirical Bayesball}
+In this section we describe our experience with methods described above to 
+predict U.S. major league baseball batting averages.  
+
+\subsection{The Data}
+From \citeasnoun{espn} we have collected monthly data on the number of at bats
+and hits for all U.S major league baseball players from 2002-2011, as well as
+an indicator of whether the player is a pitcher.  We have aggregated this data
+into half seasons to produce an unbalanced panel, observations
+on players with more than 10 at bats in any half season,  and players with no less 
+than 3 half-seasons,  leaving 1072 players and a total of 10,575 observations.
+For the final subsection on age effects we have also collected the birth year of each player
+from the ESPN website.
+\subsection{The Model}
+Following \citeasnoun{brown.08}, we consider transformed batting averages
+\[
+y_{it} = \arcsin \left ( \sqrt{\frac{H_{it} + 0.25}{N_{it} + 0.5}} \right )
+\]
+where $H_{it}$ denotes the number of ``hits'' of player $i$ in period $t$
+and $N_{it}$ denotes his number of ``at bats'' in this period.  We will
+assume, that the $y_{it}$'s are 
+Gaussian with means, $\alpha_i = \arcsin(\sqrt{p_i})$, 
+where $p_i$ is the individual specific batting success probability and variances,
+$\sigma_i^2 \nu_{it}^2 = \sigma_i^2 / (4 N_{it})$.  Given an unbalanced panel 
+with $t = 1, \cdots , m_i$ for $n$ players, we can define the sufficient 
+statistics:
+\[
+\hat \alpha_i = (\sum_{t=1}^{m_i} \nu_{it}^{-2})^{-1}
+\sum_{t=1}^{m_i} y_{it}/ \nu_{it}^2 
+\]
+and 
+\[
+S_i = \frac{1}{m_i -1} \sum_{t=1}^{m_i} (y_{it} - \hat \alpha_i)^2 /\nu_{it}^2.
+\]
+with Gaussian and Gamma distributions, respectively:
+$\hat \alpha_i | \alpha_i , \sigma_i^2 \sim 
+\NN ( \alpha_i , \sigma_i^2 v_i^2 )$ 
+and $S_i | \sigma_i^2 \sim \gamma (r_i , \sigma_i^2/r_i)$,  where we set
+$v_i^2 =  (4 \sum_{t=1}^{m_i} N_{it})^{-1}$ and $r_i = (m_i - 1)/2$.
+
+For the sake of clarity, we will first discuss the case without covariates, 
+introducing them in the final subsection.
+We will assume that players draw a $\alpha_i$ and a $\sigma_i$ at random
+from a distribution with density $h(\alpha_i , \sigma_i )$. 
+Sufficiency then implies that we can factor the likelihood of the sample,
+as a function of $(\alpha , \sigma ) \in \RR^{2n}$,
+\begin{align*}
+L(h)  &= \prod_{i=1}^n g ( (\alpha , \sigma )  \; | \; 
+y_{i1} , \cdots , y_{im_i} )\\ 
+&= \prod_{i=1}^n \int \int \prod_{t=1}^{m_i} \phi (( y_{it} - \alpha_i )/ 
+\sigma_i \nu_{it} ) / (\sigma_i \nu_{it}) h(\alpha_i , \sigma_i ) 
+d\alpha_i d\sigma_i \\
+&= K \prod_{i=1}^n \int \int 
+\phi (( \hat \alpha_{i} - \alpha_i )/ 
+\sigma_i v_{i} ) / (\sigma_i v_{i}) 
+\frac{e^{-R_i} R_i^{r_i}}{S_i \Gamma(r_i)}
+h(\alpha_i , \sigma_i ) d\alpha_i d\sigma_i 
+\end{align*}
+where $R_i = r_i S_i / \sigma_i^2$.
+
+As we have already noted, 
+it is convenient at this point to make the further assumption that the
+mixing density $h$ factors into $h = h_\alpha h_\sigma$.  In this case,
+since the likelihood contribution of the $S_i$ is independent of the 
+$\alpha_i$'s, we can solve the resulting (Kiefer-Wolfowitz) maximum
+likelihood problem by first estimating the mixing density, 
+$h_\sigma$ and  then estimating $h_\alpha$.  For the independent prior
+case this is especially convenient since the likelihood factors into
+independent gamma and Student $t$ components.  Estimation of the general
+dependent prior case is beyond the scope of the present paper, but we
+intend to explore this in future work. Estimation of the general dependent 
+prior case raises no inherent technical difficulty except that it involves 
+a two dimensional gridding.
+
+\subsection{Estimation Results}
+
+In Figure \ref{fig.fuv} we depict the estimated mixing densities for the
+means and variances, $\mu$'s and $\theta$'s, for the model described in
+the previous subsection.  In the transformed scale of the $\mu$'s we see
+one large peak, and several smaller ones, with slight upper and lower 
+``foothills.''  For the variance parameter $\theta$ we see only one very
+pronounced peak slightly above one, and one smaller peak below
+the large one.  Recall that the variance scale is relative to the binomial
+model,  which implies that variance is completely determined by the longitudinal
+sample size for each player.
+Thus, a single peak at exactly one would imply exact adherence to the binomial
+model.  Instead, we see a modest over-dispersion effect from the large peak,
+and a much smaller peak corresponding to players exhibiting under-dispersion.
+For the latter, more consistent, players prediction of future performance 
+would presumably be easier.  The $C(\alpha)$ test of homogeneity of the variance
+parameter, described in Section 3, described in detail in Appendix B, 
+rejects with $p$-value 0.023, so we can be
+reasonably confident that the smaller mass point is not spurious.
+
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{baseball/fuv.pdf}}}
+  \end{center}
+  \caption{{Estimated Mixing Distributions for $\mu$ and $\theta$ based on
+  2002-11 longitudinal data.  Note that these distributions corresponds to
+  the transformed, approximately Gaussian, observations.  See Figure \ref{fig.binp}
+  for the untransformed estimated batting average distribution implied by this
+  $f(\mu)$ distribution.  The $f(\theta)$ distribution depicted in the right panel can be
+  interpreted as an estimate of a mixture of under and over dispersion components
+  of the observed variances; the (larger) mass point with $\theta > 1$ shows that
+  most players exhibit overdispersion relative to the binomial model, while the
+  (smaller) mass point with $\theta < 1$ corresponds to a group of players that
+  are less variable more consistent than predicted by the binomial model.}}
+  \label{fig.fuv}
+\end{figure}
+
+Transforming the estimated mixing density, or prior, for the $\mu$'s back to
+the natural scale of batting averages yields the distribution shown  in left panel of 
+Figure \ref{fig.binp}.  Again, we see a similar configuration of peaks, but now 
+located at more familiar places on the $[0,1]$ interval -- at least from baseball perspective.
+In the right panel of Figure \ref{fig.binp} we illustrate the estimated mixing density
+from the Kiefer-Wolfowitz MLE of a binomial model based on the aggregated baseball data
+over the period 2002-11.  This estimate has the advantage of simplicity, but it neglects
+the potential for over or under dispersion of the data.
+We now turn to the question of how well we can predict future performance based
+on these estimates.
+\begin{figure}[ht]
+  \begin{center}
+	  \resizebox{ \textwidth}{!}{{\includegraphics{baseball/binp.pdf}}}
+  \end{center}
+  \caption{{Estimated Mixing Distributions for Batting Averages: In the left panel
+  we present the transformed density based on the Gaussian model described above.
+  And in the right panel we show the estimated mixing distribution for the MLE of
+  the binomial model based on the aggregated performance of the players from
+  2002-11.}}
+  \label{fig.binp}
+\end{figure}
+
+\subsection{Prediction}
+
+In this subsection we compare predictions based on the estimated models introduced above,
+and compare their performance with alternative nonparametric Bayesian methods based on Dirichlet
+priors.  Using the data on all 1072 players from the 2002-2011 seasons we estimate
+our Gaussian model for $h_\alpha$ and $h_\theta$.  We drop pitchers from the prediction
+exercise since they generally have fewer at bats.
+Of the remaining 403 players with more than 40 at bats
+in 2012, 336 had 3 or more half seasons prior to 2012 and were therefore qualified subjects
+for our out-of-sample prediction exercise.  
+
+In both panels of Figure \ref{fig.prediction}
+we plot observed 2012 batting averages of these players against their prior (cumulated)
+batting averages for the 2002-2011 period.  In the right panel of the figure we plot the
+predicted batting averages based on the location-scale Gaussian model after retransformation
+back to the probability scale.  The jagged nature of these predictions is due to the fluctuations
+in the number of ``at bats'' in the  prior period as well as conditioning on prior variability,
+$S_i$, which both influence the amount of shrinkage that is applied.  The grey line in both
+plots represents the (45 degree) naive prediction, so we see that shrinkage is greatest in the
+lower tail while the estimated mass points of the prior distribution in the upper tail tend to
+reduce the amount of shrinkage there.  In the left panel we have plotted the empirical Bayes
+predictions from the somewhat simpler binomial version of the model.  The strong resemblance
+of the two sets of predictions is indicative of the fact that the Gaussian transformation model
+and its attempt to account for over and under dispersion of the binomial model did not alter
+the fundamental nature of the binomial model results.  Clearly, the dispersion of the plotted
+points in both panels starkly reflects the difficulty of the prediction exercise.  
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{profile/bayesrule_f8.pdf}}}
+  \end{center}
+  \caption{Prediction of 2012 Batting Averages:  In the left panel we plot the 
+  Bayes rule prediction based on the Binomial model in contrast to the naive 
+  prediction (grey line). In the right panel, the solid blue line is the empirical 
+  Bayes rule prediction based on the Gaussian model without any covariates and 
+  the dotted red line is the prediction taking into account of the quadratic 
+  effects of age as discussed in the last subsection. The actual outcome of 
+  2012 batting average is superimposed in both figures.}
+  \label{fig.prediction}
+\end{figure}
+
+To compare the performance of the foregoing predictions with more conventional Bayesian methods
+we have also considered an alternative nonparametric formulation of the binomial model employing
+Dirichlet process priors as introduced by \citeasnoun{Ferguson73}, \citeasnoun{Antoniak74}
+and \citeasnoun{Ferguson83}.  Deferring a discussion of the details to Appendix B, we consider
+two versions of the Dirichlet model both with Dirichlet prior $\DD (\alpha G_0 )$ and
+base distribution $G_0$ taken as $\mbox{Beta}(1,1)$, i.e. uniform on $[0,1]$.  
+The scaling parameter, $\alpha$ is either 0.01 or 1, both
+reflecting relative ignorance about the prior.  Markov chain Monte-Carlo methods produce a posterior
+of the predictive density for the mixing distribution corresponding to the point estimate 
+produced by the Kiefer-Wolfowitz estimator.  
+The mean of this posterior serves as a predictive density for the mixing 
+distribution of the binomial parameter can thus be used to produce predictions for our 
+out-of-sample 2012 players as for the Binomial model described above.  
+
+\begin{figure}[ht]
+  \begin{center}
+          \resizebox{ \textwidth}{!}{{\includegraphics{baseball/figDP.pdf}}}
+  \end{center}
+  \caption{{Dirichlet Estimates of the Mixing Distribution:  In the left panel we plot
+  the estimated mixing distribution based on the Dirichlet prior with precision parameter
+  $\alpha= 1$.  In the right panel prior precision has been reduced to
+  $\alpha= 0.01$. These estimates may be interpreted as regularized versions of those
+  produced by the Kiefer-Wolfowitz MLE appearing in Figure \ref{fig.binp}.}}
+  \label{fig.DPmix}
+\end{figure}
+
+It will come as no surprise, given the appearance of Figure \ref{fig.prediction}, that
+none of the methods perform very well, and given the similarity of the estimated mixing
+distribution, performance of their predictions are also quite similar.
+This is indeed the case: the root mean squared error for the Gaussian and Binomial models
+are respectively, 0.0393 and 0.0395.  The corresponding root mean squared errors for
+the two Dirichlet models are both 0.0395, and this is no better than the naive prediction
+based on prior accumulated batting averages.  The explanation for this rather dismal 
+performance is partly that the mixture models estimated multimodality doesn't
+generate much shrinkage, and ultimately even prior performance  isn't a very good
+gauge of future batting success.
+
+\subsection{Age and the Skill of Batting}
+
+\begin{figure}[ht]
+  \begin{center}
+	  \resizebox{ .8\textwidth}{!}{{\includegraphics{profile/profage.pdf}}}
+  \end{center}
+  \caption{Profile Likelihood for a Linear Age Effect on Batting Average:
+  The Wilks confidence interval for the age effect is represented by the shaded region.}
+  \label{fig.profage}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+	  \resizebox{ .8\textwidth}{!}{{\includegraphics{profile/profage2.pdf}}}
+  \end{center}
+  \caption{Contours of  Profile Likelihood for a Quadratic Age Effect on Batting Average:
+  The Wilks confidence region for the age effect parameters is represented by the shaded region.}
+  \label{fig.profage2}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+	  \resizebox{ .8\textwidth}{!}{{\includegraphics{profile/ageeff.pdf}}}
+  \end{center}
+  \caption{The Estimated Quadratic Age Effect:  The vertical axis is in units of the transformed
+  batting average.}
+  \label{fig.ageeff}
+\end{figure}
+
+Finally, to illustrate the role that covariates can play in the empirical Bayes approach
+we have developed, we consider a model in which player's age influences his batting average.
+Following the approach outlined in the previous section we compute the profile likelihood
+on a grid of $\beta$ parameters.  The only required modification is the reweighting by the
+$v_{it}$'s.  When we include only a linear age effect, we obtain the profile likelihood
+shown in Figure \ref{fig.profage} that yields a point estimate of about $\beta = -0.12$.
+The usual Wilks confidence interval also illustrated in the figure is $[-0.151, -0.092]$.  This relentless
+deterioration in batting skill seems a bit implausible, and depressing, so we have also
+tried a simple quadratic alternative.  Now a contour plot of the profile likelihood is
+shown as Figure \ref{fig.profage2} and we find, after unrescaling,  that the age effect appears
+as shown in Figure \ref{fig.ageeff}.  The peak occurs at 26.5 years, by age 37 performance
+has declined by about 0.02 units in the transformed batting average, which corresponds to a
+decline of a typical batting average of 0.320 at the peak to 0.302.  The well-known baseball 
+guru Bill James is on record as asserting that batting ability peaks at age 27, so our estimates
+are at least consistent with his casual empiricism.  Our estimated age profile also bears an
+uncanny resemblance to the age profile of Ty Cobb (1905-1928) analyzed in \citeasnoun{morris}. Incorporating the quadratic age effects improves the prediction performance 
+slightly, so that the root mean squared error reduces to 0.0378. The Bayes rule 
+prediction is plotted as the dotted line in Figure \ref{fig.prediction}.
+
+\section{Conclusion}
+
+Models of unobserved heterogeneity for longitudinal data are common in applied econometrics.
+We have argued that empirical Bayes methods based on nonparametric maximum likelihood estimation 
+of mixture models offer a natural formulation of these models.  Recent developments in convex
+optimization greatly facilitate estimation of such models.  Semiparametric versions of these
+models including covariate effects are shown to be effectively analyzed with profile likelihood.  
+A potential criticism of the foregoing approach is that it requires us to assume a parametric
+form for the base distribution, in our setting the Gaussian.  Of course, location-scale mixtures
+of Gaussians is quite a general class, so from a prediction perspective the normality assumption
+is not especially onerous.  Moreover, in our baseball application normality is easily justified
+since the transformed batting averages have a strong claim to approximate normality.  In some
+special cases it may be possible to {\it estimate} the base distribution nonparametrically from
+extraneous sample information.  Recent work of \citeasnoun{BS} illustrates an educational treatment effect
+application of this type for which a deconvolution strategy based on empirical characteristic functions
+is employed.   We hope to explore the extension of Kiefer-Wolfowitz mixture methods to such settings
+in future work.
+
+\bibliography{brown,MCMC}
+\appendix
+{\footnotesize
+\section{Tweedie's Formulae (Proof of Propositions 1 and 2)} 
+The simplest way to derive Tweedie's Formula for the Gaussian case seems to 
+be to consider the more general exponential family compound decision problem 
+in which
+\[
+g (y) = \int \varphi(y , \theta) dF(\theta),
+\]
+where $\varphi$ is a known exponential family density with natural parameter
+$\theta$, so we may write,
+\[
+\varphi (y , \theta ) = m(y) e^{y \theta} h(\theta),
+\]
+and $F$ is again a mixing distribution over the parameter $\theta$.
+Quadratic loss implies that the Bayes rule is the conditional mean:
+\begin{eqnarray*}
+\delta_G (y) & = & \EB [ \Theta | Y = y]\\
+&=& \int \theta \varphi(y,\theta) dF / \int  \varphi(y,\theta) dF\\
+&=& \int \theta e^{y \theta} h(\theta) dF / \int e^{y \theta} h(\theta) dF \\
+&=& \frac{d}{dy} \log ( \int  e^{y \theta} h(\theta) dF \\
+&=& \frac{d}{dy} \log ( g(y) /m(y)) 
+\end{eqnarray*}
+Differentiating again,
+\begin{align*}
+\delta^\prime (y) = \frac{d}{dy} 
+\left [ \frac { \int \theta \varphi dF } { \int \varphi dF } \right ]
+& =  \frac { \int \theta^2 \varphi dF } { \int \varphi dF } 
+ - \left ( \frac { \int \theta \varphi dF } { \int \theta \varphi dF } \right )^2 \\
+& =  \EB [ \Theta^2 | Y = y] - (\EB [ \Theta | Y = y])^2\\
+& =  \VB [ \Theta | Y = y] \geq 0,
+\end{align*}
+implying that $\delta$ must be monotone.  
+When $\varphi$ is Gaussian we have,
+\[
+\varphi (y, \theta) = \phi(y - \theta) = K \exp \{ - (y - \theta)^2 / 2 \}
+= K  e^{-y^2/2} \cdot e^{y \theta} \cdot e^{- \theta^2 /2}, 
+\]
+so $m(y) = e^{-y^2/2} $ and the logarithmic derivative yields our Bayes rule.
+
+For the gamma mixture case there is an analogous formula, for the 
+natural parameter $-r/\theta$, proceeding as before, 
+\[
+\tilde{\delta}(x)=E[-r/\theta | X=x]
+= \frac{\int -\frac{r}{\theta}f(x|\theta)dG(\theta)} {\int f(x|\theta)dG(\theta)}
+=\frac{d}{dx}log(\frac{g(x)}{x^{r-1}})
+=\frac{g'(x)}{g(x)}-\frac{r-1}{x}.
+\]
+If, on the other hand, we would, quite naturally, like to compute the
+expectation of the {\it unnatural} parameter $\theta$, then we obtain instead,
+\begin{align*}
+\delta (x) & =  \EB [ \Theta | X = x]\\
+&= \int \theta \gamma(x,\theta) dF (\theta) / \int  \gamma(x,\theta) dF (\theta)\\
+&= \int \frac{\theta}{\Gamma(r) (\theta /r)^r} x^{r-1} 
+\exp( - x r / \theta ) dF (\theta) / g(x) \\
+&= r x^{r-1} \int \frac{(r/\theta)^r}{\Gamma(r)} \frac{\theta}{r}) 
+\exp( - x r / \theta ) dF (\theta) / g(x) \\
+&= r x^{r-1} \int \frac{(r/\theta)^r}{\Gamma(r)} \int_x^\infty 
+\exp( - x r / \theta ) dF (\theta) / g(x) \\
+&= r x^{r-1} \int_x^\infty y^{r-1} \int \gamma(y|\theta) dF (\theta) dy /g(x) \\
+&= r x^{r-1} \int_{x}^{\infty}y^{1-r}g(y)dy /g(x).
+\end{align*}
+It remains to show that this formulation of the Bayes rule is monotone:
+\begin{align*}
+\delta^\prime (x)&=\frac{r(r-1)x^{r-2}\int_{x}^{\infty}y^{1-r}g(y)dy+rx^{r-1}(-x^{1-r})g(x)}{g(x)}\\
+& \qquad \qquad -\frac{rx^{r-1}\int_{x}^{\infty}y^{1-r}g(y)dy g'(x)}{g^{2}(x)}\\
+&=\frac{r x^{r-1}\int_{x}^{\infty}y^{1-r}g(y)dy}{g(x)}\left [\frac{r-1}{x}-\frac{g'(x)}{g(x)}\right ]-r\\
+&=- \delta(x)\tilde{\delta}(x)-r\\
+&=\delta(x)\left [E[\frac{r}{\theta}|X=x]-\frac{r}{E[\theta|X=x]}\right ]\\
+&=\delta(x) r\left [E[\frac{1}{\theta}|X=x]-\frac{1}{E[\theta|X=x]}\right ],\\
+\end{align*}
+which is positive by Jensen's inequality.
+
+
+\section{ $C(\alpha)$ test for Gamma mixture}
+We provide details here for the $C(\alpha)$ strategy for testing homogeneity of the scale 
+parameter in the Gaussian location-scale mixture model considered in Section 2.2. 
+Given the sufficient statistics $S_{i}$, we would like to test whether they arose from a
+Gamma distribution with $\sigma_{i}^{2} = \sigma_{0}^{2}$ for all $i$, or equivalently 
+that $F_{\sigma^{2}}$ is a degenerate distribution with mass one at $\sigma_{0}^{2}$. 
+We will reparameterize by writing $\sigma_{i}^{2}= \sigma_{0}^{2} \exp (\xi U_{i})$ where 
+$U_{i} \sim H$ are iid with $\mathbb{E}(U)=0$ and $V(U)=1$. The homogeneity test is 
+therefore: $H_{0}: \xi =0$ vs. $H_{1}: \xi  \neq 0$. \\
+
+Following the $C(\alpha)$ procedure for mixture models as in \citeasnoun{Gu13}, 
+the score for $\xi$ and the nuisance parameter $\sigma_{0}^{2}$ are respectively:
+\[
+\begin{array}{ll}
+v_{1i} & := \nabla_{\xi}^{2} \log f_{i} |_{\xi=0} = (s_{i} r_{i}/\sigma_{0}^{2} - r_{i})^{2} - s_{i} r_{i} / \sigma_{0}^{2}\\
+v_{2i} & := \nabla_{\sigma_{0}^{2}} \log f_{i} | _{\xi =0} = s_{i}r_{i}/\sigma_{0}^{4} - r_{i}/\sigma_{0}^{2}
+\end{array}
+\]
+where $f_{i}$ refers to the Gamma mixture density for the $S_{i}$, and $r_i = (m_i - 1)/2 $.
+The efficient score for $\xi$ is therefore, 
+\[
+g_{i}(\sigma_{0}^{2})  = v_{1i}- \frac{cov(v_{1}, v_{2})}{V(v_{2})} v_{2i}  
+= (Y_{i} - r_{i})^{2} - Y_{i} - (Y_{i}-r_{i})
+\]
+where $Y_{i} = S_{i}r_{i}/\sigma_{0}^{2}$ with moments 
+$\mathbb{E}(Y_{i}^{k})= \prod _{j=0}^{k-1} (r_{i} +j)$. 
+Replacing the nuisance parameter by its MLE 
+$\hat \sigma_{0}^{2} = \sum_{i} s_{i} r_{i} / \sum_{i} r_{i}$, the $C(\alpha)$ test statistic is,
+\[
+T_{n}  =  \frac{\sum_{i} g_{i}(\hat \sigma_{0}^{2})}{\sqrt{\sum_{i} V(g_{i}(\hat \sigma_{0}^{2}))}} = \frac{\sum_{i} \Big [ (s_{i}r_{i}/\hat \sigma_{0}^{2} - r_{i})^{2} - s_{i} r_{i} /\hat \sigma_{0}^{2} \Big ] }{\sqrt{ \sum_{i} (2 r_{i}^{2} + 2 r_{i})}}
+\]
+Under $H_{0}$, $T_{n} \sim \mathcal{N}(0,1)$, 
+and we reject the null at significance level $\alpha$ if $T_{n} >  \Phi^{-1}(1-\alpha)$. 
+\section{Dirichlet Process Methods for Compound Decisions}
+
+
+\citeasnoun{Ferguson73} first proposed using the Dirichlet process as a prior distribution 
+for estimating an unknown probability measure $P$. 
+\citeasnoun{Antoniak74} and \citeasnoun{Ferguson83} extend the Dirichlet process to a 
+mixture of Dirichlet processes, suited to compound decision problems like the binomial mixture 
+model we have considered above. We do not observe samples on $\mu_{1}, \dots, \mu_{n}$ directly, 
+instead we would like to find the posterior distribution of $\mu$ conditional on observing 
+$y_{1}, \dots, y_{n}$. \citeasnoun{Antoniak74} shows that if $\mu_{1}, \dots, \mu_{n}$ are 
+drawn from a distribution $F$, with Dirichlet process prior $\mathcal{D}(\alpha G_{0})$, 
+and if $Y_{1}, \dots, Y_{n}$ are i.i.d. random variable with density 
+$g(y)=\int f(y | \mu) dF(\mu)$, then the posterior distribution of $F$ given 
+$y_{1}, \dots, y_{n}$ is a mixture of Dirichlet processes:
+\[
+F \mid y_{1}, \dots, y_{n} \sim \int \dots \int \mathcal{D}(\alpha G_{0} + \sum_{i=1}^{n} \delta_{\mu_{i}}) dH(\mu_{1}, \dots, \mu_{n} | y_{1}, \dots, y_{n})
+\]
+
+The above posterior seems rather intractible, however with the help of the P\'olya urn 
+representation of the Dirichlet process by \citeasnoun{Blackwell73}, one obtains a simplified 
+form of the posterior distribution, (see, for example, \citeasnoun{Lo84}). We will see that 
+this representation opens the way for MCMC sampling from the posterior distribution.
+
+The P\'olya urn representation provides the following conditional distribution, 
+\begin{equation} \label{eq1}
+\mu_{i} | \mu_{1}, \dots, \mu_{i-1} \sim \frac{\alpha}{\alpha +i-1}G_{0}(\mu_{i}) + \frac{1}{\alpha+i-1} \sum_{j=1}^{i-1} \delta_{\mu_{j}}(\mu_{i})
+\end{equation}
+where $\delta_{\mu_{j}}$ denotes the (Dirac) distribution with mass one at point $\mu_{j}$. 
+In the P\'olya urn scheme each new draw $\mu_{i}$ is a random draw from the 
+base distribution $G_{0}$ with probability $\frac{\alpha}{\alpha+i-1}$ and 
+otherwise take the value of the previous $i-1$ $\mu$'s, each with probability 
+$1/(\alpha+i-1)$. The joint distribution is therefore,  
+\[
+p(\mu_{1}, \dots, \mu_{n})= \prod_{i=1}^{n} 
+\frac{\alpha G_{0}(\mu_{i})+\sum_{j=1}^{i-1}\delta_{\mu_{j}}(\mu_{i})}{\alpha+i-1},
+\]
+and the posterior distribution of $(\mu_{1}, \dots, \mu_{n} | y)$ can thus be written as,
+\begin{equation} \label{post}
+p(\mu_{1}, \dots, \mu_{n} |y) \propto \prod_{i=1}^{n} f(y_{i} | \mu_{i})  \frac{\alpha G_{0}(\mu_{i}) + \sum_{j=1}^{i-1}\delta_{\mu_{j}}(\mu_{i})}{\alpha + i-1}. 
+\end{equation}
+Note that we have integrated out the infinite dimensional object $F$, the distribution 
+for  $\mu$,  
+
+\subsection{Gibbs Sampling I}
+Our aim is to sample from the above posterior distribution. This can be accomplished by 
+simulating a Markov chain that has the posterior as its stationary equilibrium distribution. 
+The Gibbs sampling algorithm in \citeasnoun{EscobarWest94} provides a simple way to do this. 
+It relies on the simple form of the posterior distribution of $\mu_{i}$ conditional on the 
+remaining parameters $\mu_{(-i)} = (\mu_{1}, \dots, \mu_{i-1}, \mu_{i+1}, \dots, \mu_{n})$ 
+and data $\bf{y}$ such that we only need to track one variable at each step instead of all $n$ of them.
+The easiest implementation chooses $G_{0}$ as the conjugate prior. 
+For the binomial setting, this leads us to choose $G_{0}$ as a beta distribution with 
+density $\mathcal{B}(a,b)$. 
+%A normal mixture example is provided in \citeasnoun{Escobar94} and \citeasnoun{EscobarWest94}. \\
+
+We can write the posterior distribution as, 
+\begin{align} \label{eq2}
+p(\mu_{i} | \mu_{(-i)}, \bf{y}) & = \frac{ f(y_{i} | \mu_{1}, \dots, \mu_{n}) \cdot p( \mu_{i} | \mu_{(-i)}) }{\int f(y_{i} | \mu_{1}, \dots, \mu_{n}) \cdot p( \mu_{i} | \mu_{(-i)})  d\mu_{i}} \nonumber \\ 
+& \propto  \frac{\alpha}{\alpha+n-1} \mathcal{B}(a,b) f(y_{i} | \mu_{i}) + \frac{1}{\alpha +n-1} \underset{j \neq i}{\sum} f(y_{i} | \mu_{j} ) \delta_{\mu_{j}} \nonumber \\
+& \propto  \frac{\alpha}{\alpha + n-1} \frac{B(y_{i}+a, l_{i}-y_{i}+b)}{B(a, b)} \mathcal{B}(y_{i}+a, l_{i}-y_{i}+b)  \nonumber \\
+& + \frac{1}{\alpha + n -1} \underset{j \neq i}{\sum} \mu_{j} ^{y_{i}}(1-\mu_{j})^{l_{i}-y_{i}} \delta_{\mu_{j}}
+\end{align}
+%with the normalizing constant as $(\frac{\alpha}{\alpha+n-1} 
+%\frac{B(y_{i} +a , l_{i}-y_{i}+b)}{B(a,b)} + 
+%\frac{1}{\alpha +n-1} \underset{j \neq i}
+%{\sum} \mu_{j}^{y_{i}}(1-\mu_{j})^{l_{i}-y_{i}})^{-1}$ 
+where $B(\cdot, \cdot)$ denotes the Beta function, $\mathcal{B}(\cdot, \cdot)$ denotes the 
+beta density and $f(y_{i}|\mu_{i})$ is the binomial density. Note that the posterior 
+distribution only depends on $y_{i}$ because for $j \neq i$, $y_{j}$ is conditionally 
+independent of $\mu_{i}$ given $\mu_{j}$'s. 
+
+Gibbs sampling initiates the Markov chain by sampling $(\mu_{1}^{(0)}, \dots, \mu_{n}^{(0)})$ 
+from $\mathcal{B}(y_{i}+a, l_{i}-y_{i}+b)$ (the posterior obtained by updating the prior 
+$G_{0}$ via the likelihood $f(y_{i} | \mu_{i})$ up to a normalization constant). 
+The first step of the Markov Chain is defined as: 
+
+Sample $\mu_{1}^{(1)}$ from $p(\mu_{1}| \mu_{2}^{(0)}, \dots, \mu_{n}^{(0)}, \bf{y})$. 
+
+Sample $\mu_{2}^{(1)}$ from $p(\mu_{2} | \mu_{1}^{(1)}, \mu_{3}^{(0)}, \dots, \mu_{n}^{(0)}, 
+\bf{y})$.\\ $\dots$
+
+Sample $\mu_{n}^{(1)}$ from $p(\mu_{n} | \mu_{1}^{(1)}, \dots, \mu_{n-1}^{(1)}, \bf{y})$. 
+
+Continuing the iteration, the chain stabilizes at its equilibrium distribution and the 
+resulting sample constitute draws from the distribution with density function 
+$p(\mu_{1}, \dots, \mu_{n} | \bf{y})$ as in (\ref{post}). 
+
+\subsection{Gibbs Sampling II}
+Gibbs sampling as above may have rather slow convergence because of the clustering behavior of 
+the $\mu_{i}$'s (as already noted by \citeasnoun{Antoniak74}). As discussed in \citeasnoun{Neal}, 
+since the Gibbs sampling algorithm implemented above can not change $\mu$ for more than one 
+observation at a time, changes of $\mu$ values for observations in the same cluster occur 
+rather rarely, leading to rigidity in the chain and hence slow convergence. 
+This can be avoided by introducing a latent class variable as implemented in 
+\citeasnoun{Bush} and \citeasnoun{West94}. It is also the approach adopted by the 
+DPbetabinom function in the  R package DPpackage that we employ.
+
+The latent class model is equivalent to the model introduced above, except that we 
+specify a configuration variable $\mathcal{S}=(\mathcal{S}_{1}, \dots, \mathcal{S}_{n})$ 
+that classifies the $\mu_{i}$'s into $k$ distinct clusters. 
+Denoting $n_{j}= \# \{ \mathcal{S}_{i} =j \}$ for $j = 1, \dots, k$, the distinct values of 
+$\mu$ form the set $\{ \theta_{1}, \dots, \theta_{k} \}$ and we set
+$I_{j} = \{ i: \mathcal{S}_{i}=j, i=1, \dots, n\}$. 
+As discussed in \citeasnoun{Antoniak74} and \citeasnoun{West90}, the $\theta_{i}$ are 
+random samples from $G_{0}$ and $k$ is related to the sample size $n$ and the precision 
+parameter $\alpha$. Given $k$, the $\mu_{i}$'s are selected from the set of $\theta$ 
+according to a multinomial distribution. With the above described structure, we have 
+the distribution for $\mu_{i}$ conditional on $\mu_{(-i)}$ as, 
+\[
+p(\mu_{i} \mid \mu_{(-i)}, \mathcal{S}_{(-i)},  k_{(-i)}) \sim \frac{\alpha}{\alpha+n-1} G_{0} + \frac{1}{\alpha+n-1} \sum_{j=1}^{k_{(-i)}}  n_{j}^{(-i)} \delta_{\theta_{j}^{(-i)}}
+\]
+where $\mathcal{S}_{(-i)}$ is the configuration corresponding to all entries in 
+$\mu_{(-i)}$ and $k_{(-i)}$ is the number of distinctive values of $\mu_{(-i)}$, 
+contained in the set $\theta^{(-i)}$ and $n_{j}^{(-i)} = \# \{ \mathcal{S}_{(-i)} = j \}$ 
+for $j = 1, \dots, k_{(-i)}$. We still have a P\'olya urn scheme:  with probability 
+$\alpha/(\alpha+n-1)$, $\mu_{i}$ is a random draw from $G_{0}$, and otherwise takes a value 
+from the set $\theta^{(-i)}$ with probability proportional to the multinomial counts 
+$n_{j}^{(-i)}$. 
+
+Choosing $G_{0}$ to be the conjugate prior $\mathcal{B}(a,b)$, the posterior 
+distribution of $\mu_{i}$ conditional on data $\bf{y}$ and $\mu_{(-i)}$ is thus, 
+\[
+\begin{array}{ll}
+p(\mu_{i} \mid \mu_{(-i)}, \mathcal{S}_{(-i)},  k_{(-i)}, y)  & \propto \frac{\alpha}{\alpha+n-1} f(y_{i} | \mu_{i}) \mathcal{B}(a,b) + \frac{1}{\alpha +n-1} \sum_{j=1}^{ k_{(-i)}}  n_{j}^{(-i)} f(y_{i} | \theta_{j}^{(-i)}) \delta_{\theta_{j}^{(-i)}}\\
+& = q_{i,0} \mathcal{B}(y_{i}+a, l_{i}-y_{i}+b) + \sum_{j=1}^{k_{(-i)}} q_{i,j} \delta_{\theta_{j}^{(-i)}}
+\end{array}
+\]
+with 
+\[
+q_{i,j}=
+\begin{cases}
+c \frac{\alpha}{\alpha+n-1} \frac{B(y_{i}+a, l_{i}-y_{i}+b)}{B(a,b)} & \mbox{  if   }   j=0\\
+c \frac{n_{j}^{(-i)}}{\alpha+n-1} (\theta_{j}^{(-i)})^{y_{i}}(1-\theta_{j}^{(-i)})^{l_{i}-y_{i}} &\mbox{  if   } j >0
+\end{cases}
+\]
+and normalizating constant,
+\[
+ c^{-1} = \frac{\alpha}{\alpha+n-1} \frac{B(y_{i}+a, l_{i}-y_{i}+b)}{B(a,b)}+ \frac{1}{\alpha+n-1} \sum_{j=1}^{k_{(-i)}} n_{i}^{(-i)} (\theta_{j}^{(-i)})^{y_{i}}(1-\theta_{j}^{(-i)})^{l_{i}-y_{i}}.
+ \]
+ 
+This second Gibbs sampling algorithm differs from the previous one in that instead of 
+iteratively updating $\mu_{i}$'s, we update the configuration variable $\mathcal{S}$ 
+according to its posterior distribution, that is, 
+\[
+P(\mathcal{S}_{i} =j \mid y, \mu_{(-i)}, \mathcal{S}_{(-i)}, k_{(-i)}) = q_{i,j}.
+\]
+We initiate the chain by choosing $\mathcal{S}_{i}^{(0)}=i$ (i.e., each observation forms 
+its own cluster) and $\theta^{(0)}$'s can be drawn from $\mathcal{B}(y_{i}+a, l_{i}-y_{i}+b)$. 
+The Markov chain is simulated as,
+\begin{enumerate}
+\item Given values for $\theta^{(0)}$ and $\mathcal{S}^{(0)}$, generate a new 
+	$\mathcal{S}^{(1)}$ according to posterior distribution specified above successively. 
+	For any index $i$ that has $\mathcal{S}_{i}^{(1)}=0$, draw a new $\mu_{i}$ 
+	from $\mathcal{B}(y_{i}+a, l_{i}-y_{i}+b)$. Count the number of clusters $k^{(1)}$.
+
+\item Given $k^{(1)}$ and $\mathcal{S}^{(1)}$, generate a new set of $\theta^{(1)}$ 
+	by sampling from 
+\[
+p(\theta_{j} | y, \mathcal{S}^{(1)}, k^{(1)}) \propto \prod_{r \in I_{j}^{(1)}} f(y_{r}|\theta_{j})dG_{0}(\theta_{j})
+\]
+
+\item  Continue iterating \dots
+\end{enumerate}
+
+After discarding the first few steps of the Markov chain (burn-in), we can use the 
+simulated sample for the following posterior analysis. 
+
+
+
+
+
+\subsection{Posterior Analysis}
+Given the posterior distribution (\ref{eq2}), the posterior mean for $\mu_{i}$ 
+from the $m^{th}$ step of the MCMC scan is 
+\begin{align} \label{pmean}
+\mathcal{E}_{i}^{(m)}=\mathbb{E}(\mu_{i}^{(m)} | y, \mu_{(-i)}^{(m)}) & = \int \mu_{i} p(\mu_{i} | \mu_{(-i)}, y) d\mu_{i} \nonumber \\
+&= \frac{\alpha \frac{B(y_{i} +a +1, l_{i}-y_{i} +b)}{B(a,b)} + \sum_{j \neq i} (\mu_{j}^{(m)}) ^{y_{i}+1} ( 1- \mu_{j}^{(m)})^{l_{i}-y_{i}}}{\alpha \frac{B(y_{i}+a, l_{i}-y_{i}+b)}{B(a,b)} + \sum_{j \neq i} (\mu_{j}^{(m)})^{y_{i}}(1-\mu_{j}^{(m)})^{l_{i}-y_{i}}} 
+\end{align} 
+
+The posterior mean of $\mu_{i}$ given data using the entire chain is thus estimated by, 
+\[
+\frac{1}{M}\sum_{m=1}^{M} \mathcal{E}_{i}^{(m)},
+\]
+where $M$ is the total number of MCMC scans after initial burn-in. 
+As noted by \cite{GelfandSmith90} this is essentially Rao-Blackwellization. 
+The posterior variance can be found accordingly as,  
+\[
+\mathbb{V}(\mu_{i} | y) = \mathbb{E}( \mathbb{V}(\mu_{i} | \mu^{(-i)}, y)) + \mathbb{V} ( \mathbb{E}(\mu_{i} | \mu^{(-i)}, y)). 
+\]
+\\
+\subsection{Predictive distribution}
+Nonparametric Bayesian analysis often focuses on the predictive distribution of $\mu_{n+1}$ or 
+$y_{n+1}$ for a future experiment.  It is also something routinely reported by software packages.
+%\footnote{For example, 
+%``densm.p'' in DPbetabinom function of the DPpackage is the predictive density for $\mu_{i}$ 
+%evaluated at grid points on the $[0,1]$ domain.}   
+As noted by \citeasnoun{Liu96}, since $F$ is an infinite-dimensional object, there is no 
+easy way of exploring its full posterior distribution. However, we can look at its 
+posterior mean, $\mathbb{E}(F | y )$, which also turns out to be the predictive distribution 
+of a future $\mu_{n+1}$. In particular, given the latent class model , the predictive density 
+for a future $\mu$ in the $m^{th}$ round of Markov Chain simulation, evaluated at grid points 
+on the domain of $(0,1)$, is,
+\[
+\begin{array}{ll}
+p(\mu_{n+1}^{(m)} \mid y, \mathcal{S}^{(m)}, k^{(m)}) &= \mathbb{E}(F \mid y_{1}, \dots, y_{n}) \\
+&= \frac{\alpha}{\alpha+n} G_{0}(\cdot)+ \frac{1}{\alpha +n} \sum_{j=1}^{k^{(m)}} n_{j}^{(m)} \mathcal{B}(\cdot; Z_{j}^{(m)} +a, L_{j}^{(m)}-Z_{j}^{(m)}+b)
+\end{array}
+\]
+with $Z_{j}^{(m)}=\sum_{r \in I_{j}^{(m)}}y_{r}$ and 
+$L_{j}^{(m)}=\sum_{r \in I_{j}^{(m)}}l_{r}$. 
+The predictive distribution is then obtained  as,
+\[
+\frac{1}{M}\sum_{m=1}^{M} p(\mu_{n+1}^{(m)} \mid y, \mathcal{S}^{(m)}, k^{(m)}).
+\]
+
+
+
+Given this predictive density we can compute the Bayes rule for predicting $\mu$ given an
+observed $y$ as in the binomial Kiefer Wolfowitz setting,
+\[
+\mathbb{E}(\mu \mid y) =\frac{\int \mu f(y \mid \mu) \hat f(\mu) d\mu}{\int f(y \mid \mu) \hat f(\mu) d\mu}
+\]
+The predictive density depends on the Dirichlet prior $\mathcal{D}(\alpha G_{0})$. 
+In the application, we take the distribution $G_{0}$ to be $\mathcal{B}(1,1)$, 
+i.e., the uniform distribution on the interval $[0,1]$. The precision parameter 
+$\alpha$ takes values $1$ and $0.01$. 
+The bigger $\alpha$ is, the more confidence we have in $G_{0}$. 
+}
+\end{document}
+
+

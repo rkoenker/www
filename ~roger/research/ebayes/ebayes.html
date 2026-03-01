@@ -1,0 +1,253 @@
+<title>Empirical Bayes</title>
+<html>
+<h1>Empirical Bayes</h1>
+<p>
+<br>
+<p>
+</body></html>
+
+For the last several years I've been exploring empirical Bayes methods originally
+stimulated by a question raised by Larry Brown regarding the application of
+shape contrained density estimation.  There are several papers that have come
+out of this line of research.
+
+<br>
+<br>
+<STRONG> Empirical Bayes for the Reluctant Frequentist</STRONG>
+<br>
+<br>
+Empirical Bayes methods offer valuable tools for a large class of compound
+decision problems. In this tutorial we describe some basic principles of the
+empirical Bayes paradigm stressing their frequentist interpretation. Emphasis is
+placed on recent developments of nonparametric maximum likelihood methods for
+estimating mixture models. A more extensive introductory treatment will eventually
+be available in Koenker and Gu (2024). The methods are illustrated with an
+extended application to models of heterogeneous income dynamics based on PSID
+data.
+<br>
+<br>
+This paper was commissioned for a special issue of JPE Micro on recent developments in
+econometrics and will appear there in due course.  Meanwhile, it is
+available on:  <a href="https://arxiv.org/abs/2404.03422".>arXiv.</a>
+or  <a href="jpeeb.pdf">here.</a>.  
+<br>
+<br>
+<STRONG> Invidious Comparisons:  Ranking and Selection as Compound Decisions </STRONG>
+<br>
+<br>
+ There is an innate human tendency, one might call it the ``league table
+    mentality,'' to construct rankings.  Schools,
+    hospitals, sports teams, movies, and myriad other objects are ranked even though their inherent
+    multi-dimensionality would suggest that -- at best -- only partial orderings were possible.
+    We consider a large class of elementary ranking problems in which we observe noisy, scalar
+    measurements of merit for $n$ objects of potentially heterogeneous precision
+    and are asked to select a group of the objects that are ``most meritorious.''
+    The problem is naturally formulated in the compound decision framework of
+    Robbins's (1956) empirical Bayes theory, but it also exhibits close connections to
+    the recent literature on multiple testing.  The nonparametric maximum likelihood
+    estimator for mixture models (Kiefer and Wolfowitz (1956)) is employed to construct
+    optimal ranking and selection rules.  Performance  of the rules is evaluated in
+    simulations and an application to ranking U.S kidney dialysis centers.
+<br>
+<br>
+The paper is available on:  <a href="https://arxiv.org/abs/2012.12550".>arXiv.</a>
+or  <a href="Ranking.pdf">here.</a>.  The latter version corrects a mislabeling in Figure 7.1. 
+Replication files in R for the paper are available in compressed tar format 
+<a href="RankingRfiles.tar.gz">here.</a> This file is 87MB.  A file describing the
+linkage of the R code and data files with the figures in the paper is available 
+<a href="ReplicationFiles">here.</a>  A tutorial guide to the software for this paper
+is available <a href="RankingTutorial.pdf">here.</a>  
+This paper is joint work with Jiaying Gu at U. Toronto, as is much of the work described below.
+
+<br>
+<br>
+<STRONG> Ranking and Selection from Pairwise Comparisons:
+Empirical Bayes Methods for Citation Analysis</STRONG>
+<br>
+<br>
+We study Stigler’s (1994) model of citation flows among journals adapting the
+pairwise comparison model of Bradley and Terry to do ranking and selection of
+journal influence based on nonparametric empirical Bayes procedures.
+Comparisons with several other rankings are made.
+<br>
+<br>
+This paper is joint work with Jiaying Gu at U. Toronto.
+It is available on:  <a href="https://arxiv.org/abs/2112.11064".>arXiv.</a>
+An R package for replication of results in the paper is available in compressed form
+<a href="RRpairwise_0.50.tar.gz">here.</a>  The package includes a vignette describing
+further details about the software and data sources.
+Slides for a talk on the paper are  available <a href="LT.pdf">here.</a> 
+<br>
+<br>
+<STRONG> Shape Constraints, Compound Decisions and Empirical Bayes Rules </STRONG>
+<br>
+<br>
+ A shape constrained maximum likelihood variant of the kernel based empirical
+        Bayes rule proposed by Brown and Greenshtein (2009) for the classical Gaussian compound
+        decision problem is described and some simulation comparisons are presented.
+        The simulation evidence suggests that the shape constrained Bayes rule improves
+        substantially on the performance of the unconstrained kernel estimate for the
+        Bayes rule.  Two variants of the generalized non-parametric
+        maximum likelihood (Kiefer-Wolfowitz) Bayes rule recently proposed by 
+        Jiang and Zhang (2009) are also studied.  Interior point methods of computing
+        the Kiefer-Wolfowitz estimator are proposed that substantially improve
+        upon the prevailing EM approach.
+<br>
+<br>
+The paper is joint work with Ivan Mizera and is available in <a href="brown.pdf">pdf.</a>  
+It now appears in JASA, 109, 694--685. 
+Computations for the paper rely on Mosek, a proprietary  convex optimization software.
+An R package called MeddeR was built to connect R via Matlab to Mosek, and carry out
+the computations.  Adventurous people who would like to try to reproduce this 
+somewhat Rube Goldberg schema in their own environments are welcome to contact me 
+for further details.  Future work will rely on the much simplified structure
+provided by the Rmosek package.  Mosek  Version 9 replaced the special additive
+model formulations with a unified cone constraint formulation.  Some notes on
+adapting to V9 and extensions to Renyi entropy extensions are available
+<a href="kwdual9.pdf">here.</a>  
+<br>
+<br>
+A new R package called REBayes is available using Rmosek.  Some aspects are
+still under active consideration, but the current version is available from CRAN.
+Note that this package requires the Rmosek package which in turn requires Mosek 
+to be installed.  Some advice about this process is available 
+<a href="mosek.txt">here.</a>  
+<br>
+<br>
+<STRONG> Minimalist G-Modeling: A Comment on Efron</STRONG>
+<br>
+<br>
+This is a comment on Brad Efron's paper:  Bayes, Oracle Bayes and Empirical Bayes,
+to appear in Statistical Science. The text in pdf is  <a href="Efron.pdf">here.</a>
+And R code to reproduce the figures and tables in tar.gz format is  
+<a href="EfronRepo.tar.gz">here.</a>
+<br>
+<br>
+<STRONG> REBayes:  An R Package for Empirical Bayes Mixture Methods</STRONG>
+<br>
+<br>
+An R  vignette describing the R package REBayes is available
+<a href="rebayes.pdf">here.</a>  The code to recreate the computations
+reported in this paper is available <a href="rebayes.R">here.</a>  
+Some notes on the adaptation of the code in REBayes, particularly the
+the function medde to the upgrade from Mosek V8 to V9 are available
+<a href="Mosek9.pdf">here.</a>
+<br>
+<br>
+An R vinaigrette comparing the Kiefer-Wolfowitz estimator with Efron's logspline
+Bayesian deconvolution estimator is avilable 
+<a href="Bdecon.pdf">here.</a>  Code for the computations in this note is available
+from the Sweave version <a href="Bdecon.R">here.</a>  
+<br>
+<br>
+Another R vinaigrette concerning the use of Bayesian deconvolution for the Wicksell
+problem in stereology is available <a href="tomato2.pdf">here.</a>  
+<br>
+<br>
+<STRONG> Empirical Bayes Confidence Intervals</STRONG>
+
+Another R Vinaigrette describing some comparisons of interval estimation based
+on the Kiefer-Wolfowitz NPMLE and the Efron logspline G-modeling approach is available
+<a href="cieb.pdf">here.</a>  Code for the computations in this note is available
+in tar.gz compressed form from the <a href="cieb.tar.gz">here.</a>  
+<br>
+<br>
+
+<STRONG> Unobserved Heterogeneity in Income Dynamics</STRONG>
+<br>
+<br>
+A related paper on Gaussian mixture models for longitudinal data
+(with Jiaying Gu) is available: <a href="Haydn.pdf">here.</a>
+This paper has appeared in JBES.
+Slides for a talk about this paper are <a href="jhu.pdf">here.</a>
+Data and code for reproducing the figures are <a href="Haydn.tar.gz">here,</a>
+as a gzipped tarball.
+<br>
+<br>
+<STRONG> Nonparametric Maximum Likelihood Methods for Binary Response Models 
+with Random Coefficients </STRONG>
+<br>
+<br>
+A relatively new paper on binary response models is available from arXiv 
+<a href='https://arxiv.org/abs/1811.03329'>here.</a>  An R package and code
+for all the figures and tables is available 
+<a href="rcbr4.tar.gz">here </a> in standard unix tar.gz format.
+This is about a 50MB download, that contains some intermediate
+simulation results as well as code so be warned.
+<br>
+<br>
+<STRONG> Empirical Bayesball Remixed:  Empirical Bayes Methods for 
+Longitudinal Data</STRONG>
+<br>
+<br>
+A updated version of an earlier paper with more detail about some
+aspects of the methodology and a perhaps somewhat frivolous application
+to predicting baseball batting averages is also available:
+<a href="Bball.pdf">here.</a>
+This paper is forthcoming in  J. Applied Econometrics.
+Slides for a talk about the latter paper are <a href="cemmap.pdf">here.</a>
+Data and code to reproduce figures and tables of the paper will be available
+on the JAE website.
+<br>
+<br>
+<STRONG> On a Problem of Robbins</STRONG>
+<br>
+<br>
+An early example of a compound decision problem of Robbins (1951)
+is employed to illustrate some features of the development of empirical Bayes meth-
+ods. Our primary objective is to draw attention to the constructive role that the
+nonparametric maximum likelihood estimator for mixture models introduced by
+Kiefer and Wolfowitz (1956) can play in these developments.
+This surveyish paper (also with Jiaying Gu) is available in pdf 
+<a href="isrProbRob.pdf">here.</a>
+This paper has appeared in International Statistical Review.
+Slides for a talk about this paper are available
+<a href="hkust.pdf">here.</a>
+<br>
+<br>
+<br>
+<STRONG> Testing for Homogeneity in Mixture Models</STRONG>
+<br>
+<br>
+A related paper on testing for homogeneity in mixture models (with Jiaying Gu
+and Stanislav Volgushev) is available from <a href="LRT.pdf">LRT.pdf.</a>
+Code for the computational results in this paper is available from the
+<a href="LRT.zip">zip archive.</a>
+<br>
+<br>
+<STRONG> Introduction to Empirical Bayes</STRONG>
+<br>
+<br>
+An introductory chapter of a proposed monograph on empirical Bayes methods is
+available in extremely preliminary from <a href="EBCh1.pdf">EBCh1.pdf.</a>
+<br>
+<br>
+<STRONG> Fraility, Profile Likelihood and Medfly Mortality </STRONG>
+<br>
+<br>
+A related paper on Weibull mixture models and medfly mortality 
+(with Jiaying Gu) is available: <a href="frailty.pdf">here.</a>
+This paper has appeared in a Festscrift for Hira Koul. 
+<br>
+<br>
+<br>
+<STRONG> Adaptive Estimation of Regression Parameters</STRONG>
+<br>
+<br>
+A brief paper on adaptive estimation of regression in models with (iid) 
+scale mixture of Gaussian errors is available: <a href="asm.pdf">here.</a>
+This paper has appeared in a Festscrift for Siegfried Heiler. 
+<br>
+<br>
+<STRONG> Gaussian Compound Decisions</STRONG>
+<br>
+<br>
+An even more brief paper that compares performance of the empirical Bayes
+procedure for Gaussian compound decision problems with some recently proposed
+alternatives is available: <a href="bakeoff.pdf">here.</a>.  This paper has
+appeared in the new ISI journal Stat.  Code for the
+simulations reported in this paper is available as a compressed tarball
+<a href="bakeoff.tar.gz">here.</a>
+<br>
+<br>
+Comments are, of course, always welcome.

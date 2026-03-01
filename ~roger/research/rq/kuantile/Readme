@@ -1,0 +1,61 @@
+Motivated by Deepayan's recent inquiries about the efficiency of the R 'quantile'
+function:
+
+	http://tolstoy.newcastle.edu.au/R/devel/05/11/3305.html
+	http://tolstoy.newcastle.edu.au/R/devel/06/03/4358.html
+
+I decided to try to revive an old project to implement a version of the Floyd
+and Rivest (1975) algorithm for finding quantiles with O(n) comparisons.  I
+used to have a direct translation from FR's algol68 in my quantreg package,
+but was forced to remove it when it encountered unfriendly g77 compilers that
+didn't like the way I had handled recursion. 
+
+Fortunately, in the interim, I've corresponded with Krzysztof Kiwiel in Warsaw
+who has made a detailed study of the algorithm:
+
+K.C. Kiwiel: On Floyd and Rivest's SELECT Algorithm, Theoretical
+      Computer Sci. 347 (2005) 214-238.
+
+He has also kindly now agreed to allow me to incorporate his implementation of
+the FR algorithm in R under GPL.  
+
+For the moment, I have made an alpha-test package with a single function --
+'kuantile' -- that attempts to reproduce the functionality of the current
+base quantile function, essentially replacing the partial sorting done
+there with calls to Kiwiel's 'select' function.  This package is available 
+from:
+
+	http://www.econ.uiuc.edu/~roger/research/rq/kuantile
+
+The good news is that the new function  _is_ somewhat quicker than 
+the base 'quantile' function.  The following table is based on means
+of 10 replications.  The first two columns report times for computing 
+just the median, the next two columns for computing the five default
+quantiles:  seq(0,1,.25), and the last column is the time needed for a call
+of sort().
+
+	mean system.time()[1] for various calls*
+
+          median only      default 5
+n      quantile kuantile quantile kuantile  	sort
+
+100      0.002    0.001    0.004    0.004 	0.000
+1000     0.002    0.001    0.003    0.002 	0.002
+10000    0.003    0.002    0.009    0.005 	0.005
+1e+05    0.024    0.010    0.061    0.013 	0.031
+1e+06    0.206    0.120    0.535    0.142 	0.502
+1e+07    2.132    0.790    5.575    1.035 	7.484
+
+* On a mac G5 running R 2.2.1.
+
+The bad news is that this approach doesn't help with Deepayan's
+original question which involved instances in which quantile() was
+being called for rather large number of probabilities.  In such
+cases it seems that it is difficult to improve upon doing a full sort.
+
+I would welcome comments on any of this....
+
+url:    www.econ.uiuc.edu/~roger    Roger Koenker
+email:  rkoenker@uiuc.edu           Department of Economics
+vox:    217-333-4558                University of Illinois
+fax:    217-244-6678                Champaign, IL 61820

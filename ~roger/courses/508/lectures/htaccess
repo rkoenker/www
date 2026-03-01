@@ -1,0 +1,39 @@
+deny from all
+allow from .uiuc.edu 
+allow from .illinois.edu 
+allow from .comcast.net
+allow from 23.249.32
+allow from .ers.usda.gov
+allow from .uwaterloo.ca
+allow from .ucl.ac.uk
+AuthType Basic
+AddDescription "Empirical Demand Analysis" L1.pdf
+AddDescription "Transformations" L2.pdf
+AddDescription "L2 slides" L2b.pdf
+AddDescription "Dynamic Demand Models " L3.pdf
+AddDescription "Model Selection and Fishing" L4.pdf
+AddDescription "Delta-Method and Bootstrap" L5.pdf
+AddDescription "Welfare Econometrics " L6.pdf
+AddDescription "Specification Testing" L7.pdf 
+AddDescription "The Regression Fallacy" L8.pdf
+AddDescription "Non-Stationary Time Series" L9.pdf 
+AddDescription "Simultaneous Equations" L10.pdf 
+AddDescription "Errors in Variables" L11.pdf 
+AddDescription "Dynamic SEMs" L12.pdf 
+AddDescription "Specification Testing" L13.pdf 
+AddDescription "System Estimation" L14.pdf 
+AddDescription "Optimization" L15.pdf 
+AddDescription "Quantile Regression" L16.pdf 
+AddDescription "QR Slides" L16a.pdf 
+AddDescription "Panel Data" L17.pdf 
+AddDescription "Dynamic Panels " L18.pdf 
+AddDescription "Inequality" L19.pdf 
+AddDescription "Binary Response" L20.pdf 
+AddDescription "Sample Selection" L21.pdf 
+AddDescription "Survival Analysis" L22.pdf 
+AddDescription "Nonparametrics" L23.pdf 
+AddDescription "Ecological Regression" L25.pdf 
+AddDescription "Course Outline" outline.pdf 
+AddDescription "Midterm Review" f12mtx.pdf 
+AddDescription "Final Review" f12fx.pdf 
+AddDescription "Appendix to L6" A6.pdf 

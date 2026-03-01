@@ -1,0 +1,99 @@
+This is TeX, Version 3.14159 (C version 6.1e) (format=latex 95.9.4)  13 JAN 2001 11:13
+**agenda
+(agenda.tex
+LaTeX2e <1995/06/01> patch level 3
+(/opt/texmf/tex/latex/unpacked/latex209.def
+File: latex209.def 1995/06/30 v0.46 Standard LaTeX file
+
+Entering LaTeX 2.09 compatibility mode.
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+(/opt/texmf/tex/latex/base/tracefnt.sty
+Package: tracefnt 1995/06/15 v3.0b Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 133.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 275.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 276.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 277.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 283.
+LaTeX Info: Redefining \em on input line 293.
+
+(/opt/texmf/tex/latex/unpacked/latexsym.sty
+Package: latexsym 1995/03/18 v2.2a Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 81.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 358.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 360.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 362.
+)
+(/opt/texmf/tex/latex/unpacked/article.cls
+Document Class: article 1995/06/26 v1.3g Standard LaTeX document class
+(/opt/texmf/tex/latex/unpacked/size11.clo
+File: size11.clo 1995/06/26 v1.3g Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 491.
+LaTeX Info: Redefining \mit on input line 492.
+\bibindent=\dimen105
+) (agenda.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 31.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 31.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 31.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 31.
+
+(/opt/texmf/tex/latex/unpacked/Ulasy.fd
+File: Ulasy.fd 1995/03/18 v2.2aLaTeX symbol font definitions
+) [1
+
+] (agenda.aux) ) 
+Here is how much of TeX's memory you used:
+ 381 strings out of 10957
+ 3821 string characters out of 72967
+ 49113 words of memory out of 262141
+ 3240 multiletter control sequences out of 9500
+ 12647 words of font info for 46 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 22i,9n,21p,173b,149s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on agenda.dvi (1 page, 3052 bytes).

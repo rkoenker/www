@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Linking FORTRAN to SPLUS</TITLE>
+<META NAME="description" CONTENT="Linking FORTRAN to SPLUS">
+<META NAME="keywords" CONTENT="repro">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="repro.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html41" HREF="node4.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/~roger/gifs/next_motif.gif"></A> <A NAME="tex2html39" HREF="repro.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/~roger/gifs/up_motif.gif"></A> <A NAME="tex2html33" HREF="node2.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/~roger/gifs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html42" HREF="node4.html">Is this really necessary?</A>
+<B>Up:</B> <A NAME="tex2html40" HREF="repro.html"> Reproducible Econometric Research</A>
+<B> Previous:</B> <A NAME="tex2html34" HREF="node2.html">Reproducible Simulation</A>
+<BR> <P>
+<H1><A NAME="SECTION00030000000000000000">Linking <font size=-1><small>FORTRAN</small></font> to <font size=-1><small>SPLUS</small></font></A></H1>
+<P>
+The natural question which arises immediately is, ``why?''  What could motivate us 
+to return to the paleolithic land of GOTO's and DO-loops when <font size=-1><small>SPLUS</small></font> 
+offers such a convenient environment already.  The answer, in a word, is 
+efficiency.  It becomes painfully apparent after only a little experience with 
+<font size=-1><small>SPLUS</small></font> in simulation work, that unless the inner loops of computations are coded in 
+some lower level language like <font size=-1><small>FORTRAN</small></font> or C, <font size=-1><small>SPLUS</small></font> can be very slow.  
+As a rule of thumb, if you have a loop which needs to be executed 1000's of 
+times you should begin to consider <font size=-1><small>FORTRAN</small></font>izing it, for your own benefit, 
+and for the welfare of other users who share the machine you happen to compute on.
+<P>
+Fortunately, adding <font size=-1><small>FORTRAN</small></font> (or C, but I will not delve into this) is quite easy in S.
+I will briefly describe some tools which I find helpful in the process, and 
+some general rules that I try to follow when venturing into this land of 
+the dinosaurs.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html43" HREF="node4.html#SECTION00031000000000000000">Is this really necessary?</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Sun Aug 31 15:47:37 CDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

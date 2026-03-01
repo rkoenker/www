@@ -1,0 +1,4 @@
+This directory contains software for the monte carlo expericment in my
+Prague Symposium paper.  There are several versions of the bootstrap
+in an effort to speed things up, there is a routine called rqs which
+allows several y vectors to be used within a fortran loop.

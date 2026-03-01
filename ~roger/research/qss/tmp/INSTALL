@@ -1,0 +1,41 @@
+#! /bin/sh
+if [ ! -d .Data ]
+then
+	mkdir .Data .Data/.Help
+else
+	if [ ! -d .Data/.Help ]
+	then 
+		mkdir .Data/.Help
+	fi
+fi
+if [ $* = "dynamic" ]
+then
+	sed '
+	/^		call dmonit/s/^/#/
+	/^subroutine dmonit/,/^end/s/^/#/
+	' drqssbc.r >/tmp/drqssbc.r
+	mv /tmp/drqssbc.r .
+	make -f Makefile DYNAMIC
+	for file in `ls *.d`
+		do
+			help=`basename $file .d`
+			cp $file .Data/.Help/$help
+		done
+	echo "Dynamic version of qss and qss.fit loaded"
+else
+	if [ $* = "static" ]
+	then
+		sed ' 
+		/^#		call dmonit/s/^#//
+		/^#subroutine dmonit/,/^#end/s/^#//
+		' drqssbc.r >/tmp/drqssbc.r
+		mv /tmp/drqssbc.r .
+		make -f Makefile STATIC
+		for file in `ls *.d`
+			do
+				help=`basename $file .d`
+				cp $file .Data/.Help/$help
+			done
+		echo "Static version of qss and qss.fit loaded"
+	fi
+fi
