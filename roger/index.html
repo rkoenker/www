@@ -13,40 +13,37 @@
 
 <table cellpadding=10 cellspacing=0>
 <tr>
-<td valign=top width=200 align=left>
-<script Language="JavaScript">
-<!--
-function random_imglink(){
-var myimages=new Array()
-//specify random images below. You can have as many as you wish
-myimages[1]="pics/magritte.jpg"
-myimages[2]="pics/magritte1.jpg"
-myimages[3]="pics/lichtenstein.jpg"
-myimages[4]="pics/13_numbers.jpg"
-myimages[5]="pics/rothko7.jpg"
-myimages[6]="pics/malevich.jpg"
-myimages[7]="pics/NedKelly2.jpg"
-myimages[8]="pics/thumb.jpg"
-myimages[9]="pics/nose.jpg"
-myimages[10]="pics/nose.jpg"
-myimages[11]="pics/saul_steinbergmask.jpg"
-myimages[12]="pics/SaulSteinberg82.jpg"
-myimages[13]="pics/fetish.jpg"
-myimages[14]="pics/rwk.jpg"
-myimages[15]="pics/NoRepro.jpg"
-myimages[16]="pics/sisyphus8.jpg"
-myimages[17]="pics/dejavu.jpg"
-myimages[18]="pics/DataPoisoning.jpg"
-myimages[19]="pics/stevenson.jpg"
-myimages[20]="pics/Beach.jpg"
+<td valign="top" width="200" align="left">
+<img id="randomImage" src="" border="0" alt="Random art">
 
-var ry=Math.floor(Math.random()*myimages.length)
-if (ry==0)
-ry=1
-document.write('<a> <img src="'+myimages[ry]+'" border=0></a>')
-}
-random_imglink()
-//-->
+<script type="text/javascript">
+(function() {
+  var images = [
+    "pics/magritte.jpg",
+    "pics/magritte1.jpg",
+    "pics/lichtenstein.jpg",
+    "pics/13_numbers.jpg",
+    "pics/rothko7.jpg",
+    "pics/malevich.jpg",
+    "pics/NedKelly2.jpg",
+    "pics/thumb.jpg",
+    "pics/nose.jpg",
+    "pics/nose.jpg",
+    "pics/saul_steinbergmask.jpg",
+    "pics/SaulSteinberg82.jpg",
+    "pics/fetish.jpg",
+    "pics/rwk.jpg",
+    "pics/NoRepro.jpg",
+    "pics/sisyphus8.jpg",
+    "pics/dejavu.jpg",
+    "pics/DataPoisoning.jpg",
+    "pics/stevenson.jpg",
+    "pics/Beach.jpg"
+  ];
+
+  var randIndex = Math.floor(Math.random() * images.length);
+  document.getElementById("randomImage").src = images[randIndex];
+})();
 </script>
 </td>
 <td valign=top bgcolor=ffffff align=left>
