@@ -1,0 +1,83 @@
+66,67c66,67
+< <td><b> September 20 </b>(Friday)</td>
+< <td><b> Roger Klein </b> (Rutgers) </td>
+---
+> <td><b> February 19 </b>(Tuesday!)</td>
+> <td><b> Ron Gallant </b> (UNC) </td>
+71c71
+< <td><b> <font color="red"> <b> 245 Wohlers Hall, 3:30-5:00PM </b>
+---
+> <td><b> <font color="red"> <b> 170 Wohlers Hall, 3:30-5:00PM </b>
+76,78c76,77
+< <a href="http://www.econ.uiuc.edu/~roger/klein.ps">
+< "Estimating and Identifying A Class OF Semiparametric 
+< Models Without Exclusion Restrictions" </a>
+---
+> <a href="http://www.econ.uiuc.edu/~roger/edf.ps">
+> "Effective Calibration" </a>
+82,83c81,82
+< <td><b> October 4 </b>(Friday)</td>
+< <td><b> Roger Koenker</b> (UIUC) </td>
+---
+> <td><b> March 15 </b>(Friday)</td>
+> <td><b> Ted Juhl</b> (U Kansas) </td>
+87c86
+< <td><b> <font color="red"> <b> 245 Wohlers Hall, 3:30-5:00PM </b>
+---
+> <td><b> <font color="red"> <b> 170 Wohlers Hall, 3:30-5:00PM </b>
+93,94c92
+< "How to be Pessimistic:  Choquet Risk and Portfolio
+< Optimization" </a>
+---
+> "Functional Coefficient Models under Unit Root Behavior" </a>
+97a96,145
+> <tr>
+> <td><b> April 5 </b>(Friday)</td>
+> <td><b> David Brownstone</b> (UC Irvine ) </td>
+> </tr>
+> <tr>
+> <td><b></td>
+> <td><b> <font color="red"> <b> 170 Wohlers Hall, 3:30-5:00PM </b>
+> </font> </td>
+> </tr>
+> <tr><td></td>
+> <td><b> 
+> <a href="http://orion.oac.uci.edu/~dbrownst/bootmi.pdf">
+> "Applying the Bootstrap" </a>
+> </b></td>
+> </tr>
+> 
+> <tr>
+> <td><b> April 26 </b>(Friday)</td>
+> <td><b> Jan Kiviet </b> (Amsterdam) </td>
+> </tr>
+> <tr>
+> <td><b></td>
+> <td><b> <font color="red"> <b> 174 Wohlers Hall, 3:30-5:00PM </b>
+> </font> </td>
+> </tr>
+> <tr><td></td>
+> <td><b> 
+> <a href="http://aimsrv1.fee.uva.nl/koen/attachme.nsf/view/AF8FEF15793A036AC1256
+> B42004CEC36/$file/BK02b.pdf">
+> "Estimation of Dynamic Panel
+> Data Models" </a>
+> </b></td>
+> </tr>
+> 
+> <tr>
+> <td><b> May 3 </b>(Friday)</td>
+> <td><b> Jan Kiviet </b> (Amsterdam) </td>
+> </tr>
+> <tr>
+> <td><b></td>
+> <td><b> <font color="red"> <b> 174 Wohlers Hall, 3:30-5:00PM </b>
+> </font> </td>
+> </tr>
+> <tr><td></td>
+> <td><b> 
+> <a href="http://aimsrv1.fee.uva.nl/koen/attachme.nsf/view/a.pdf">
+> "Prehistory of Econometrics " </a>
+> </b></td>
+> </tr>
+> </table>

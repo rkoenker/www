@@ -1,0 +1,859 @@
+<HTML><HEAD><TITLE>Pine Technical Notes: Configuration and Preferences</TITLE></HEAD><BODY>
+<H1>Configuration and Preferences</H1>
+
+<H2><A NAME="pine-conf">Pine Configuration</A></H2>
+
+There is very little in Pine which <STRONG>requires</STRONG> compile-time
+configuration. In most cases, the compiled-in preferences will suit users
+and administrators just fine. When running Pine on a UNIX system, the
+default built-in configuration can be changed by setting variables in the
+system configuration file, <EM>/usr/local/lib/pine.conf</EM>.  Both Pine
+and PC-Pine also use personal (user-based) configuration files.  On UNIX
+machines, the personal configuration file is the file <EM>~/.pinerc</EM>. 
+For PC-Pine systems, the personal configuration file is in
+<EM>$PINERC</EM> or <EM>$HOME\PINE\PINERC</EM> or <EM>&lt;PINE.EXE
+dir&gt;\PINERC</EM>. <P>
+
+The syntax of a non-list configuration variable is this: 
+
+<BLOCKQUOTE>
+&lt;variable&gt; = &lt;value&gt;<BR>
+</BLOCKQUOTE>
+
+If the value is absent then the variable is unset.  To set a variable to
+the empty value the syntax is "".  This is equivalent to an absent value
+except that it overrides any system-wide value that may be set.  Quotes
+may be used around any value.  All values are strings and end at the end
+of the line or the closing quote.  Leading and trailing space is ignored
+unless it is included in the quotes.  For some variables the only
+appropriate values are <EM>yes</EM> and <EM>no.</EM> There is also a
+second type of variable, lists.  A list is a comma-separated list of
+values.  The syntax for a list is: 
+
+<BLOCKQUOTE>
+&lt;variable&gt; = &lt;value&gt; [, &lt;value&gt; , ... ]<BR>
+</BLOCKQUOTE>
+
+A list can be continued on subsequent lines by beginning the line with
+white-space.  Both the per-user and global configuration files may contain
+comments which are lines beginning with a <EM>#.</EM> <P>
+
+For UNIX Pine, there are five ways in which a variable can be set.  In
+decreasing order of precedence they are: 
+
+<OL>
+
+<LI> the system-wide <EM>fixed</EM> configuration file
+
+<LI> a command line argument
+
+<LI> the personal configuration file (which is usually set from the Config
+screen)
+
+<LI> the system-wide configuration file
+
+<LI> default in the source code. 
+
+</OL><P>
+
+So, system-wide fixed settings always take precedence over command line
+flags, which take precedence over per-user settings, which take precedence
+over system-wide configuration settings, which take precedence over source
+code defaults.  PC-Pine has the same precedence, but it does not use a
+system-wide fixed configuration file.  <P>
+
+You may get a sample/fresh copy of the system configuration file by
+running <EM>pine -conf.</EM> The result will be printed on the standard
+output with short comments describing each variable.  (The online help in
+the Setup/Config screen provides longer comments.) If you need to fix some
+of the configuration variables, you would use the same template for the
+fixed configuration file as for the regular system-wide configuration
+file.  (If it isn't clear, the purpose of the fixed configuration file is
+to allow system administrators to restrict the configurability of Pine. 
+It is by no means a bullet-proof method.) Pine will automatically create
+the personal configuration file the first time it is run, so there is no
+need to generate a sample.  Pine reads and writes the personal
+configuration file occasionally during normal operation.  Users will not
+normally look at their personal configuration file, but will use the
+Setup/Config screen from within Pine to set the values in this file.  If a
+user does add additional comments to the personal configuration file they
+will be retained.  Pine always writes this file at least once when
+running, so you can tell when a user last invoked Pine by checking the
+date on this file.  <P>
+
+References to environment variables may be included in the Pine
+configuration files.  The format is <EM>$variable</EM> or
+<EM>${variable}.</EM> The character <EM>~</EM> will be expanded to the
+<EM>$HOME</EM> environment variable.  <P>
+
+When environment variables are used for Pine settings which take lists,
+you must have an environment variable set for each member of the list. 
+That is, Pine won't properly recognize an environment variable which is
+set equal to a comma-delimited list.  It is OK to reference unset
+environment variables in the Pine configuration file, which will expand to
+nothing.  <P>
+
+<HR>
+
+<H2><A NAME="gen-conf">General Configuration Variables</A></H2>
+
+The following is a list of all Pine configuration variables, in
+alphabetical order.  Note that not all variables apply to all versions of
+Pine and that some variables are only applicable in a system configuration
+file and some are only applicable in a personal configuration file.  <P>
+
+<DL COMPACT>
+
+<DT> <EM>addrbook-sort-rule</EM>
+
+<DD> This variable sets up the default address book sorting.  Currently,
+Pine will accept the values <EM>dont-sort</EM>,
+<EM>fullname-with-lists-last</EM>, <EM>fullname</EM>,
+<EM>nickname-with-lists-last</EM>, and <EM>nickname</EM>.  The default is
+to sort by fullname with lists last.  <P>
+
+<DT> <EM>address-book</EM> 
+
+<DD> A list of personal address books.  Each entry in the list is an
+optional nickname followed by a pathname or file name relative to the home
+directory.  This list will be added to the <EM>global-address-book</EM>
+list to arrive at the complete set of address books.  <P>
+
+<DT> <EM>addressbook-formats</EM>
+
+<DD> This option specifies the format that address books are displayed in. 
+Normally, address books are displayed with the nicknames in the first
+column, the fullnames in the second column, and addresses in the third
+column.  The system figures out reasonable defaults for the widths of the
+columns.  An address book may be given a different format by listing
+special tokens in the order you want them to display.  The possible tokens
+are NICKNAME, FULLNAME, ADDRESS, FCC, and COMMENT. <P>
+
+<DT> <EM>alt-addresses</EM>
+
+<DD> This option provides a place for you to list alternative email
+addresses you may have.  If set, the option affects the behavior of the
+Reply command and the "+" symbol in the Folder Index, which denotes that a
+message has been addressed specifically to you. <P>
+ 
+With respect to Reply, the reply-to-all option will exclude addresses
+listed here. <P>
+
+<DT> <EM>bugs-additional-data</EM>
+
+<DD> System-wide configuration file only.  Program/Script used by "Report
+Bug" command.  Output from the program/script is captured and attached to
+the bug report. <P>
+
+<DT> <EM>bugs-nickname</EM>, <EM>bugs-fullname</EM>,
+<EM>bugs-address</EM>, <EM>local-fullname</EM>, <EM>local-address</EM>, 
+<EM>suggest-fullname</EM>, and <EM>suggest-address</EM>
+
+<DD> System-wide configuration file only.  These are used by the Report
+Bug command.  <P>
+
+<DT> <EM>character-set</EM>
+
+<DD> This sets the character set used by the terminal.  Currently
+appropriate values are US-ASCII, ISO-8859-1 through ISO-8859-9 and
+ISO-2022-JP. See the section on international character sets for more
+details. The default is US-ASCII.  <P>
+
+<DT> <EM>composer-wrap-column</EM>
+
+<DD> This option specifies an aspect of Pine's Composer.  This gives the
+maximum width that auto-wrapped lines will have.  It's also the maximum
+width of lines justified using the ^J Justify command.  The normal default
+is "74".  The largest allowed setting is normally "80" in order to
+prevent very long lines from being sent in outgoing mail.  When the mail
+is actually sent, trailing spaces will be stripped off of each line. <P>
+
+<DT> <EM>customized-hdrs</EM>
+
+<DD> Add these custom headers when composing.  Also possible to add
+default values to these custom headers or to any of the standard headers. 
+This is a list variable.  Each entry in the list is a header name (the
+actual header name that will appear in the message) followed by an
+optional colon and value.  For example, if a Reply-to header was needed
+because it was different from the From address, that could be accomplished
+with: 
+
+<PRE><CODE>
+    customized-hdrs=Reply-to: fred_flintstone@bedrock.net 
+</CODE></PRE>
+<P>
+
+<DT> <EM>default-composer-hdrs</EM>
+
+<DD> Show only these headers (by default) when composing a message.  This
+list may include headers defined in the <EM>customized-hdrs</EM> list. 
+<P>
+
+<DT> <EM>default-fcc</EM>
+
+<DD> The name of the folder to which all outgoing mail goes is set here. 
+The compiled-in default is <EM>sent-mail</EM> (UNIX) or <EM>sentmail</EM>
+(PC).  It can be set to "" (two double quotes with nothing between them)
+to turn off saving copies of outgoing mail.  If the default-fcc is a
+relative file name, then it is relative to your default collection for
+saves (see <EM>folder-collections</EM>).  <P>
+
+<DT> <EM>default-saved-msg-folder</EM>
+
+<DD> This option determines the default folder name for Saves...  If this
+is not a path name, it will be in the default collection for saves.  Any
+valid folder specification, local or IMAP, is allowed.  This default
+folder only applies when the saved-msg-name-rule (see later in this
+configuration screen) doesn't override it.  Unix Pine default is normally
+"saved-messages" in the default folder collection. PC-Pine default is
+"SAVEMAIL" (normally stored as SAVEMAIL.MTX). <P>
+
+<DT> <EM>display-filters</EM>
+
+<DD> This option defines a list of text-filtering commands (programs or
+scripts) that may be used to filter text portions of received messages
+prior to their use (e.g., presentation in the "MESSAGE TEXT" display
+screen).  For security reasons, the full path name of the filter command
+must be specified.  See the online help text for further details. <P>
+
+<DT> <EM>download-command</EM>
+
+<DD> This option affects the behavior of the Export command.  It specifies
+a Unix program name, and any necessary command line arguments, that Pine
+can use to transfer the exported message to your personal computer's disk.
+<P>
+
+<DT> <EM>download-command-prefix</EM>
+
+<DD> This option is used in conjunction with the Download-command option. 
+It defines text to be written to the terminal emulator (via standard
+output)  immediately prior to starting the download command.  This is
+useful for integrated serial line file transfer agents that permit command
+passing (e.g., Kermit's APC method). <P>
+ 
+<DT> <EM>editor</EM>
+
+<DD> UNIX Pine only.  Sets the name of the alternate editor for composing
+mail (message text only, not headers).  It will be invoked with the "^_"
+command or it will be invoked automatically if the
+<EM>enable-alternate-editor-implicitly</EM> feature is set.  <P>
+
+<DT> <EM>fcc-name-rule</EM>
+
+<DD> Determines default folder name for fcc when composing.  Currently,
+Pine will accept the values <EM>default-fcc</EM>, <EM>by-recipient</EM>,
+or <EM>last-fcc-used</EM>.  If set to <EM>default-fcc</EM>, then Pine will
+use the value defined in the <EM>default-fcc</EM> variable (which itself
+has a default) for the Fcc header field.  If set to <EM>by-recipient</EM>,
+then Pine will use the name of the recipient as a folder name for the fcc. 
+The relevant recipient is the first address in the To field.  If set to
+"last-fcc-used", then Pine will offer to fcc to whatever folder you used
+previously.  In all cases, the field can still be edited after it is
+initially assigned.  If the fcc field in the address book is set for the
+first To address, that value over-rides any value derived from this rule. 
+<P>
+
+<DT> <EM>feature-list</EM>
+
+<DD> This is a list of features (options) which may be turned on.  You may
+also turn features off (the default) by prepending the characters
+<EM>no-</EM> to any of the features.  The <EM>feature-list</EM> is
+additive.  That is, first the system-wide <EM>feature-list</EM> is read
+and then the user's <EM>feature-list</EM> is read.  This makes it possible
+for the system manager to turn some of the features on by default while
+still allowing the user to cancel that default.  However, some of the
+documentation assumes that all of the features are off by default, so use
+this with care.  In Unix Pine, features can be individually fixed on or
+off by setting the feature on or off in the system-wide <EM>fixed</EM>
+configuration file.  Descriptions for most features are omitted here.  See
+the online help for descriptions of each feature (in the Setup/Config
+screen).  <P>
+
+Here is the current list of possible features. 
+
+<BLOCKQUOTE>
+allow-talk<BR>
+assume-slow-link<BR>
+auto-move-read-msgs<BR>
+auto-open-next-unread<BR>
+auto-unzoom-after-apply<BR>
+auto-zoom-after-select<BR>
+compose-cut-from-cursor<BR>
+compose-maps-delete-key-to-ctrl-d<BR>
+compose-rejects-unqualified-addrs<BR>
+compose-send-offers-first-filter<BR>
+compose-sets-newsgroup-without-confirm<BR>
+delete-skips-deleted<BR>
+disable-keyboard-lock-cmd<BR>
+disable-keymenu<BR>
+disable-config-cmd<BR>
+disable-password-cmd<BR>
+disable-signature-edit-cmd<BR>
+disable-update-cmd<BR>
+enable-8bit-esmtp-negotiation<BR>
+enable-8bit-nntp-posting<BR>
+enable-aggregate-command-set<BR>
+enable-alternate-editor-cmd<BR>
+enable-alternate-editor-implicitly<BR>
+enable-bounce-cmd<BR>
+enable-cruise-mode<BR>
+enable-cruise-mode-delete<BR>
+enable-dot-files<BR>
+enable-dot-folders<BR>
+enable-flag-cmd<BR>
+enable-flag-screen-implicitly<BR>
+enable-full-header-cmd<BR>
+enable-incoming-folders<BR>
+enable-jump-shortcut<BR>
+enable-mail-check-cue<BR>
+enable-mouse-in-xterm<BR>
+enable-suspend<BR>
+enable-tab-completion<BR>
+enable-unix-pipe-cmd<BR>
+enable-verbose-smtp-posting<BR>
+expanded-view-of-addressbooks<BR>
+expanded-view-of-folders<BR>
+expunge-without-confirm<BR>
+fcc-on-bounce<BR>
+include-attachments-in-reply<BR>
+include-header-in-reply<BR>
+include-text-in-reply<BR>
+news-post-without-validation<BR>
+news-read-in-newsrc-order<BR>
+pass-control-characters-as-is<BR>
+preserve-start-stop-characters<BR>
+print-formfeed-between-messages<BR>
+print-offers-custom-cmd-prompt<BR>
+print-index-enabled<BR>
+quell-dead-letter-on-cancel<BR>
+quell-lock-failure-warnings<BR>
+quell-status-message-beeping<BR>
+quit-without-confirm<BR>
+reply-always-uses-reply-to<BR>
+save-aggregates-copy-sequence<BR>
+save-will-quote-leading-froms<BR>
+save-will-not-delete<BR>
+save-will-advance<BR>
+select-without-confirm<BR>
+show-cursor<BR>
+show-selected-in-boldface<BR>
+signature-at-bottom<BR>
+single-column-folder-list<BR>
+tab-visits-next-new-message-only<BR>
+use-current-dir<BR>
+use-function-keys<BR>
+use-sender-not-x-sender<BR>
+user-lookup-even-if-domain-mismatch<BR>
+</BLOCKQUOTE>
+<P>
+
+The four <EM>disable-</EM> features and the <EM>use-function-keys</EM>
+feature are intentionally suppressed from the Config screen, as they are
+intended for use by system administrators in the system-wide fixed config
+file.  Their meaning should be self-explanatory. <P>
+
+The <EM>save-aggregates-copy-sequence</EM> feature is suppressed from the
+config screen.  This feature will optimize an aggregate copy operation, if
+possible, by issuing a single COPY command with a list of the messages to
+be copied.  This may save network traffic when the source and destination
+folders are on the same IMAP server.  <I>However, many IMAP servers
+(including the UW IMAP server) do not preserve the order of messages when
+this optimization is applied.</I> If this feature is not enabled, or if
+the folders are on different IMAP servers, or the folders are local and in
+different formats, Pine will copy each message individually.  <P>
+
+<DT> <EM>folder-collections</EM>
+
+<DD> This is a list of one or more collections where saved mail is stored. 
+See the sections describing folder collections and collection syntax for
+more information.  The first collection in this list is the default
+collection for saves, including <EM>default-fcc</EM>'s.  <P>
+
+<DT> <EM>font-name</EM>
+
+<DD> Winsock version of PC Pine only.  <P>
+
+<DT> <EM>font-size</EM>
+
+<DD> Winsock version of PC Pine only.  <P>
+
+<DT> <EM>forced-abook-entry</EM>
+
+<DD> System-wide Pine configuration file only.  Force these address book
+entries into all writable personal address books. <P>
+
+<DT> <EM>global-address-book</EM>
+
+<DD> A list of shared address books.  Each entry in the list is an
+optional nickname followed by a pathname or file name relative to the home
+directory.  This list will be added to the <EM>address-book</EM> list to
+arrive at the complete set of address books.  Global address books are
+defined to be readonly.  <P>
+
+<DT> <EM>goto-default-rule</EM>
+
+<DD> This value affects Pine's behavior when you use the Goto command.
+There are three possible values for this option:
+
+ <DL>
+
+ <DT> <CODE>inbox-or-folder-in-recent-collection</CODE>
+
+ <DD> If your current folder is "Inbox", Pine will offer the last open
+folder as the default.  If the current folder is other than "Inbox",
+"Inbox" is offered as the default.
+ 
+ <DT> <CODE>inbox-or-folder-in-first-collection</CODE>
+
+ <DD> The second accepted value is a variation on the default which again
+offers "Inbox" if it isn't currently open, but otherwise offers the most
+recent folder in the first collection found in the "FOLDER LIST"  screen. 
+<P>
+
+ <DT> <CODE>most-recent-folder</CODE>
+
+ <DD> The last accepted value simply causes the most recently opened
+folder to be offered as the default regardless of the currently opened
+folder. <P>
+ 
+ </DL>
+ 
+NOTE: The default while a newsgroup is open remains the same; the last
+open newsgroup. <P>
+
+<DT> <EM>image-viewer</EM>
+
+<DD> This variable names the program to call for displaying parts of a
+MIME message that are of type IMAGE.  If your system supports the
+<EM>mailcap</EM> system, you don't need to set this variable.  <P>
+
+<DT> <EM>inbox-path</EM>
+
+<DD> This specifies the name of the folder to use for the INBOX.  Normally
+this is unset so the system's default is used.  The most common reason for
+setting this is to open an IMAP mailbox for the INBOX.  For example,
+<EM>{imap5.u.example.edu}inbox</EM> will open the user's standard
+<EM>INBOX</EM> on the mail server, imap5.  <P>
+
+<DT> <EM>incoming-archive-folders</EM>
+
+<DD> This is like Read-Message-Folder, only more general.  This is a list
+of folder pairs, with the first separated from the second in the pair by a
+space.  The first folder in a pair is the folder you want to archive, and
+the second folder is the folder that read messages from the first should
+be moved to.  Depending on how you define the "auto-move-read-messages" 
+setting in the "feature-list", you may or may not be asked when you leave
+the first folder if you want read messages to be moved to the second
+folder.  In either case, moving the messages means they will be deleted
+from the first folder. <P>
+ 
+If these are not path names, they will be in the default collection for
+saves.  Any valid folder specification, local or remote (via IMAP), is
+allowed.  There is no default. <P>
+
+<DT> <EM>incoming-folders</EM>
+
+<DD> This is a list of one or more folders other than <EM>INBOX</EM> that
+may receive new messages.  This list is slightly special in that it is
+always expanded in the folder lister.  In the future, it may become more
+special.  For example, it would be nice if Pine would monitor the folders
+in this list for new mail.  <P>
+
+<DT> <EM>index-format</EM>
+
+<DD> This option specifies the format that folder indexes are displayed
+in.  Normally, the system figures out reasonable defaults for the widths
+of the columns of the index display.  A non-standard display format can be
+used by listing special tokens in the order you want them to display.  The
+tokens are STATUS, FULLSTATUS, MSGNO, DATE, SIZE, DESCRIPSIZE, SUBJECT,
+FROMORTO, FROM, and TO.  The tokens are separated by spaces.  Each of the
+tokens may also be optionally followed by parentheses with either a number
+or a percentage inside the parentheses. <P>
+
+<DT> <EM>initial-keystroke-list</EM>
+
+<DD> This is a comma-separated list of keystrokes which Pine executes on
+startup.  Items in the list are usually just characters, but there are
+some special values.  <EM>SPACE,</EM> <EM>TAB,</EM> and <EM>CR</EM> mean a
+space character, tab character, and a carriage return, respectively. 
+<EM>F1</EM> through <EM>F12</EM> stand for the twelve function keys. 
+<EM>UP, DOWN, LEFT, </EM>and<EM> RIGHT </EM>stand for the arrow keys. 
+Control characters are represented with <EM>^&lt;char&gt;</EM>.  A
+restriction is that you can't mix function keys and character keys in this
+list even though you can, in some cases, mix them when running Pine.  A
+user can always use only <EM>character</EM> keys in the startup list even
+if he or she is using <EM>function</EM> keys normally, or vice versa.  <P>
+
+<DT> <EM>kblock-passwd-count</EM>
+
+<DD> System-wide Pine configuration file only.  number of times a user
+will have to enter a password when they run the keyboard lock command in
+the main menu. <P>
+
+<DT> <EM>last-time-prune-questioned</EM>
+
+<DD> Personal configuration file only.  This variable records the month
+the user was last asked if his or her sent-mail folders should be pruned. 
+The format is <EM>yy.mm</EM>.  This is automatically updated by Pine when
+the the pruning is done or declined.  If a user wanted to make Pine stop
+asking this question he or she could set this time to something far in the
+future.  <P>
+
+<DT> <EM>last-version-used</EM>
+
+<DD> Personal configuration file only.  This is set automatically by Pine. 
+It is used to keep track of the last version of Pine that was run by the
+user.  Whenever the version number increases, a new version message is
+printed out.  <P>
+
+<DT> <EM>mail-check-interval</EM>
+
+<DD> This option specifies, in seconds, how often Pine will check for new
+mail.  If set to zero, new-mail checking is disabled.  There is a minimum
+value, normally 15 seconds. <P>
+
+<DT> <EM>mail-directory</EM>
+
+<DD> This variable was more important in previous versions of Pine.  Now
+it is used only as the default for storing personal folders (and only if
+there are no <EM>folder-collections</EM> defined).  The default value is
+<EM>~/mail</EM> on UNIX and <EM>$HOME\MAIL</EM> on a PC.  <P>
+
+<DT> <EM>mailcap-search-path</EM>
+
+<DD> This variable is used to replace Pine's default mailcap file search
+path.  It takes one or more file names (full paths must be specified) in
+which to look for mail capability data.  <P>
+
+<DT> <EM>mimetype-search-path</EM>
+
+<DD> This variable is used to replace Pine's default mime.types file
+search path.  It takes one or more file names (full paths must be
+specified) in which to look for file-name-extension to MIME type mapping
+data.  See the Config Notes for details on Pine's usage of the <A
+HREF="config-notes.html#mime.types">MIME.Types File</A>.  <P>
+
+<DT> <EM>new-version-threshold</EM>
+
+<DD> When a new version of Pine is run for the first time it offers a
+special explanatory screen to the user upon startup.  This option
+helps control when and if that special screen appears for users that
+have previously run Pine.  It takes as its value a Pine version
+number.  Pine version less than the specified value will supress this
+special screen while versions equal to or greater than that specified
+will behave normally. <P>
+
+<DT> <EM>news-active-file-path</EM>
+
+<DD> This option tells Pine where to look for the "active file" for
+newsgroups when accessing news locally, rather than via NNTP.  The default
+path is usually "/usr/lib/news/active". <P>
+
+<DT> <EM>news-collections</EM>
+
+<DD> This is a list of collections where news folders are located.  See
+the section describing collections for more information.  <P>
+
+<DT> <EM>news-spool-directory</EM>
+
+<DD> This option tells Pine where to look for the "news spool" for
+newsgroups when accessing news locally, rather than via NNTP.  The default
+path is usually "/usr/spool/news". <P>
+
+<DT> <EM>newsrc-path</EM>
+
+<DD> This option overrides the default name Pine uses for your "newsrc" 
+news status and subscription file.  If set, Pine will take this value as
+the full pathname for the desired newsrc file. <P>
+
+<DT> <EM>nntp-server</EM>
+
+<DD> One or more NNTP servers (host name or IP address) which Pine will
+use for outgoing news.  If you read and post news to and from a single
+NNTP server, you can get away with only setting the <EM>nntp-server</EM>
+variable and leaving the <EM>news-collections</EM> variable unset.  <P>
+
+<DT> <EM>normal-background-color</EM>
+
+<DD> PC-Pine only.  Currently, Pine will accept the colors <EM>black</EM>,
+<EM>blue</EM>, <EM>green</EM>, <EM>cyan</EM>, <EM>red</EM>,
+<EM>magenta</EM>, <EM>yellow</EM>, or <EM>white</EM>.  <P>
+
+<DT> <EM>normal-foreground-color</EM>
+
+<DD> PC-Pine only.  See <EM>normal-background-color</EM> for possible
+colors.  <P>
+
+<DT> <EM>operating-dir</EM>
+
+<DD> System-wide Pine configuration file only.  This names the root of the
+tree to which the user is restricted when reading and writing folders and
+files. <P>
+
+<DT> <EM>personal-name</EM>
+
+<DD> Personal configuration file only (not applicable in global config.
+file).  User's full personal name.  On UNIX systems, the default is taken
+from the accounts data base (/etc/passwd).  <P>
+
+<DT> <EM>personal-print-command</EM> <DD> UNIX personal configuration file
+only.  This corresponds to item 3 in the printer menu.  This variable
+retains the value of <EM>personal-print-command</EM> when the printer is
+set to something other than item 3.  The <EM>personal-print-command</EM>
+can be set within Pine using the printer setup menu.  <P>
+
+<DT> <EM>postponed-folder</EM>
+
+<DD> The folder where postponed messages are stored.  The default is
+postponed-msgs (Unix) or POSTPOND (PC).  <P>
+
+<DT> <EM>printer</EM>
+
+<DD> UNIX Pine only.  This is the current setting for a user's printer. 
+This variable is set from Pine's printer-setup function.  The value must
+be either
+
+<UL>
+
+<LI> "attached-to-ansi" -or-
+
+<LI> the value of <EM>personal-print-command</EM> -or-
+
+<LI> the value of <EM>standard-printer</EM> from the system-wide
+configuration.
+
+</UL> <P>
+
+<DT> <EM>pruned-folders</EM>
+
+<DD> This variable allows you to define a list of one or more folders that
+Pine will offer to prune for you in the same way it automatically offers
+to prune your "sent-mail" folder each month.  That is, once a month for
+each folder listed, Pine will offer to move the contents of the folder to
+a new folder of the same name but with the previous month's date appended. 
+Pine will then look for any such date-appended folder names created for a
+previous month, and offer each one it finds for deletion. If you decline
+the first offer, no mail is moved and no new folder is created. Folders
+listed are assumed to exist, and the archive folders will be created, in
+the first collection defined by the "folder-collections" variable. <P>
+
+<DT> <EM>read-message-folder</EM>
+
+<DD> If set, mail in the <EM>INBOX</EM> that has been read but not deleted
+is moved here, or rather, the user is asked whether or not he or she wants
+to move it here upon quitting Pine.  <P>
+
+<DT> <EM>reply-indent-string</EM>
+
+<DD> This variable specifies an aspect of Pine's Reply command.  When a
+message is replied to and the text of the message is included, that text
+usually has the string "> " prepended to each line to indicate quoting.
+<P>
+ 
+This variable specifies a different value for that string.  If you wish to
+use a string which begins or ends with a space, enclose the string in
+double quotes. <P>
+ 
+You can also include the sender's name in the prepended string.  The first
+occurrence of "_FROM_" in the reply-indent-string will be replaced with
+the "username" portion of the address being replied to. <P>
+ 
+The normal default is "> ". <P>
+
+<DT> <EM>reverse-background-color</EM>
+
+<DD> PC-Pine only.  See <EM>normal-background-color</EM> for possible
+colors.  <P>
+
+<DT> <EM>reverse-foreground-color</EM>
+
+<DD> PC-Pine only.  See <EM>normal-background-color</EM> for possible
+colors.  <P>
+
+<DT> <EM>saved-msg-name-rule</EM>
+
+<DD> Determines default folder name when saving.  Currently, Pine will
+accept the values "default-folder", "by-sender", "by-from",
+"by-recipient", or "last-folder-used".  If set to <EM>default-folder</EM>,
+then Pine will offer the folder "saved-messages" (UNIX) or "SAVEMAIL" 
+(PC) for saving messages.  If set to <EM>by-from</EM>, then Pine will
+offer to save the message in a folder with the same name as the From, if
+there is one, or the Sender otherwise.  If set to <EM>by-sender</EM>, then
+Pine will offer to save the message in a folder with the same name as the
+Sender, if there is one, or the From otherwise.  If set to
+<EM>by-recipient</EM>, then Pine will offer to save the message in a
+folder with the same name as the recipient, which is the newsgroup if this
+was sent to a newsgroup or the To address if not.  If set to
+"last-folder-used", then Pine will offer to save in whatever folder you
+used previously.  <P>
+
+<DT> <EM>sending-filters</EM>
+
+<DD> This option defines a list of text-filtering commands (programs and
+scripts) that may be selectively invoked to process a message just before
+it is sent.  If set, the Composer's ^X (Send) command will allow you to
+select which filter (or none) to apply to the message before it is sent. 
+For security reasons, the full path of the filter program must be
+specified.  See the online help text for further details. <P>
+
+<DT> <EM>sendmail-path</EM>
+
+<DD> System-wide Pine configuration file only.  This names the path to an
+alternative program, and any necessary arguments, to be used in posting
+mail messages. <P>
+
+<DT> <EM>signature-file</EM>
+
+<DD> Names the file to be included as the signature.  This defaults to
+<EM>~/.signature</EM> on UNIX and <EM>&lt;PINERC
+directory&gt;\PINE.SIG</EM> on a PC.  <P>
+
+<DT> <EM>smtp-server</EM>
+
+<DD> One or more SMTP servers (host name or IP address) which Pine will
+use for outgoing mail.  If not set, Pine passes outgoing email to the
+<EM>sendmail</EM> program on the local machine.  PC-Pine users must have
+this variable set in order to send mail as they have no <EM>sendmail</EM>
+program.  An alternate port may be specified by appending <EM>:port</EM>
+to the host name or IP address.  See the <A
+HREF="config-notes.html#smtp-server">SMTP Servers</A> section for
+details.  <P>
+
+<DT> <EM>sort-key</EM>
+
+<DD> This variable sets up the default index sorting.  The default is to
+sort by arrival order.  It has the same functionality as the
+<EM>-sort</EM> command line argument and the <EM>$</EM> command in the
+folder index.  If a <EM>sort-key</EM> is set, then all folders open during
+the session will have that as the default sort order.  <P>
+
+<DT> <EM>speller</EM>
+
+<DD> This option affects the behavior of the ^T (spell check) command in
+the Composer.  It specifies the program invoked by ^T in the Composer.  By
+default, Pine uses the system's "spell" command.  Pine will use the
+command defined by this option (if any) instead.  When invoking the
+spell-checking program, Pine appends a tempfile name (where the message is
+passed) to the command line. <P>
+
+<DT> <EM>standard-printer</EM>
+
+<DD> System-wide configuration file only.  Specifies the command for
+printer selection number 2 on the printer menu.  Unix only.  <P>
+
+<DT> <EM>status-message-delay</EM>
+
+<DD> If this is set to a positive number, it causes the cursor to move to
+the status line whenever a status message is printed and pause there for
+this many seconds.  It will probably only be useful if the show-cursor
+feature is also turned on. <P>
+
+<DT> <EM>upload-command</EM>
+
+<DD> This option affects the behavior of the Composer's "Read File" (^R in
+the message body) and "Attach File" (^J in the header) commands.  It
+specifies a Unix program name, and any necessary command line arguments,
+that Pine can use to transfer files from your personal computer into
+messages that you are composing. <P>
+
+<DT> <EM>upload-command-prefix</EM>
+
+<DD> This option is used in conjunction with the Upload-command option. 
+It defines text to be written to the terminal emulator (via standard
+output)  immediately prior to starting upload command.  This is useful for
+integrated serial line file transfer agents that permit command passing
+(e.g., Kermit's APC method). <P>
+
+<DT> <EM>use-only-domain-name</EM>
+
+<DD> Can be set to <EM>yes</EM> or <EM>no.</EM> At this point anything but
+<EM>yes</EM> means <EM>no.</EM> If set to <EM>yes</EM> the first label in
+the host name will be lopped off to get the domain name and the domain
+name will be used for outgoing mail and such.  That is, if the host name
+is <EM>carson.u.example.edu</EM> and this variable is set to <EM>yes,</EM>
+then <EM>u.example.edu</EM> will be used on outgoing mail.  Only
+meaningful if <EM>user-domain</EM> is NOT set.  <P>
+
+<DT> <EM>user-domain</EM>
+
+<DD> Sets the domain or host name for the user, overriding the system host
+or domain name.  See the domain name section.  <P>
+
+<DT> <EM>user-id</EM>
+
+<DD> PC-Pine only.  Sets the username that is placed on all outgoing
+messages.  <P>
+
+<DT> <EM>viewer-hdrs</EM>
+
+<DD> You may change the default list of headers that are viewed by listing
+the headers you want to view here.  If the headers in your "viewer-hdrs" 
+list are present in the message, then they will be shown.  The order of
+the headers you list will be honored.  If the special value "all-except" 
+is included as the first header in the "viewer-hdrs" list, then all
+headers in the message except those in the list will be shown.  The values
+are all case insensitive.<P>
+ 
+<DT> <EM>viewer-overlap</EM>
+
+<DD> This option specifies an aspect of Pine's Message Viewing screen. 
+When the space bar is used to page forward in a message, the number of
+lines specified by the "viewer-overlap" variable will be repeated from the
+bottom of the screen.  That is, if this was set to two lines, then the
+bottom two lines of the screen would be repeated on the top of the next
+screen.  The normal default value is "2". <P>
+
+<DT> <EM>window-position</EM>
+
+<DD> Winsock version of PC Pine only.  Window position in the format: 
+CxR+X+Yn Where C and R are the window size in characters and X and Y are
+the screen position of the top left corner of the window.  <P>
+
+</DL>
+
+<HR>
+
+<H2><A NAME="ret-var">Retired Variables</A></H2>
+
+Variables that are no longer used by the current Pine version.  When an
+obsolete variable is encountered, its value is applied to any new
+corresponding setting and a comment is place before it noting that it is
+no longer in used.  The replaced values at the time of this document
+include:  <P>
+
+<DL COMPACT>
+
+<DT> <EM>elm-style-save</EM>
+
+<DD> Replaced by <EM>saved-msg-name-rule</EM> <P>
+
+<DT> <EM>feature-level</EM>
+
+<DD> Replaced by <EM>feature-list.</EM> <P>
+
+<DT> <EM>header-in-reply</EM>
+
+<DD> Replaced by <EM>include-header-in-reply</EM> in the
+<EM>feature-list.</EM> <P>
+
+<DT> <EM>old-style-reply</EM>
+
+<DD> Replaced by <EM>signature-at-bottom</EM> in the
+<EM>feature-list.</EM> <P>
+
+<DT> <EM>save-by-sender</EM>
+
+<DD> Replaced by <EM>saved-msg-name-rule.</EM> <P>
+
+<DT> <EM>show-all-characters</EM>
+
+<DD> No replacement, it always works this way now.  <P>
+
+</DL>
+
+<HR>
+
+<!-- pnuts -->
+
+</BODY>
+</HTML>

@@ -1,0 +1,15 @@
+#some illustrative figures for transformation lectures
+pdf("loglin1.pdf",width=6.5,height=4.5)
+x <- exp(1+rnorm(50))
+y <- exp(1 + .5*log(x) + rnorm(50)/100)
+plot(x,y)
+z <- lm(y~x)
+abline(z)
+dev.off()
+pdf("loglin2.pdf",width=8.5,height=6.5)
+plot(x,z$coef[2]*x/z$fit,ylab="elasticity")
+abline(h=.5)
+abline(v=mean(x))
+abline(v=exp(mean(log(x))),lty=2)
+dev.off()
+

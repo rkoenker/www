@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML .95.3 (Nov 17 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="acmtom">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="acmtom.css">
+</HEAD>
+<BODY LANG="EN">
+ <BR> <HR><A NAME="tex2html16" HREF="node2.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/icons/next_motif.gif"></A>   <A NAME="tex2html14" HREF="acmtom.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/icons/up_motif.gif"></A>   <A NAME="tex2html8" HREF="acmtom.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/icons/previous_motif.gif"></A>         <BR>
+<B> Next:</B> <A NAME="tex2html17" HREF="node2.html">Degeneracy in the Bartels </A>
+<B>Up:</B> <A NAME="tex2html15" HREF="acmtom.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html9" HREF="acmtom.html">No Title</A>
+<BR> <HR> <P>
+<H1><A NAME="SECTION00010000000000000000">Introduction</A></H1>
+<P>
+Bartels and Conn [<A HREF="node3.html#BC1980">1</A>] provided an efficient algorithm to solve the
+following linearly constrained discrete  <IMG WIDTH=11 HEIGHT=28 ALIGN=MIDDLE ALT="tex2html_wrap_inline219" SRC="img4.gif"  >  problem, 
+<P><A NAME="eqnbcobj1">&#160;</A> <IMG WIDTH=500 HEIGHT=28 ALIGN=BOTTOM ALT="equation24" SRC="img5.gif"  > <P>
+<P> <IMG WIDTH=405 HEIGHT=19 ALIGN=BOTTOM ALT="displaymath221" SRC="img6.gif"  > <P>
+where <i>A,G,C</i> are matrices with columns  <IMG WIDTH=112 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline225" SRC="img7.gif"  >  respectively,
+and <i>b,h,d</i> are vectors with elements  <IMG WIDTH=65 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline229" SRC="img8.gif"  > 
+respectively. Letting  <IMG WIDTH=240 HEIGHT=49 ALIGN=MIDDLE ALT="tex2html_wrap_inline231" SRC="img9.gif"  >  and  <IMG WIDTH=301 HEIGHT=52 ALIGN=MIDDLE ALT="tex2html_wrap_inline233" SRC="img10.gif"  > , (<A HREF="node1.html#eqnbcobj1">1</A>) can be written as 
+<P><A NAME="eqnbcobj2">&#160;</A> <IMG WIDTH=566 HEIGHT=38 ALIGN=BOTTOM ALT="equation40" SRC="img11.gif"  > <P>
+where  <IMG WIDTH=9 HEIGHT=18 ALIGN=MIDDLE ALT="tex2html_wrap_inline235" SRC="img12.gif"  >  is a Lagrange multiplier,  <IMG WIDTH=10 HEIGHT=18 ALIGN=MIDDLE ALT="tex2html_wrap_inline237" SRC="img13.gif"  >  is the index for the
+columns of  <IMG WIDTH=55 HEIGHT=49 ALIGN=MIDDLE ALT="tex2html_wrap_inline239" SRC="img14.gif"  >  and  <IMG WIDTH=8 HEIGHT=9 ALIGN=BOTTOM ALT="tex2html_wrap_inline241" SRC="img15.gif"  >  is the index for
+the columns of  <IMG WIDTH=22 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline243" SRC="img16.gif"  > .
+<P>
+Our motivation for studying the algorithm is that it is well suited for
+computing the quantile smoothing splines described in Koenker, Ng, and
+Portnoy [<A HREF="node3.html#KNP1994">2</A>].  However, in the course of adapting the algorithm for
+this purpose we encountered some difficulties with the behavior of the
+algorithm in degenerate situations.  Since our problems are extremely
+sparse and degeneracy is the norm rather than an exceptional situation, 
+it proved essential to understand and correct this anomalous behavior.
+We describe these modifications briefly in the next section; a detailed
+description of the quantile smoothing spline computations will be
+reported elsewhere.  Throughout, we adhere as closely as possible to the
+notation introduced by Bartels and Conn.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Wed Nov 29 11:55:09 CST 1995</I>
+</ADDRESS>
+</BODY>
+</HTML>

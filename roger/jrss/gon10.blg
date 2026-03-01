@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (Web2C 7.3.1)
+The top-level auxiliary file: gon10.aux
+The style file: econometrica.bst
+Database file #1: abbrev.bib
+Database file #2: gon1.bib
+Database file #3: pen.bib
+Done.
+You've used 45 entries,
+            2327 wiz_defined-function locations,
+            883 strings with 10296 characters,
+and the built_in function-call counts, 21437 in all, are:
+= -- 2180
+> -- 1086
+< -- 2
++ -- 345
+- -- 324
+* -- 1861
+:= -- 4125
+add.period$ -- 54
+call.type$ -- 45
+change.case$ -- 261
+chr.to.int$ -- 45
+cite$ -- 45
+duplicate$ -- 770
+empty$ -- 1386
+format.name$ -- 350
+if$ -- 4180
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 50
+newline$ -- 147
+num.names$ -- 270
+pop$ -- 203
+preamble$ -- 1
+purify$ -- 261
+quote$ -- 0
+skip$ -- 691
+stack$ -- 0
+substring$ -- 1340
+swap$ -- 134
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 474
+warning$ -- 0
+while$ -- 250
+width$ -- 0
+write$ -- 553

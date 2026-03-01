@@ -1,0 +1,73 @@
+Ideas: Software review for reproducible research (in econometrics)
+##################################################################
+
+Title ideas:
+  - Reproducible Econometric Research
+  - Strategies and Tools for Reproducible Research
+  - Forensic Econometrics
+  
+Outline ideas:
+  o Objectives:
+      - Software review
+      - Replication excercises
+      ------------------------
+      - Tutorial on how to make reproducibility more convenient
+      - Guidelines for better journal requirements for reproducibility
+      - Discussion of incentive problems relating to reproducibility
+  o Starting point:
+    Econometric research papers often contain (1) theory/new
+    methods, (2) simulations, (3) empirical analysis.
+    There is some consensus that proofs/justifications should
+    be included in within a publication for (1). But for (2)
+    and (3), it is often difficult (or impossible) to 
+    reproduce the published results. In particular, for
+    readers but also for the authors themselves.  Proofs are
+    not that different, references to other results in the
+    literature often have the feel of missing functions/packages ...
+  o Why should we want to improve the situation?
+      - Authors put a lot of work into this anyway. Some
+        tools and strategies can help them to reproduce
+	or modify their own results...often with only small
+	efforts. Furthermore, the availability of more insights
+	into the details of an analysis facilitate communcation
+	of ideas and results to the reader.
+      - Readers should expect authors (and publishers) to
+        assure reproducibility as this is the basis for research
+	=> Claerbout's principle.  Yes, this is really the most
+        essential point that communicating a complete version of
+	the idea requires the details to be filled in.  Analogies
+	with bench experiments in science really illustrates how
+	much better the tools are for documenting what was done
+	in computational settings.
+  o Tools and strategies:
+      - Make data available. Often already enforced, e.g., in JAE.
+	preferably with some details on where it came from and what
+	the protocol was for getting to the final version.
+      - Write, document and publish source code. Code is often
+        less clumsy than words.  
+      - Couple code and documentation. Literate analysis/programming.
+      - Version control.
+  o Software:
+      - Documentation environment: LaTeX, fewer people also
+        like Word processors, HTML for Web-based publishing
+      - Computing environment:
+          * language features (OOP, functions, scoping,
+	    compiled code, re-usable components)
+	  * high-level language (speed of getting results is not
+	    only speed of running code but also of writing code)
+	    and implementation principles
+	  * preferably cross-platform, cross-language consistency,
+	    with means for software delivery, open source
+	 => R
+      - Literate programming: R+Sweave, NoWeb, Mathematica Notebook,
+        combining LaTeX (or other documentation) with MATLAB, Stata, Ox??
+      - Version control: Subversion (client-server setup, easy-to-use
+        clients available for all platforms), some still use CVS, many other
+        tools for more specialized applications (Git, ...)
+  o Illustrations of software tools for reproducibility:
+      - Empirical analysis of a data set: data pre-processing, model
+        fitting, summary (numerical and graphical).
+	=> Durlauf & Johnson, Koenker?
+	(maybe Luetkepohl et al./Zeileis et al.)
+      - Programming a simulation and displaying the results.
+        => structural change tests?

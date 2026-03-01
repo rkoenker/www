@@ -1,0 +1,1250 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+
+xmlns:o="urn:schemas-microsoft-com:office:office"
+
+xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="-//W3C//DTD HTML 4.0//EN">
+
+
+
+<head>
+
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+
+<meta name=ProgId content=FrontPage.Editor.Document>
+
+<meta name=Generator content="Microsoft FrontPage 4.0">
+
+<meta name=Originator content="Microsoft Word 9">
+
+<!--[if VML]><![if !VMLRender]>
+
+
+
+<object id=VMLRender classid="CLSID:10072CEC-8CC1-11D1-986E-00A0C955B42E"
+
+ width=0 height=0>
+
+</object>
+
+
+
+<style>
+
+v\:* {behavior:url(#VMLRender);}
+
+o\:* {behavior:url(#VMLRender);}
+
+w\:* {behavior:url(#VMLRender);}
+
+.shape {behavior:url(#VMLRender);}
+
+
+
+</style>
+
+<![endif]><![endif]-->
+
+<title>A short introduction to using STATA (version 5</title>
+
+<!--[if gte mso 9]><xml>
+
+ <o:DocumentProperties>
+
+  <o:Author>Daniel Morillo</o:Author>
+
+  <o:Template>Normal</o:Template>
+
+  <o:LastAuthor>Daniel Morillo</o:LastAuthor>
+
+  <o:Revision>3</o:Revision>
+
+  <o:TotalTime>379</o:TotalTime>
+
+  <o:Created>1999-02-09T04:52:00Z</o:Created>
+
+  <o:LastSaved>1999-02-09T05:30:00Z</o:LastSaved>
+
+  <o:Pages>3</o:Pages>
+
+  <o:Words>1152</o:Words>
+
+  <o:Characters>6567</o:Characters>
+
+  <o:Lines>54</o:Lines>
+
+  <o:Paragraphs>13</o:Paragraphs>
+
+  <o:CharactersWithSpaces>8064</o:CharactersWithSpaces>
+
+  <o:Version>9.2216</o:Version>
+
+ </o:DocumentProperties>
+
+</xml><![endif]--><!--[if gte mso 9]><xml>
+
+ <w:WordDocument>
+
+  <w:ActiveWritingStyle Lang="EN-US" VendorID="64" DLLVersion="131077"
+
+   NLCheck="1">1</w:ActiveWritingStyle>
+
+ </w:WordDocument>
+
+</xml><![endif]-->
+
+<style>
+
+<!--
+
+ /* Style Definitions */
+
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+
+	{mso-style-parent:"";
+
+	margin:0in;
+
+	margin-bottom:.0001pt;
+
+	mso-pagination:widow-orphan;
+
+	font-size:12.0pt;
+
+	font-family:"Times New Roman";}
+
+h1
+
+	{mso-style-next:Normal;
+
+	margin:0in;
+
+	margin-bottom:.0001pt;
+
+	mso-pagination:widow-orphan;
+
+	page-break-after:avoid;
+
+	mso-outline-level:1;
+
+	font-size:12.0pt;
+
+	font-family:"Times New Roman";
+
+	mso-font-kerning:0pt;
+
+	font-weight:bold;
+
+	font-style:italic;}
+
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+
+	{margin-top:0in;
+
+	margin-right:0in;
+
+	margin-bottom:0in;
+
+	margin-left:.5in;
+
+	margin-bottom:.0001pt;
+
+	mso-pagination:widow-orphan;
+
+	font-size:12.0pt;
+
+	font-family:"Times New Roman";}
+
+@page Section1
+
+	{size:8.5in 11.0in;
+
+	margin:1.0in 1.25in 1.0in 1.25in;
+
+	mso-header-margin:.5in;
+
+	mso-footer-margin:.5in;
+
+	mso-paper-source:0;}
+
+div.Section1
+
+	{page:Section1;}
+
+-->
+
+</style>
+
+</head>
+
+
+
+<body lang=EN-US style="tab-interval: .5in">
+
+
+
+<div class=Section1>
+
+
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+
+style='font-size:14.0pt;mso-bidi-font-size:12.0pt'>A short introduction to
+
+using STATA (version 5.0)<o:p/></span></b></p>
+
+
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoNormal><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt'>1)
+
+Keeping a log file.<o:p/></span></p>
+
+
+
+<p class=MsoNormal style='margin-left:.5in'>To keep a log file of both the
+
+commands entered and the resulting output we use the function <b><i>log</i></b>.
+
+The syntax of the function is given by</p>
+
+
+
+<p class=MsoNormal style='margin-left:.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=540 style="width:405.0pt;
+
+ margin-left:41.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=156 valign=top style='width:117.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>log using [filename]</h1>
+
+  </td>
+
+  <td width=384 valign=top style='width:4.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will cause STATA to start logging to the file
+
+  [filename]. Standard extension is “.log”</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=156 valign=top style='width:117.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>log off</h1>
+
+  </td>
+
+  <td width=384 valign=top style='width:4.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will stop STATA from logging.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=156 valign=top style='width:117.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>log on<o:p/></i></b></p>
+
+  </td>
+
+  <td width=384 valign=top style='width:4.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will resume logging.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=156 valign=top style='width:117.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>log close<o:p/></i></b></p>
+
+  </td>
+
+  <td width=384 valign=top style='width:4.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will stop the log and close the file currently being used
+
+  as a log file.</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoNormal><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt'>2)
+
+Loading data the simple way.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>If you have an existing file with data that you want
+
+to use in STATA the simplest way to load it into the program is to use the
+
+command <b><i>insheet</i></b>. This command will expect a file where the data is
+
+TAB or comma separated and there is only one observation per line. The syntax
+
+of the command is</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent><b><i>insheet &lt;varnames&gt; using [filename]
+
+&lt;,options&gt;<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'>This will read data from
+
+[filename] where the standard extension is “.raw” and if no variable names are
+
+specified it is assumed that the fist line contains variable names. Various
+
+options include:</p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=468 style="width:351.0pt;
+
+ margin-left:95.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>tab <span style='font-weight:normal;font-style:normal'>or </span>comma</h1>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will specify the type of file being read. Default is
+
+  TAB separation</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>names <span style='font-weight:normal;font-style:normal'>or</span>
+
+  nonames</h1>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This specifies if variables names are to be found in the
+
+  first line of the file.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>clear<o:p/></i></b></p>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will replace the data currently in memory with the
+
+  data from the file being read</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">3) More flexible loading of data.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>For data that is contained in files with complex or
+
+nonstandard formats STATA provides the <b><i>infile2</i></b> command. This
+
+command requires the creation of a dictionary file (with extension “.dct”) that
+
+explains how the data is to be read. The syntax of the dictionary file is as
+
+follows:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>dictionary using
+
+[filename]{<o:p/></i></b></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=468 style="width:351.0pt;
+
+ margin-left:95.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>*comments</h1>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>Comments can be added to the dictionary file</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>firstlineoffile(#)</h1>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This specifies where the data starts in [filename].
+
+  Default is the first line.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>_lines(#)<o:p/></i></b></p>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This specifies how many lines contain one observation of
+
+  the variables. Default is one.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>_line(#)<o:p/></i></b></p>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>If more than one line is used for one observation, this
+
+  will specify how data is to be from in each line in every observation. This
+
+  is not needed if <b><i>_lines(#)</i></b> was not specified or set equal to
+
+  one.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>_column(#)<o:p/></i></b></p>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>If the data is in fixed-position format, this will specify
+
+  how to read data that starts at the specify column number. This is no
+
+  required if the data is tab, comma or space separated.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=144 valign=top style='width:1.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>vartype &amp; varname<o:p/></i></b></p>
+
+  </td>
+
+  <td width=324 valign=top style='width:243.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will specify the variables to be read</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>}<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent>The [filename] specified in the dictionary file will
+
+refer to the file where the data is actually contained. The standard extension
+
+is still “.raw”. To specify variable names and types in the dictionary file we
+
+use the following syntax:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>[type] [ name] [format]
+
+“description”<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in;text-indent:-.5in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>The variable type is one of <b><i>int, long, float,
+
+double</i></b><i> </i>or <b><i>str</i></b>. If a variable is of “string” type
+
+we must specify its maximum length. For example if we require a variable that
+
+will contain at most 8 characters we declare its type as <b><i>str8</i></b>.
+
+The maximum length of a string is 80 characters. It is usually not required to
+
+specify the format of the variable except when we are reading for a fixed-width
+
+file. The most frequently used formats have the following syntax:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=492 style="width:369.0pt;
+
+ margin-left:77.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=84 valign=top style='width:63.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>%#.#g</h1>
+
+  </td>
+
+  <td width=408 valign=top style='width:4.25in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>General numeric format. The first number is the length of
+
+  the number and the second is the number of decimals. It is not required to
+
+  specify the number of decimals.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=84 valign=top style='width:63.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>%#.#e</h1>
+
+  </td>
+
+  <td width=408 valign=top style='width:4.25in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>Scientific format. The numbers specified in # are as
+
+  before.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=84 valign=top style='width:63.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>%#s<o:p/></i></b></p>
+
+  </td>
+
+  <td width=408 valign=top style='width:4.25in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>String format. The number specified the (maximum) length
+
+  of the string</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>Finally, once we have a dictionary file completed,
+
+we can use the <b><i>infile2</i></b> command in the following way:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>infile2 using
+
+[filename] &lt;options&gt;<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent>where the [filename] is the dictionary file we have
+
+created. The options include the <b><i>clear</i></b> option (explained above),
+
+the <b><i>if [expression]</i></b> and the <b><i>in [range]</i></b> options,
+
+which will be explained in the data management section.</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:9.0pt'><span style="font-size:
+
+14.0pt;mso-bidi-font-size:12.0pt">4) Loading and Saving files in STATA’s
+
+proprietary format.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>If you plan to use STATA extensively it is very
+
+useful to transform your original data into STATA’s own format. Saving and
+
+loading in STATA format is accomplished with the following commands:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>save [filename]<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><b><i>use [filename]<o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent><b><i><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></i></b></p>
+
+
+
+<p class=MsoBodyTextIndent>The standard extension of STATA data files is “.dta”</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">5) Some additional notes on saving and loading data.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>Aside from the commands included here STATA provides
+
+a number of other commands designed for loading and saving data. In particular,
+
+the command <b><i>infix</i></b> is specifically designed for fixed-width format
+
+files while the command <b><i>infile1</i></b> is a variation of the command
+
+discussed here. If it is required to save files in non-STATA format the
+
+commands <b><i>outsheet </i></b>and<b><i> outfile</i></b> both of which have
+
+syntax similar to their loading counterparts.</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">6) Manipulating data in STATA.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>Once your data is loaded into STATA you can
+
+manipulate it in a number of different ways. Some of the more useful commands
+
+are summarized here</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=492 style="width:369.0pt;
+
+ margin-left:77.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>drop [varnames]</h1>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will eliminated the listed variables from the
+
+  dataset.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>sort [varnames]</h1>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will sort the data according to the variables listed.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>gen [newvar]=[formula]<o:p/></i></b></p>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a new variable according to the
+
+  specified formula.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>edit<o:p/></i></b></p>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>(PC version) this will bring up the graphical data editor.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>merge [varname] using [filename]<o:p/></i></b></p>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This merges the dataset currently in memory with the data
+
+  contained in the STATA-format file specified by [filename]. The merging is
+
+  done through the variable in [varname].</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=252 valign=top style='width:189.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b><i>clear<o:p/></i></b></p>
+
+  </td>
+
+  <td width=240 valign=top style='width:2.5in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will clear all data from memory</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>It is important to note that the observations in
+
+STATA are numbered in the order in which they where read. The command <b><i>list
+
+</i></b>will list the observations in that order. The <b><i>sort</i></b> command
+
+will naturally change that order.</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">7) Some common options in STATA commands.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>A large number of STATA commands will accept the
+
+following options:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=492 style="width:369.0pt;
+
+ margin-left:77.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>by [varnames]: <span style='font-style:normal'>command</span></h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will execute the command several times, one time for each
+
+  distinct combination of values of the variables specified in [varnames].</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1><span style='font-style:normal'>command</span> if [expression]</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will execute the command only on the observations
+
+  that match the specified expression. Note that equality in [expression] must
+
+  be specified with the “==” symbol.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal><b>command <i>in [range]<o:p/></i></b></p>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will execute the command on the observations
+
+  contained in the specified range. [range] is usually specified as
+
+  [startobs.]/[endobs.].</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>These options are extremely useful since they let us
+
+restrict almost all commands in STATA to the variables or observations that of
+
+most interest to us.</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">8) Some common summarization commands.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>STATA provides a number of useful summarization
+
+commands. Here we list some of the most common ones:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=492 style="width:369.0pt;
+
+ margin-left:77.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>su [varnames] &lt;,detail&gt;</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will display summary statistics for the variables
+
+  listed. The “detail” option results in an expanded set of summary statistics.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>tabulate [varnames] &lt;,generate([varname])&gt;</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will create a frequency table for the variables listed.
+
+  The “generate” option will create a set of dummy variables that reflect all
+
+  possible values of the variables involved.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>correlate [varlist]</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a correlation plot.</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent>Note that these commands are most useful when combined
+
+with the <b><i>if</i></b>, <b><i>by</i></b> or <b><i>in</i></b> options. As
+
+plots tend to be the easiest way of summarizing the structure of the data we
+
+list some simple “diagnostic” graphics commands:</p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=492 style="width:369.0pt;
+
+ margin-left:77.4pt;border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>kdensity [varname] &lt;options&gt;</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a kernel density plot. Several options
+
+  allow choice of kernel and bandwidth.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>qnorm [varname]</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a qq-plot against a normal
+
+  distribution.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>qqplot [var1] [var2]</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a qq-plot of both variables.</p>
+
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td width=192 valign=top style='width:2.0in;padding:0in 5.4pt 0in 5.4pt'>
+
+  <h1>plot [var1] [var2]</h1>
+
+  </td>
+
+  <td width=300 valign=top style='width:225.0pt;padding:0in 5.4pt 0in 5.4pt'>
+
+  <p class=MsoNormal>This will generate a scatterplot of the two variables
+
+  listed.</p>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:1.0in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><span style="font-size:14.0pt;
+
+mso-bidi-font-size:12.0pt">9) Batch files.<o:p/></span></p>
+
+
+
+<p class=MsoBodyTextIndent>If you have a large dataset and want to execute a
+
+series of repetitive commands on several variables it is often useful to create
+
+a batch file with the necessary commands. The commands can then be executed
+
+with the command <b><i>do [filename]</i></b> where the standard extension is
+
+“.ado”. Note that in some version of STATA you will need to put two blank lines
+
+at the end of the batch file for it to execute correctly.</p>
+
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+<p class=MsoBodyTextIndent><![if !supportEmptyParas]>&nbsp;<![endif]><o:p/></p>
+
+
+
+</div>
+
+
+
+</body>
+
+
+
+</html>
+

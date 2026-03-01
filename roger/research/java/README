@@ -1,0 +1,7 @@
+This directory contains sample html and spj files for the S-PLUS
+graphlet described in the S-PLUS Programmer's Manual.
+
+To view the graphs, copy these files along with the file
+$SHOME/java/spjgraph.jar to some directory.  Then, use a Web browser
+to view the html files.  Some of the html files include the S-PLUS
+code used to create the graphics.

@@ -1,0 +1,293 @@
+\batchmode
+\documentclass[10pt]{amsart}
+\makeatletter
+\usepackage{latexsym}
+\usepackage{alltt}
+\usepackage{graphics}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\textwidth}{135mm}
+\setlength{\textheight}{205mm}
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{10mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textwidth}{6in}
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+\renewenvironment {proof}{\noindent {\bf Proof:\ }}{\hfill{ \rule{2mm}{2mm}}}
+
+\newtheorem {assumption}{Assumption}
+
+\newtheorem {lemma}{Lemma}
+
+\newtheorem {result}{Result}
+
+\newtheorem {remark}{Remark}
+
+\newtheorem {proposition}{Proposition}
+
+\newtheorem {corollary}{Corollary}
+
+\newtheorem {theorem}{Theorem}
+
+\newenvironment {apabib}{
+  \noindent
+\begin{center}
+{\bf{ R}EFERENCES}
+\end{center}
+\vspace{-3mm}
+\begin{list}{}{
+  \topsep	   0mm
+  \leftmargin	  10mm
+  \parsep	   0mm
+  \listparindent -10mm}
+  \item[]\strut\par}{
+\end{list}}
+
+\newcommand {\Twiddle}{\mbox{\(\tt\sim\)}}
+
+\newcommand {\twiddle}{{\Twiddle}}
+
+\renewcommand {\Hat}{\mbox{\boldmath\({}^{\wedge}\)}}
+
+\def\endbox{{$\sqcap$}\llap{$\sqcup$}}
+
+\def\hbeta{\hat \beta_n}
+
+\def\tbeta{\tilde \beta_n}
+
+\def\Jureckova{Jure\v{c}kov\'{a}}
+
+\def\Vninv{\hat V_n^{-1}}
+
+\makeatother
+\newenvironment{tex2html_wrap}{}{}
+\newwrite\lthtmlwrite
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newbox\sizebox
+\begin{document}
+\pagestyle{empty}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{${\tt  lm(x \sim y)}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline513: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline521: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \(\tt\sim\)
+}
+
+{\newpage
+\clearpage
+\samepage \({}^{\wedge}\)
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{${\tt l1 fit}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline523: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{${\tt lm (y \sim x)}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline525: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\leftarrow$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline535: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$times:
+
+, , p=16, n=120000
+                  [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   38.37000   38.13965   38.18066   37.94043   38.05859
+l1fit(x, y) 4564.16016 4742.39990 4561.49023 4574.25000 4235.11133
+ rqfn(x, y)  102.37988  103.21973  103.92969   98.58008   98.35938
+ RQFN(x, y)   51.75977   52.31934   55.91016   51.26953   55.97070
+
+, , p=8, n=120000
+                  [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   22.48828   22.38086   22.11914   22.17969   21.95312
+l1fit(x, y) 2768.43945 2645.08008 2488.46094 3182.05078 2590.62891
+ rqfn(x, y)   67.54883   71.39062   69.29883   63.49219   66.94141
+ RQFN(x, y)   31.45898   20.36914   29.95117   27.82812   29.07812
+
+, , p=4, n=120000
+                  [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   16.10938   16.33984   15.95703   15.92188   15.91797
+l1fit(x, y) 1607.01953 1761.36719 1939.10156 1376.69922 1897.66797
+ rqfn(x, y)   55.43750   51.75781   55.07031   55.03906   55.53906
+ RQFN(x, y)   19.03125   13.19922   13.03906   13.21875   21.17188
+
+, , p=16, n=80000
+                  [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   24.91797   24.78125   25.00000   24.69922   24.71094
+l1fit(x, y) 2079.09766 1979.44141 1974.65234 1917.89062 2106.11328
+ rqfn(x, y)   61.44922   65.53906   68.65234   65.08984   65.37891
+ RQFN(x, y)   37.39062   38.90234   37.66016   40.45312   25.01953
+
+, , p=8, n=80000
+                  [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   14.98047   14.85156   14.64844   14.58984   14.51172
+l1fit(x, y) 1208.23047 1235.46875 1265.23047 1265.78125 1303.05859
+ rqfn(x, y)   42.51953   42.26172   42.12891   44.66016   44.67188
+ RQFN(x, y)   21.81250   13.91016   20.39062   20.82031   21.41016
+
+, , p=4, n=80000
+                 [,1]      [,2]      [,3]      [,4]      [,5] 
+  lm(y ~ x)  10.78906  10.76172  10.68750  10.49219  10.46875
+l1fit(x, y) 692.56641 838.37109 826.60938 806.97656 782.32812
+ rqfn(x, y)  34.25000  38.95312  34.21094  34.21094  31.96875
+ RQFN(x, y)  10.10938  10.72656  12.39062  22.81250  13.17969
+
+, , p=16, n=40000
+                 [,1]      [,2]      [,3]      [,4]      [,5] 
+  lm(y ~ x)  12.22656  12.14844  12.03906  12.07812  12.05469
+l1fit(x, y) 500.25000 487.10156 540.10156 442.32031 513.26562
+ rqfn(x, y)  30.97656  36.21094  30.70312  30.70312  32.40625
+ RQFN(x, y)  19.85156  20.50000  20.21875  19.45312  19.85156
+
+, , p=8, n=40000
+                 [,1]       [,2]       [,3]      [,4]       [,5] 
+  lm(y ~ x)   7.15625   7.140625   7.148438   7.12500   7.132812
+l1fit(x, y) 282.28906 286.421875 302.765625 274.36719 322.515625
+ rqfn(x, y)  22.01562  20.804688  22.031250  19.57812  21.710938
+ RQFN(x, y)   7.71875   9.859375  10.664062  11.55469   7.820312
+
+, , p=4, n=40000
+                 [,1]       [,2]       [,3]       [,4]       [,5] 
+  lm(y ~ x)   5.18750   5.265625   5.164062   5.164062   5.117188
+l1fit(x, y) 171.76562 221.078125 206.242188 188.523438 165.507812
+ rqfn(x, y)  15.52344  16.578125  19.945312  16.734375  17.664062
+ RQFN(x, y)   7.40625   6.593750   5.453125   6.664062   6.984375
+
+, , p=16, n=20000
+                  [,1]       [,2]       [,3]       [,4]      [,5] 
+  lm(y ~ x)   5.859375   5.953125   5.890625   5.851562   5.87500
+l1fit(x, y) 136.562500 136.578125 138.351562 147.945312 129.01562
+ rqfn(x, y)  15.015625  14.140625  15.867188  14.187500  16.94531
+ RQFN(x, y)  10.507812  11.468750   7.171875  10.570312  10.92969
+
+, , p=8, n=20000
+                 [,1]      [,2]      [,3]      [,4]      [,5] 
+  lm(y ~ x)  3.507812  3.515625  3.515625  3.523438  3.523438
+l1fit(x, y) 84.078125 77.656250 72.671875 83.773438 69.906250
+ rqfn(x, y)  9.875000  9.281250  9.265625  9.296875 10.007812
+ RQFN(x, y)  5.789062  6.359375  6.773438  5.757812  5.945312
+
+, , p=4, n=20000
+                 [,1]      [,2]      [,3]      [,4]      [,5] 
+  lm(y ~ x)  2.570312  2.554688  2.593750  2.593750  2.585938
+l1fit(x, y) 47.195312 44.343750 45.914062 54.007812 44.820312
+ rqfn(x, y)  7.835938  8.257812  7.289062  7.812500  7.351562
+ RQFN(x, y)  2.835938  4.085938  4.328125  2.648438  3.921875
+
+$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline537: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \begin{figure}[hbt]
+\begin{center}
+{\includegraphics{fig.4.1.ps}}
+\begin{caption}
+{Timing comparison of three algorithms  for median regression:
+Times are in seconds for the median of five replications for iid Gaussian
+data.  The solid line represents the timings for the simplex-based
+Barrodale and Roberts algorithm, the {\tt rqfn} dashed line represents
+a primal-dual interior point algorithm, {\tt RQFN} uses a preprocessing
+step and the {\tt rqfn} algorithm, and the dotted line represents least
+squares timing based on ${\tt lm(x \sim y)}$ as a benchmark}
+\end{caption}
+\end{center}
+\end{figure}
+}
+
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$times is an array with dimensions 4 x 5  x 3 x 4
+methods_c("lm","RQFN","rqfn","l1fit")
+ps_c(4,8,16)
+z_c(20,40,80,120)*100
+z_c(z,z*10)
+m.5.m_apply(m.5$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline563: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline565: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{table}[hptb]
+\begin{center}
+\begin{tabular}{|l||c|c|c|c|c|c|c|c|} \hline
+\multicolumn{1}{|l||}{}&\multicolumn{1}{c|}{n=2000}&\multicolumn{1}{c|}{n=4000}&\multicolumn{1}{c|}{n=8000}&\multicolumn{1}{c|}{n=12000}&\multicolumn{1}{c|}{n=20000}&\multicolumn{1}{c|}{n=40000}&\multicolumn{1}{c|}{n=80000}&\multicolumn{1}{c|}{n=120000}\\  \hline
+{\bf p= 4}&&&&&&&&\\ 
+~~lm&~~~0.320&~~~0.550&~~~1.030&~~~1.510&~~~2.586&~~~5.164&~~10.688&~~15.957\\  
+~~RQFN&~~~0.500&~~~0.790&~~~1.350&~~~1.800&~~~3.922&~~~6.664&~~12.391&~~13.219\\  
+~~rqfn&~~~0.530&~~~1.050&~~~2.400&~~~3.840&~~~7.812&~~16.734&~~34.211&~~55.070\\  
+~~l1fit&~~~0.510&~~~2.130&~~~7.360&~~16.740&~~45.914&~188.523&~806.977&1761.367\\  \hline
+{\bf p= 8}&&&&&&&&\\ 
+~~lm&~~~0.400&~~~0.710&~~~1.360&~~~2.030&~~~3.516&~~~7.141&~~14.648&~~22.180\\  
+~~RQFN&~~~0.810&~~~1.380&~~~2.260&~~~3.730&~~~5.945&~~~9.859&~~20.820&~~29.078\\  
+~~rqfn&~~~0.670&~~~1.490&~~~3.380&~~~5.070&~~~9.297&~~21.711&~~42.520&~~67.549\\  
+~~l1fit&~~~1.120&~~~3.870&~~12.530&~~31.270&~~77.656&~286.422&1265.230&2645.080\\  \hline
+{\bf p= 16}&&&&&&&&\\ 
+~~lm&~~~0.580&~~~1.090&~~~2.210&~~~3.410&~~~5.875&~~12.078&~~24.781&~~38.140\\  
+~~RQFN&~~~1.130&~~~1.860&~~~4.500&~~~6.350&~~10.570&~~19.852&~~37.660&~~52.319\\  
+~~rqfn&~~~1.170&~~~2.460&~~~5.140&~~~8.660&~~15.016&~~30.977&~~65.379&~102.380\\  
+~~l1fit&~~~2.260&~~~7.050&~~24.650&~~48.820&~136.578&~500.250&1979.441&4564.160\\  
+\hline
+\end{tabular}
+\vspace{3mm}
+ 
+\end{center}
+\end{table}
+}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+
+\end{document}

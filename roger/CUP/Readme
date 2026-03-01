@@ -1,0 +1,24 @@
+The file QR.tar.gz is a tarball of projects/book.cup and was
+uploaded to the ftp.cup.org ftp site July 3, 2004.  It purports
+to contain the full monte needed to recreate the QR ms.
+
+The file QRx.tar.gz is a tarball of projects/book -- the .tex files
+differ only in that they contain the \index{} entries needed to
+make the (two) indices.  The full ms.  should be creatible by the
+following incantations on some reasonable facsimile of a unix box:
+
+	tar xfz QRz.tar.gz
+	make
+	make all
+
+N.B.  The QRx tarball contains quite a few extra files  that were purged
+prior making the QR version.  These shouldn't create any inconsistencies
+in the typeset versions.  I resolutely resisted all temptations to change
+the latex files, except by introducing index entries.  I can't insure
+that something wasn't inadvertantly altered, but I would hope that the
+probability of this was quite small.
+
+
+The file book.pdf is the pdf version of the current manuscript.
+
+The file bookx.pdf is the pdf version of the current manuscript with indices.

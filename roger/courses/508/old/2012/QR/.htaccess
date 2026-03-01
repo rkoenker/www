@@ -1,0 +1,20 @@
+deny from all
+allow from .uiuc.edu 
+allow from .uwm.edu 
+allow from .gmu.edu 
+allow from .illinois.edu 
+allow from .centril.net
+allow from .comcast.net
+allow from .soton.ac.uk
+allow from .ucl.ac.uk
+#allow from .monash.edu.au
+AuthType Basic
+AddDescription "Introduction" L1.pdf
+AddDescription "Inference for QR" L2.pdf
+AddDescription "Nonparametric QR" L3.pdf
+AddDescription "Endogoneity" L4.pdf
+AddDescription "Survival Analysis" L5.pdf
+AddDescription "Quantile Autoregression" L6.pdf
+AddDescription "Panel Data" L7.pdf 
+AddDescription "Risk and Portfolios" L8.pdf
+AddDescription "Computation" L9.pdf 

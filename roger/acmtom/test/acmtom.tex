@@ -1,0 +1,210 @@
+%% This document created by Scientific Word (R)
+
+\documentstyle[12pt,qqaajart]{article}
+
+\input tcilatex
+
+\QQQ{Language}{
+American English
+}
+
+\begin{document}
+
+
+\begin{center}
+{\Large A Remark on Bartels and Conn's Linearly Constrained Discrete $l_1$ Problems}\footnote{Financial support from the National
+Science Foundation Grants SES 89-22472 is gratefully acknowledged.
+Authors' addresses: Roger W. Koenker, Department of Economics, University
+of Illinois, Champaign, IL 61820.  Pin T. Ng, Department of Economics,
+University of Houston, Houston, TX 77204-5882}
+
+\bigskip\ 
+
+{\normalsize Roger W. Koenker}
+
+{\normalsize Department of Economics }
+
+{\normalsize University of Illinois at Urbana-Champaign }
+
+{\normalsize and }
+
+{\normalsize Pin T. Ng }
+
+{\normalsize Department of Economics }
+
+{\normalsize University of Houston }
+
+\bigskip\ 
+\end{center}
+\noindent
+{\it Categories and Subject Descriptors:} G.1.6 [Numerical Analysis]: 
+Optimization -- constrained optimization, gradient methods, linear 
+programming; G.3 [Mathematics of Computing]: Probability and Statistics --
+statistical computing\\
+{\it General Terms:} Algorithms, Performance, Reliability, Theory\\
+{\it Key Words and Phrases:} degeneracy, $l_1$ norm, discrete approximation,
+linearly constrained approximation \\
+
+\begin{center}
+{\bf Abstract}
+\end{center}
+
+Two modifications of Bartels and Conn's algorithm for solving linearly
+constrained discrete $l_1$ problems are described.  The modifications
+are designed to improve performance of the algorithm under conditions 
+of degeneracy.
+
+\section{Introduction}
+
+Bartels and Conn \cite{BC:1980} provided an efficient algorithm to solve the
+following linearly constrained discrete $l_1$ problem, 
+\begin{equation}
+\label{eqn:bcobj1}\min _{x\in R^n}\ \ ||A^{\prime }x-b||_1 
+\end{equation}
+$$
+\mbox{subject to}\ \ \ \ G^{\prime }x\ =\ h,\ \ \ \ C^{\prime }x\ \geq \ d. 
+$$
+where $A,G,C$ are matrices with columns $a_i,g_j,c_k\in R^n$ respectively,
+and $b,h,d$ are vectors with elements $\beta _i,\eta _j,\delta _k$
+respectively. Letting $E=\left[ e_{1,}\cdots ,e_m\right] =\left[ \gamma
+A\vdots G\vdots C\right]$ and $f=\left[ \zeta
+_1,\cdots ,\zeta _m\right] ^{\prime }=\left[ \gamma b^{\prime }\vdots
+h^{\prime }\vdots d^{\prime }\right] ^{\prime }\in {\bf R}^m$, (\ref
+{eqn:bcobj1}) can be written as 
+\begin{equation}
+\label{eqn:bcobj2}\min _{x\in R^n}\psi \left( x\right) =\sum_\mu ^{}|e_\mu
+^{\prime }x\ -\ \zeta _\mu |\ -\ \sum_\nu ^{}\min (0,e_\nu ^{\prime }x\ -\
+\zeta _\nu ) 
+\end{equation}
+where $\gamma $ is a Lagrange multiplier, $\mu $ is the index for the
+columns of $\left[ \gamma A\vdots G\right] \,$ and $\nu $ is the index for
+the columns of $\left[ C\right] $.
+
+Our motivation for studying the algorithm is that it is well suited for
+computing the quantile smoothing splines described in Koenker, Ng, and
+Portnoy \cite{KNP:1994}.  However, in the course of adapting the algorithm for
+this purpose we encountered some difficulties with the behavior of the
+algorithm in degenerate situations.  Since our problems are extremely
+sparse and degeneracy is the norm rather than an exceptional situation, 
+it proved essential to understand and correct this anomalous behavior.
+We describe these modifications briefly in the next section; a detailed
+description of the quantile smoothing spline computations will be
+reported elsewhere.  Throughout, we adhere as closely as possible to the
+notation introduced by Bartels and Conn.
+
+
+\section{Degeneracy in the Bartels and Conn  Algorithm}
+
+The directional derivative of (\ref{eqn:bcobj2})
+is written by Bartels and Conn as
+\begin{equation}
+\label{eqn:dd}
+\psi^{\prime }\left( x, p\right)  = 
+g^{\prime }p+ \left[ \sum_{\mu \in {\cal E}}\left| e_\mu
+^{\prime }p\right| -\sum_{\nu \in {\cal E}}\min \left( 0,e_\nu ^{\prime
+}p\right) \right] 
+\end{equation}
+where the {\it restricted gradient} is 
+\begin{equation}
+\label{eqn:gradient}g\ =\ \sum_{\mu \NEG \in {\cal E}}^{}\sigma _\mu e_\mu
++\sum_{\nu \NEG \in {\cal E}}^{}\sigma _\nu ^{-}e_\nu 
+\end{equation}
+\begin{equation}
+\label{eqn:sigma} 
+\begin{array}{lll}
+\sigma _\mu & = & \left\{ 
+\begin{array}{lllll}
+1 & if & e_\mu ^{\prime }x-\zeta _\mu & > & 0 \\ 
+-1 & if & e_\mu ^{^{\prime }}x-\zeta _\mu & < & 0 
+\end{array}
+\right. \\ 
+\sigma _\nu ^{-} & = & \left\{ 
+\begin{array}{lllll}
+0 & if & e_\nu ^{\prime }x-\zeta _\nu & > & 0 \\ 
+-1 & if & e_\nu ^{^{\prime }}x-\zeta _\nu & < & 0 
+\end{array}
+\right. 
+\end{array}
+\end{equation}
+and $\cal E$ denotes the index set of the zero elements of the residual
+vector $E^{\prime}x-f$.  A minimal set of linearly independent columns 
+$\{ e_i: \; i \in \cal E \}$ are referred to as the active columns.
+Degeneracy occurs when the full set of zero residual columns are
+linearly dependent.  When this occurs, Bartels and Conn's strategy 
+is to randomize the corresponding $\sigma$'s 
+in  ({\ref{eqn:gradient}) inside the \{ {\bf find p }\} module. 
+A ``descent direction'' is then constructed from this randomized restricted 
+gradient.
+
+The problem, as we see it, with this strategy is that the resulting 
+restricted gradient
+will not accurately reflect the contributions of the non-active, 
+zero-residual columns to the directional derivitive.  
+{\it These contributions depend on the chosen direction $p$}.  
+Ignoring this can result in the algorithm taking steps in 
+directions which actually increase, rather
+than decrease, the objective function.  To correct this, we suggest
+computing the direction $p$ as in Bartels and Conn, 
+decomposing the index set of  non-active columns into a zero residual set
+$\overline { \cal {E}}_0$ and  the others
+$\overline { \cal {E}}_1$, recomputing the restricted gradient as
+\begin{equation}
+\label{eqn:gradient1}
+g(p) \ =\ \sum_{\mu \in \overline{{\cal E}}_0}^{}\widehat{%
+\sigma }_\mu e_\mu +\sum_{\mu \in \overline{{\cal E}}_1}^{}\sigma _\mu e_\mu
++\sum_{\nu \in \overline{{\cal E}}_0}^{}\widehat{\sigma }_\nu ^{-}e_\nu
++\sum_{\nu \in \overline{{\cal E}}_1}^{}\sigma _\nu ^{-}e_\nu 
+\end{equation}
+where 
+\begin{equation}
+\label{eqn:sigmahat} 
+\begin{array}{lll}
+\widehat{\sigma }_\mu & = & \left\{ 
+\begin{array}{lllll}
+1 & if & e_\mu ^{\prime }p & > & 0 \\ 
+0 & if & e_\mu ^{\prime }p & = & 0 \\ 
+-1 & if & e_\mu ^{^{\prime }}p & < & 0 
+\end{array}
+\right. \\ 
+\widehat{\sigma }_\nu ^{-} & = & \left\{ 
+\begin{array}{lllll}
+0 & if & e_\nu ^{\prime }p & \geq & 0 \\ 
+-1 & if & e_\nu ^{^{\prime }}p & < & 0 .
+\end{array}
+\right. 
+\end{array}
+\end{equation}
+and finally, checking whether  $p^{\prime}g(p) < 0$ before proceeding 
+(in \{ {\bf {find $\alpha$}}\}) to take a step in direction $p$.
+A further source of difficulties is also apparent from ({\ref{eqn:sigmahat}}).
+Since $e_\mu^{\prime} p$ may equal zero as well as $\pm 1$
+it is important in the randomization step to randomize among all {\it three}
+possible values.  If this is not done, the algorithm can cycle
+indefinitely never finding a direction of descent.  With somewhat more
+effort, one could further modify the algorithm to implement a
+deterministic strategy for handling the problem of degeneracy as
+discussed for example in Gill, Murray and Wright (1991, Section 8.3.3).
+
+Having made these two rather minor modifications:  randomizing over
+$\{ -1,0,1 \}$ rather than $\{ -1,1\}$, and verifying under conditions
+of degeneracy that the randomized direction $p$ is indeed a descent
+direction by computing an updated restricted gradient -- we find that
+the Bartels and Conn algorithm performs extremely well for our quantile
+spline applications.
+
+
+
+\begin{thebibliography}{99}
+\bibitem{BC:1980}  Bartels, R. and Conn, A. 
+Linearly constrained discrete $%
+l_1$ problems, {\em ACM Trans. Math. Softw., 6}, 4, (1980), 
+594-608.
+
+\bibitem{KNP:1994}  Koenker, R., Ng, P. and Portnoy, S. L. 
+Quantile smoothing splines, {\em Biometrika, 84}, 4, (1994), 673-680.
+
+\bibitem{GMW:1991}  Gill, P.E., Murray, W., and Wright, M.H.
+{\it Numerical Linear Algebra and Optimization}, 1991, Addison-Wesley.
+\end{thebibliography}
+
+\end{document}

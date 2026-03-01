@@ -1,0 +1,11 @@
+AuthType Basic
+AddDescription "What, Why and How?" L1.pdf
+AddDescription "QR Inference" L2.pdf
+AddDescription "Nonparametric QR" L3.pdf
+AddDescription "Endogoneity and IV" L4.pdf
+AddDescription "Censored QR" L5.pdf
+AddDescription "Quantile Autoregression" L6.pdf
+AddDescription "QR for Panel Data" L7.pdf 
+AddDescription "Risk and Portfolios" L8.pdf
+AddDescription "Computational Aspects" L9.pdf 
+AddDescription "Handout" handout.pdf 

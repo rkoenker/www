@@ -1,0 +1,29 @@
+\batchmode
+\documentclass[11pt]{article}
+\makeatletter
+\setlength{\textwidth}{150mm}
+\setlength{\textheight}{220mm}
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{10mm}
+\setlength{\topmargin}{-10mm}
+
+
+\pagestyle{empty}
+
+\renewcommand {\baselinestretch}{1.3}
+
+\makeatother
+\newenvironment{tex2html_wrap}{}{}
+\newwrite\lthtmlwrite
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newbox\sizebox
+\begin{document}
+\pagestyle{empty}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\sim$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline64: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+
+\end{document}

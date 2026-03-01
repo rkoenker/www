@@ -1,0 +1,803 @@
+\ifx\undefined\BySame
+\newcommand{\BySame}{\leavevmode\rule[.5ex]{3em}{.5pt}\ }
+\fi
+\ifx\undefined\textsc
+\newcommand{\textsc}[1]{{\sc #1}}
+\newcommand{\emph}[1]{{\em #1\/}}
+\let\tmpsmall\small
+\renewcommand{\small}{\tmpsmall\sc}
+\fi
+\begin{thebibliography}{}
+
+\harvarditem[Abadie, Angrist, and Imbens]{Abadie, Angrist, and
+  Imbens}{1997}{aai:1997}
+\textsc{Abadie, A., J.~Angrist,  {\small and} G.~Imbens}  (1997):
+  ``Instrumental Variables Estimation of Quantile Treatment Effects,''
+  preprint.
+
+\harvarditem[Amemiya]{Amemiya}{1982}{amem:82}
+\textsc{Amemiya, T.}  (1982): ``Two Stage Least Absolute Deviations
+  Estimators,'' \emph{Econometrica}, 50, 689--712, Quantile regression for
+  simultaneous equation models.
+
+\harvarditem[Ammann]{Ammann}{1993}{amma.93}
+\textsc{Ammann, L.~P.}  (1993): ``Robust Singular Value Decompositions: {A} New
+  Approach to Projection Pursuit,'' \emph{J. of Am. Stat. Assoc.}, 88,
+  505--514.
+
+\harvarditem[Angrist, Imbens, and Rubin]{Angrist, Imbens, and
+  Rubin}{1996}{air:1996}
+\textsc{Angrist, J., G.~Imbens,  {\small and} D.~B. Rubin}  (1996):
+  ``Identification of Casual Effects Using Instrumental Variables,'' \emph{J.
+  of Am. Stat. Assoc.}, 91, 444--472.
+
+\harvarditem[Arcones]{Arcones}{1996}{arcones:1996}
+\textsc{Arcones, M.}  (1996): ``The {B}ahadur-{K}iefer representation of $L_p$
+  regression estimators,'' \emph{Econometric Theory}, 12, 257--283, Second
+  order asymptotics for QR.
+
+\harvarditem[Arias, Hallock, and Sosa]{Arias, Hallock, and Sosa}{1997}{Twins}
+\textsc{Arias, O., K.~Hallock,  {\small and} W.~Sosa}  (1997): ``Indidividual
+  heterogeneity in the returns to schooling: IV-QR using Twins data,''
+  preprint.
+
+\harvarditem[Babu]{Babu}{1989}{babu:1989}
+\textsc{Babu, G.}  (1989): ``Strong represention for LAD estimators in linear
+  models,'' \emph{Prob. Theory and Related Fields}, 83, 547--580.
+
+\harvarditem[Barro and Sala{-}i{-}Martin]{Barro and
+  Sala{-}i{-}Martin}{1995}{BSiM}
+\textsc{Barro, R.~J.,  {\small and} X.~Sala{-}i{-}Martin}  (1995):
+  \emph{Economic Growth}. McGraw-Hill: New York.
+
+\harvarditem[Barrodale and Roberts]{Barrodale and Roberts}{1974}{BR.74}
+\textsc{Barrodale, I.,  {\small and} F.~Roberts}  (1974): ``Solution of an
+  overdetermined system of equations in the $\ell_1$ norm,''
+  \emph{Communications of the ACM}, 17, 319--320.
+
+\harvarditem[Bartels and Conn]{Bartels and Conn}{1980}{BC.80}
+\textsc{Bartels, R.,  {\small and} A.~Conn}  (1980): ``Linearly constrained
+  discrete $\ell_1$ problems,'' \emph{Transactions of the ACM on Mathematical
+  Software}, 6, 594--608.
+
+\harvarditem[Bassett and Koenker]{Bassett and Koenker}{1978}{bass:koen:1978}
+\textsc{Bassett, G.,  {\small and} R.~Koenker}  (1978): ``Asymptotic Theory of
+  Least Absolute Error Regression,'' \emph{J. of Am. Stat. Assoc.}, 73,
+  618--622.
+
+\harvarditem[Bedard]{Bedard}{1996}{Bed.96}
+\textsc{Bedard, K.}  (1996): ``School Quality and the Distribution of Male
+  Earnings in {C}anada,'' preprint.
+
+\harvarditem[Bosch, Ye, and Woodworth]{Bosch, Ye, and Woodworth}{1995}{BYW}
+\textsc{Bosch, R.~J., Y.~Ye,  {\small and} G.~G. Woodworth}  (1995): ``A
+  Convergent Algorithm for Quantile Regression With Smoothing Splines,''
+  \emph{Comp. Stat. and Data Anal.}, 19, 613--630.
+
+\harvarditem[Buchinsky]{Buchinsky}{1994}{B.94}
+\textsc{Buchinsky, M.}  (1994): ``Changes in US Wage Structure 1963-87: An
+  Application of Quantile Regression,'' \emph{Econometrica}, 62, 405--458.
+
+\harvarditem[Buchinsky]{Buchinsky}{1995}{Bu.95}
+\textsc{\BySame{}}  (1995): ``Quantile Regression, the Box-Cox Transformation
+  Model and {U.S.} Wage Structure 1963-1987,'' \emph{J. of Econometrics}, 65,
+  109--154.
+
+\harvarditem[Buchinsky]{Buchinsky}{1996}{Bu.96}
+\textsc{\BySame{}}  (1996): ``Women's `return to education' in the {U.S.}:
+  Exploration by Quantile Regression with Nonparametric Sample, Selection
+  Correction,'' preprint.
+
+\harvarditem[Chakraborty]{Chakraborty}{1996}{Chak}
+\textsc{Chakraborty, B.}  (1996): ``On multivariate median regression,''
+  preprint.
+
+\harvarditem[Chakraborty and Chaudhuri]{Chakraborty and Chaudhuri}{1995}{CC}
+\textsc{Chakraborty, B.,  {\small and} P.~Chaudhuri}  (1995): ``On an adaptive
+  transformation-retransformation estimate of multivariate,'' \emph{J. of the
+  Royal Statistical Society (B)}, forthcoming.
+
+\harvarditem[Chamberlain]{Chamberlain}{1994}{Ch.94}
+\textsc{Chamberlain, G.}  (1994): ``Quantile regression censoring and the
+  structure of wages,'' in \emph{Advances in Econometrics}, ed. by C.~Sims.
+  Elsevier: New York.
+
+\harvarditem[Chaudhuri]{Chaudhuri}{1991}{chau:1991}
+\textsc{Chaudhuri, P.}  (1991): ``Global Nonparametric Estimation of
+  Conditional Quantile Functions and Their Derivatives,'' \emph{J. Mult.
+  Analysis.}, 39, 246--269.
+
+\harvarditem[Chaudhuri]{Chaudhuri}{1992}{Chd.92}
+\textsc{Chaudhuri, P.}  (1992): ``Generalized regression quantiles: Forming a
+  useful toolkit for robust linear regression,'' in \emph{Proceedings of the
+  Second , International Conference on Statistical Data Analysis based on the ,
+  $L_1$ norm and related methods}, ed. by Y.~Dodge. North-Holland: New York.
+
+\harvarditem[Chaudhuri]{Chaudhuri}{1996}{Chd.96}
+\textsc{\BySame{}}  (1996): ``On a geometric notion of quantiles for
+  multivariate data,'' \emph{J. of the American Statistical Association}, 91,
+  862--872.
+
+\harvarditem[Chaudhuri, Doksum, and Samarov]{Chaudhuri, Doksum, and
+  Samarov}{1994}{cds:1994}
+\textsc{Chaudhuri, P., K.~Doksum,  {\small and} A.~Samarov}  (1994):
+  ``Regression Estimators Based on Conditional Quantiles,'' \emph{J. of
+  Nonparametric Stat.}, 3, 317--321.
+
+\harvarditem[Chaudhuri, Doksum, and Samarov]{Chaudhuri, Doksum, and
+  Samarov}{1996}{CDS}
+\textsc{Chaudhuri, P., K.~Doksum,  {\small and} A.~Samarov}  (1996):
+  ``Nonparametric estimation of global functionals based on quantile
+  regression,'' preprint.
+
+\harvarditem[Chaudhuri, Doksum, and Samarov]{Chaudhuri, Doksum, and
+  Samarov}{1997}{cds:1997}
+\textsc{\BySame{}}  (1997): ``On average derivitive quantile regression,''
+  \emph{Annals of Stat.}, 25, 715--744.
+
+\harvarditem[Chay]{Chay}{1995}{Chay}
+\textsc{Chay, K.}  (1995): ``Evaluating the impact of the 1994 Civil Rights Act
+  on the Economic Status of Black Men Using Censored Longitudinal, Earnings
+  Data,'' preprint.
+
+\harvarditem[Cox]{Cox}{1972}{Cox.72}
+\textsc{Cox, D.}  (1972): ``Regression Models with Life Tables,'' \emph{J. of
+  the Royal Statistical Society (B)}, 34, 187--220.
+
+\harvarditem[Csorgo and Revesz]{Csorgo and Revesz}{1984}{CsR.84}
+\textsc{Csorgo, M.,  {\small and} P.~Revesz}  (1984): ``Two approaches to
+  constructing simultaneous confidence bounds for quantiles,'' \emph{Prob.
+  Math. Statist}, 4, 221--236.
+
+\harvarditem[de~Jongh, de~Wet, and Welsh]{de~Jongh, de~Wet, and
+  Welsh}{1988}{jww:88}
+\textsc{de~Jongh, P.~J., T.~de~Wet,  {\small and} A.~H. Welsh}  (1988):
+  ``Mallows-type Bounded-influence-regression Trimmed Means,'' \emph{J. of Am.
+  Stat. Assoc.}, 83, 805--810.
+
+\harvarditem[Efron]{Efron}{1991}{Ef.91a}
+\textsc{Efron, B.}  (1991): ``Regression percentiles using asymmetric squared
+  error loss,'' \emph{Statistica Sinica}, 1, 93--125.
+
+\harvarditem[Efron]{Efron}{1992}{ef.91b}
+\textsc{Efron, B.}  (1992): ``Poisson Overdispersion Estimates Based on the
+  Method of Asymmetric Maximum Likelihood,'' \emph{J. of Am. Stat. Assoc.}, 87,
+  98--107.
+
+\harvarditem[Engle]{Engle}{1982}{E.82}
+\textsc{Engle, R.~F.}  (1982): ``Autoregressive conditional heteroscedasticity
+  with estimates of the variance of United Kingdom inflation,''
+  \emph{Econometrica}, 50, 987--1007.
+
+\harvarditem[Englund, Holst, and Ruppert]{Englund, Holst, and
+  Ruppert}{1988}{engl:hols:rupp:1988}
+\textsc{Englund, J.-E., U.~Holst,  {\small and} D.~Ruppert}  (1988):
+  ``Recursive $M$-estimators of Location and Scale for Dependent Sequences,''
+  \emph{Scand. J. of Stat.}, 15, 147--159.
+
+\harvarditem[Fenton and Gallant]{Fenton and Gallant}{1996}{FG:1996}
+\textsc{Fenton, V.,  {\small and} A.~Gallant}  (1996): ``Qualitative and
+  Asymptotic Performance of SNP Density Estimators,'' \emph{J. Econometrics},
+  74, 77 --118.
+
+\harvarditem[Fiacco and McCormick]{Fiacco and McCormick}{1968}{FM}
+\textsc{Fiacco, A.,  {\small and} G.~McCormick}  (1968): \emph{Nonlinear
+  Programming: Sequential Unconstrained Minimization Techniques}. Wiley: New
+  York.
+
+\harvarditem[Fitzenberger]{Fitzenberger}{1996}{Fitz.96}
+\textsc{Fitzenberger, B.}  (1996): ``A Guide to Censored Quantile
+  Regressions,'' in \emph{Handbook of Statistics}, ed. by C.~Rao,  {\small and}
+  G.~Maddala. North-Holland: New York.
+
+\harvarditem[Fitzenberger]{Fitzenberger}{1997}{F.1997}
+\textsc{\BySame{}}  (1997): ``Computational aspects of censorted quantile
+  regression,'' in \emph{$L_1$-Statistical Procedures and Related Topics}, ed.
+  by Y.~Dodge, IMS Lecture Notes-Monograph Series.
+
+\harvarditem[Frisch]{Frisch}{1956}{Fr.56}
+\textsc{Frisch, R.}  (1956): ``La R\'{e}solution des probl\`{e}mes de programme
+  lin\`{e}aire par la m\`{e}thode du potential logarithmique,'' \emph{Cahiers
+  du Seminaire d'Econometrie}, 4, 7--20.
+
+\harvarditem[Gallant and Tauchen]{Gallant and Tauchen}{1997}{GT:1997}
+\textsc{Gallant, A.,  {\small and} G.~Tauchen}  (1997): ``The Relative
+  Efficiency of Method of Moments Estimators,'' preprint.
+
+\harvarditem[Geweke]{Geweke}{1989}{Gew.89}
+\textsc{Geweke, J.}  (1989): ``Exact predictive densities for linear models
+  with ARCH disturbances,'' \emph{J. of Econometrics}, 40, 63--86.
+
+\harvarditem[Gill, Murray, Saunders, Tomlin, and Wright]{Gill, Murray,
+  Saunders, Tomlin, and Wright}{1986}{GMSTW}
+\textsc{Gill, P., W.~Murray, M.~Saunders, T.~Tomlin,  {\small and} M.~Wright}
+  (1986): ``On projected Newton barrier methods for linear programming and an
+  equivalence to Karmarker's projective method,'' \emph{Mathematical
+  Programming}, 36, 183--209.
+
+\harvarditem[Ginther]{Ginther}{1994}{Gin.94}
+\textsc{Ginther, D.}  (1994): ``A Nonparametric analysis of the {U.S.} earnings
+  distribution,'' preprint.
+
+\harvarditem[Goldberg]{Goldberg}{1996}{Gold}
+\textsc{Goldberg, P.}  (1996): ``Dealer Price Discrimination in New Car
+  Purchases Evidence from the Consumer Expenditure Survey,'' \emph{Journal of
+  Political Economy}, 104, 622--654.
+
+\harvarditem[Gonzago]{Gonzago}{1992}{Gon.92}
+\textsc{Gonzago, C.}  (1992): ``Path-following methods for linear
+  programming,'' \emph{SIAM Review}, 34, 167--224.
+
+\harvarditem[Gutenbrunner]{Gutenbrunner}{1994}{G.94}
+\textsc{Gutenbrunner, C.}  (1994): ``Tests for heteroscedasticity based on
+  regression quantiles and regression rank scores,'' in \emph{Asymptotic
+  Statistics: Proceedings of the Fifth Prague Symposium}, ed. by P.~Mandl,
+  {\small and} Huskova. Physica-Verlag: Heidelberg.
+
+\harvarditem[Gutenbrunner]{Gutenbrunner}{1997}{G:1997}
+\textsc{\BySame{}}  (1997): ``Regression Rank Statistics,'' in
+  \emph{$L_1$-Statistical Procedures and Related Topics}, ed. by Y.~Dodge, IMS
+  Lecture Notes-Monograph Series.
+
+\harvarditem[Gutenbrunner and Jureckova]{Gutenbrunner and
+  Jureckova}{1992}{GJ.92}
+\textsc{Gutenbrunner, C.,  {\small and} J.~Jureckova}  (1992): ``Regression
+  quantile and regression rank score process in the linear model and derived
+  statistics,'' \emph{Ann. Statist.}, 20, 305--330.
+
+\harvarditem[Gutenbrunner, Jureckova, Koenker, and Portnoy]{Gutenbrunner,
+  Jureckova, Koenker, and Portnoy}{1993}{GJKP.94}
+\textsc{Gutenbrunner, C., J.~Jureckova, R.~Koenker,  {\small and} S.~Portnoy}
+  (1993): ``Tests of linear hypotheses based on regression rank scores,''
+  \emph{J. of Nonparametric Statistics}, 2, 307--33.
+
+\harvarditem[Gutenbrunner and Jure\v{c}kov\'a]{Gutenbrunner and
+  Jure\v{c}kov\'a}{1992}{gj:1992}
+\textsc{Gutenbrunner, C.,  {\small and} J.~Jure\v{c}kov\'a}  (1992):
+  ``Regression Rank Scores and Regression Quantiles,'' \emph{Annals of Stat.},
+  20, 305--330, Asymptotics for QR primal and dual processes.
+
+\harvarditem[Gutenbrunner, Jure\v{c}kov\'a, Koenker, and Portnoy]{Gutenbrunner,
+  Jure\v{c}kov\'a, Koenker, and Portnoy}{1993}{gjkp:1993}
+\textsc{Gutenbrunner, C., J.~Jure\v{c}kov\'a, R.~Koenker,  {\small and}
+  S.~Portnoy}  (1993): ``Tests of Linear Hypotheses Based on Regression Rank
+  Scores,'' \emph{J. of Nonparametric Stat.}, 2, 307--331, Asymptotics for QR
+  rank tests.
+
+\harvarditem[Hahn]{Hahn}{1995}{Hahn}
+\textsc{Hahn, J.}  (1995): ``Bootstrapping quantile regression models,''
+  \emph{Econometric Theory}, 11, 105--121.
+
+\harvarditem[Hajek and Sidak]{Hajek and Sidak}{1967}{HS.67}
+\textsc{Hajek, J.,  {\small and} Z.~Sidak}  (1967): \emph{Theory of Rank
+  Tests}. Academia, Prague.
+
+\harvarditem[Hall and Sheather]{Hall and Sheather}{1988}{SH.88}
+\textsc{Hall, P.,  {\small and} S.~Sheather}  (1988): ``On the distribution of
+  a studentized quantile,'' \emph{J. Royal Stat. Soc. (B)}, 50, 381--391.
+
+\harvarditem[Han]{Han}{1987}{han:1987}
+\textsc{Han, A.}  (1987): ``Nonparametric analysis of a generalized regression
+  model,'' \emph{J. Econometrics}, 35, 303--318.
+
+\harvarditem[Hansen, Kooperberg, and Sardy]{Hansen, Kooperberg, and
+  Sardy}{1996}{HKS}
+\textsc{Hansen, M., C.~Kooperberg,  {\small and} S.~Sardy}  (1996): ``Triogram
+  Models,'' \emph{J. of Am. Stat. Assoc.}, forthcoming.
+
+\harvarditem[Hasan and Koenker]{Hasan and Koenker}{1996}{HK.96}
+\textsc{Hasan, M.,  {\small and} R.~Koenker}  (1996): ``Robust rank tests of
+  the unit root hypothesis,'' \emph{Eonometrica}, forthcoming.
+
+\harvarditem[Hastie and Stuetzle]{Hastie and Stuetzle}{1989}{hast:stue:1989}
+\textsc{Hastie, T.,  {\small and} W.~Stuetzle}  (1989): ``Principal Curves,''
+  \emph{J. of Am. Stat. Assoc.}, 84, 502--516.
+
+\harvarditem[He and Portnoy]{He and Portnoy}{1997}{HP:97}
+\textsc{He, X.,  {\small and} S.~Portnoy}  (1997): ``Asymptotics of the Deepest
+  Line,'' preprint.
+
+\harvarditem[Heckman]{Heckman}{1996}{heckman:1996}
+\textsc{Heckman, J.}  (1996): ``Randomization as an Instrumental Variable,''
+  \emph{The Review of Economics and Statistics}, 78, 336--340.
+
+\harvarditem[Hendricks and Koenker]{Hendricks and Koenker}{1991}{HK.92}
+\textsc{Hendricks, W.,  {\small and} R.~Koenker}  (1991): ``Hierarchical spline
+  models for conditional quantiles and the demand for electricity,''
+  \emph{JASA}, 87, 58--68.
+
+\harvarditem[Herc\'{e}]{Herc\'{e}}{1996}{Herce}
+\textsc{Herc\'{e}, M.}  (1996): ``Asymptotic theory of LAD estimation in a unit
+  root process with finite variance,'' \emph{Econometric Theory}, 12, 129--154.
+
+\harvarditem[Holst]{Holst}{1985}{hols:1985}
+\textsc{Holst, U.}  (1985): ``Recursive Estimation of Quantiles,'' in
+  \emph{Contributions to Prob. and Stat. in Honour of Gunar Blom}, ed. by
+  G.~Lindgren, pp. 179-- 188.
+
+\harvarditem[Holst]{Holst}{1987}{hols:1987}
+\textsc{\BySame{}}  (1987): ``Recursive Estimation of Quantiles Using Recursive
+  Kernel Density Estimators,'' \emph{Sequential Analysis}, 6, 219--237.
+
+\harvarditem[Honor\'e and Powell]{Honor\'e and Powell}{1992a}{HP.92}
+\textsc{Honor\'e, B.,  {\small and} J.~Powell}  (1992a): ``Pairwise Difference
+  Estimators of Censored and Truncated Regression Models,'' preprint.
+
+\harvarditem[Honor\'e and Powell]{Honor\'e and Powell}{1992b}{HP.93}
+\textsc{\BySame{}}  (1992b): ``Quantile regression under random censoring,''
+  preprint.
+
+\harvarditem[Honor\'e and Powell]{Honor\'e and Powell}{1994}{hono:powe:1994}
+\textsc{Honor\'e, B.~E.,  {\small and} J.~L. Powell}  (1994): ``Pairwise
+  Difference Estimators of Censored and Truncated Regression Models,'' \emph{J.
+  Econometrics}, 64, 241--278, U statistics models for quantile regression
+  estimators.
+
+\harvarditem[Horowitz]{Horowitz}{1992}{horo}
+\textsc{Horowitz, J.}  (1992): ``A Smoothed Maximum Score Estimator for the
+  Binary Response Model,'' \emph{Econometrica}, 60, 505--531.
+
+\harvarditem[Horowitz]{Horowitz}{1996}{horo:97}
+\textsc{\BySame{}}  (1996): ``Bootstrap methods for median regression models,''
+  \emph{Econometrica}, forthcoming.
+
+\harvarditem[Huber]{Huber}{1981}{Hub.81}
+\textsc{Huber, P.}  (1981): \emph{Robust Statistics}. New York: Wiley.
+
+\harvarditem[Huskova]{Huskova}{1997}{H:1997}
+\textsc{Huskova, M.}  (1997): ``$L_1$ test procedures for detection of
+  change,'' in \emph{$L_1$-Statistical Procedures and Related Topics}, ed. by
+  Y.~Dodge, IMS Lecture Notes-Monograph Series.
+
+\harvarditem[Imbens and Angrist]{Imbens and Angrist}{1994}{ai:1994}
+\textsc{Imbens, G.,  {\small and} J.~Angrist}  (1994): ``Identification and
+  Estimation of Local Average Treatment Effects,'' \emph{Econometrica}, 62,
+  467--475.
+
+\harvarditem[Jureckova]{Jureckova}{1991}{Jur.91}
+\textsc{Jureckova, J.}  (1991): ``Tests of Kolmogorov-Smirnov type based on
+  regression rank scores,'' \emph{Transactions of the 11th Prague Conference on
+  Information Theory and Statistical Decision Functions}.
+
+\harvarditem[Karmarker]{Karmarker}{1984}{Karm}
+\textsc{Karmarker, N.}  (1984): ``A new polynomial time algorithm for linear
+  programming,'' \emph{Combinatorica}, 4, 373--395.
+
+\harvarditem[Kiefer]{Kiefer}{1959}{Kfr.59}
+\textsc{Kiefer, J.}  (1959): ``K-sample analogues of the Kolmogorov-Smirnov and
+  Cramer-von Mises tests,'' \emph{Ann. Math. Statist}, 30, 420--447.
+
+\harvarditem[King]{King}{1997}{King}
+\textsc{King, G.}  (1997): \emph{A Solution to the Ecological Inference
+  Problem}. Harvard: Cambridge.
+
+\harvarditem[Knight]{Knight}{1989}{Kn}
+\textsc{Knight, K.}  (1989): ``Limit theory for autoregressive parameters in an
+  infinite variance random walk,'' \emph{Canadian J. of Statistics}, 17,
+  261--278.
+
+\harvarditem[Knight]{Knight}{1997}{kk:1997}
+\textsc{\BySame{}}  (1997): ``Asymptotics for $L_1$ regression estimators under
+  general conditions,'' preprint.
+
+\harvarditem[Koenker]{Koenker}{1994a}{k:1994}
+\textsc{Koenker, R.}  (1994a): ``Confidence Intervals for Regression
+  Quantiles,'' in \emph{Asymptotic Statistics: Proceedings of the 5th Prague
+  Symposium}, pp. 349--359. Springer-Verlag.
+
+\harvarditem[Koenker]{Koenker}{1994b}{K.94}
+\textsc{Koenker, R.}  (1994b): ``Confidence intervals for regression
+  quantiles,'' in \emph{Asymptotic Statistics: Proceedings of the 5th Prague
+  Symposium on Asymptotic Statistics}, ed. by M.~P.,  {\small and} M.~Huskova.
+  Physica-Verlag: Heidleberg.
+
+\harvarditem[Koenker]{Koenker}{1996}{K.96}
+\textsc{\BySame{}}  (1996): ``Rank Tests for Linear Models,'' in \emph{Handbook
+  of Statistics}, ed. by C.~Rao,  {\small and} G.~Maddala. North-Holland: New
+  York.
+
+\harvarditem[Koenker]{Koenker}{1997}{K.1997}
+\textsc{\BySame{}}  (1997): ``$\ell_1$ computation: an interior monologue,'' in
+  \emph{$L_1$-Statistical Procedures and Related Topics}, ed. by Y.~Dodge, IMS
+  Lecture Notes-Monograph Series.
+
+\harvarditem[Koenker and Bassett]{Koenker and Bassett}{1978}{KB.78}
+\textsc{Koenker, R.,  {\small and} G.~Bassett}  (1978): ``Regression
+  Quantiles,'' \emph{Econometrica}, 46, 33--50.
+
+\harvarditem[Koenker and Bassett]{Koenker and Bassett}{1982a}{KB.82b}
+\textsc{\BySame{}}  (1982a): ``Robust tests for heteroscedasticity based on
+  regression quantiles,'' \emph{Econometrica}, 50, 43--61.
+
+\harvarditem[Koenker and Bassett]{Koenker and Bassett}{1982b}{KB.82}
+\textsc{Koenker, R.,  {\small and} G.~Bassett}  (1982b): ``Tests of linear
+  hypotheses and l$_1$ estimation,'' \emph{Econometrica}, 50, 1577--1584.
+
+\harvarditem[Koenker and d'Orey]{Koenker and d'Orey}{1987}{KO.87}
+\textsc{Koenker, R.,  {\small and} V.~d'Orey}  (1987): ``Computing Regression
+  Quantiles,'' \emph{Applied Statistics}, 36, 383--393.
+
+\harvarditem[Koenker and d'Orey]{Koenker and d'Orey}{1993}{KO.93}
+\textsc{\BySame{}}  (1993): ``A Remark on Computing Regression Quantiles,''
+  \emph{Applied Statistics}, 36, 383--393.
+
+\harvarditem[Koenker and Machado]{Koenker and Machado}{1996}{KM.96}
+\textsc{Koenker, R.,  {\small and} J.~Machado}  (1996): ``GMM inference when
+  the number of moment conditions is large,'' preprint.
+
+\harvarditem[Koenker and Machado]{Koenker and Machado}{1998}{KM.98}
+\textsc{\BySame{}}  (1998): ``Goodness of fit and likelihood ratio processes
+  for quantile regression,'' preprint.
+
+\harvarditem[Koenker, Machado, Skeels, and A.H.Welsh]{Koenker, Machado, Skeels,
+  and A.H.Welsh}{1995}{KMSW.93}
+\textsc{Koenker, R., J.~Machado, C.~Skeels,  {\small and} A.H.Welsh}  (1995):
+  ``Momentary Lapses: Moment expansions and the robustness of minimum distance
+  estimators,'' \emph{Econometric Theory}, pp. 172--197.
+
+\harvarditem[Koenker, Machado, Skeels, and Welsh.]{Koenker, Machado, Skeels,
+  and Welsh.}{1994}{KMSW.94}
+\textsc{Koenker, R., J.~Machado, C.~Skeels,  {\small and} A.~Welsh.}  (1994):
+  ``A note on Amemiya's form of the weighted least squares estimator,''
+  \emph{Australian Journal of Statistics}, 35, 155--174.
+
+\harvarditem[Koenker, Ng, and Portnoy]{Koenker, Ng, and Portnoy}{1994}{KNP.94}
+\textsc{Koenker, R., P.~Ng,  {\small and} S.~Portnoy}  (1994): ``Quantile
+  Smoothing Splines,'' \emph{Biometrika}, 81, 673--80.
+
+\harvarditem[Koenker and Park]{Koenker and Park}{1996}{KP.96}
+\textsc{Koenker, R.,  {\small and} B.~Park}  (1996): ``An interior point
+  algorithm for nonlinear quantile regression,'' \emph{Journal of
+  Econometrics}, 71, 265--283.
+
+\harvarditem[Koenker and Portnoy]{Koenker and Portnoy}{1987}{koen:port:1987}
+\textsc{Koenker, R.,  {\small and} S.~Portnoy}  (1987): ``$L$-estimation for
+  Linear Models,'' \emph{J. of Am. Stat. Assoc.}, 82, 851--857, Asymptotics for
+  L-estimators based on QR.
+
+\harvarditem[Koenker and Portnoy]{Koenker and Portnoy}{1990}{KP.90}
+\textsc{Koenker, R.,  {\small and} S.~Portnoy}  (1990): ``M Estimation of
+  multivariate regressions,'' \emph{J. of American Statistical Association},
+  85, 1060--68.
+
+\harvarditem[Koenker and Schorfheide]{Koenker and Schorfheide}{1994}{KS.94}
+\textsc{Koenker, R.,  {\small and} F.~Schorfheide}  (1994): ``Quantile
+  Smoothing Splines for global temperature change,'' \emph{Climatic Change},
+  28, 395--404.
+
+\harvarditem[Koenker and Zhao]{Koenker and Zhao}{1994}{KZ.94}
+\textsc{Koenker, R.,  {\small and} Q.~Zhao}  (1994): ``L-Estimation for linear
+  heteroscedastic models,'' \emph{J. of Nonparametric Statistics}, 3, 223--235.
+
+\harvarditem[Koenker and Zhao]{Koenker and Zhao}{1996}{KZ.96}
+\textsc{\BySame{}}  (1996): ``Conditional quantile estimation and interence for
+  ARCH models,'' \emph{Econometric Theory}, 12, 793--813.
+
+\harvarditem[Koltchinskii]{Koltchinskii}{1997}{kolt}
+\textsc{Koltchinskii, V.}  (1997): ``M-estimation, convexity, and quantiles,''
+  \emph{Annals of Stat.}, 25, 435--477, Multivariate Quantiles.
+
+\harvarditem[Koul and Mukherjee]{Koul and Mukherjee}{1994}{KM.94}
+\textsc{Koul, H.,  {\small and} R.~Mukherjee}  (1994): ``Regression quantiles
+  and related processes under long range dependent errors,'' \emph{J. Mult.
+  Anal}, 51, 318--337.
+
+\harvarditem[Koul and Saleh]{Koul and Saleh}{1995}{KS.95}
+\textsc{Koul, H.,  {\small and} A.~Saleh}  (1995): ``Autoregression quantiles
+  and related rank score processes,'' \emph{Annals of Statistics}, 23,
+  670--689.
+
+\harvarditem[Lamport]{Lamport}{1994}{Lamp:1994}
+\textsc{Lamport, L.}  (1994): \emph{\LaTeX}. Addison-Wesley.
+
+\harvarditem[Lehmann]{Lehmann}{1983}{Leh.83}
+\textsc{Lehmann, E.}  (1983): \emph{Theory of Point Estimation}. Wiley: New
+  York.
+
+\harvarditem[Liu]{Liu}{1990}{Liu}
+\textsc{Liu, R.}  (1990): ``On a notion of data depth based on random
+  simplices,'' \emph{Annals of Statistics}, 36, 405--411.
+
+\harvarditem[Lustig, Marsden, and Shanno]{Lustig, Marsden, and
+  Shanno}{1994}{LMS.94}
+\textsc{Lustig, I., R.~Marsden,  {\small and} D.~Shanno}  (1994): ``Interior
+  point methods for linear programming: computational state of the art with
+  discussion,'' \emph{ORSA J. on Computing}, 6, 1--36.
+
+\harvarditem[Manning, Blumberg, and Moulton]{Manning, Blumberg, and
+  Moulton}{1995}{MBM.95}
+\textsc{Manning, W., L.~Blumberg,  {\small and} L.~Moulton}  (1995): ``The
+  demand for alcohol: the differential response to price,'' \emph{Journal of
+  Health Economics}, 14, 123--148.
+
+\harvarditem[Manski]{Manski}{1975a}{M.75}
+\textsc{Manski, C.}  (1975a): ``Maximum score estimation of the stochastic
+  utility model of choice,'' \emph{J. of Eonometrics}, 3, 205--228.
+
+\harvarditem[Manski]{Manski}{1985a}{M.85}
+\textsc{\BySame{}}  (1985a): ``Semiparametric analysis of discrete response
+  asymptotic properties of the maximum score estimator,'' \emph{J. of
+  Eonometrics}, 27, 205--228.
+
+\harvarditem[Manski]{Manski}{1997}{manski:1997}
+\textsc{\BySame{}}  (1997): ``Monotone Treatment Response,''
+  \emph{Econometrica}, 65, 1311--1334.
+
+\harvarditem[Manski]{Manski}{1975b}{mans:1975}
+\textsc{Manski, C.~F.}  (1975b): ``Maximum Score Estimation of the Stochastic
+  Utility Model of Choice,'' \emph{J. Econometrics}, 3, 205--228.
+
+\harvarditem[Manski]{Manski}{1985b}{mans:1985}
+\textsc{\BySame{}}  (1985b): ``Semiparametric Analysis of Discrete Response:
+  {A}symptotic Properties of the Maximum Score Estimator,'' \emph{J.
+  Econometrics}, 27, 313--333.
+
+\harvarditem[Manski and Thompson]{Manski and Thompson}{1986}{mt:86}
+\textsc{Manski, C.~F.,  {\small and} T.~S. Thompson}  (1986): ``Operational
+  Characteristics of Maximum Score Estimation,'' \emph{J. Econometrics}, 32,
+  85--108.
+
+\harvarditem[Marden]{Marden}{1995}{Mard}
+\textsc{Marden, J.}  (1995): \emph{Analysing and Modeling Rank Data}.
+  Chapman-Hall: New York.
+
+\harvarditem[Markatou and Horowitz]{Markatou and
+  Horowitz}{1995}{mark:horo:1995}
+\textsc{Markatou, M.,  {\small and} J.~L. Horowitz}  (1995): ``Robust Scale
+  Estimation in the Error-components Model Using the Empirical Characteristic
+  Function,'' \emph{Canadian J. of Stat.}, 23, 369--381.
+
+\harvarditem[Marron and Wand]{Marron and Wand}{1992}{marr:wand:1992}
+\textsc{Marron, J.~S.,  {\small and} M.~P. Wand}  (1992): ``Exact Mean
+  Integrated Squared Error,'' \emph{Annals of Stat.}, 20, 712--736.
+
+\harvarditem[Matzkin]{Matzkin}{1994}{Matz}
+\textsc{Matzkin, R.}  (1994): ``Restrictions of economic theory in
+  nonparametric models,'' in \emph{Handbook of Econometrics}, ed. by R.~Engle,
+  {\small and} D.~McFadden. North-Holland: New York.
+
+\harvarditem[Mehrotra]{Mehrotra}{1992}{Meh.92}
+\textsc{Mehrotra, S.}  (1992): ``On the implementation of a primal-dual
+  interior point method,'' \emph{SIAM J. of Optimization}, 2, 575--601.
+
+\harvarditem[Meketon]{Meketon}{1986}{Mek.86}
+\textsc{Meketon, M.}  (1986): ``Least Absolute Value Regression,'' \emph{Bell
+  Labs Technical Report}.
+
+\harvarditem[Mosteller and Tukey]{Mosteller and Tukey}{1977}{MT.77}
+\textsc{Mosteller, F.,  {\small and} J.~Tukey}  (1977): \emph{Data Analysis and
+  Regression: A Second Course in Statistics}. Addison-Wesley, Reading Mass.
+
+\harvarditem[Nevel'son]{Nevel'son}{1975}{Nev.75}
+\textsc{Nevel'son, M.}  (1975): ``On the Properties of the recursive estimates
+  for a functional of an unknown distribution function,'' in \emph{Limit
+  Theorems of Probability Theory}, ed. by P.~Revesz, vol.~11 of \emph{Colloquia
+  Mathematica Societatis Janos Bolyai}.
+
+\harvarditem[Newey and Powell]{Newey and Powell}{1987}{NP.87}
+\textsc{Newey, W.,  {\small and} J.~L. Powell}  (1987): ``Asymmetric least
+  squares estimation and testing,'' \emph{Econometrica}, 55, 819--847.
+
+\harvarditem[Newey and Powell]{Newey and Powell}{1990}{newe:powe:1990}
+\textsc{Newey, W.~K.,  {\small and} J.~L. Powell}  (1990): ``Efficient
+  Estimation of Linear and Type {I} Censored Regression Models Under
+  Conditional Quantile Restrictions,'' \emph{Econometric Theory}, 6, 295--317,
+  Semiparametric optimality result for QR.
+
+\harvarditem[Niinimaa and Oja]{Niinimaa and Oja}{1995}{niin:oja:1995}
+\textsc{Niinimaa, A.,  {\small and} H.~Oja}  (1995): ``On the Influence
+  Functions of Certain Bivariate Medians,'' \emph{J. Royal Stat. Soc. (B)}, 57,
+  565--574.
+
+\harvarditem[Niinimaa, Oja, and Tableman]{Niinimaa, Oja, and
+  Tableman}{1990}{niin:oja:tabl:1990}
+\textsc{Niinimaa, A., H.~Oja,  {\small and} M.~Tableman}  (1990): ``The
+  Finite-sample Breakdown Point of the {O}ja Bivariate Median and of the
+  Corresponding Half-samples Version,'' \emph{Stat and Prob Letters}, 10,
+  325--328.
+
+\harvarditem[Ninimaa, Oja, and Nyblom]{Ninimaa, Oja, and Nyblom}{1992}{NON}
+\textsc{Ninimaa, A., H.~Oja,  {\small and} J.~Nyblom}  (1992): ``The {O}ja
+  Bivariate Median,'' \emph{Applied Statistics}, 41, 611--17.
+
+\harvarditem[Oja]{Oja}{1983}{Oja.83}
+\textsc{Oja, H.}  (1983): ``Descriptive statistics for multivariate
+  distributions,'' \emph{Statistics and Probability Letters}, 1, 327--332.
+
+\harvarditem[Oja and Niinimaa]{Oja and Niinimaa}{1985}{oja:niin:1985}
+\textsc{Oja, H.,  {\small and} A.~Niinimaa}  (1985): ``Asymptotic Properties of
+  the Generalized Median in the Case of Multivariate Normality,'' \emph{J.
+  Royal Stat. Soc. (B)}, 47, 372--377.
+
+\harvarditem[Parzen, Wei, and Ying]{Parzen, Wei, and Ying}{1994}{PWY.94}
+\textsc{Parzen, M.~I., L.~Wei,  {\small and} Z.~Ying}  (1994): ``A resampling
+  method based on pivotal estimating functions,'' \emph{Biometrika}, 81,
+  341--350.
+
+\harvarditem[Perron]{Perron}{1989}{Per.89}
+\textsc{Perron, P.}  (1989): ``The Great Crash, the Oil Price Shock, and the
+  Unit-Root Hypothesis,'' \emph{Econometrica}, 57, 1361--1401.
+
+\harvarditem[Phillips]{Phillips}{1991}{phil:1991}
+\textsc{Phillips, P. C.~B.}  (1991): ``A Shortcut to {L}AD Estimator
+  Asymptotics,'' \emph{Econometric Theory}, 7, 450--463, Heuristics for QR
+  asymptotics using generalized functions.
+
+\harvarditem[Pollard]{Pollard}{1991}{poll:1991}
+\textsc{Pollard, D.}  (1991): ``Asymptotics for Least Absolute Deviation
+  Regression Estimators,'' \emph{Econometric Theory}, 7, 186--199, Asymptotics
+  under weaker design conditions.
+
+\harvarditem[Portnoy]{Portnoy}{1984}{P.84}
+\textsc{Portnoy, S.}  (1984): ``Tightness of the sequence of empiric cdf
+  processes defined from regression fractiles,'' in \emph{Robust and Nonlinear
+  Time Series Analysis}, ed. by J.~Franke, W.~Hardle,  {\small and} D.~Martin.
+  Springer-Verlag: New York.
+
+\harvarditem[Portnoy]{Portnoy}{1989}{P.89}
+\textsc{\BySame{}}  (1989): ``Asymptotic behavior of the number of regression
+  quantile breakpoints,'' \emph{SIAM J. Science Statistical Computing,}, 12,
+  867--883.
+
+\harvarditem[Portnoy]{Portnoy}{1991}{port:1991}
+\textsc{Portnoy, S.}  (1991): ``Asymptotic Behavior of Regression Quantiles in
+  Non-stationary, Dependent Cases,'' \emph{J. Mult. Analysis.}, 38, 100--113,
+  Asymptotics for QR under misspecification.
+
+\harvarditem[Portnoy]{Portnoy}{1996}{P.96}
+\textsc{Portnoy, S.}  (1996): ``Local asymptotics for quantile smoothing
+  splines,'' \emph{Annals of Statistics}, forthcoming.
+
+\harvarditem[Portnoy]{Portnoy}{1997}{P.1997}
+\textsc{\BySame{}}  (1997): ``On computation of regression quantiles,'' in
+  \emph{$L_1$-Statistical Procedures and Related Topics}, ed. by Y.~Dodge, IMS
+  Lecture Notes-Monograph Series.
+
+\harvarditem[Portnoy and Koenker]{Portnoy and Koenker}{1989}{PK.89}
+\textsc{Portnoy, S.,  {\small and} R.~Koenker}  (1989): ``Adaptive L-estimation
+  of linear models,'' \emph{Ann. Statist,}, 17, 362--381.
+
+\harvarditem[Portnoy and Koenker]{Portnoy and Koenker}{1997}{PK.1997}
+\textsc{Portnoy, S.,  {\small and} R.~Koenker}  (1997): ``The Gaussian Hare and
+  the Laplacian Tortoise: Computability of squared-error versus absolute-error
+  estimators, with discusssion,'' \emph{Stat. Science}, 12, 279--300.
+
+\harvarditem[Poterba and Rueben]{Poterba and Rueben}{1995}{PR.95}
+\textsc{Poterba, J.,  {\small and} K.~Rueben}  (1995): ``The Distribution of
+  Public Sector Wage Premia: New Evidence Using Quantile Regression Methods,''
+  NBER Working paper \#4734.
+
+\harvarditem[Powell]{Powell}{1986a}{Pow.86}
+\textsc{Powell, J.}  (1986a): ``Censored regression quantiles,'' \emph{J.
+  Econometrics}, 32, 143--155.
+
+\harvarditem[Powell]{Powell}{1989}{Pow.89}
+\textsc{\BySame{}}  (1989): ``Estimation of monotonic regression models under
+  quantile restrictions,'' in \emph{Nonparametric and Semiparametric Methods in
+  Econometrics}, ed. by B.~W.A., J.~Powell,  {\small and} G.~Tauchen. Cambridge
+  U. Press: Cambridge.
+
+\harvarditem[Powell]{Powell}{1994}{Pow.94}
+\textsc{\BySame{}}  (1994): ``Estimation of semiparametric models,'' in
+  \emph{Handbook of Econometrics}, ed. by R.~Engle,  {\small and} D.~McFadden.
+  North-Holland: New York.
+
+\harvarditem[Powell]{Powell}{1983}{P:83}
+\textsc{Powell, J.~L.}  (1983): ``The Asymptotic Normality of Two-stage Least
+  Absolute Deviations Estimators,'' \emph{Econometrica}, 51, 1569--1576.
+
+\harvarditem[Powell]{Powell}{1986b}{powe:1986}
+\textsc{\BySame{}}  (1986b): ``Censored Regression Quantiles,'' \emph{J.
+  Econometrics}, 32, 143--155, Asymptotics for censored quantile regression.
+
+\harvarditem[Ramsay and Silverman]{Ramsay and Silverman}{1997}{RS}
+\textsc{Ramsay, J.,  {\small and} B.~Silverman}  (1997): \emph{Functional Data
+  Analysis}. Springer.
+
+\harvarditem[Rocke]{Rocke}{1983}{rock:1983}
+\textsc{Rocke, D.~M.}  (1983): ``Robust Statistical Analysis of Interlaboratory
+  Studies,'' \emph{Biometrika}, 70, 421--431.
+
+\harvarditem[Rousseeuw and Hubert]{Rousseeuw and Hubert}{1996}{RH:97}
+\textsc{Rousseeuw, P.,  {\small and} M.~Hubert}  (1996): ``Regression Depth,''
+  preprint.
+
+\harvarditem[Ruppert]{Ruppert}{1985}{rupp:1985}
+\textsc{Ruppert, D.}  (1985): ``A {N}ewton-Raphson Version of the Multivariate
+  {R}obbins-Monro Procedure,'' \emph{Annals of Stat.}, 13, 236--245.
+
+\harvarditem[Ruppert and Carroll]{Ruppert and Carroll}{1980}{RC.80}
+\textsc{Ruppert, D.,  {\small and} R.~Carroll}  (1980): ``Trimmed least squares
+  estimation in the linear model,'' \emph{Journal of the American Statistical
+  Association}, 75, 828--838.
+
+\harvarditem[Schwarz]{Schwarz}{1978}{Sch.78}
+\textsc{Schwarz, G.}  (1978): ``Estimating the dimension of a model,''
+  \emph{Annals of Statistics}, 6, 461--464.
+
+\harvarditem[Serfling]{Serfling}{1980}{Serf.80}
+\textsc{Serfling, R.}  (1980): \emph{Approximation Theorems of Mathematical
+  Statistics}. New York: Wiley.
+
+\harvarditem[Silverman]{Silverman}{1985}{Sil.85}
+\textsc{Silverman, B.}  (1985): ``Some aspects of the spline smoothing approach
+  to nonparametric regression curve fitting (with discussion),''
+  \emph{JRSS(B)}, 47, 1--52.
+
+\harvarditem[Small]{Small}{1990}{Small:1990}
+\textsc{Small, C.}  (1990): ``A survey of multidimensional medians,''
+  \emph{International Statistical Review}, 58, 263--277.
+
+\harvarditem[Small]{Small}{1997}{Small}
+\textsc{\BySame{}}  (1997): \emph{The Statistical Theory of Shape}. Springer.
+
+\harvarditem[Stoker]{Stoker}{1992}{Stoker}
+\textsc{Stoker, T.}  (1992): \emph{Lectures on Semiparametric Econometrics}.
+  CORE Foundation: Louvain.
+
+\harvarditem[Stone]{Stone}{1977}{St.77}
+\textsc{Stone, C.}  (1977): ``Consistent Nonparametric Regression, with
+  discussion,'' \emph{Annals of Statistics}, 5, 595--645.
+
+\harvarditem[Stone, Hansen, Kooperberg, and Truong]{Stone, Hansen, Kooperberg,
+  and Truong}{1997}{SHKT}
+\textsc{Stone, C., M.~Hansen, C.~Kooperberg,  {\small and} Y.~Truong}  (1997):
+  ``Polynomial Splines and their Tensor Products in Extended Linear Modeling,
+  with discussion,'' \emph{Annals of Statistics}, 25, 1371--1470.
+
+\harvarditem[Troung]{Troung}{1989}{Trg.89}
+\textsc{Troung, Y.}  (1989): ``Asymptotic properties of kernel estimators based
+  on local medians,'' \emph{Annals of Statistics}, 17, 606--617.
+
+\harvarditem[Venables and Ripley]{Venables and Ripley}{1997}{VR:1997}
+\textsc{Venables, W.,  {\small and} B.~Ripley}  (1997): \emph{Modern Applied
+  Statistics with Splus}. Springer.
+
+\harvarditem[Wahba]{Wahba}{1990}{W.90}
+\textsc{Wahba, G.}  (1990): \emph{Spline Models for Observational Data},
+  vol.~59. CBMS-NSF Regional Conference Series in Applied Mathematics.
+
+\harvarditem[Wang]{Wang}{1994}{Wang.93}
+\textsc{Wang, Y.}  (1994): ``The $L_2$ risk of the isotonic estimator,''
+  preprint.
+
+\harvarditem[Weiss]{Weiss}{1991}{weis:1991}
+\textsc{Weiss, A.~A.}  (1991): ``Estimating Nonlinear Dynamic Models Using
+  Least Absolute Error Estimation,'' \emph{Econometric Theory}, 7, 46--68, QR
+  asymptotics for dynamic models.
+
+\harvarditem[Welsh]{Welsh}{1987}{Wel.87}
+\textsc{Welsh, A.}  (1987): ``Kernel estimates of the sparsity function,'' in
+  \emph{Statistical Data Analysis Based on the $L_1$-norm and Related,
+  Methods}, ed. by Y.~Dodge, pp. 369--377. Elsevier: New York.
+
+\harvarditem[Welsh]{Welsh}{1993}{Wel.93}
+\textsc{Welsh, A.}  (1993): ``Robust estimation of smooth regression and spread
+  functions and their derivatives,'' preprint.
+
+\harvarditem[Wolak]{Wolak}{1987}{Wolak}
+\textsc{Wolak, F.~A.}  (1987): ``An exact test for multiple inequality and
+  equality constraints in the linear regression model,'' \emph{Journal of the
+  American Statistical Association}, 82, 782--793.
+
+\harvarditem[Wright]{Wright}{1992}{W.92}
+\textsc{Wright, M.}  (1992): ``Interior Methods for constrained optimization,''
+  \emph{Acta Numerica}, pp. 341--407.
+
+\harvarditem[Ying, Jung, and Wei]{Ying, Jung, and Wei}{1995}{YJW.92}
+\textsc{Ying, Z., S.~H. Jung,  {\small and} L.~J. Wei}  (1995): ``Survival
+  Analysis With Median Regression Models,'' \emph{J. of Am. Stat. Assoc.}, 90,
+  178--184.
+
+\harvarditem[Zhou and Portnoy]{Zhou and Portnoy}{1996}{ZP}
+\textsc{Zhou, K.,  {\small and} S.~Portnoy}  (1996): ``Direct use of regression
+  quantiles to construct confidence sets in linear models,'' \emph{Annals of
+  Statistics}, 24, 287--306.
+
+\harvarditem[Zwanzig]{Zwanzig}{1997}{Z:1997}
+\textsc{Zwanzig, S.}  (1997): ``On $L_1$ norm estimators in nonlinear
+  regression and in nonlinear errors in variables models,'' in
+  \emph{$L_1$-Statistical Procedures and Related Topics}, ed. by Y.~Dodge, IMS
+  Lecture Notes-Monograph Series.
+
+\end{thebibliography}

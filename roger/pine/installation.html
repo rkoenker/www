@@ -1,0 +1,572 @@
+<HTML><HEAD><TITLE>Pine Technical Notes: Building and Installation</TITLE></HEAD><BODY>
+<H1>Building and Installation</H1>
+
+<H2><A NAME="pine-compile">UNIX Pine Compile-time Options</A></H2>
+
+The files you may need to modify are <CODE>./pine/makefile.xxx</CODE> and
+<CODE>./pine/osdep/os-xxx.h</CODE> where "xxx" is the 3-letter code for
+your platform.  You can give the command <CODE>build help</CODE> to see
+the list of ports incorporated into Pine and their associated 3-letter
+codes.  The file <CODE>./pine/makefile.xxx</CODE> is where you would set
+your compiler options.  By default, Pine will be compiled with debugging
+on, optimization and profile off.  Note that if you compile with DEBUG
+off, then Pine will not create its normal debug files, no matter how the
+debug-level and debug command line flag are set.  <P>
+
+Most of Pine's behaviors are set in the file
+<CODE>./pine/osdep/os-xxx.h,</CODE> which includes comments that explain
+each setting.  Some of these can only be set when you compile.  Others,
+however, can be overridden by command-line flags to Pine or settings in
+Pine's user or system configuration files.  Some of the options which can
+be set when compiling: 
+
+<DL COMPACT>
+
+<DT> USE_QUOTAS
+
+<DD> Determines whether quotas are checked on startup.  Default is to not
+check the quota. 
+
+<DT> ALLOW_CHANGING_FROM
+
+<DD> Determines whether users are allowed to modify the From line on
+outgoing mail.  Even with this turned on, users will have to include From
+in their <EM>default-composer-hdrs</EM> or <EM>customized-hdrs</EM> in
+order to be able to edit the From line.  Default is to not allow any
+changing. 
+
+<DT> DEFAULT_DEBUG
+
+<DD> Sets the level of debugging output created in Pine's debug files. 
+Default is level 2. 
+
+<DT> NEW_MAIL_TIME
+
+<DD> Interval between new-mail checks.  Default is 150 seconds. 
+
+<DT> OVERLAP
+
+<DD> Number of lines overlap when user views the next page of a message. 
+Default is 2 lines. 
+
+<DT> USE_TERMINFO
+
+<DD> Instructs Pine to use the terminfo database instead of termcap. 
+Default varies by system. 
+
+<DT> SENDMAIL
+<DT> SENDMAILFLAGS
+
+<DD> Sets the name and flags for the local program that will be called to
+handle outgoing email.  Default is <CODE>/usr/lib/sendmail -oi -oem
+-t.</CODE>
+
+<DT> SYSTEM_PINERC
+
+<DD> The name of the file which holds Pine configuration information for
+all users on the system.  Default on UNIX systems is
+<CODE>/usr/local/lib/pine.conf</CODE>.
+
+<DT> SYSTEM_PINERC_FIXED
+
+<DD> The name of the file which holds the same type of information as for
+SYSTEM_PINERC, but only for variables that the administrator wants to keep
+fixed.  That is, users are not allowed to change variables that are
+specified in the FIXED file.  Default on UNIX systems is
+<CODE>/usr/local/lib/pine.conf.fixed</CODE>.
+
+</DL> <P>
+
+There are a couple of more obscure options which are in the source code 
+because a few people have asked for them or because we changed our 
+minds about them being a good idea in general. 
+
+<DL COMPACT>
+
+<DT> ENCODE_FROMS
+
+<DD> Use Quoted-printable encoding so that <CODE>From</CODE>'s at the
+beginning of lines don't end up being escaped by &gt;'s.  Most people seem
+to dislike the Q-P encoding more than the &gt; escapes so this is off by
+default.  Once everyone has MIME mail readers, we'll turn this on by
+default. 
+
+<DT> NO_KEYBOARD_LOCK
+
+<DD> Disable the keyboard locking function in the main menu.  Keyboard
+locking is enabled by default.  (Keyboard lock may also be turned off by
+adding <EM>disable-kblock-cmd</EM> to the feature list variable in the
+global pine.conf file.) <P>
+
+</DL>
+
+<HR>
+
+<H2><A NAME="pico-compile">Pico Compile-time Options</A></H2>
+
+There are even fewer options needed when compiling Pico.  The two
+interesting ones are for UNIX Pico versions only.  The file that may need
+some changing is <CODE>./pico/os_unix.h.</CODE> Whatever is set will
+effect the behavior of the Pico stand-alone program as well as the
+composer within Pine. 
+
+<DL COMPACT>
+
+<DT> SPELLER
+
+<DD> Names the program called to do "normal" spell-checking. 
+
+<DT> TERMCAP
+<DT> TERMINFO
+
+<DD> Determines which of these terminal databases will be used.  <P>
+
+</DL>
+
+<HR>
+
+<H2><A NAME="imapd-compile">IMAPd Compile-time Options</A></H2>
+
+There are no options or settings required for the version of IMAPd
+distributed with Pine.  If you need to be doing more complex modifications
+to IMAP, then you should pick up the IMAP development package and work
+with that code.  The developer's version of IMAP is available for
+anonymous ftp from <A
+HREF="ftp://ftp.cac.washington.edu"><CODE>ftp.cac.washington.edu</CODE></A>
+in the directory <CODE>mail</CODE>.  The file is called <A
+HREF="ftp://ftp.cac.washington.edu/mail/imap.tar.Z"><CODE>imap.tar.Z</CODE></A>. 
+<P>
+
+<HR>
+
+<H2><A NAME="build">Building the Pine Programs</A></H2>
+
+You may have already compiled Pine and tried it out.  If so, great!  If
+not, you should be able to do it without too much trouble by following
+these step-by-step instructions: <P>
+
+<OL>
+
+<LI> Figure out what platform you're building for.  You can give the
+command <CODE>build help</CODE> to see the list of ports incorporated into
+Pine.  What you need is the three letter code for the platform.  Some
+examples are <CODE>nxt</CODE> for the Next operating system and 
+<CODE>ult</CODE>
+for Ultrix.  If your platform is not in the list of ports, then you might
+have some work ahead of you.  First, check the file
+<CODE>doc/pine-ports</CODE> to see if there are others working on a port for
+your platform or to see if the port is included in the "contrib" section
+of the source code.  Ports in the <CODE>contrib</CODE> directory were
+contributed by Pine administrators from around the world, but the Pine
+development team has not been able to test the code. If Pine has not yet
+been ported to your platform at all, read the section on Porting Pine in
+this document.  <P>
+
+<LI> Make sure you're in the root of the Pine source.  When you type
+<CODE>ls</CODE> you should see the following files and directories (or
+something close to it): 
+
+<PRE>
+	README	build	doc 	makefile	   pine
+	bin		contrib	imap	pico
+</PRE>
+<P>
+
+<LI> Make sure you're getting a clean start by giving the command
+<CODE>build clean</CODE>. This should take only a few seconds to run.  <P>
+
+<LI> Give the command <CODE>build </CODE><EM>xxx</EM> where <EM>xxx</EM>
+is the three letter code you picked in step 1.  The compiler should grind
+away for a few minutes.  <P>
+
+<LI> When the compilation is complete the sizes of the four binaries built
+(pine, mtest, imapd, pico) will be displayed.  The actual binaries are in
+the various source directories.  In addition, the <CODE>bin</CODE>
+directory contains a link to each program compiled.  You can just copy
+them out of <CODE>bin</CODE> or try them from there.  <P>
+
+</OL>
+
+<HR>
+
+<H2><A NAME="install-unix">Installing Pine and Pico on UNIX Platforms</A></H2>
+
+Installing Pine and Pico is remarkably simple.  You take the program files
+which you have just transferred or built and you move them to the correct
+directory on your system.  Most often the binaries go in
+<CODE>/usr/local/bin</CODE> though sometimes they are placed in
+<CODE>/usr/bin</CODE>.  All the help text is compiled into Pine so there
+are no <STRONG>required</STRONG> auxiliary files.  <P>
+
+There are, however, three optional auxiliary files: 
+<CODE>/usr/local/lib/pine.info</CODE>,
+<CODE>/usr/local/lib/pine.conf</CODE>, and
+<CODE>/usr/local/lib/pine.conf.fixed</CODE>.  The file
+<CODE>pine.info</CODE> contains text on how to get further help on the
+local system.  It is presented as the first page of the help text for the
+main menu and should probably refer to the local help desk or the system
+administrator.  If this file doesn't exist a generic version which
+suggests ``talking to the computer support staff at your site'' is shown. 
+The file <CODE>pine.conf</CODE> is used to set system-wide default
+configurations for Pine.  The file <CODE>pine.conf.fixed</CODE> is also
+used to set system-wide default configurations for Pine.  The difference
+between these two files is that configuration variables set in the
+<CODE>pine.conf.fixed</CODE> file may not normally be over-ridden by a
+user.  See the section on Pine Configuration later in this document for
+details about the <CODE>pine.conf</CODE> and <CODE>pine.conf.fixed</CODE>
+files.  <P>
+
+<HR>
+
+<H2><A NAME="install-pc">Installing PC-Pine</A></H2>
+
+Beginning with the Pine 3.90 release, there is a PC-Pine version that runs
+under windows using the Winsock network interface.  For those who still
+need to run the DOS version of PC-Pine, there are versions for four
+different TCP/IP network stacks: FTP Inc's PC/TCP, Novell's LAN Workplace
+for DOS, Sun's PC/NFS, and WATTCP for packet drivers.  PC-Pine needs to be
+able to interact closely with the stack loaded on your PC.  Most of the
+time, this occurs automatically.  However, there are certain modifications
+that need be made.  <P>
+
+<DL COMPACT>
+
+<DT> LAN Workplace for DOS Version 4.1
+
+<DD> Set the environment variable <EM>EXCELAN</EM> in the PC's
+<EM>AUTOEXEC.BAT</EM> file.  This provides the necessary links so that LAN
+Workplace for DOS 4.1 can translate domain names to IP numbers correctly. 
+It is needed because Pine was developed for LAN Workplace 4.0 and this
+particular variable is treated differently in 4.1 than in 4.0.  The
+<EM>EXCELAN</EM> variable must point to the directory in which LAN
+Workplace is installed. 
+
+<DT> PC/TCP versions before 2.2
+
+<DD> You need a file called <EM>PCTCP.INI</EM> which contains a
+bare-minimum 2-line description of the PC's configuration.  It looks like
+this: 
+
+<PRE>
+		[pctcp ifcust 0]
+		ip-address=<EM>xx.xx.xx.xx</EM>
+</PRE>
+
+<DT>
+
+<DD> Where <EM>xx.xx.xx.xx</EM> is the IP address of the PC.  Pine also
+requires an environment variable, <EM>PCTCP,</EM> which points to this
+file.  For example: 
+
+<PRE>
+		set PCTCP=C:\PINE\PCTCP.INI
+</PRE>
+
+<DT> Packet Drivers
+
+<DD> Pine needs to be made aware of the PC's network configuration file. 
+Simply edit the file <CODE>WATTCP.CFG</CODE> included in the Pine
+distribution.  The file includes 5 configuration settings--IP-address,
+gateway, netmask, nameserver(s) and domainslist.  If you have a network
+configuration file for NCSA Telnet then <CODE>WATTCP.CFG</CODE> is just a
+pared down version of the <CODE>CONFIG.TEL</CODE> file you already made. 
+Take a look at <CODE>CONFIG.TEL</CODE> to find the correct settings for
+<CODE>WATTCP.CFG</CODE>.  Once the configuration file is made, the DOS
+environment variable <CODE>WATTCP.CFG</CODE> needs to point at it.  For
+example: 
+
+<PRE>
+		set WATTCP.CFG=C:\PINE
+</PRE>
+<P>
+
+</DL> <P>
+
+In addition to networking software issues, you might need to worry about
+setting the time zone.  PC-Pine includes the time zone as part of outgoing
+email.  There is a generic way for PC applications to get the time zone,
+but, because PC-Pine is one of a very few applications which requires this
+information, time zone might not be previously configured.  <P>
+
+The trick is to add an environment variable, <EM>TZ</EM>, to your PC's
+<CODE>AUTOEXEC.BAT</CODE> file.  The format for the <EM>TZ</EM>
+environment variable is as follows:
+
+<PRE>
+	ZZZ[+H]H[:MM:SSTTT]
+</PRE>
+
+First is the 3-letter code for your standard time, then a "+" or a "-" for
+direction of offset from GMT, then the amount of offset (hours, minutes,
+seconds) and finally the 3-letter code for your summer- or daylight
+savings time.  Everything in [] brackets is optional.  <P>
+
+The default time zone is "<CODE>PST-8PDT</CODE>" (U.S. Pacific Time). 
+Coincidentally, Microsoft is headquartered in that time zone.  <P>
+
+As an example, people in the Eastern part of the US should add this line
+to their <CODE>AUTOEXEC.BAT</CODE> files:  <P>
+
+<PRE>
+	TZ=EST-5EDT
+</PRE>
+
+<HR>
+
+<H2><A NAME="install-imapd">Installing IMAPd</A></H2>
+
+When the Pine distribution is built on a UNIX station, the IMAP server
+binary, <CODE>imapd</CODE>, is compiled.  Installing <CODE>imapd</CODE>
+requires placing the binary in the appropriate directory, usually
+<CODE>/usr/etc</CODE>, and adding entries to <CODE>/etc/services</CODE>
+and <CODE>/etc/inetd.conf</CODE> or their counterparts.  The following
+line is appropriate for <CODE>/etc/services</CODE>: 
+
+<PRE>
+  imap         143/tcp         # Mail transfer 
+</PRE>
+
+and the next line is appropriate for <CODE>/etc/inetd.conf</CODE>: 
+
+<PRE>
+  imap  stream  tcp     nowait  root    /usr/etc/imapd imapd 
+</PRE>
+
+The <CODE>/etc/inetd.conf</CODE> file entry may vary on different versions
+of UNIX.  Some have a slightly different set of fields.  Also the pathname
+in <CODE>/etc/inetd.conf</CODE> must match the path where
+<CODE>imapd</CODE> is installed.  <P>
+
+With this configuration, the IMAP server runs without pre-authentication. 
+Each new IMAP connection requires a correct username and password.  IMAP
+can also be run with pre-authentication based on the standard <EM>rsh</EM>
+mechanism.  To enable this, the user account on the IMAP server must
+contain a valid file which grants access to the client machine.  Enabling
+<EM>rimap</EM> authentication is done by creating a link called
+<CODE>/etc/rimapd</CODE> to <CODE>imapd</CODE>.  Basically, what is
+happening is that Pine is taking advantage of the ability that
+<CODE>rsh</CODE> has to use privileged TCP ports so it doesn't have to run
+in privileged mode.  If the <CODE>rimap</CODE> authentication fails it
+will drop back to plain password authentication.  <P>
+
+PC-Pine cannot take advantage of <EM>rimap</EM> authentication.  Also, if
+your system uses a distributed configuration database, like NIS, Yellow
+Pages or Netinfo, be sure that appropriate steps are taken to ensure the
+above mentioned information is updated.  <P>
+
+<HR>
+
+<H2><A NAME="files-unix">Support Files and Environment Variables:  UNIX Pine</A></H2>
+
+This section lists the various files which Pine uses which are not email
+folders.  All of these are the default names of files, they may vary based
+on Pine's configuration. 
+
+<DL COMPACT>
+
+<DT> /usr/local/lib/pine.conf
+
+<DD> Pine's global configuration file. 
+
+<DT> /usr/local/lib/pine.conf.fixed
+
+<DD> Non-overridable global configuration file. 
+
+<DT> /usr/local/lib/pine.info
+
+<DD> Local pointer to system administrator. 
+
+<DT> ~/.pinerc
+
+<DD> Personal configuration file for each user. 
+
+<DT> ~/.addressbook
+
+<DD> Personal addressbook
+
+<DT> ~/.addressbook.lu
+
+<DD> Personal address book lookup file (index file to speed up lookups). 
+
+<DT> ~/.newsrc
+
+<DD> Personal USENET subscription list.  This is shared with other
+newsreading programs. 
+
+<DT> ~/.pine-debugX
+
+<DD> The files created for debugging Pine problems.  By default, there are
+4 .pine-debug files kept at any time. 
+
+<DT> ~/.signature
+
+<DD> A signature file which will be included in all outgoing email
+messages. 
+
+<DT> ~/.pine-interrupted-mail
+
+<DD> The text of a message which was interrupted by some unexpected error
+which Pine detected. 
+
+<DT> ~/mail/postponed-msgs
+
+<DD> A folder of messages which the user chose to postpone. 
+
+<DT> /etc/mailcap
+
+<DD> System-wide mail capabilities file.  Only used if
+<CODE>$MAILCAPS</CODE> not set. 
+
+<DT> ~/.mailcap
+
+<DD> Personal mail capabilities file.  Combines with system-wide mailcap. 
+Only used if <CODE>$MAILCAPS</CODE> not set. 
+
+</DL> <P>
+
+The location of the following support files may be controlled by variables
+in the personal or global Pine configuration file: signature, addressbook
+and its index file, postponed messages, and newsrc.  <P>
+
+Unix Pine uses the following environment variables: 
+
+<DL COMPACT>
+
+<DT> TERM
+
+<DD> Tells Pine what kind of terminal is being used. 
+
+<DT> DISPLAY
+
+<DD> Determines if Pine will try to display IMAGE attachments. 
+
+<DT> SHELL
+
+<DD> If not set, default is /bin/sh
+
+<DT> MAILCAPS
+
+<DD> A semicolon delimited list of path names to mailcap files.  <P>
+
+</DL>
+
+<HR>
+
+<H2><A NAME="files-pc">Support Files and Environment Variables:  PC-Pine</A></H2>
+
+This section lists the various files which PC-Pine uses which are not
+normal mail folders.  All of these are the default names of files, they
+may vary based on Pine's configuration.  <P>
+
+<DL COMPACT>
+
+<DT> &lt;PINE.EXE directory&gt;\PINE.HLP
+
+<DD> File containing Pine's internal help text. 
+
+<DT> &lt;PINE.EXE directory&gt;\PINE.NDX
+
+<DD> Index of Pine's help text used by PC-Pine to locate entries. 
+
+<DT> $PINERC or $HOME\PINE\PINERC or &lt;PINE.EXE dir&gt;\PINERC
+
+<DD> Path to (required) personal configuration file. 
+
+<DT> $PINECONF
+
+<DD> Path of optional global configuration file. 
+
+<DT> &lt;PINERC directory&gt;\ADDRBOOK
+
+<DD> Personal addressbook
+
+<DT> &lt;PINERC directory&gt;\ADDRBOOK.LU
+
+<DD> Personal address book lookup file (index file to speed up lookups). 
+
+<DT> &lt;PINERC directory&gt;\PINE.SIG
+
+<DD> A signature file which will be included in all outgoing email
+messages. 
+
+<DT> &lt;PINERC directory&gt;\PINE.PWD
+
+<DD> A file containing encrypted password for remote mail server. 
+
+<DT> &lt;PINERC directory&gt;\PINEDEBG.TXT
+
+<DD> Location of Pine debug file. 
+
+<DT> &lt;PINERC directory&gt;\MAILCAP and/or &lt;PINE.EXE dir&gt;\MAILCAP
+
+<DD> These paths are only used if $MAILCAPS not set. 
+
+<DT> $HOME\NEWSRC or &lt;PINERC directory&gt;\NEWSRC
+
+<DD> Personal USENET subscription list.  This may be shared with other
+newsreading programs. 
+
+<DT> $HOME\MAIL\INTRUPTD
+
+<DD> The text of a message which was interrupted by some unexpected error
+which Pine detected. 
+
+<DT> $HOME\MAIL\POSTPOND
+
+<DD> A folder of messages which the user chose to postpone. 
+
+</DL> <P>
+
+PC-Pine's help text and help text index file are expected to reside in the
+same directory as the <CODE>PINE.EXE</CODE> executable, as they are
+essentially extensions of the executable.  The personal configuration file
+may be in the same directory as the executable, or if that is inconvenient
+because the executable is on a shared or read-only drive, then it can be
+in a file named by the <CODE>$PINERC</CODE> environment variable, or in
+<CODE>$HOME\PINE\PINERC</CODE>, where if not set, <CODE>$HOME</CODE>
+defaults to the root of the current working drive.  <P>
+
+Most of the other support files key off of the location of the
+<CODE>PINERC</CODE> file.  However, in the case of the NEWSRC file, the
+path <CODE>$HOME\NEWSRC</CODE> is checked first.  Also, the postponed
+messages and interrupted message folders are placed in the default folder
+collection, normally in the directory <CODE>$HOME\MAIL</CODE>.  <P>
+
+The location of the following support files may be controlled by variables
+in the personal or global Pine configuration file: signature, addressbook
+(and its index file), postponed messages, and newsrc.  <P>
+
+PC-Pine uses the following environment variables: 
+
+<DL COMPACT>
+
+<DT> PINERC
+
+<DD> Overrides default path to pinerc file. 
+
+<DT> PINECONF
+
+<DD> Optional path to global pine config file. 
+
+<DT> HOME
+
+<DD> If not set, Pine uses the root of the current drive, e.g. C: 
+
+<DT> TMP or TEMP
+
+<DD> Specifies location of temporary storage area
+
+<DT> COMSPEC
+
+<DD> Specifies shell for external commands. 
+
+<DT> MAILCAPS
+
+<DD> A semicolon delimited list of path names to mailcap files. 
+
+</DL> <P>
+
+<!-- pnuts -->
+
+</BODY>
+</HTML>

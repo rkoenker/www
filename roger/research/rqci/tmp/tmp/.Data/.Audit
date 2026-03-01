@@ -1,0 +1,9 @@
+#~New session: Version: S Thu Jun  8 18:57:02 CDT 1995, Time: Fri Sep 29 12:30:00 1995
+#~get "/home/splus3.2/splus/.Datasets/..min.script.id" -1 ...
+#~get "/home/splus3.2/splus/.Datasets/.Copyright" -1 ...
+#~get "/home/splus3.2/splus/.Datasets/version" -1 ...
+#~
+rq
+#~
+q()
+#~End session: Time: 812395810; Process: 22887

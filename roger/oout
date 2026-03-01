@@ -1,0 +1,29 @@
+20c20
+< <img src="pics/magritte.jpg" align=center
+---
+> <img src="pics/lichtenstein.jpg" align=center
+26c26
+< Le Therapeute
+---
+> Self Portrait
+33c33
+< Rene Magritte<br>
+---
+> Roy Lichtenstein<br>
+69,71d68
+< <b><a href=http://www.econ.uiuc.edu/~roger/courses/371/ec371.html> 371</b>  Spring, 2004
+< </li>
+< <li>
+152,163d148
+< <a href= http://www.stat.uiuc.edu/icors04/ >
+< ICORS: International Conference on Robust Statistics, Beijing,July 12-16, 2004</a>
+< </b> 
+< <br>
+< <br>
+< <b> 
+< <a href= http://www.ci.tuwien.ac.at/Conferences/useR-2004/ >
+< useR! The R User Conference, Vienna, May 19-21, 2004</a>
+< </b> 
+< <br>
+< <br>
+< <b> 

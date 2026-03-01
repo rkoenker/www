@@ -1,0 +1,29 @@
+<script language="JavaScript">
+<!--
+
+/*
+Random Image Link Script- By Website Abstraction(http://www.wsabstract.com)
+Over 200+ free JavaScripts here!
+Updated: 00/04/25
+*/
+ 
+function random_imglink(){
+var myimages=new Array()
+//specify random images below. You can have as many as you wish
+myimages[1]="~roger/pics/magritte.jpg"
+myimages[2]="~roger/pics/nedkelly.jpg"
+myimages[3]="~roger/pics/lichtenstein.jpg"
+//specify corresponding links below
+var imagelinks=new Array()
+imagelinks[1]="http://www.econ.uiuc.edu/~roger/home.html"
+imagelinks[2]="http://www.econ.uiuc.edu/~roger/home.html"
+imagelinks[3]="http://www.econ.uiuc.edu/~roger/home.html"
+var ry=Math.floor(Math.random()*myimages.length)
+if (ry==0)
+ry=1
+document.write('<a href='+'"'+imagelinks[ry]+'"'+'><img src="'+myimages[ry]+'" border=0></a>')
+}
+random_imglink()
+//-->
+</script>
+

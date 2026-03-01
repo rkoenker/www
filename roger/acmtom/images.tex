@@ -1,0 +1,246 @@
+\batchmode
+%
+\documentstyle[12pt,qqaajart]{article}
+\makeatletter
+
+\input tcilatex
+
+\QQQ{Language}{
+American English
+}
+
+
+
+\makeatother
+\newenvironment{tex2html_wrap}{}{}
+\newwrite\lthtmlwrite
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newbox\sizebox
+\begin{document}
+\pagestyle{empty}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline213: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline215: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline217: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline219: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:bcobj1}\min _{x\in R^n}\ \ ||A^{\prime }x-b||_1 
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{displaymath}\mbox{subject to}\ \ \ \ G^{\prime }x\ =\ h,\ \ \ \ C^{\prime }x\ \geq \ d. 
+\end{displaymath}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$a_i,g_j,c_k\in R^n$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline225: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\beta _i,\eta _j,\delta _k$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline229: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$E=\left[ e_{1,}\cdots ,e_m\right] =\left[ \gamma
+A\vdots G\vdots C\right]$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline231: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$f=\left[ \zeta
+_1,\cdots ,\zeta _m\right] ^{\prime }=\left[ \gamma b^{\prime }\vdots
+h^{\prime }\vdots d^{\prime }\right] ^{\prime }\in {\bf R}^m$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline233: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:bcobj2}\min _{x\in R^n}\psi \left( x\right) =\sum_\mu ^{}|e_\mu
+^{\prime }x\ -\ \zeta _\mu |\ -\ \sum_\nu ^{}\min (0,e_\nu ^{\prime }x\ -\
+\zeta _\nu ) 
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\gamma $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline235: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\mu $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline237: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\left[ \gamma A\vdots G\right] \,$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline239: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\nu $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline241: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\left[ C\right] $}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline243: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:dd}
+\psi^{\prime }\left( x, p\right)  = 
+g^{\prime }p+ \left[ \sum_{\mu \in {\cal E}}\left| e_\mu
+^{\prime }p\right| -\sum_{\nu \in {\cal E}}\min \left( 0,e_\nu ^{\prime
+}p\right) \right] 
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:gradient}g\ =\ \sum_{\mu \NEG \in {\cal E}}^{}\sigma _\mu e_\mu
++\sum_{\nu \NEG \in {\cal E}}^{}\sigma _\nu ^{-}e_\nu 
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:sigma} 
+\begin{array}{lll}
+\sigma _\mu & = & \left\{ 
+\begin{array}{lllll}
+1 & if & e_\mu ^{\prime }x-\zeta _\mu & > & 0 \\  
+-1 & if & e_\mu ^{^{\prime }}x-\zeta _\mu & < & 0 
+\end{array}
+\right. \\  
+\sigma _\nu ^{-} & = & \left\{ 
+\begin{array}{lllll}
+0 & if & e_\nu ^{\prime }x-\zeta _\nu & > & 0 \\  
+-1 & if & e_\nu ^{^{\prime }}x-\zeta _\nu & < & 0 
+\end{array}
+\right. 
+\end{array}
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\cal E$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline245: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$E^{\prime}x-f$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline247: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\{ e_i: \; i \in \cal E \}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline249: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\sigma$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline251: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\overline { \cal {E}}_0$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline257: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\overline { \cal {E}}_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline259: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:gradient1}
+g(p) \ =\ \sum_{\mu \in \overline{{\cal E}}_0}^{}\widehat{\sigma }_\mu e_\mu +\sum_{\mu \in \overline{{\cal E}}_1}^{}\sigma _\mu e_\mu
++\sum_{\nu \in \overline{{\cal E}}_0}^{}\widehat{\sigma }_\nu ^{-}e_\nu
++\sum_{\nu \in \overline{{\cal E}}_1}^{}\sigma _\nu ^{-}e_\nu 
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \begin{equation}\label{eqn:sigmahat} 
+\begin{array}{lll}
+\widehat{\sigma }_\mu & = & \left\{ 
+\begin{array}{lllll}
+1 & if & e_\mu ^{\prime }p & > & 0 \\  
+0 & if & e_\mu ^{\prime }p & = & 0 \\  
+-1 & if & e_\mu ^{^{\prime }}p & < & 0 
+\end{array}
+\right. \\  
+\widehat{\sigma }_\nu ^{-} & = & \left\{ 
+\begin{array}{lllll}
+0 & if & e_\nu ^{\prime }p & \geq & 0 \\  
+-1 & if & e_\nu ^{^{\prime }}p & < & 0 .
+\end{array}
+\right. 
+\end{array}
+\end{equation}
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$p^{\prime}g(p) < 0$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline261: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{% latex2html id marker 263
+$\alpha$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline263: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$e_\mu^{\prime} p$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline267: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\pm 1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline269: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\{ -1,0,1 \}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline271: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\{ -1,1\}$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline273: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$l_1$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline277: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+
+\end{document}

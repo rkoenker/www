@@ -1,0 +1,20 @@
+This package contains: 
+README -- this file
+INSTALL -- installation script
+Makefile -- makefile for INSTALL
+drqssbr.r drqssbc.r -- ratfor source codes
+dblas1.f -- BLAS fortran source codes
+qss.s qss.fit.s -- sources for S interface 
+qss.d qss.fit.d -- help files for qss and qss.fit
+data.s -- Schuette's (1978) data set
+test.s -- test program for qss and qss.fit
+
+To install for dynamic loading:
+% chmod +x INSTALL
+% INSTALL dynamic
+% Splus
+> dyn.load("local.o")
+
+To install for static loading:
+% chmod +x INSTALL
+% INSTALL static

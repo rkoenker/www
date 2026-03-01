@@ -1,0 +1,5 @@
+#to update the contents of this directory run this file
+cp $HOME/text/rq/book.ps .
+cp $HOME/text/rq/title/title2.ps .
+cp $HOME/projects/rqn/text/haretort.ps .
+cp $HOME/projects/ranks/survey/s3.ps .

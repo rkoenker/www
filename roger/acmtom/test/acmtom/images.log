@@ -1,0 +1,234 @@
+This is TeX, Version 3.1415 (C version 6.1) (format=lplain 95.8.5)  29 NOV 1995 11:55
+**images.tex
+(images.tex
+LaTeX2e <1994/12/01>
+
+(/usr/local/lib/texmf/tex/latex2e/base/latex209.def
+File: latex209.def 1994/11/28 v0.39 Standard LaTeX file
+Entering LaTeX 2.09 compatibility mode.
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+(/usr/local/lib/texmf/tex/latex2e/base/tracefnt.sty
+Package: tracefnt 1994/11/18 v2.3m Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 101.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 200.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 201.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 202.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 208.
+LaTeX Info: Redefining \em on input line 218.
+(/usr/local/lib/texmf/tex/latex2e/base/latexsym.sty
+Package: latexsym 1994/09/25 v2.1f Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 283.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 285.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 287.
+) (/usr/local/lib/texmf/tex/latex2e/base/article.cls
+Document Class: article 1994/12/09 v1.2x Standard LaTeX document class
+(/usr/local/lib/texmf/tex/latex2e/base/size12.clo
+File: size12.clo 1994/12/09 v1.2x Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 455.
+LaTeX Info: Redefining \mit on input line 456.
+\bibindent=\dimen105
+) (/usr/local/lib/texmf/tex/local/qqaajart.sty (/usr/local/lib/texmf/tex/local/
+jeep.sty
+\chaptopsep=\skip43
+\chapaftersep=\skip44
+\c@theorem=\count91
+\underheadsep=\skip45
+)) (/usr/local/lib/texmf/tex/local/tcilatex.tex
+\intno@=\count92
+\ex@=\dimen106
+\GRAPHICSTYPE=\count93
+\draft=\count94
+\theight=\dimen107
+)
+\lthtmlwrite=\write3
+\sizebox=\box26
+(images.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 23.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 23.
+(/usr/local/lib/texmf/tex/latex2e/base/Ulasy.fd
+File: Ulasy.fd 1994/09/25 v2.1fLaTeX symbol font definitions
+)
+latex2htmlSize :tex2html_wrap_inline213: 8.33331pt::1.79999pt.
+[1
+
+
+]
+latex2htmlSize :tex2html_wrap_inline215: 8.33331pt::1.79999pt.
+[2
+
+]
+latex2htmlSize :tex2html_wrap_inline217: 8.33331pt::1.79999pt.
+[3
+
+]
+latex2htmlSize :tex2html_wrap_inline219: 8.33331pt::1.79999pt.
+[4
+
+] [5
+
+] [6
+
+]
+latex2htmlSize :tex2html_wrap_inline225: 8.2pt::3.35555pt.
+[7
+
+]
+latex2htmlSize :tex2html_wrap_inline229: 8.33331pt::3.35555pt.
+[8
+
+]
+latex2htmlSize :tex2html_wrap_inline231: 15.16666pt::9.00012pt.
+[9
+
+]
+latex2htmlSize :tex2html_wrap_inline233: 16.44444pt::9.00012pt.
+[10
+
+] [11
+
+]
+latex2htmlSize :tex2html_wrap_inline235: 5.16667pt::2.33331pt.
+[12
+
+]
+latex2htmlSize :tex2html_wrap_inline237: 5.16667pt::2.33331pt.
+[13
+
+]
+latex2htmlSize :tex2html_wrap_inline239: 15.16666pt::9.00012pt.
+[14
+
+]
+latex2htmlSize :tex2html_wrap_inline241: 5.16667pt::0.0pt.
+[15
+
+]
+latex2htmlSize :tex2html_wrap_inline243: 9.0pt::3.0pt.
+[16
+
+] [17
+
+] [18
+
+] [19
+
+]
+latex2htmlSize :tex2html_wrap_inline245: 8.19998pt::0.0pt.
+[20
+
+]
+latex2htmlSize :tex2html_wrap_inline247: 8.79916pt::2.33331pt.
+[21
+
+]
+latex2htmlSize :tex2html_wrap_inline249: 9.0pt::3.0pt.
+[22
+
+]
+latex2htmlSize :tex2html_wrap_inline251: 5.16667pt::0.0pt.
+[23
+
+]
+latex2htmlSize :tex2html_wrap_inline257: 10.19987pt::1.79999pt.
+[24
+
+]
+latex2htmlSize :tex2html_wrap_inline259: 10.19987pt::1.79999pt.
+[25
+
+] [26
+
+] [27
+
+]
+latex2htmlSize :tex2html_wrap_inline261: 9.0pt::3.0pt.
+[28
+
+]
+latex2htmlSize :tex2html_wrap_inline263: 5.16667pt::0.0pt.
+[29
+
+]
+latex2htmlSize :tex2html_wrap_inline267: 8.79916pt::4.52216pt.
+[30
+
+]
+latex2htmlSize :tex2html_wrap_inline269: 7.73332pt::1.0pt.
+[31
+
+]
+latex2htmlSize :tex2html_wrap_inline271: 9.0pt::3.0pt.
+[32
+
+]
+latex2htmlSize :tex2html_wrap_inline273: 9.0pt::3.0pt.
+[33
+
+]
+latex2htmlSize :tex2html_wrap_inline277: 8.33331pt::1.79999pt.
+[34
+
+] (images.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 657 strings out of 10953
+ 6312 string characters out of 72770
+ 50725 words of memory out of 262141
+ 3510 multiletter control sequences out of 9500
+ 12041 words of font info for 44 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 23i,13n,21p,291b,228s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on images.dvi (34 pages, 6676 bytes).

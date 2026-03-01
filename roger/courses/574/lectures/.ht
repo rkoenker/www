@@ -1,0 +1,38 @@
+deny from all
+allow from .uiuc.edu 
+allow from .illinois.edu 
+allow from .centril.net
+allow from .insightbb.com
+allow from il.comcast.net
+AuthType Basic
+AddDescription "13 Ways " L1.pdf
+AddDescription "Inequalities" L2.pdf
+AddDescription "Instant Measure" L1a.pdf
+AddDescription "Modes of Convergence" L3.pdf
+AddDescription "Delta Method" L3a.pdf
+AddDescription "LLNs & CLTs" L4.pdf
+AddDescription "Monte-Carlo I" L5.pdf
+AddDescription "Density Estimation" L6.pdf
+AddDescription "Shape of Likelihood" L7.pdf
+AddDescription "Exponential Families" L8.pdf
+AddDescription "MLE Asymptotics I" L9.pdf
+AddDescription "MLE Asymptotics II" L10.pdf
+AddDescription "Testing I" L11.pdf
+AddDescription "ARE for Tests" L12.pdf
+AddDescription "Calculus of Variations" L12a.pdf
+AddDescription "Monte-Carlo II" L13.pdf
+AddDescription "GMM" L14.pdf
+AddDescription "Robustness" L15.pdf
+AddDescription "NonParametric Regression" L16.pdf
+AddDescription "Smoothing Splines" L17.pdf
+AddDescription "Logspline Density Estimation" L18.pdf
+AddDescription "Quasi Concave Density Estimation" L18a.pdf
+AddDescription "Model Selection" L19.pdf
+AddDescription "MCMC" L20.pdf
+AddDescription "Treatment Effects" L21.pdf
+AddDescription "Survival I" L22.pdf
+AddDescription "Survival II" L23.pdf
+AddDescription "Survival III" L24.pdf
+AddDescription "Empirical Bayes" L25.pdf
+AddDescription "Hotelling Tubes" tubes.pdf
+AddDescription "Log-Concave Densities" ut.pdf

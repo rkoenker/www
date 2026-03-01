@@ -1,0 +1,5 @@
+deny from all
+allow from .uiuc.edu 
+allow from .illinois.edu 
+allow from .comcast.net 
+

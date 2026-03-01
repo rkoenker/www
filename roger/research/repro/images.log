@@ -1,0 +1,302 @@
+This is TeX, Version 3.14159 (C version 6.1e) (format=latex 95.9.4)  31 AUG 1997 15:47
+**images.tex
+(images.tex
+LaTeX2e <1995/06/01> patch level 3
+
+(/opt/texmf/tex/latex/packages/amslatex/inputs/amsart.cls
+Document Class: amsart 1995/02/23 v1.2b
+\linespacing=\dimen102
+\normalparindent=\dimen103
+\normaltopskip=\skip41
+(/opt/texmf/tex/latex/packages/amslatex/inputs/amsgen.sty
+File: amsgen.sty 1995/01/31 v1.2a
+\@emptytoks=\toks14
+\ex@=\dimen104
+) (/opt/texmf/tex/latex/packages/amslatex/inputs/amsmath.sty
+Package: amsmath 1995/02/23 v1.2b AMS math features
+\@mathmargin=\skip42
+(/opt/texmf/tex/latex/packages/amslatex/inputs/amstext.sty
+Package: amstext 1995/01/25 v1.2
+) (/opt/texmf/tex/latex/packages/amslatex/inputs/amsbsy.sty
+Package: amsbsy 1995/01/20 v1.2
+\pmbraise@=\dimen105
+) (/opt/texmf/tex/latex/packages/amslatex/inputs/amsopn.sty
+Package: amsopn 1995/02/20 v1.2a operator names
+)
+LaTeX Info: Redefining \frac on input line 180.
+\uproot@=\count82
+\leftroot@=\count83
+\classnum@=\count84
+\DOTSCASE@=\count85
+LaTeX Info: Redefining \dots on input line 327.
+LaTeX Info: Redefining \ldots on input line 410.
+LaTeX Info: Redefining \cdots on input line 414.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen106
+LaTeX Font Info:    Redeclaring font encoding OML on input line 492.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 493.
+\skewcharcount@=\count86
+\familycount@=\count87
+\pointcount@=\count88
+\accentdimen@=\dimen107
+\accentmu@=\count89
+\minaw@=\dimen108
+\c@MaxMatrixCols=\count90
+\dotsspace@=\muskip10
+\c@parentequation=\count91
+\dspbrk@lvl=\count92
+\tag@help=\toks15
+\row@=\count93
+\column@=\count94
+\maxfields@=\count95
+\andhelp@=\toks16
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks17
+\multlinegap=\skip43
+\multlinetaggap=\skip44
+) (/opt/texmf/tex/amslatex/amsfonts.sty
+Package: amsfonts 1995/02/01 v2.2b
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 128.
+)
+\copyins=\insert233
+\abstractbox=\box28
+\listisep=\skip45
+\c@part=\count96
+\c@section=\count97
+\c@subsection=\count98
+\c@subsubsection=\count99
+\c@paragraph=\count100
+\c@figure=\count101
+\c@table=\count102
+\abovecaptionskip=\skip46
+\belowcaptionskip=\skip47
+(/opt/texmf/tex/latex/packages/amslatex/inputs/amsthm.sty
+Package: amsthm 1995/02/01 v1.2a
+\theorem@style=\toks18
+\theorembodyfont=\toks19
+\theoremheadfont=\toks20
+\theoremnotefont=\toks21
+\theoremheadpunct=\toks22
+\theorempreskipamount=\skip48
+\theorempostskipamount=\skip49
+)) (/opt/texmf/tex/latex/unpacked/latexsym.sty
+Package: latexsym 1995/03/18 v2.2a Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 81.
+) (/opt/texmf/tex/latex/unpacked/alltt.sty
+Package: alltt 1995/05/18 v2.0e defines alltt environment
+) (/opt/texmf/tex/graphics/graphics.sty
+Package: graphics 1995/04/27 v0.7b Standard LaTeX Graphics (DPC,SPQR)
+(/opt/texmf/tex/graphics/trig.sty
+Package: trig 1994/10/16 v1.08 sin cos tan (DPC)
+) (/opt/texmf/tex/graphics/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 88.
+(/opt/texmf/tex/graphics/dvips.def
+File: dvips.def 1995/04/19 v2.9 Driver-dependant file (DPC,SPQR)
+))
+\c@assumption=\count103
+\c@lemma=\count104
+\c@result=\count105
+\c@remark=\count106
+\c@proposition=\count107
+\c@corollary=\count108
+\c@theorem=\count109
+\lthtmlwrite=\write3
+\sizebox=\box29
+(images.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+(/opt/texmf/tex/amslatex/Umsa.fd
+File: Umsa.fd 1995/01/05 v2.2e AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+(/opt/texmf/tex/amslatex/Umsb.fd
+File: Umsb.fd 1995/01/05 v2.2e AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 91.
+(/opt/texmf/tex/latex/unpacked/Ulasy.fd
+File: Ulasy.fd 1995/03/18 v2.2aLaTeX symbol font definitions
+)
+latex2htmlSize :tex2html_wrap_inline513: 7.5pt::2.5pt.
+[1
+
+]
+latex2htmlSize :tex2html_wrap_inline521: 6.94444pt::1.49998pt.
+[2
+
+] [3
+
+] [4
+
+]
+latex2htmlSize :tex2html_wrap_inline523: 6.11111pt::0.0pt.
+[5
+
+]
+latex2htmlSize :tex2html_wrap_inline525: 7.5pt::2.5pt.
+[6
+
+]
+latex2htmlSize :tex2html_wrap_inline535: 3.66875pt::0.0pt.
+[7
+
+]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.135 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> }
+                 
+l.220 $}
+        \lthtmltypeout{latex2htmlSize :tex2html_wrap_inline537: \the\ht\size...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+latex2htmlSize :tex2html_wrap_inline537: 0.0pt::0.0pt.
+! Extra }, or forgotten $.
+l.221 }
+       
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.222 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.226 {\newpage
+               
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.226 {\newpage
+               
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+File: fig.4.1.ps Graphic file (type eps)
+<fig.4.1.ps>
+Overfull \hbox (37.13876pt too wide) in paragraph at lines 230--238
+ [] 
+ []
+
+[8
+
+
+]
+latex2htmlSize :tex2html_wrap_inline563: 7.5pt::2.5pt.
+[9
+
+]
+! Extra }, or forgotten $.
+<recently read> }
+                 
+l.257 \samepage \setbox\sizebox=\hbox{$}
+                                        \lthtmltypeout{latex2htmlSize :tex2h...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+latex2htmlSize :tex2html_wrap_inline565: 0.0pt::0.0pt.
+! Extra }, or forgotten $.
+l.258 }
+       
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.259 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.260 {\newpage
+               
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.260 {\newpage
+               
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[10
+
+
+] (images.aux) ) 
+Here is how much of TeX's memory you used:
+ 1453 strings out of 10957
+ 15047 string characters out of 72967
+ 66898 words of memory out of 262141
+ 4089 multiletter control sequences out of 9500
+ 10091 words of font info for 44 fonts, out of 100000 for 255
+ 176 hyphenation exceptions out of 607
+ 34i,8n,25p,590b,389s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on images.dvi (10 pages, 6864 bytes).

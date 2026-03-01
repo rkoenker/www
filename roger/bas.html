@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<title>Untitled</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+</head>
+
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000"
+background="../images/misc/home-back.jpeg">
+<font size="-1" color="#000080"><i>
+
+<p align="center">Econometrics Lab at UIUC</i></font> </p>
+
+<hr width="100%" align="center">
+
+<p align="center"><font size="+1" color="#000080">Basic information about the use of
+terminals at the Econometrics Lab</font></p>
+
+<hr width="100%">
+
+<p><b><font color="#800000">Printing a file </font></b></p>
+
+<p>At the unix prompt type: </p>
+
+<p><tt>lp &lt;filename&gt;</tt></p>
+
+<p>The file <tt>&lt;filename&gt;</tt> must be in ragnar. Print jobs cannot be sent from
+another computer.</p>
+
+<p><b><font color="#800000">Setting up the display</font></b></p>
+
+<p>You must set the display before using any program that makes use of graphics (Netscape,
+Splus, etc.) This depends on the unix shell you are using. There are several
+possibilities:</p>
+
+<p>a) in <b><i>ragnar</i></b> do: 
+
+<ul>
+  <p><tt>setenv DISPLAY xi:0.0</tt></p>
+</ul>
+
+<p>after you login. The &quot;i&quot; in xi refers to a number assigned to each terminal.
+This number appears in the &quot;Terminal Controls&quot; window. For example, the terminal
+below the clock is x2.</p>
+
+<p>b) in <b><i>ux6 (or any student account)</i></b>: when you login the system asks for a
+display. Type: 
+
+<ul>
+  <p><tt>xi.econ.uiuc.edu:0.0</tt></p>
+</ul>
+
+<p>If you want to set the display after you have logged in, at the unix prompt type: 
+
+<ul>
+  <p><tt>DISPLAY=xi.econ.uiuc.edu:0.0</tt></p>
+</ul>
+
+<p>The same consideration holds regarding &quot;i&quot; in xi <br>
+</p>
+
+<p><b><font color="#800000">Making things work in ragnar</font></b> </p>
+
+<p>There are several programs available in ragnar. See the <a href="software.html">software</a>
+page for detailed list and information about how to start and exit them. If you experience
+problems accesing software it can be that you have an old copy of the configuration file.
+Usually any update will be handled automatically. If problems persist you can try updating
+the configuration file. At the UNIX prompt type the following sequence of commands: 
+
+<ul>
+  <p><tt>cp .cshrc .cshrc.old <br>
+  cd <br>
+  cp ~roger/.cshrc . <br>
+  csh </tt></p>
+</ul>
+
+<p>This will an updated configuration file in your home directory. The first two lines
+will create a backup copy of any previously existing <tt>.cshrc</tt> file, and the
+remaining lines will copy the configuration file from Prof. Koenker's directory. </p>
+
+<hr width="100%">
+
+<p>This is only the very basics of ragnar. Comments, suggestions, questions or complaints
+are welcome. <br>
+<br>
+<br>
+</p>
+</body>
+</html>

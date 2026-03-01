@@ -1,0 +1,12 @@
+AuthType Basic
+AddDescription "Outline" L0.pdf
+AddDescription "Introduction" L1.pdf
+AddDescription "Inference" L2.pdf
+AddDescription "Nonparametric QR" L3.pdf
+AddDescription "Survival" L4.pdf
+AddDescription "Endogoneity" L5.pdf
+AddDescription "Longitudinal Data" L6.pdf
+AddDescription "Time-Series" L7.pdf
+AddDescription "Computation" L8.pdf
+AddDescription "Risk" L9.pdf
+AddDescription "Zip" NIPE14.zip

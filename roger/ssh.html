@@ -1,0 +1,108 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16 i686) [Netscape]">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#FF0000" alink="#000088">
+
+<center>
+<h1>
+SSH - <u>S</u>ecure <u>SH</u>ell</h1></center>
+
+<center>Secure SHell (SSH) is the safest way to establish your communications
+to
+<br>our servers with domain econ.uiuc.edu
+<br>(ysidro, ragnar, galton, s2, ...).
+<br>Your username and password are encrypted while in transit
+<br>through the network -- no longer plain text ready to be stolen.
+<p>You are used to establish your connection with telnet and ftp. From
+now
+<br>on, you should <b>ONLY</b> use SSH -- <b><font color="#3333FF">telnet
+services will be</font></b>
+<br><b><font color="#FF0000">SHUTDOWN</font><font color="#3333FF">  SOON.
+</font></b>
+<p>Note: telnet and ftp to other sites is still available, though.</center>
+
+<center>
+<h3>
+What do I need to do?</h3></center>
+
+<center>
+<p><br>That depends on the OS you are using. Below are instruction pertaining
+to
+<br><a href="#unix">Unix-based</a> systems (includes Linux) and <a href="#windows">Windows</a>.</center>
+
+<p><br>
+<center>
+<h3>
+Unix, Linux</h3></center>
+
+<center>
+<p><br><a NAME="unix"></a>You need to have some form of SSH installed in
+your system.
+<br>We use ssh, but there are other compatible secure shells out there,
+e.g., openssh.
+<p><font color="#3333FF">To "ssh"</font> unix-to-unix just type, for example:
+<p>ssh username@ragnar.econ.uiuc.edu
+<br>(note: you can drop the username@ if your local login is
+<br>the same as the remote)
+<p><font color="#3333FF">To "ftp"</font> use "<b>scp</b>"
+<p>From local to remote type, for example:
+<p>scp myfile.tex ragnar.econ.uiuc.edu:/hx/user/projects/
+<br>(please notice the colon)
+<p>From remote to local type, for example:
+<p>scp remote.machine:/hx/user/projects/myfile.tex myfile.tex
+<p>For more details see the man page, type man scp.
+<p><font color="#3333FF">To X-display remotely</font>
+<p>xhost is obsolete with ssh. ssh automatically encrypts X data.
+<br>Simply ssh to the remote machine and type the name of your
+<br>X program as you normally would.
+<p>We leave the rest up to you... but you can drop us a line at <a href="mailto:novo@uiuc.edu">novo@uiuc.edu</a></center>
+
+<p><br>
+<br>&nbsp;
+<br>&nbsp;
+<center>
+<h3>
+<a NAME="windows"></a>Windows</h3></center>
+
+<center>
+<p><br>If you still are using Windows, then you have to download the following
+programs:
+<p>1) <a href="http://www.uncwil.edu/download/tc/pc/ttpro/ttermp23.exe">TeraTerm</a>
+<br>2) <a href="ftp://ftp.monash.edu.au/pub/pc/ttssh/ttssh151.zip">SSH
+Extension</a>
+<p>Then, you need to install them. Please follow this instructions:
+<p>1) Put both files into a temporary directory, say, c:\Windows\Temp
+<br>2) Unzip first TeraTerm to a temporary folder
+<br>3) Run the setup program, by default it will install into
+<br>C:\Program Files\TTERMPRO
+<br>4) Double click ttssh151.zip and (<font color="#FF0000">IMPORTANT</font>)
+unzip it into the <b><font color="#3333FF">same</font></b>
+<br><b><font color="#3333FF">directory</font></b> where you installed TTerm
+(C:\Program Files\TTERMPRO).
+<br>5) Run ttssh.exe and type the name of the remote machine, say,
+<br>ragnar.econ.uiuc.edu
+<br>6) That's it, everything else is as before -- username, password and
+so on.
+<p><font color="#3333FF">File Transfer</font>
+<p>From PC to Unix:
+<p>1) Establish ssh connection with TeraTerm
+<br>2) cd to destination directory
+<br>3) Type rz
+<br>4) Click File, Transfer, Zmodem, Send File, select files and click
+Open.
+<p>From Unix to PC:
+<p>1) Establish ssh connection with TeraTerm
+<br>2) Click File, Change Directory (where you want to receive the file)
+<br>3) cd to directory containing the file
+<br>4) type sz name.file.to.be.received
+<br>5) Click File, Transfer, Zmodem, Receive.
+<br>&nbsp;
+<p>
+<hr WIDTH="100%"></center>
+<font size=-2>Created: Sept. 2, 2000 by Alvaro A. Novo</font>
+<br><font size=-2>Upadetd:&nbsp; _ by _</font>
+</body>
+</html>

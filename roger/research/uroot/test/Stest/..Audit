@@ -1,0 +1,37 @@
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Thu Jul 17 13:06:41 2003
+#~
+.System("ls")
+#~
+source("uroot.s")
+#~
+source("HK.s")
+#~error: Problem in uroot.test(log(x), p[k], l[j], score = sc..: Couldn't find a function definition for "rq
+#~
+library(rq)
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~
+source("HK.s")
+#~error: invalid formula
+#~
+.System("vi HK.s")
+#~
+traceback()
+#~
+q()
+#~End session: Time: 1058465902; Process: 22148
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Thu Jul 17 13:19:20 2003
+#~
+rq
+#~error: Problem: Object "rq" not foun
+#~
+library(rq)
+#~
+rq
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal ":" on input line 
+#~
+q()
+#~End session: Time: 1058466366; Process: 22402

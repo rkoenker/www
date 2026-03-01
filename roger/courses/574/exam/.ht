@@ -1,0 +1,8 @@
+deny from all
+allow from .illinois.edu 
+allow from .uiuc.edu 
+allow from .centril.net
+allow from .insightbb.com
+allow from il.comcast.net
+allow from .monash.edu.au
+AuthType Basic

@@ -1,0 +1,60 @@
+#pdf("Bracket.pdf", height=8, width=6)
+require(grid)
+grid.newpage()
+pushViewport(viewport(width=.8,height=.8))
+# partition the plot areas
+pushViewport(viewport(layout = grid.layout(50,96)))
+#grid.rect(gp=gpar(col="grey"))
+#main title
+pushViewport(viewport(layout.pos.col = 1:96, layout.pos.row = 1:2))
+grid.rect(gp=gpar(col="gray", fill="lightblue"))
+grid.text("NCAA Tournament Bracket A")
+popViewport()
+
+# Seeded Team Names
+Teams <- paste("Team", 1:16,sep=" ")
+Seeds <- c(1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15)
+Scores <- sample(50:95,16)
+PlotRound <- function(Teams,Seeds,Scores){
+ngames <- length(Teams)/2
+nround <- 3 - log2(ngames)
+col <- nround * 24
+skip <- nround * 6 
+for(k in 1:ngames){
+   for(j in 1:2){
+	i <-  j +(k-1)*2
+	row <-  4 + (k-1)*6 + (j-1)*2 + 4^nround  + skip * (k-1)
+	#Seed Box
+        pushViewport(viewport(layout.pos.col = col + 1:2, layout.pos.row = row:(row+1)))
+        grid.rect(gp=gpar(col="gray", fill="cornsilk"))
+        grid.text(Seeds[i],gp=gpar(fontsize=9, col=gray(0.1)))
+        popViewport()
+	#Name Box
+        pushViewport(viewport(layout.pos.col = col + 3:20, layout.pos.row = row:(row+1)))
+        grid.rect(gp=gpar(col="gray", fill="cornsilk"))
+        grid.text(Teams[i],gp=gpar(fontsize=9, col=gray(0.1)))
+        popViewport()
+	#Score Box
+        pushViewport(viewport(layout.pos.col = col + 21:22, layout.pos.row = row:(row+1)))
+        grid.rect(gp=gpar(col="gray", fill="cornsilk"))
+        grid.text(Scores[i],gp=gpar(fontsize=9, col=gray(0.1)))
+        popViewport()
+        }
+    }
+}
+# Seeded Team Names and other initializations
+Teams <- paste("Team", 1:16,sep=" ")
+Seeds <- c(1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15)
+Scores <- sample(50:95,16)
+for(round in 1:4){
+	PlotRound(Teams,Seeds,Scores)
+	ngames <- length(Teams)/2
+	odd <- (1:ngames)*2 - 1
+	even  <- (1:ngames)*2 
+	W <- ifelse(diff(Scores)[odd] < 0,odd,even)
+	Teams <- Teams[W]
+	Seeds <- Seeds[W]
+	Scores <- sample(50:95,length(Teams))
+	}
+   #dev.off()
+

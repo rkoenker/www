@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Printer usage</title>
+</head>
+
+<body background="../images/misc/home-back.jpeg">
+
+<p><big><strong><font size="+3" color="#0000FF">Printing at the Econometrics Lab</font></strong></big></p>
+
+<hr width="100%">
+
+<p>These are simple instructions to handle printing problems. The lab has a
+Hewlett-Packard 4 M Plus laser printer.</p>
+
+<p><b><font size="+1">Basic rules</font></b> 
+
+<ul>
+  <li>Print jobs can only be sent from a valid account in ragnar.</li>
+  <li>Please be moderate with the use of the printer. So far we are not imposing any
+    restrictions on printer usage though for administrative purposes we check the origin and
+    size of print jobs regularly. We will be forced to modify the free access policy if we
+    note any abusive use. We keep track of <b><i> printer usage</i></b> with the command <tt><font
+    size="+1">ljusage</font></tt>. This command will generate a table that
+    summarizes number of pages printer for every user.</li>
+  <li>If you experience any problem,<b><i> </i><font color="#FF0000">do not turn off the
+    printer</b></font>. Report the problem to the Lab consultant.</li>
+</ul>
+
+<p><b><font size="+1">Sending print jobs</font></b> 
+
+<ul>
+  <li>In order to print a file called <i>filename</i>, at the unix prompt type: <tt><font
+    size="+1">lp [filename]<br>
+    </font></tt>The file has to be in a printable format , either ASCII or postscript.</li>
+</ul>
+
+<p><b><font size="+1">Checking printer queue status and stopping print jobs</font></b> 
+
+<ul>
+  <li>Print jobs are directly sent to a print queue which spools print jobs. You can check the
+    status of this queue with the <tt><font size="+1">lpq</font></tt> command in unix</li>
+  <li>If you want to<b><font color="#FF0000"> remove a print job</font></b> fro the queue,
+    first check the status of the queue (using the <tt><font size="+1">lpq</font></tt> command
+    described above) and take note of the job number assigned to your print job. Then execute:<br>
+    <br>
+    <tt><font size="+1">lprm #<br>
+    <br>
+    </font></tt>where # is the number of the print job. You cannot remove print jobs sent by
+    other users. Type<tt><font size="+1"> man lprm</font></tt> for more help on this command.</li>
+</ul>
+
+<p><b><font size="+1">Clearing printer memory and stopping print jobs from the printer.</font></b>
+
+<ul>
+  <li>First press <tt><font size="+1">on line</font></tt> to take the printer offline. The
+    printer stops receiving data.</li>
+  <li>When the display reads <tt>00 offline</tt>, hold down Shift and press Reset to clear any
+    remaining pages in the printer's memory. Be sure that your print jobs was removed from the
+    print queue in ragnar.</li>
+</ul>
+
+<p><b><font size="+1">Toner and paper</font></b> 
+
+<ul>
+  <li>Please report to the Lab consultant any toner low message or if we need more paper.</li>
+</ul>
+<p><b><font size="+1">Reducing printing cost:</font></b><font size="+1"><b>
+multi-page printing </b></font>
+<ul>
+  <li>One of the easiest way of reducing printing cost is to print your document
+    in a two-page format (i.e to make two pages of your document fit into one
+    printer page). To do this you can use the following command:</li>
+</ul>
+<blockquote>
+  <p><font size="+1"><tt>psnup -2 [original file] &gt; [new file]</tt></font></p>
+  <p>This will take your original postscript file and transform it into a
+  two-page format postscript file. You can then print this new file with the
+  usual <tt><font
+    size="+1">lp</font></tt> command.</p>
+</blockquote>
+<ul>
+  <li>For larger files, professor Koenker suggests you can use the following
+    commands:</li>
+</ul>
+<blockquote>
+  <p><font size="+1"><tt>psbook -s[#] [original file] | psnup -2 &gt;</tt></font><tt><font size="+1">
+  [new file]</font></tt></p>
+  <p>This will take your original postscript file and create
+  &quot;signatures&quot; of&nbsp; [#] pages in length that then are saved as a
+  multiple-page new file that can be printed to create book-style pages that can
+  be folded into a nice little booklet.</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</blockquote>
+</body>
+</html>

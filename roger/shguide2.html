@@ -1,0 +1,274 @@
+<html>
+
+<head>
+<title>A Quick Guide to Shazam II</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body text="#000000" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000"
+background="../images/misc/home-back.jpeg">
+
+<p align="center"><font size="+2" color="#000080"><b>A Quick Guide to SHAZAM (II) </b></font></p>
+
+<p align="center">by Walter Sosa</p>
+
+<hr width="100%" align="center">
+
+<p>This quick guide presents various tests and alternative estimation methods. We will use
+the consumption example in the Shazam manual. As a starting point, we read the data from
+the file shazdat.txt and estimate a basic model. See the <a href="shguide.html">Quick Guide I</a> for basic Shazam
+commands. </p>
+
+<p><tt>|_SAMPLE 1 17</tt> <br>
+<tt>|_READ(c:\sa\shazdat.txt) year consume income price /skiplines=1</tt> <br>
+<tt>|_PRINT year consume income price</tt> <br>
+<tt>|_STAT consume income price</tt> <br>
+<tt>|_OLS consume income price </tt><br>
+</p>
+
+<p>These are some basic results of the OLS estimation: </p>
+
+<p><tt>R-SQUARE = 0.9516 R-SQUARE ADJUSTED = 0.9447</tt> <br>
+<tt>VARIANCE OF THE ESTIMATE-SIGMA**2 = 30.716</tt> <br>
+<tt>STANDARD ERROR OF THE ESTIMATE-SIGMA = 5.5422</tt> <br>
+<tt>SUM OF SQUARED ERRORS-SSE= 430.03</tt> <br>
+<tt>MEAN OF DEPENDENT VARIABLE = 134.49</tt> <br>
+<tt>LOG OF THE LIKELIHOOD FUNCTION = -51.5823</tt> <br>
+<tt>VARIABLE ESTIMATED STANDARD T-RATIO PARTIAL STANDARDIZED ELAST.</tt> <br>
+</p>
+
+<p><tt>NAME COEFFICIENT ERROR 14 DF P-VALUE CORR. COEFFICIENT AT MEANS <br>
+INCOME 1.0648 0.2668 3.991 0.999 0.730 0.2388 0.8155</tt> <br>
+<tt>PRICE -1.3846 0.8358E-01 -16.57 0.000-0.975 -0.9909 -0.7856</tt> <br>
+<tt>CONSTANT 130.48 27.07 4.819 1.000 0.790 0.0000 0.9701</tt> <br>
+</p>
+
+<p><font size="+1" color="#800000"><b>1. Testing hypothesis on regression coefficients <br>
+<br>
+</b></font>We start by testing the simple hypothesis that the coefficient associated with
+income is equal to 1. The TEST command is used: </p>
+
+<p><tt>|_TEST income = 1</tt> <br>
+<br>
+And some relevant output is: <br>
+</p>
+
+<p><tt>TEST VALUE = 0.64824E-01 STD. ERROR OF TEST VALUE 0.26678</tt> <br>
+<tt>T STATISTIC = 0.24298353 WITH 14 D.F. P-VALUE= 0.40577</tt> <br>
+<tt>F STATISTIC = 0.59040995E-01 WITH 1 AND 14 D.F. P-VALUE= 0.81154</tt> <br>
+<tt>WALD CHI-SQUARE STATISTIC = 0.59040997E-01 WITH 1 D.F. P-VALUE= 0.80802</tt> <br>
+<tt>UPPER BOUND ON P-VALUE BY CHEBYCHEV INEQUALITY = 1.00000</tt> </p>
+
+<p>Test value is simply income-1. The t-statistic is the usual t-ratio. The command also
+performs an F-statistic and an asymptotic wald statistic . Now test the hypothesis that
+the price coefficient is equal to -1: <br>
+<br>
+<tt>|_TEST price = -1</tt> </p>
+
+<p>Suppose we want to test the non-linear hypothesis that the product of the income and
+price coefficients is one. This is performed with: </p>
+
+<p><tt>|_TEST income*price=1</tt> <br>
+<br>
+and the output is: <br>
+</p>
+
+<p><tt>TEST VALUE = -2.4743 STD. ERROR OF TEST VALUE 0.39558</tt> <br>
+<tt>T STATISTIC = -6.2548234 WITH 14 D.F. P-VALUE= 0.00001</tt> <br>
+<tt>F STATISTIC = 39.122816 WITH 1 AND 14 D.F. P-VALUE= 0.00002</tt> <br>
+<tt>WALD CHI-SQUARE STATISTIC = 39.122814 WITH 1 D.F. P-VALUE= 0.00000</tt> <br>
+<tt>UPPER BOUND ON P-VALUE BY CHEBYCHEV INEQUALITY = 0.02556</tt> <br>
+</p>
+
+<p>Again, the test value is <tt>income*price -1</tt>. The standard error is obtained from
+the &quot;delta-method&quot;. The &quot;t-statistic&quot; does not have the t-distribution
+but the standard normal. Note that the t-statistic is the square root of the Wald
+statistic, which in our case has Chi-Square distribution with one degree of freedom. The
+previous were single hypothesis. To test the joint hypothesis that the coefficients of
+income and price are 1 and -1 jointly we use: </p>
+
+<p><tt>|_TEST</tt> <br>
+<tt>|_TEST income =1</tt> <br>
+<tt>|_TEST price=-1</tt> <br>
+<tt>|_END</tt> <br>
+<br>
+obtaining: <br>
+<br>
+<tt>F STATISTIC = 10.773871 WITH 2 AND 14 D.F. P-VALUE= 0.00147</tt> <br>
+<tt>WALD CHI-SQUARE STATISTIC = 21.547743 WITH 2 D.F. P-VALUE= 0.00002</tt> <br>
+<br>
+The command performs an F-statistic and a Wald test of the joint hypothesis. </p>
+
+<p><br>
+<font size="+1" color="#800000"><b>2. Residual analysis. Testing for normality</b></font></p>
+
+<p>If you include the options RSTAT , GF and LM, the OLS command willl produce an analysis
+of the residuals and a goodness of fit test for normality of the residuals. GS produces a
+goodness of fit test and LM produces Jarque and Bera's test of normality</p>
+
+<p><tt>OLS consume income price / RSTAT GF LM</tt></p>
+
+<p>and some relevant output is:</p>
+
+<p><tt>DURBIN-WATSON = 2.0291 VON NEUMANN RATIO = 2.1560 RHO = -0.19231 RESIDUAL SUM =
+0.66791E-12 RESIDUAL VARIANCE = 30.716 SUM OF ABSOLUTE ERRORS= 72.335 R-SQUARE BETWEEN
+OBSERVED AND PREDICTED = 0.9516 RUNS TEST: 7 RUNS, 9 POSITIVE, 8 NEGATIVE, NORMAL
+STATISTIC = -1.2423 COEFFICIENT OF SKEWNESS = -0.0273 WITH STANDARD DEVIATION OF 0.5497
+COEFFICIENT OF EXCESS KURTOSIS = -0.8459 WITH STANDARD DEVIATION OF 1.0632 </tt></p>
+
+<p><tt>GOODNESS OF FIT TEST FOR NORMALITY OF RESIDUALS - 6 GROUPS OBSERVED 0.0 2.0 6.0 6.0
+3.0 0.0 EXPECTED 0.4 2.3 5.8 5.8 2.3 0.4 CHI-SQUARE = 1.0363 WITH 1 DEGREES OF FREEDOM </tt></p>
+
+<p><tt>JARQUE-BERA ASYMPTOTIC LM NORMALITY TEST CHI-SQUARE = 0.6412 WITH 2 DEGREES OF
+FREEDOM TYPE COMMAND </tt></p>
+
+<p><br>
+<font size="+1" color="#800000"><b>3. Testing for autocorrelation and heteroskedasticity <br>
+<br>
+</b></font>The command DIAGNOS performs several specification tests on the last estimated
+model. To test for the presence of serial correlation in the residuals we use the ACF
+option (ACF stands for Autocorrelation Function): <br>
+<br>
+<tt>|_DIAGNOS /ACF</tt> <br>
+</p>
+
+<p>Some relevant output is: <br>
+</p>
+
+<p><tt>RESIDUAL CORRELOGRAM</tt> <br>
+</p>
+
+<p><tt>LM-TEST FOR HJ:RHO(J)=0, STATISTIC IS STANDARD NORMAL</tt> <br>
+<tt>LAG RHO STD ERR T-STAT LM-STAT DW-TEST BOX-PIERCE-LJUNG</tt> <br>
+<tt>1 -0.1531 0.2425 -0.6311 0.7385 2.0291 0.4729</tt> <br>
+<tt>2 -0.2221 0.2425 -0.9158 1.2245 2.0313 1.5352</tt> <br>
+<tt>3 0.1923 0.2425 0.7928 1.0255 1.1821 2.3883</tt> <br>
+<tt>4 -0.2940 0.2425 -1.2123 1.7086 1.9974 4.5364</tt> <br>
+<tt>LM CHI-SQUARE STATISTIC WITH 4 D.F. IS 3.335</tt> <br>
+</p>
+
+<p>By default this command produces estimates of the autocorrelation function for 4 lags.
+The RHO coefficients are total autocorrelations of the residuals with respect to its lags.
+The command also produces a Breusch-Pagan LM test for serial correlation of order 4. <br>
+<br>
+To test for the presence of heteroskedastic residuals we use the HET option: <br>
+<br>
+<tt>|_DIAGNOS /HET</tt> </p>
+
+<p><tt>HETEROSKEDASTICITY TESTS</tt> <br>
+<tt>E**2 ON YHAT: CHI-SQUARE = 2.458 WITH 1 D.F.</tt> <br>
+<tt>E**2 ON YHAT**2: CHI-SQUARE = 2.626 WITH 1 D.F.</tt> <br>
+<tt>E**2 ON LOG(YHAT**2): CHI-SQUARE = 2.263 WITH 1 D.F.</tt> <br>
+<tt>E**2 ON X (B-P-G) TEST: CHI-SQUARE = 4.934 WITH 2 D.F.</tt> <br>
+<tt>E**2 ON LAG(E**2) ARCH TEST: CHI-SQUARE = 1.576 WITH 1 D.F.</tt> <br>
+<tt>LOG(E**2) ON X (HARVEY) TEST: CHI-SQUARE = 3.533 WITH 2 D.F.</tt> <br>
+<tt>ABS(E) ON X (GLEJSER) TEST: CHI-SQUARE = 4.308 WITH 2 D.F.</tt> <br>
+<br>
+This command computes several heteroskedasticity tests including Breush-Godfrey and ARCH
+tests<tt> </tt><br>
+</p>
+
+<p><font size="+1" color="#800000"><b>4. Robust regression <br>
+<br>
+</b></font>Robust alternatives to OLS are easily produced in Shazam. The following command
+produces estimates based on the Least Absolute Errors (LAE) criterion. The RSTAT option
+prints summary statistics of the residuals of the estimation: </p>
+
+<p><br>
+<tt>|_ROBUST consume income price /LAE RSTAT</tt> <br>
+<br>
+<tt>LEAST ABSOLUTE ERRORS REGRESSION</tt> <br>
+<tt>OBJECTIVE FUNCTION = 35.039</tt> <br>
+<tt>NUMBER OF SIMPLEX ITERATIONS = 6.0000</tt> <br>
+<tt>EMPIRICAL QUANTILE FUNCTION AT MEANS = 136.26</tt> <br>
+<tt>SUM OF ABSOLUTE ERRORS = 70.078</tt> <br>
+<tt>USING DIFF= 2 FOR COVARIANCE CALCULATIONS</tt> <br>
+<tt>VARIANCE OF THE ESTIMATE-SIGMA**2 = 68.326</tt> <br>
+<tt>STANDARD ERROR OF THE ESTIMATE-SIGMA = 8.2659</tt> <br>
+<tt>SUM OF SQUARED ERRORS-SSE= 569.00</tt> <br>
+<tt>MEAN OF DEPENDENT VARIABLE = 134.49</tt> </p>
+
+<p><br>
+<tt>VARIABLE ESTIMATED STANDARD T-RATIO PARTIAL STANDARDIZED ELASTICITY <br>
+NAME COEFFICIENT ERROR 14 DF P-VALUE CORR. COEFFICIENT AT MEANS</tt></p>
+
+<p><br>
+<tt>INCOME 0.69851 0.3979 1.756 0.949 0.425 0.1566 0.5349 <br>
+PRICE -1.4421 0.1247 -11.57 0.000-0.951 -1.0321 -0.8183 <br>
+CONSTANT 174.36 40.38 4.318 1.000 0.756 0.0000 1.2964 </tt><br>
+</p>
+
+<p><tt>DURBIN-WATSON = 1.5357 VON NEUMANN RATIO = 1.6317 RHO = 0.19828</tt> <br>
+<tt>RESIDUAL SUM = -29.972 RESIDUAL VARIANCE = 40.643</tt> <br>
+<tt>SUM OF ABSOLUTE ERRORS= 70.078</tt> <br>
+<tt>R-SQUARE BETWEEN OBSERVED AND PREDICTED = 0.9438</tt> <br>
+</p>
+
+<p><tt>RUNS TEST: 7 RUNS, 10 POSITIVE, 7 NEGATIVE, NORMAL STATISTIC = -1.1583</tt> <br>
+</p>
+
+<p><font size="+1" color="#800000"><b>5. Autocorrelation models </b></font><br>
+</p>
+
+<p>The following command estimates the original model using the Cochrane-Orcutt iterative
+procedure for errors with first-order serial correlation. Again, the RSTAT option
+generates summary statistics on the residuals: <br>
+<br>
+<tt>|_AUTO consume income price /RSTAT</tt> <br>
+</p>
+
+<p><tt>LOG L.F. = -51.3037 AT RHO = -0.20585</tt> <br>
+<tt>ASYMPTOTIC ASYMPTOTIC ASYMPTOTIC</tt> <br>
+<tt>ESTIMATE VARIANCE ST.ERROR T-RATIO</tt> <br>
+</p>
+
+<p><tt>RHO -0.20585 0.05633 0.23734 -0.86730</tt> <br>
+<tt>R-SQUARE = 0.9533 R-SQUARE ADJUSTED = 0.9466</tt> <br>
+<tt>VARIANCE OF THE ESTIMATE-SIGMA**2 = 29.650</tt> <br>
+<tt>STANDARD ERROR OF THE ESTIMATE-SIGMA = 5.4452</tt> <br>
+<tt>SUM OF SQUARED ERRORS-SSE= 415.10</tt> <br>
+<tt>MEAN OF DEPENDENT VARIABLE = 134.49</tt> <br>
+<tt>LOG OF THE LIKELIHOOD FUNCTION = -51.3037</tt> <br>
+<tt>VARIABLE ESTIMATED STANDARD T-RATIO PARTIAL STANDARDIZED ELASTICITY</tt> <br>
+<tt>NAME COEFFICIENT ERROR 14 DF P-VALUE CORR. COEFFICIENT AT MEANS <br>
+INCOME 1.0691 0.2264 4.723 1.000 0.784 0.2397 0.8187</tt> <br>
+<tt>PRICE -1.3766 0.7022E-01 -19.60 0.000-0.982 -0.9852 -0.7811</tt> <br>
+<tt>CONSTANT 129.28 22.83 5.663 1.000 0.834 0.0000 0.9612</tt> <br>
+<tt>DURBIN-WATSON = 1.8606 VON NEUMANN RATIO = 1.9768 RHO = -0.05771</tt> <br>
+<tt>RESIDUAL SUM = 1.1487 RESIDUAL VARIANCE = 29.744</tt> <br>
+<tt>SUM OF ABSOLUTE ERRORS= 72.685</tt> <br>
+<tt>R-SQUARE BETWEEN OBSERVED AND PREDICTED = 0.9532</tt> <br>
+<tt>RUNS TEST: 7 RUNS, 9 POSITIVE, 8 NEGATIVE, NORMAL STATISTIC = -1.2423</tt> <br>
+<tt>DURBIN H STATISTIC (ASYMPTOTIC NORMAL) = -1.1559</tt> <br>
+<br>
+</p>
+
+<p>The GS option uses a &quot;grid search&quot; method to estimate the autocorrelation
+coefficient: <br>
+<br>
+<tt>|_AUTO consume income price /gs RSTAT</tt> </p>
+
+<p>and the ML option produces maximum-likelihood estimates </p>
+
+<p><tt>|_AUTO consume income price /ml RSTAT</tt> </p>
+
+<p><font size="+1" color="#800000"><b>6. Where to find more information</b></font>
+
+<ul>
+  <li>There is a <a href="shguide.html">Quick Guide to Shazam </a>with
+    basic commands</li>
+  <li>At UIUC, The Shazam User's Reference Manual v.7.0 can be purchased at the Resource
+    Center at CCSO (1420 Digital Computer Lab). The manual contains detailed descriptions of
+    all available commands. </li>
+  <li>The <a href="eclab.html">Econometrics Lab</a> at the
+    UIUC Department of Economics keeps useful information related to econometric computing in
+    general (including this guide). </li>
+</ul>
+
+<hr width="100%">
+
+<p>Back to the <a href="eclab.html">Econometrics Lab</a> page.</p>
+
+<hr width="100%">
+</body>
+</html>

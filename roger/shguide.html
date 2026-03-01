@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<title>A quick guide to SHAZAM</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body text="#000000" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000"
+background="../images/misc/home-back.jpeg">
+
+<p align="center"><font color="#000080"><b><font size="+2">A Quick Guide to SHAZAM</font></b><font
+size="+1"> </font></font></p>
+
+<p align="center">by Walter Sosa<br>
+</p>
+
+<hr width="100%">
+
+<p><font size="+1" color="#800000"><b>1. Very basic SHAZAM (getting help and quitting) </b></font></p>
+
+<p>To <b>start</b> SHAZAM for Windows double click in the corresponding icon (ask the
+local system administrator if you have questions about where Shazam is installed). Once
+the program is loaded you will see the Shazam prompt (:). </p>
+
+<p>To <b>obtain help</b>, just type :</p>
+
+<p><tt>HELP <i>command</i> </tt></p>
+
+<p>where <i>command</i> is any valid Shazam command. For example, <tt>help ols</tt> shows
+available help on the ols command use to perform ordinary least squares. Type <tt>help</tt>
+alone to see a list of available commands. To <b>exit </b>SHAZAM, simply type: </p>
+
+<p><tt>QUIT</tt> <br>
+</p>
+
+<p><b><font size="+1" color="#800000">2. Reading data</font> </b><br>
+</p>
+
+<p>We assume your data is in an ASCII (text) file called <i>mydata.txt</i>. The first four
+lines of <i>mydata.txt</i> should look like this: </p>
+
+<p><tt>YEAR CONSUME INCOME PRICE <br>
+1923 99.2 96.7 101.0 <br>
+1924 99.0 98.4 100.1 <br>
+1925 100.0 100.0 100.0 <br>
+1926 111.6 104.9 90.6 </tt></p>
+
+<p>First we need to <b>set the sample size</b>. In our example we will have 17
+observations, so we do:</p>
+
+<p><tt>SAMPLE 1 17</tt></p>
+
+<p>where 1 and 17 refer to the first and last observation respectively. Now we are ready
+to <b>read the data</b> from the <i>mydata.txt</i> file. This is done with:</p>
+
+<p><tt>READ(<i>mydata.txt</i>) year consume income price /skiplines=1 </tt></p>
+
+<p>This command assumes that <i>mydata.txt</i> is located in the same subdirectory as the
+Shazam program, if not you should provide a full path to the file. The command follows
+with a list of the names of the variables being read. The option <tt>/skiplines=1 </tt>indicates
+that the file contains variables names in the first row. You should ignore this option if
+this is not the case or change the number in <tt>skiplines</tt> if variable names are
+contained in more than one row. If you want to <b>list the data</b>, you can do it with:<tt>
+</tt></p>
+
+<p><tt>PRINT year consume income price</tt></p>
+
+<p>this will show a list with the variables above.<tt> </tt><br>
+<br>
+</p>
+
+<p><font size="+1" color="#800000"><b>3. Basic statistics and regressions</b></font></p>
+
+<p>Basic <b>descriptive statistics</b> can be produced with the following line: </p>
+
+<p><tt>STAT consume income price</tt></p>
+
+<p>This shows a table with some descriptive statistics for each of the variables. To run
+an <b>ordinary least squares regression</b>, the command is:</p>
+
+<p><tt>OLS consume income price</tt></p>
+
+<p>This will produce ols estimates of a regression of consume on income and price. The
+first variable in the list is always taken to be the dependent variable and the rest are
+treated as explanatory variables. By default, a constant is always included in the model. <br>
+<br>
+</p>
+
+<p><font size="+1" color="#800000"><b>4. Producing output files and reading commands from
+external files.</b></font> <br>
+</p>
+
+<p>It will be useful to <b>store results in a text file</b> that could be later printed or
+edited with a wordprocessor. At the Shazam prompt type:</p>
+
+<p><tt>FILE SCREEN <i>filename</tt></i></p>
+
+<p>and Shazam will send output to the file <i>filename</i> and the screen simultaneously.
+This command must be typed before any other command whose output you want to send to <i>filename</i>.
+Sometimes it is useful to collect a sequence of Shazam commands in a text file and run
+them all at once. To do this you have to create a text file containing valid Shazam
+commands, as if you were typing them in Shazam, one at each line. After you have saved the
+file (in a file named <i>command.txt</i>, say), at the Shazam prompt type:</p>
+
+<p><tt>FILE INPUT <i>command.txt</tt></i></p>
+
+<p>and the program will execut the commands contained in the <i>command.txt</i> file.</p>
+
+<p>As an example, we reproduce a full session </p>
+
+<p><tt>FILE SCREEN shout.out <br>
+SAMPLE 1 17 <br>
+READ(shazdat.txt) year consume income price /skiplines=1 <br>
+PRINT year consume income price <br>
+STAT consume income price <br>
+OLS consume income price </tt></p>
+
+<p>Note that any output will be sent to the file <i>shout.out</i> and the screen
+simultaneously. </p>
+
+<p><font size="+1" color="#800000"><b>5. Where to find more information</b></font> 
+
+<ul>
+  <li>At UIUC, The Shazam User's Reference Manual v.7.0 can be purchased at the Resource
+    Center at CCSO (1420 Digital Computer Lab). The manual contains detailed descriptions of
+    all available commands. </li>
+  <li>The <a href="eclab.html">Econometrics Lab</a> at the UIUC Department of Economics keeps
+    useful information related to econometric computing in general (including this guide).
+    Visit our WWW page at: </li>
+  <p align="center"><tt>http://www.econ.uiuc.edu/~sosa/eclab.html </tt></p>
+  <p><t>for more information about the Lab and related activities. </p>
+  <width="100%">
+</ul>
+
+<hr width="100%">
+
+<p align="left">Back to the <a href="eclab.html">Econometrics
+Lab</a> </p>
+
+<hr width="100%">
+</body>
+</html>

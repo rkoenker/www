@@ -1,0 +1,16 @@
+deny from all
+allow from .uiuc.edu 
+allow from .illinois.edu 
+allow from .comcast.net
+allow from .au.dk
+AuthType Basic
+AddDescription "Basics" L1.pdf
+AddDescription "Inference" L2.pdf
+AddDescription "Computation" L3.pdf
+AddDescription "Nonparametrics" L4.pdf
+AddDescription "Survival" L5.pdf
+AddDescription "QAR" L6.pdf
+AddDescription "Risk" L7.pdf
+AddDescription "Panel Data" L8.pdf
+AddDescription "Endogoneity" L9.pdf
+

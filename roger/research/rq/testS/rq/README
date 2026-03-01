@@ -1,0 +1,40 @@
+quantreg -- Quantile Regression (Version 3.01)
+
+This is a new version of the quantile regression software for Splus.
+There is a parallel version for R also available at the web site.
+
+Initially it is available for Splus 5.1 for Unix, and with some luck
+it will eventually be made available for Splus 3.x for Unix, Splus 5.1
+for linux, and perhaps even for various windows versions of Splus.
+See the file S2R for some comments on the differences between the
+S and R versions.
+
+This version incorporates the algorithmic developments reported in
+Portnoy and Koenker (1997, Statistical Science) as well as a number
+of other modernizations.  Foremost among the latter is the that
+the transition to the lm() formula specification of the linear model
+has been made.  I hope that this will make the function substantially
+easier to use.  There are also a number of new developments for
+inference.  Further developments are anticipated. 
+
+The archive consists of the following pieces:
+
+	rq.q		a file containing all the s functions
+	rqbr.r		a ratfor file with the original simplex algorithm
+	rqfn.r		a ratfor file with the new interior point algorithm
+	xlapack.f	a fortran file with some "extra" lapack routines
+				needed for the rqfn algorithm.
+	help.d		a directory with  documentation files in 3.x  style
+				These files were automatically translated
+				from the sgm by sgml2roff.
+	help.sgm	a directory with  documentation files in 5.x  style
+	README		this file
+	INSTALL		some notes on installation
+	S2R		file with some comments about differences between the
+				R and S versions of the package.
+
+
+url:   http://www.econ.uiuc.edu                Roger Koenker   
+email  roger@ysidro.econ.uiuc.edu              Department of Economics
+vox:   217-333-4558                            University of Illinois
+fax:   217-244-6678                            Champaign, IL 61820

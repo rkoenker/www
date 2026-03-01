@@ -1,0 +1,228 @@
+\ifx\undefined\BySame
+\newcommand{\BySame}{\leavevmode\rule[.5ex]{3em}{.5pt}\ }
+\fi
+\ifx\undefined\textsc
+\newcommand{\textsc}[1]{{\sc #1}}
+\newcommand{\emph}[1]{{\em #1\/}}
+\let\tmpsmall\small
+\renewcommand{\small}{\tmpsmall\sc}
+\fi
+\begin{thebibliography}{}
+
+\harvarditem[Ambrosio, Fusco, and Pallara]{Ambrosio, Fusco, and
+  Pallara}{2000}{AmbFusPal00}
+\textsc{Ambrosio, L., N.~Fusco,  {\small and} D.~Pallara}  (2000):
+  \emph{Functions of bounded variation and free discontinuity problems}.
+  Clarendon Press, Oxford.
+
+\harvarditem[Breiman]{Breiman}{1991}{breiman.91}
+\textsc{Breiman, L.}  (1991): ``The $\Pi$ Method for Estimating Multivariate
+  Functions From Noisy Data (Disc: P145-160),'' \emph{Technometrics}, 33,
+  125--143.
+
+\harvarditem[Davies and Kovac]{Davies and Kovac}{2001}{DK.01}
+\textsc{Davies, P.,  {\small and} A.~Kovac}  (2001): ``Local extremes, runs,
+  strings and multiresolution,'' \emph{The Annals of Statistics}, 29, 1--65,
+  with discussion.
+
+\harvarditem[{De Giorgi}]{{De Giorgi}}{1954}{Gio54}
+\textsc{{De Giorgi}, E.}  (1954): ``Su una teoria generale della misura
+  $(r-1)$-dimensionale in uno spazio a $r$ dimensioni,'' \emph{Ann. Math. Pura
+  Appl. (4)}, 36, 191--213.
+
+\harvarditem[Dinculeanu]{Dinculeanu}{1967}{Din67}
+\textsc{Dinculeanu, N.}  (1967): \emph{Vector measures}. Pergamon Press,
+  Oxford, New York.
+
+\harvarditem[Donoho, Chen, and Saunders]{Donoho, Chen, and
+  Saunders}{1998}{DCS:1998}
+\textsc{Donoho, D., S.~Chen,  {\small and} M.~Saunders}  (1998): ``Atomic
+  decomposition by basis pursuit,'' \emph{SIAM J. of Scientific Computing}, 20,
+  33--61.
+
+\harvarditem[Duchon]{Duchon}{1976}{Duc76}
+\textsc{Duchon, J.}  (1976): ``Interpolation des fonctions de deux variables
+  suivant le principe de la flexion des plaques minces,'' \emph{R.A.I.R.O.,
+  Analyse num{\'e}rique}, 10, 1--13.
+
+\harvarditem[Duchon]{Duchon}{1977}{Duc77}
+\textsc{\BySame{}}  (1977): ``Splines minimizing rotation-invariant semi-norms
+  in Sobolev spaces,'' in \emph{Constructive Theory of Functions of Several
+  Variables, Oberwolfach 1976}, Lecture Notes in Mathematics 571, pp. 85--100.
+  Springer, Berlin.
+
+\harvarditem[Fichera]{Fichera}{1954}{Fic54}
+\textsc{Fichera, G.}  (1954): \emph{Lezioni sulle transformazioni lineari}.
+  Istituto matematico dell'Universit{\`a} di Trieste, vol I.
+
+\harvarditem[Friedman]{Friedman}{1991}{friedman.91}
+\textsc{Friedman, J.~H.}  (1991): ``Multivariate Adaptive Regression Splines
+  (Disc: P67-141),'' \emph{The Annals of Statistics}, 19, 1--67.
+
+\harvarditem[Green and Silverman]{Green and Silverman}{1994}{gree:silv:1994}
+\textsc{Green, P.~J.,  {\small and} B.~W. Silverman}  (1994):
+  \emph{Nonparametric Regression and Generalized Linear Models: {A} Roughness
+  Penalty Approach}. Chapman-Hall.
+
+\harvarditem[Gu, Bates, Chen, and Wahba]{Gu, Bates, Chen, and
+  Wahba}{1989}{GBCW}
+\textsc{Gu, C., D.~M. Bates, Z.~Chen,  {\small and} G.~Wahba}  (1989): ``The
+  Computation of Generalized Cross-validation Functions Through {H}ouseholder
+  Tridiagonalization With Applications to the Fitting of Interaction Spline
+  Models,'' \emph{SIAM Journal on Matrix Analysis and Application}, 10,
+  457--480.
+
+\harvarditem[Hansen and Kooperberg]{Hansen and Kooperberg}{2002}{HK.02}
+\textsc{Hansen, M.,  {\small and} C.~Kooperberg}  (2002): ``Spline Adaptation
+  in Extended Linear Models,'' \emph{Statistical Science}, 17, 2--51.
+
+\harvarditem[Hansen, Kooperberg, and Sardy]{Hansen, Kooperberg, and
+  Sardy}{1998}{HKS:1998}
+\textsc{Hansen, M., C.~Kooperberg,  {\small and} S.~Sardy}  (1998): ``Triogram
+  Models,'' \emph{J. Am. Stat. Assoc.}, 93, 101--119.
+
+\harvarditem[Harder and Desmarais]{Harder and Desmarais}{1972}{HD.1972}
+\textsc{Harder, R.~L.,  {\small and} R.~N. Desmarais}  (1972): ``Interpolation
+  using surface splines,'' \emph{J. Aircraft}, 9, 189--191.
+
+\harvarditem[He, Ng, and Portnoy]{He, Ng, and Portnoy}{1998}{HNP:1998}
+\textsc{He, X., P.~Ng,  {\small and} S.~Portnoy}  (1998): ``Bivariate quantile
+  smoothing splines,'' \emph{J. R. Stat. Soc. (B)}, 60, 537--550.
+
+\harvarditem[He and Shi]{He and Shi}{1996}{HS.96}
+\textsc{He, X.,  {\small and} P.~Shi}  (1996): ``Bivariate Tensor-product
+  $B$-splines in a Partly Linear Model,'' \emph{Journal of Multivariate
+  Analysis}, 58, 162--181.
+
+\harvarditem[Jordan]{Jordan}{1881}{Jor81}
+\textsc{Jordan, C.}  (1881): ``Sur la s{\'e}rie de {Fourier},'' \emph{C. R.
+  Acad. Sci. Paris}, XCII, 228--230.
+
+\harvarditem[Koenker and Mizera]{Koenker and Mizera}{2002}{KM.02}
+\textsc{Koenker, R.,  {\small and} I.~Mizera}  (2002): ``Comment on Hansen and
+  Kooperberg: Spline Adaptation in Extended Linear Models,'' \emph{Statistical
+  Science}, 17, 30--31.
+
+\harvarditem[Koenker and Ng]{Koenker and Ng}{2002}{KN.02}
+\textsc{Koenker, R.,  {\small and} P.~Ng}  (2002): ``SparseM: A Sparse Matrix
+  Package for R,''
+  \verb+http://cran.r-project.org/src/contrib/PACKAGES.html#SparseM+.
+
+\harvarditem[Koenker, Ng, and Portnoy]{Koenker, Ng, and
+  Portnoy}{1994}{KNP:1994}
+\textsc{Koenker, R., P.~Ng,  {\small and} S.~Portnoy}  (1994): ``Quantile
+  Smoothing Splines,'' \emph{Biometrika}, 81, 673--680.
+
+\harvarditem[Kronrod]{Kronrod}{1949}{Kro49}
+\textsc{Kronrod, A.~S.}  (1949): ``On linear and planar variation of functions
+  of several variables,'' \emph{Doklady Akademii Nauk SSSR}, 66, 797--800, [in
+  Russian].
+
+\harvarditem[Kronrod]{Kronrod}{1950}{Kro50}
+\textsc{\BySame{}}  (1950): ``On functions of two variables,'' \emph{Uspekhi
+  matematicheskikh nauk}, 5, 24--134, [in Russian].
+
+\harvarditem[Mammen and van~de Geer]{Mammen and van~de Geer}{1997}{MdG}
+\textsc{Mammen, E.,  {\small and} S.~van~de Geer}  (1997): ``Locally Adaptive
+  Regression Splines,'' \emph{Annals of Statistics}, 25, 387--413.
+
+\harvarditem[Meinguet]{Meinguet}{1979}{meinguet:1979}
+\textsc{Meinguet, J.}  (1979): ``Multivariate interpolation at arbitrary points
+  made simple,'' \emph{ZAMP}, 30, 292--304.
+
+\harvarditem[Meyer and Woodroofe]{Meyer and Woodroofe}{2000}{MW.00}
+\textsc{Meyer, M.,  {\small and} M.~Woodroofe}  (2000): ``On the degrees of
+  freedom in shape-restricted regression,'' \emph{Annals of Statistics}, 28,
+  1083--1104.
+
+\harvarditem[Natanson]{Natanson}{1974}{natanson}
+\textsc{Natanson, I.}  (1974): \emph{Theory of Functions of a Real Variable}.
+  Ungar.
+
+\harvarditem[Nicholls]{Nicholls}{1998}{nicholls}
+\textsc{Nicholls, G.~K.}  (1998): ``Bayesian Image Analysis With {M}arkov Chain
+  {M}onte {C}arlo and Coloured Continuum Triangulation Models,'' \emph{Journal
+  of the Royal Statistical Society, Series B, Methodological}, 60, 643--659.
+
+\harvarditem[Okabe, Boots, Sugihara, and Chiu]{Okabe, Boots, Sugihara, and
+  Chiu}{2000}{OBSC}
+\textsc{Okabe, A., B.~Boots, K.~Sugihara,  {\small and} S.~Chiu}  (2000):
+  \emph{Spatial Tesselations}. Wiley.
+
+\harvarditem[Portnoy]{Portnoy}{1997}{P.97}
+\textsc{Portnoy, S.}  (1997): ``Local Asymptotics for Quantile Smoothing
+  Splines,'' \emph{Annals of Statistics}, 25, 414--434.
+
+\harvarditem[Portnoy and Koenker]{Portnoy and Koenker}{1997}{PK.1997}
+\textsc{Portnoy, S.,  {\small and} R.~Koenker}  (1997): ``The {G}aussian Hare
+  and the {L}aplacian Tortoise: Computability of squared-error versus
+  absolute-error estimators, with discusssion,'' \emph{Statistical Science},
+  12, 279--300.
+
+\harvarditem[Rippa]{Rippa}{1992}{rippa:1992}
+\textsc{Rippa, S.}  (1992): ``Long and thin triangles can be good for linear
+  interpolation,'' \emph{SIAM J. Numer. Anal.}, 29, 257--270.
+
+\harvarditem[Rudin, Osher, and Fatemi]{Rudin, Osher, and Fatemi}{1992}{ORF}
+\textsc{Rudin, L., S.~Osher,  {\small and} E.~Fatemi}  (1992): ``Nonlinear
+  total variation based noise removal algorithms,'' \emph{Physica D}, 60,
+  259--268.
+
+\harvarditem[Rudin and Osher]{Rudin and Osher}{1994}{OR}
+\textsc{Rudin, L.~I.,  {\small and} S.~Osher}  (1994): ``Total variation based
+  image restoration with free local constraints,'' in \emph{Proceeedings
+  ICIP-94}, vol.~I. IEEE Computer Society Press.
+
+\harvarditem[Scherzer]{Scherzer}{1998}{Scherz98}
+\textsc{Scherzer, O.}  (1998): ``Denoising with higher order derivatives of
+  bounded variation and application to parameter estimation,''
+  \emph{Computing}, 60, 1--27.
+
+\harvarditem[Schwarz]{Schwarz}{1978}{schw:1978}
+\textsc{Schwarz, G.}  (1978): ``Estimating the Dimension of a Model,''
+  \emph{Annals of Statistics}, 6, 461--464.
+
+\harvarditem[Serrin]{Serrin}{1961}{Ser61}
+\textsc{Serrin, J.}  (1961): ``On the definition and properties of certain
+  variational integrals,'' \emph{Trans. Amer. Math. Soc.}, 101, 139--167.
+
+\harvarditem[Stone, Hansen, Kooperberg, and Troung]{Stone, Hansen, Kooperberg,
+  and Troung}{1997}{SHKT:1997}
+\textsc{Stone, C., M.~Hansen, C.~Kooperberg,  {\small and} Y.~Troung}  (1997):
+  ``Polynomial splines and their tensor products in extended linear modeling,''
+  \emph{Annals of Statistics}, 25, 1371--1470.
+
+\harvarditem[Stone]{Stone}{1994}{ston:1994}
+\textsc{Stone, C.~J.}  (1994): ``The Use of Polynomial Splines and Their Tensor
+  Products in Multivariate Function Estimation (Disc: P171-184),'' \emph{Annals
+  of Statistics}, 22, 118--171.
+
+\harvarditem[Tasdizen, Whitaker, Burchard, and Osher]{Tasdizen, Whitaker,
+  Burchard, and Osher}{2002}{TWBO}
+\textsc{Tasdizen, T., R.~Whitaker, P.~Burchard,  {\small and} S.~Osher}
+  (2002): ``Geometric Surface Processing via Normal Maps,'' preprint.
+
+\harvarditem[Tibshirani]{Tibshirani}{1996}{tibs:1996}
+\textsc{Tibshirani, R.}  (1996): ``Regression Shrinkage and Selection Via the
+  Lasso,'' \emph{J. R. Stat. Soc. (B)}, 58, 267--288.
+
+\harvarditem[Tonelli]{Tonelli}{1926}{Ton26}
+\textsc{Tonelli, L.}  (1926): ``Sulla quadratura delle superficie {I}, {{II}},
+  {{III}},'' \emph{Rend. Acc. Naz. Lincei}, 3, 357--362, 445--450, 633--638.
+
+\harvarditem[Tonelli]{Tonelli}{1936}{Ton36}
+\textsc{\BySame{}}  (1936): ``Sulle funzioni di due variabili generalmente a
+  variazione limitata,'' \emph{Ann. Scuola Norm. Sup. Pisa Cl. Sci. (2)}, 5,
+  315--320.
+
+\harvarditem[Wahba]{Wahba}{1990}{Wah90}
+\textsc{Wahba, G.}  (1990): \emph{Spline models for observational data},
+  CBMS-NSF Regional Conference Series in Applied Mathematics. SIAM,
+  Philadelphia.
+
+\harvarditem[Wahba and Wendelberger]{Wahba and Wendelberger}{1980}{WahWen80}
+\textsc{Wahba, G.,  {\small and} J.~Wendelberger}  (1980): ``Some new
+  mathematical methods for variational objective analysis using splines and
+  cross validation,'' \emph{Monthly Weather Review}, 108, 1122--1143.
+
+\end{thebibliography}

@@ -1,0 +1,17 @@
+sub present {
+             print "Kyphosis is <BLINK>Present</BLINK><BR>\n";
+             &rethome
+             }
+
+     sub absent {
+             print "Kyphosis is <BLINK>Absent</BLINK><BR>\n";
+             &rethome;
+             }
+
+     sub rethome {
+             print "<P>\n";
+             print "<a href=\"http://www.econ.uiuc.edu/~roger\">Return to <EM>
+		Roger Koenker's</EM> page</a>";
+             }
+
+

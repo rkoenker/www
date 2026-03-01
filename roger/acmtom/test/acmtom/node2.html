@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML .95.3 (Nov 17 1995) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Degeneracy in the Bartels and Conn  Algorithm</TITLE>
+<META NAME="description" CONTENT="Degeneracy in the Bartels and Conn  Algorithm">
+<META NAME="keywords" CONTENT="acmtom">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="acmtom.css">
+</HEAD>
+<BODY LANG="EN">
+ <BR> <HR><A NAME="tex2html26" HREF="node3.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/icons/next_motif.gif"></A>   <A NAME="tex2html24" HREF="acmtom.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/icons/up_motif.gif"></A>   <A NAME="tex2html18" HREF="node1.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/icons/previous_motif.gif"></A>         <BR>
+<B> Next:</B> <A NAME="tex2html27" HREF="node3.html">References</A>
+<B>Up:</B> <A NAME="tex2html25" HREF="acmtom.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html19" HREF="node1.html">Introduction</A>
+<BR> <HR> <P>
+<H1><A NAME="SECTION00020000000000000000">Degeneracy in the Bartels and Conn  Algorithm</A></H1>
+<P>
+The directional derivative of (<A HREF="node1.html#eqnbcobj2">2</A>)
+is written by Bartels and Conn as
+<P><A NAME="eqndd">&#160;</A> <IMG WIDTH=533 HEIGHT=57 ALIGN=BOTTOM ALT="equation51" SRC="img17.gif"  > <P>
+where the <I>restricted gradient</I> is 
+<P><A NAME="eqngradient">&#160;</A> <IMG WIDTH=500 HEIGHT=47 ALIGN=BOTTOM ALT="equation61" SRC="img18.gif"  > <P>
+<P><A NAME="eqnsigma">&#160;</A> <IMG WIDTH=500 HEIGHT=98 ALIGN=BOTTOM ALT="equation69" SRC="img19.gif"  > <P>
+and  <IMG WIDTH=9 HEIGHT=14 ALIGN=BOTTOM ALT="tex2html_wrap_inline245" SRC="img20.gif"  >  denotes the index set of the zero elements of the residual
+vector  <IMG WIDTH=65 HEIGHT=29 ALIGN=MIDDLE ALT="tex2html_wrap_inline247" SRC="img21.gif"  > .  A minimal set of linearly independent columns 
+ <IMG WIDTH=98 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline249" SRC="img22.gif"  >  are referred to as the active columns.
+Degeneracy occurs when the full set of zero residual columns are
+linearly dependent.  When this occurs, Bartels and Conn's strategy 
+is to randomize the corresponding  <IMG WIDTH=9 HEIGHT=9 ALIGN=BOTTOM ALT="tex2html_wrap_inline251" SRC="img23.gif"  > 's 
+in  ({<A HREF="node2.html#eqngradient">4</A>) inside the { <B>find p </B>} module. 
+A ``descent direction'' is then constructed from this randomized restricted 
+gradient.
+<P>
+The problem, as we see it, with this strategy is that the resulting 
+restricted gradient
+will not accurately reflect the contributions of the non-active, 
+zero-residual columns to the directional derivitive.  
+<I>These contributions depend on the chosen direction <i>p</i></I>.  
+Ignoring this can result in the algorithm taking steps in 
+directions which actually increase, rather
+than decrease, the objective function.  To correct this, we suggest
+computing the direction <i>p</i> as in Bartels and Conn, 
+decomposing the index set of  non-active columns into a zero residual set
+ <IMG WIDTH=18 HEIGHT=33 ALIGN=MIDDLE ALT="tex2html_wrap_inline257" SRC="img24.gif"  >  and  the others
+ <IMG WIDTH=17 HEIGHT=33 ALIGN=MIDDLE ALT="tex2html_wrap_inline259" SRC="img25.gif"  > , recomputing the restricted gradient as
+<P><A NAME="eqngradient1">&#160;</A> <IMG WIDTH=568 HEIGHT=43 ALIGN=BOTTOM ALT="equation92" SRC="img26.gif"  > <P>
+where 
+<P><A NAME="eqnsigmahat">&#160;</A> <IMG WIDTH=500 HEIGHT=119 ALIGN=BOTTOM ALT="equation107" SRC="img27.gif"  > <P>
+and finally, checking whether   <IMG WIDTH=85 HEIGHT=32 ALIGN=MIDDLE ALT="tex2html_wrap_inline261" SRC="img28.gif"  >  before proceeding 
+(in { <B>find  <IMG WIDTH=10 HEIGHT=9 ALIGN=BOTTOM ALT="tex2html_wrap_inline263" SRC="img29.gif"  > </B>}) to take a step in direction <i>p</i>.
+A further source of difficulties is also apparent from (<A HREF="node2.html#eqnsigmahat">7</A>).
+Since  <IMG WIDTH=25 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline267" SRC="img30.gif"  >  may equal zero as well as  <IMG WIDTH=21 HEIGHT=27 ALIGN=MIDDLE ALT="tex2html_wrap_inline269" SRC="img31.gif"  > 
+it is important in the randomization step to randomize among all <I>three</I>
+possible values.  If this is not done, the algorithm can cycle
+indefinitely never finding a direction of descent.  With somewhat more
+effort, one could further modify the algorithm to implement a
+deterministic strategy for handling the problem of degeneracy as
+discussed for example in Gill, Murray and Wright (1991, Section 8.3.3).
+<P>
+Having made these two rather minor modifications:  randomizing over
+ <IMG WIDTH=78 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline271" SRC="img32.gif"  >  rather than  <IMG WIDTH=60 HEIGHT=30 ALIGN=MIDDLE ALT="tex2html_wrap_inline273" SRC="img33.gif"  > , and verifying under conditions
+of degeneracy that the randomized direction <i>p</i> is indeed a descent
+direction by computing an updated restricted gradient - we find that
+the Bartels and Conn algorithm performs extremely well for our quantile
+spline applications.
+<P>
+<BR> <HR><A NAME="tex2html26" HREF="node3.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://www.econ.uiuc.edu/icons/next_motif.gif"></A>   <A NAME="tex2html24" HREF="acmtom.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://www.econ.uiuc.edu/icons/up_motif.gif"></A>   <A NAME="tex2html18" HREF="node1.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://www.econ.uiuc.edu/icons/previous_motif.gif"></A>         <BR>
+<B> Next:</B> <A NAME="tex2html27" HREF="node3.html">References</A>
+<B>Up:</B> <A NAME="tex2html25" HREF="acmtom.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html19" HREF="node1.html">Introduction</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Roger Koenker <BR>
+Wed Nov 29 11:55:09 CST 1995</I>
+</ADDRESS>
+</BODY>
+</HTML>

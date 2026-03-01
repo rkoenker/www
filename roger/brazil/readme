@@ -1,0 +1,22 @@
+This directory/diskette contains postscript files for possible 
+distribution for a short course on Quantile Regression prepared
+for the 5th School on Regression Models, to be held February 26-28
+in Campos dos Jordao, SP, Brazil.  They consist of the following
+
+readme		This file
+title2.ps	Title page for the monograph file
+book.ps		Chapters 1-3 of a monograph-in-progress
+s3.ps		Manuscript of a paper on ranktests
+haretort.ps	Manuscript of a paper on Computation
+
+
+I will probably not have time to say much about either of the two papers,
+and therefore it is not essential that they be distributed for the conference,
+but I would like to present the computation paper in the seminars
+which have been arranged in conjunction with the conference,
+so I thought that I would include it.  The survey paper includes some
+related material, particularly on time-series which I thought might be
+a useful supplement to the monograph material.
+
+
+Roger Koenker

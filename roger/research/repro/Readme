@@ -1,0 +1,11 @@
+usage of svn for repro project with Achim.
+login:  rkoenker
+password: onegin
+
+svn checkout svn://svn-statmath.wu-wien.ac.at/repro .
+
+svn up
+svn add
+svn commit
+svn rename
+svn log

@@ -1,0 +1,34 @@
+\batchmode
+
+\documentstyle[11pt]{article}
+\makeatletter
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{230mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\evensidemargin}{-10mm}
+\setlength{\topmargin}{0mm}
+
+
+
+\pagestyle{empty}
+
+\renewcommand {\baselinestretch}{1}
+
+\newcommand {\REF}{\nopagebreak\noindent{\large{\bf
+      References}}\vspace{.2in}}
+
+\makeatother
+\newenvironment{tex2html_wrap}{}{}
+\newwrite\lthtmlwrite
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newbox\sizebox
+\begin{document}
+\pagestyle{empty}
+{\newpage
+\clearpage
+\samepage \setbox\sizebox=\hbox{$\qquad$}\lthtmltypeout{latex2htmlSize :tex2html_wrap_inline61: \the\ht\sizebox::\the\dp\sizebox.}\box\sizebox
+}
+
+\stepcounter{section}
+
+\end{document}

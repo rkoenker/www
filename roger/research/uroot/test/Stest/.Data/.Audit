@@ -1,0 +1,183 @@
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Thu Jul 17 13:26:15 2003
+#~
+library(rq)
+#~
+rq
+#~
+rq.fit.br
+#~
+source("uroot.s")
+#~
+source("HK.s")
+#~interrupt
+#~interrupt
+#~interrupt
+#~
+traceback()
+#~
+source("uroot.s")
+#~error: statement with syntax error
+#~error: Problem in parse(n = n, file = file): Syntax error: illegal name ("np") on input line 43, file "uroot.s
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~interrupt
+#~
+#~
+source("uroot.s")
+#~
+source("HK.s")
+#~interrupt
+#~interrupt
+#~interrupt
+#~error: Problem: Object "y" not foun
+#~
+x
+#~error: Problem: Object "x" not foun
+#~
+y <- NP.data[[1]]
+#~
+y
+#~
+uroot.test(log(y), 1, 2, score = "sign")
+#~interrupt
+#~interrupt
+#~
+yy <- rnorm(40)
+#~
+xx <- matrix(rnorm(80), 40)
+#~
+rq(yy ~ xx)
+#~
+rq(yy ~ xx, tau = -1)
+#~
+q()
+#~End session: Time: 1058473342; Process: 22473
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Thu Jul 17 15:24:25 2003
+#~
+y
+#~
+library(rq)
+#~
+uroot.test(log(y), 1, 2, "wilcoxon")
+#~error: Problem in rep.int: rep() only defined for length(times)==1 or length(x): rep.int(1:xlen, times
+#~
+uroot.test
+#~
+uroot.test(log(x), 1, 2, score = "silcoxon")
+#~error: Problem: Object "x" not foun
+#~
+uroot.test(log(y), 1, 2, score = "wilcoxon")
+#~
+y
+#~
+make.adf.model(log(y), 1)
+#~
+make.adf.model
+#~
+make.adf.model(y, 1)
+#~
+make.adf.model(log(y), 1)
+#~
+uroot.test(log(y), 1, 4)
+#~
+HK.test
+#~
+fix(uroot.test)
+#~
+q()
+#~End session: Time: 1058475958; Process: 23811
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Thu Jul 17 16:06:53 2003
+#~
+fix(uroot.test)
+#~
+uroot.test(log(y), 1, 2)
+#~error: Problem in uroot.test(log(y), 1, 2): Couldn't find a function definition for "rq
+#~
+library(rq)
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~
+uroot.test(log(y), 1, 2)
+#~error: Problem in uroot.test(log(y), 1, 2): Object "fit" not foun
+#~error: statement with syntax error
+#~error: Problem in parse(prompt = prompt, n = 1): Syntax error: illegal unknown expression ("\033") on input line 
+#~error: statement with syntax error
+#~error: Problem in parse(prompt = prompt, n = 1): Syntax error: illegal unknown expression ("\033") on input line 
+#~
+uroot.test(log(y), 1, 2, trend = F)
+#~error: Problem in rep.int: rep() only defined for length(times)==1 or length(x): rep.int(1:xlen, times
+#~
+HK.test
+#~
+uroot.test(log(y), 1, 2)
+#~
+fix(uroot.nuisance)
+#~
+uroot.test(log(y), 1, 2)
+#~error: Problem in uroot.nuisance(x0, dy, l, res, trend, sco..: Object "wt" not foun
+#~
+uroot.test(log(y), 1, 2, score = "normal")
+#~
+uroot.test(log(y), 1, 2, score = "sign")
+#~
+q()
+#~End session: Time: 1058481832; Process: 24310
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Fri Jul 18 14:10:19 2003
+#~
+ls()
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~
+uroot.test
+#~
+y
+#~
+uroot.test(log(y), 1, 4, trend = F)
+#~error: Problem in uroot.test(log(y), 1, 4, trend = F): Couldn't find a function definition for "rq
+#~
+library(rq)
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~
+uroot.test(log(y), 1, 4, trend = F)
+#~error: Problem in rep.int: rep() only defined for length(times)==1 or length(x): rep.int(1:xlen, times
+#~
+traceback()
+#~
+fix(uroot.nuisance)
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~
+if(is.matrix(x)) n <- nrow(x)
+#~error: Problem: Object "x" not foun
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal name ("n") on input line 
+#~
+uroot.test(log(y), 1, 4, trend = F)
+#~error: statement with syntax error
+#~error: Problem in parse(prompt = prompt, n = 1): Syntax error: illegal literal (".2") on input line 
+#~error: statement with syntax error
+#~error: Problem in parse(prompt = prompt, n = 1): Syntax error: illegal unknown expression ("\033") on input line 
+#~
+fix(uroot.test)
+#~
+#~error: statement with syntax error
+#~error: Problem: Syntax error: illegal unknown expression ("\033") on input line 
+#~interrupt
+#~
+c
+#~
+history()
+#~
+uroot.test(log(y), 1, 4, trend = F, score = "normal")
+#~
+uroot.test(log(y), 1, 4, trend = F, score = "sign")
+#~
+q()
+#~End session: Time: 1058790052; Process: 877

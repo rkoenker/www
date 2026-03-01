@@ -1,0 +1,57 @@
+\documentclass[12pt]{amsart}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\usepackage{latexsym}
+\usepackage{harvard}
+\usepackage{lscape}
+\usepackage{graphics}
+\usepackage{dsfont}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{alltt}
+\font\TenCyr=wncyr10
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\textwidth}{135mm}
+\setlength{\textheight}{205mm}
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{10mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textwidth}{6in}
+\setlength{\marginparwidth}{20mm}
+\DeclareMathAlphabet{\mathsi}{OT1}{cmss}{m}{sl}
+%\renewcommand{\abstractname}{}
+\makeatletter
+%\renewcommand{\section}{\@startsection{section}{1}{0em}{1.5\baselineskip}%
+%    {0em}{\centering\sffamily\normalsize\bfseries}}
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+    {-0.5\baselineskip}{0.01\baselineskip}
+%    {\centering\sffamily\normalsize\slshape}}
+     {\centering\normalsize\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+    {-0.5\baselineskip}{0.01\baselineskip}
+%    {\sffamily\normalsize\slshape}}
+     {\normalsize\bfseries}}
+\makeatother
+\renewenvironment{proof}{\noindent {\bf Proof.\ }}{\hfill{ \rule{2mm}{2mm}}}
+\newtheorem{ass}{Assumption}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\def\sT{\scriptscriptstyle T}
+%\def\RR{\hbox{\raise.4ex\hbox{$\scriptstyle{|}$}\hskip-1.85pt R}}
+\def\RR{\mathds{R}}
+\def\GG{\mathcal{G}}
+\def\VV{\mathcal{V}}
+\newcommand{\Trace}{\mbox{Trace}}
+\newcommand{\dint}{\,d}
+\newcommand{\grad}{\,\nabla\!}
+\newcommand{\hess}{\,\nabla^2\!}
+\newcommand{\ltwonorm}{|| \cdot ||_2}
+\newcommand{\lonenorm}{|| \cdot ||_1}
+\newcommand{\trans}{^{\scriptscriptstyle\mathsi{T}\unskip}}
+\newcommand{\Jureckova}{Jure\v{c}kov\'{a} }
+\newcommand{\Hajek}{H\'{a}jek }
+\newcommand{\Hardle}{H\"{a}rdle }
+\newcommand{\Sidak}{\v{S}id\'{a}k }

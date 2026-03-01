@@ -1,0 +1,337 @@
+<HTML><HEAD><TITLE>Pine Technical Notes: Command Line Arguments</TITLE></HEAD><BODY>
+<H1>Command Line Arguments</H1>
+
+<H2><A NAME="pine">Pine</A></H2>
+  
+Pine and PC-Pine can accept quite a few command-line arguments.  Many of
+these arguments overlap with variables in the Pine configuration file.  If
+there is a difference, then a flag set in the command line takes
+precedence.  Both Pine and PC-Pine expect command line arguments to be
+preceded by the "-" (dash) as normally used by UNIX programs.  <P>
+
+<DL COMPACT>
+
+<DT> <EM>[address]</EM>
+
+<DD> Send-to:  If you put an unqualified string (or strings) in the
+command line, Pine reads them as email addresses.  Pine will startup in
+the composer with a message started to the person/people specified.  Once
+the message is sent, the Pine session closes.  <P>
+
+<DT> &LT; <EM>file</EM>
+
+<DD> Pine will startup in the composer with <EM>file</EM> read into the
+body of the message.  Once the message is sent, the Pine session closes. 
+<P>
+
+<DT> -a
+
+<DD> Special anonymous mode for UWIN*.  <P>
+
+<DT> -c <EM>n</EM>
+
+<DD> When used with the <CODE>-f</CODE> option, apply the <EM>n</EM>th 
+context.  This is used when there are multiple folder collections and you 
+want to open a folder not in the primary collection. <P>
+
+<DT> -conf
+
+<DD> Configuration:  Prints a sample system configuration file to the
+screen or standard output.  To generate an initial system configuration 
+file, execute
+
+<PRE><CODE>
+		pine -conf > /usr/local/lib/pine.conf
+</CODE></PRE>
+<P>
+
+To generate a system configuration file using settings from an old
+system configuration file, execute
+
+<PRE><CODE>
+		pine -P old-pine.conf -conf > /usr/local/lib/pine.conf
+</CODE></PRE>
+<P>
+
+<DT> -create_lu <EM>addrbook sort-order</EM>
+
+<DD> Create auxiliary index (LookUp) file for <EM>addrbook</EM> and sort
+<EM>addrbook</EM> in <EM>sort-order,</EM> which may be <EM>dont-sort</EM>,
+<EM>nickname</EM>, <EM>fullname</EM>, <EM>nickname-with-lists-last</EM>,
+or <EM>fullname-with-lists-last</EM>.  Only useful when creating global or
+shared address books.  <P>
+
+<DT> -d <EM>debug-level</EM>
+
+<DD> Debug Level:  Sets the level of debugging information written by
+Pine.  <EM>debug-level</EM> can be set to any integer 0-9.  A debug level
+of 0 turns off debugging for the session.  (Actually there are some levels
+higher than 9, now, but you probably don't want to see them.) <P>
+
+<DT> -f <EM>folder</EM>
+
+<DD> Startup folder:  Pine will open this folder in place of the standard
+INBOX.  <P>
+
+<DT> -F <EM>file</EM>
+
+<DD> Open named text file and view with Pine's browser.  <P>
+
+<DT> -h
+
+<DD> Help:  Prints the list of available command-line arguments to the
+screen.  <P>
+
+<DT> -i
+
+<DD> Pine will start up in the FOLDER INDEX screen instead of the MAIN
+MENU.  <P>
+
+Configuration equivalent:  <EM>initial-keystroke-list=i</EM> <P>
+
+<DT> -I <EM>a,b,c,...</EM>
+
+<DD> Initial Keystrokes:  Pine will execute this comma-separated sequence
+of commands upon startup.  This allows users to get Pine to start in any
+of its menus/screens.  You cannot include any input to the composer in the
+initial keystrokes.  The key &lt;Return&gt; is represented by a ``CR'' in
+the keystroke list; the spacebar is designated by the letters ``SPACE''.
+Control keys are two character sequences beginning with ``^'', such as
+``^I''. A tab character is ``TAB''. Function keys are ``F1'' - ``F12'' and
+the arrow keys are ``UP'', ``DOWN'', ``LEFT'', and ``RIGHT''. <P>
+
+Configuration equivalent:  <EM>initial-keystroke-list</EM> <P>
+
+<DT> -k
+
+<DD> Function-Key Mode:  When invoked in this way, Pine expects the input
+of commands to be function-keys.  Otherwise, commands are linked to the
+regular character keys. <I>This option supported only in conjunction with
+UW Enhanced NCSA telnet.</I> <P>
+
+Configuration equivalent:  <EM>use-function-keys</EM> included in
+<EM>feature-list</EM>.  <P>
+
+<DT> -l
+
+<DD> Folder-List:  With "-l" set, Pine will default to an expanded folder
+list.  This means that the FOLDER LIST screen will always show all folders
+in all collections.  Default is to show the folders in the current
+collection only.  <P>
+
+Configuration equivalent:  <EM>expanded-view-of-folders</EM> in
+<EM>feature-list</EM>.  <P>
+
+<DT> -n <EM>n</EM>
+
+<DD> Message-Number:  When specified, Pine starts up in the FOLDER INDEX
+screen with the current message being the designated message number.  <P>
+
+<DT> -nr
+
+<DD> Special mode for UWIN*.  <P>
+
+<DT> -o <EM>folder</EM>
+
+<DD> Opens the INBOX (or a folder specified via the -f argument) ReadOnly. 
+<P>
+
+<DT> -p <EM>file</EM>
+
+<DD> Uses the named file as the personal configuration file instead of
+<EM>~/.pinerc</EM> or the default PINERC search sequence PC-Pine uses.  
+<P>
+
+<DT> -P <EM>file</EM>
+
+<DD> Uses the named file as the system wide configuration file instead of
+<EM>/usr/local/lib/pine.conf</EM>.  <I>UNIX Pine only.</I>  <P>
+
+<DT> -pinerc <EM>file</EM>
+
+<DD> Output fresh pinerc configuration to <EM>file,</EM> preserving the
+settings of variables that the user has made.  Use <EM>file</EM> set to
+``-'' to make output go to standard out.  <P>
+
+<DT> -r
+
+<DD> Restricted Mode:  For UNIX Pine only.  Pine in restricted mode can
+only send email to itself.  Save and export are limited.  <P>
+
+<DT> -sort <EM>key</EM>
+
+<DD> Sort-Key:  Specifies the order messages will be displayed in for the
+FOLDER INDEX screen.  <EM>Key</EM> can have the following values: 
+subject, arrival, date, from, size, orderedsubj, subject/reverse,
+arrival/reverse, date/reverse, from/reverse, size/reverse,
+orderedsubj/reverse.  The default value is "arrival". The <EM>key</EM>
+value reverse is equivalent to arrival/reverse.  This option will be
+expanded in the future to allow sorting on "to" and "cc". <P>
+
+Configuration equivalent:  <EM>sort-key</EM>.  <P>
+
+<DT> -z
+
+<DD> Enable Suspend:  When run with this flag, the key sequence ctrl-z
+will suspend the Pine session.  <P>
+
+Configuration equivalent:  <EM>enable-suspend</EM> included in
+<EM>feature-list</EM>.  <P>
+
+<DT> -<EM>option</EM>=<EM>value</EM>
+
+<DD> Assign <EM>value</EM> to the config option <EM>option.</EM> For
+example, <EM>-signature-file=sig1</EM> or
+<EM>-feature-list=signature-at-bottom</EM> (Note:  feature-list values are
+additive).  <P>
+
+</DL> <P>
+
+* UWIN = University of Washington Information Navigator <P>
+
+<H2><A NAME="pico">Pico</A></H2>
+
+The following command line options are supported in Pico:
+
+<DL>
+
+<DT> +<EM>n</EM>
+
+<DD> Causes <EM>pico</EM> to be started with the cursor located <EM>n</EM>
+lines into the file. (Note: no space between "+" sign and number) <P>
+
+<DT> -d
+
+<DD> Rebind the "delete" key so the character the cursor is on is rubbed
+out rather than the character to its left.  <P>
+
+<DT> -e
+
+<DD>Enable file name completion. <P>
+
+<DT> -f
+
+<DD> Use function keys for commands.  <I>This option supported only in
+conjunction with UW Enhanced NCSA telnet.</I> <P>
+
+<DT> -g
+
+<DD> Enable "Show Cursor" mode in file browser.  Cause cursor to be
+positioned before the current selection rather than placed at the lower
+left of the display. <P>
+
+<DT> -k
+
+<DD>Causes "Cut Text" command to remove characters from the cursor
+position to the end of the line rather than remove the entire line. <P>
+
+<DT> -m
+
+<DD> Enable mouse functionality.  This only works when <EM>pico</EM> is
+run from within an X Window System "xterm" window. <P>
+
+<DT>-n<EM>n</EM>
+
+<DD> The -n<EM>n</EM> option enables new mail notification.  The
+<EM>n</EM> argument is optional, and specifies how often, in seconds, your
+mailbox is checked for new mail.  For example, -n60 causes <EM>pico</EM>
+to check for new mail once every minute.  The default interval is 180
+seconds, while the minimum allowed is 30. (Note: no space between "n" and
+the number) <P>
+
+<DT> -o <EM>dir</EM>
+
+<DD> Sets operating directory.  Only files within this directory are
+accessible.  Likewise, the file browser is limited to the specified
+directory subtree. <P>
+
+<DT> -r<EM>n</EM>
+
+<DD> Sets column used to limit the "Justify" command's right margin. <P>
+
+<DT> -t
+
+<DD> Enable "tool" mode.  Intended for when <EM>pico</EM> is used as the
+editor within other tools (e.g., Elm, Pnews).  <EM>Pico</EM> will not
+prompt for save on exit, and will not rename the buffer during the "Write
+Out" command. <P>
+
+<DT> -v
+
+<DD> View the file only, disallowing any editing. <P>
+
+<DT> -w
+
+<DD> Disable word wrap (thus allow editing of long lines).  <P>
+
+<I>Note: Pico will break any lines over 255 characters when reading a
+file, regardless of word wrapping.</I> <P>
+
+<DT> -x
+
+<DD> Disable keymenu at the bottom of the screen. <P>
+
+<DT> -z
+
+<DD> Enable ^Z suspension of <EM>pico</EM>. <P>
+
+</DL>
+
+<H2><A NAME="pilot">Pilot</A></H2>
+
+The following command line options are supported in Pilot:
+
+<DL>
+
+<DT> -a
+
+<DD> Display all files including those beginning with a period (.). <P>
+
+<DT> -f
+
+<DD> Use function keys for commands.  <I>This option supported only in
+conjunction with UW Enhanced NCSA telnet.</I> <P>
+
+<DT> -g
+
+<DD> Enable "Show Cursor" mode.  Cause cursor to be positioned before the
+current selection rather than placed at the lower left of the display. <P>
+
+<DT> -m
+
+<DD> Enable mouse functionality.  This only works when <EM>pilot</EM> is
+run from within an X Window System "xterm" window. <P>
+
+<DT> -n<EM>n</EM>
+
+<DD> The -n<EM>n</EM> option enables new mail notification.  The
+<EM>n</EM> argument is optional, and specifies how often, in seconds, your
+mailbox is checked for new mail.  For example, -n60 causes <EM>pilot</EM>
+to check for new mail once every minute.  The default interval is 180
+seconds, while the minimum allowed is 30. (Note: no space between "n" and
+the number) <P>
+
+<DT> -o <EM>dir</EM>
+
+<DD>Sets operating directory.  Only files within the specified directory
+are accessible and browsing is limited to the specified directory subtree.
+<P>
+
+<DT> -v
+
+<DD> Enable single vertical column display. <P>
+
+<DT> -x
+
+<DD> Disable keymenu at the bottom of the screen. <P>
+
+<DT> -z
+
+<DD> Enable ^Z suspension of <EM>pilot</EM>.
+
+</DL>
+
+<!-- pnuts -->
+
+</BODY>
+</HTML>

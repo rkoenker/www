@@ -1,0 +1,521 @@
+<HTML><HEAD><TITLE>Pine Technical Notes: Notes on Configuration and 
+Preferences</TITLE></HEAD><BODY>
+<H1>Notes on Configuration and Preferences</H1>
+
+<H2><A NAME="fkey">Pine in Function Key Mode</A></H2>
+
+The standard Pine uses alphabetic keys for most commands, and control keys
+in the composer.  Despite possible appearances, the current bindings are
+the result of much discussion and thought.  All the commands in the
+composer are single control characters.  This keeps things very neat and
+simple for users.  Two character commands in the composer are a
+possibility, but we're trying to avoid them because of the added
+complexity for the user.  <P>
+
+Pine can also operate in a function-key mode.  To go into this mode invoke
+<EM>pine -k</EM> or (on some UNIX systems) <EM>pinef.</EM> On a UNIX
+system, you can link or copy the <EM>pine</EM> executable to
+<EM>pinef</EM> to install <EM>pinef.</EM> Alternatively, users and systems
+administrators can set the <EM>use-function-keys</EM> feature in the
+personal or system-wide Pine configuration file.  The command menus at the
+bottom of the screen will show <EM>F1-F12 </EM>instead of the alphabetic
+commands.  In addition, the help screens will be written in terms of
+function keys and not alphabetic keys.  <P>
+
+One of the results of using Pine in function-key mode is that users can
+only choose from twelve commands at any given time.  In alphabetic-key
+mode, a user can press a key for a command (say, q to quit) and that
+command can be fulfilled.  In function-key mode, the command must be
+visible on the bottom key-menu in order to be used.  There are some
+screens where 34 commands are operational; function-key users can get to
+all of them, just not all at once.  <P>
+
+<HR>
+
+<H2><A NAME="domain">Domain Settings</A></H2>
+
+Pine uses the default domain for a few different tasks.  First, it is
+tacked onto the user-id for outgoing email.  Second, it is tacked onto all
+"local" (unqualified) addresses in the "To:" or "Cc:" fields of messages
+being composed (unless they are found in the address book).  The domain
+name is also used to generate message-id lines for each outgoing message
+and to allow Pine to check if an address is that of the current Pine user. 
+<P>
+
+Pine determines the domain name according to whichever of these it finds. 
+The list here is in decreasing order of precedence. 
+
+<OL>
+
+<LI> Value of the variable <EM>user-domain</EM> in the system fixed
+configuration file
+
+<LI> Value of the variable <EM>user-domain</EM> in the personal
+configuration file
+
+<LI> Value of the variable <EM>user-domain</EM> is the system-wide
+configuration file
+
+<LI> Value from an external database (DNS, <EM>/etc/hosts</EM>, NIS)  as
+modified by a system fixed configuration file if
+<EM>use-domain-name-only</EM> set to "yes"
+
+<LI> Value from an external database (DNS, <EM>/etc/hosts</EM>, NIS)  as
+modified by a personal configuration file if <EM>use-domain-name-only</EM>
+set to "yes"
+
+<LI> Value from an external database (DNS, <EM>/etc/hosts</EM>, NIS)  as
+modified by a system configuration file if <EM>use-domain-name-only</EM>
+set to "yes"
+
+<LI> Unmodified value (host name) from an external database <P>
+
+</OL>
+
+<P> The easiest way for this system to work is for PC-Pine users and UNIX
+Pine system administrators to set the <EM>user-domain</EM> variable.  The
+variable <EM>use-only-domain-name</EM> is helpful if your site
+supports/requires hostless addressing, but for some reason you don't want
+to use the <EM>user-domain</EM> variable.  <P> 
+
+A new feature in 3.90 is called
+<EM>user-lookup-even-if-domain-mismatch</EM>.  This will cause the
+personal name field to be looked up from the password file even if the
+domain of an address isn't a substring of the local host name.  See the
+online help in the Setup/Config screen for full information.  <P> 
+
+<HR>
+
+<H2><A NAME="collections">Syntax for Collections</A></H2>
+
+In many environments, it is quite common to have collections of archived
+mail on various hosts around the network.  Using the folder collections
+facility in Pine, access to these archives is just as simple as access to
+folders on Pine's local disk.  <P>
+
+"Collection" is the word we use in Pine to describe a set of folders.  A
+collection corresponds loosely to a "directory" containing mail folders. 
+Folders within a defined collection can be manipulated (opened, saved-to,
+etc) using just their simple name.  Any number of folder collections can
+be defined, and pine will adjust its menus and prompts to help navigate
+them.  <P>
+
+The way collections are defined in Pine is with the
+<EM>folder-collections</EM> variable in the Pine configuration file. 
+<EM>Folder-collections</EM> takes a list of one or more collections, each
+(optionally) preceded by a user-defined logical name (label).  Once
+collections are defined, Pine adjusts its menus and behavior to allow
+choosing files by their simple name within the collection.  Collections
+are always defined in the configuration file;  there is no time that Pine
+will ever ask a question which requires a user to input a collection
+specifier.  This might change in the future if/when the Goto command is
+extended to allow jumping to a collection/directory as well as an
+individual folder.  <P>
+
+Consider the following: 
+
+<PRE>
+   folder-collections=	Local-Mail	C:\MAIL\[],
+			Remote-Mail	{imap.u.example.edu}mail/[]
+</PRE>
+<P>
+
+The example shows two collections defined (a comma separated list;
+newlines in the list are OK if there's one or more spaces before the next
+entry), one local and one remote.  Each collection is a space-delimited
+pair of elements-first an optional logical-name and second the collection
+specifier.  The logical-name can have spaces if it has quotes around it
+(but keeping the logical name short and descriptive works best).  Pine
+will use the logical-name (if provided) to reference all folders in the
+collection, so the user never has to see the ugliness of the collection
+specifier.  <P>
+
+The collection specifier can be thought of as an extended IMAP format (see
+the "Remote Folders" section for a description of IMAP format names). 
+Basically, a pair of square-brackets are placed in the fully qualified
+IMAP path where the simple folder name (the part without the host name and
+path) would appear.  Like IMAP, the path can be either fully qualified
+(i.e., with a leading '/') or relative to your home directory.  <P>
+
+An advanced feature of this notation is that a pattern within the square
+brackets allows the user to define a collection to be a subset of a
+directory.  For example, a collection defined with the specifier: 
+
+<PRE>
+	M-Mail		C:MAIL/[m*]<BR>
+</PRE>
+
+will provide a view in the folder lister of all folders in the PC's
+"C:MAIL" directory that start with the letter 'm' (case insensitive under
+DOS, of course).  Further, the wildcard matching will honor characters
+trailing the '*' in the pattern.  <P>
+
+From within Pine, the FOLDER LIST display will be adjusted to allow
+browsing of the folders in any defined collection.  Even more, you'll
+notice in the Goto and Save commands a pair of sub-commands to rotate
+through the list of logical collection names, so only a simple name need
+be input in order to operate on a folder in any collection.  <P>
+
+The first collection specified in the <EM>folder-collections</EM> has
+special significance.  That folder is the "default collection for saves". 
+In cases where the user does not specify which collection should be used
+to save a message, the default collection for saves will be used.  Also,
+if the <EM>default-fcc</EM> is a relative file name, then it is relative
+to the default collection for saves.  <P>
+
+The notion of collections encompasses both email folders and news reading. 
+The variable <EM>news-collections</EM> uses nearly the same format as
+<EM>folder-collections</EM>.  Newsgroups can be defined for convenient
+access via either IMAP or NNTP.  There are advantages and disadvantages to
+both access methods.  In the IMAP case, your news environment state is
+maintained on the server and, thus, will be seen by any client.  The
+downside is that, at the moment, you must have an account on the server. 
+In the NNTP case, server access is mostly anonymous and no
+state/accounting need be maintained on it.  The downside is that each
+client, for now, must individually maintain news environment state.  <P>
+
+An example pinerc entry might be: 
+
+<PRE>
+     news-collections=	Remote-State	*{news.u.example.edu}[],
+			Local-State	*{news.u.example.edu/nntp}[]
+</PRE>
+
+Note that each news collection must be preceded by a '*' to indicate
+non-mail access.  Only newsgroups to which you are subscribed are included
+in the collection.  <P>
+
+The pattern matching facility can be applied so as to define a news 
+collection which is a subset of all the newsgroups you subscribe to.  For 
+example, this could be a valid collection: 
+
+<PRE>
+			Newsfeed-News	*{news.u.example.edu/nntp}[clari.*]
+</PRE>
+<P>
+
+Collection handling is a tough problem to solve in a general way, and the
+explanation of the syntax is a bit ugly.  The upside is, hopefully, that
+for a little complexity in the Pine configuration file you get simple
+management of multiple folders in diverse locations.  <P>
+
+<HR>
+
+<H2><A NAME="remote-folders">Syntax for Remote Folders</A></H2>
+
+Remote folders are distinguished from local folders by a leading host name
+bracketed by '{' and '}'.  The path and folder name immediately following
+the closing bracket, '}', is interpreted by the IMAP server and is in a
+form compatible with that server (i.e., path delimiters and naming syntax
+relative to that server).  <P>
+
+Typically, a folder name without any path description is understood to
+reside in the user's "home directory" (i.e., in some way the user's
+personal, writable file area), as are incomplete path designations. 
+However, the IMAP specification does not require that unqualified folder
+names live in one's home directory, so some IMAP servers may require fully
+qualified names. An example of a remote folder specification would be,
+
+<PRE>
+	{mailhost.cac.washington.edu}mail/saved-messages
+</PRE>
+
+This example simply specifies a folder named ``saved-messages'' on the
+imap server ``mailhost.cac.washington.edu'', in the ``mail'' subdirectory
+of the user's home directory.  Easy isn't it?  <P>
+
+To confuse things a bit, qualifiers are permitted within the brackets
+following the host name.  These qualifiers consist of a slash, '/'
+character followed by a keyword or keyword and value equality, and have
+the effect of modifying how the connection is made to the host specified. 
+An example of such a specification might be,
+
+<PRE>
+	*{pine.cac.washington.edu/anonymous}updates
+</PRE>
+
+Another example might be, 
+
+<PRE>
+	*{news.u.washington.edu/nntp}comp.mail.mime
+</PRE>
+<P>
+
+Both of these examples illustrate a different qualifier.  The first,
+specifying ``anonymous'' access to the IMAP server on
+``pine.cac.washington.edu''.  The second is interesting in that it
+specifies an altogether different access method:  access via the Network
+News Transport Protocol (NNTP).  Both examples bring to light one
+remaining subtlety.  The leading ``*'' tells pine to treat the remote
+folder as a Bulletin-Board (i.e., typically a shared, read-only resource)
+and to adjusts its behavior accordingly.  <P> 
+
+<HR>
+
+<H2><A NAME="sorting">Sorting a Folder</A></H2>
+
+The mail index may be sorted by subject, size, sender, date, or arrival
+order.  Each sort order can also be reversed.  The <EM>$</EM> command will
+prompt the user for the sort order.  The sort order can also be specified
+on the command line with the <EM>-sort</EM> flag or (equivalently) with
+the <EM>sort-key</EM> variable in the <EM>.pinerc</EM> file.  When a user
+changes folders, the sort order will go back to the original sort order. 
+The command line (<EM>-sort</EM>) or configuration file sort specification
+(<EM>sort-key</EM>) changes the original sort order.  <P>
+
+When a folder is sorted and new mail arrives in the folder it will be
+inserted in its properly sorted place.  This can be a little odd when the
+folder is sorted by something like the subject.  It can also be a little
+slow if you are viewing a large, sorted INBOX, since the INBOX will have
+to be re-sorted whenever new mail arrives.  <P>
+
+The sorts are all independent of case and ignore leading or trailing white
+space.  There are actually two forms of subject sort.  One called
+"Subject" and the other called "OrderedSubj".  They both ignore "Re:" at
+the beginning and "(fwd)" at the end of the subjects.  Subject sorts all
+the subjects alphabetically.  OrderedSubj sorts by subjects
+alphabetically, groups messages with the same subject (pseudo-threads),
+then sorts the groups by the date of the first message of the group.  The
+sort by sender sorts by the userid, not the full name.  The arrival sort
+is basically no sort at all and the date sort depends on the format of the
+date.  Some dates are in strange formats and are unparsable.  The time
+zone is also taken into account.  <P>
+
+Sorting large mail folders can be very slow since it requires fetching all
+the headers of the mail messages.  With UNIX Pine, only the first sort is
+slow since Pine keeps a copy of all the headers.  One exception is sorting
+in reverse arrival order.  This is fast because no headers have to be
+examined.  Pine will show progress as it is sorting.  <P>
+
+<HR>
+
+<H2><A NAME="alt-ed">Alternate Editor</A></H2>
+
+In the Pine composer you can use any text editor, such as <EM>vi</EM> or
+<EM>emacs,</EM> for composing the message text.  The addresses and subject
+still must be edited using the standard Pine composer.  If you include the
+feature <EM>enable-alternate-editor-cmd</EM> in your <EM>.pinerc</EM> you
+can type <EM>^_</EM> while in the body of the message in the composer and
+be prompted for the editor.  If you also set the <EM>editor</EM> variable
+in your <EM>.pinerc</EM> then <EM>^_</EM> will invoke the configured
+editor when you type it.  <P>
+
+Turning on the feature <EM>enable-alternate-editor-implicitly</EM> will
+automatically invoke the editor you have defined with the <EM>editor</EM>
+variable whenever you enter the body of a message you are composing.  For
+example, when you move out of the last header line and into the body of
+the message, the alternate editor will be automatically invoked.  <P>
+
+We know that many people would like to use the alternate editor to edit
+the mail header as well.  We considered several designs for this and
+didn't come up with one that we liked and that was easy to implement.  One
+of the main problems is that you lose access to the address book.  <P>
+
+<HR>
+
+<H2><A NAME="signature">Signatures and Signature Placement</A></H2>
+
+If the file <EM>~/.signature</EM> (UNIX) or
+<EM>&lt;PINERC</EM>directory&gt;\PINE.SIG (PC) exists, it will be included
+in all outgoing messages.  It is included before composition starts so
+that the user has a chance to edit it out if he or she likes.  The file
+name for the signature can be changed by setting the
+<EM>signature-file</EM> variable in the <EM>.pinerc.</EM> There is no way
+to have Pine include different signatures in different outgoing messages
+automatically.  You can do this by hand, however, by having multiple
+signature files (<EM>.sig1, .sig2, .sig3, etc</EM>) and choosing to
+include (^R in the composer) the correct one for the message being sent. 
+<P>
+
+Pine's default behavior encourages a user to put his or her contribution
+before the inclusion of the original text of the message being forwarded
+or replied to, This is contrary to some conventions, but makes the
+conversation more readable when a long original message is included in a
+reply for context.  The reader doesn't have to scroll through the original
+text that he or she has probably already seen to find the new text.  If
+the reader wishes to see the old message(s), the reader can scroll further
+into the message.  Users who prefer to add their input at the end of a
+message should set the <EM>signature-at-bottom</EM> feature in the
+<EM>feature-list</EM>.  The signature will then be appended to the end of
+the message after any included text.  This feature applies when replying,
+not when forwarding.  <P>
+
+<HR>
+
+<H2><A NAME="feature-list">Feature List Variable</A></H2>
+
+Pine used to have <EM>feature levels</EM> for users with different amounts
+of experience.  We found that this was too restrictive.  Pine now has a
+<EM>feature-list</EM> instead.  Each user may pick and choose which
+features they would like enabled (simple to do in the Setup/Config
+screen).  There is a short on-line help explaining the effect of each of
+the features in the Setup/Config screen.  When the cursor is highlighting
+a feature, the "?" command will show the help text for that feature. 
+Features don't have values, they are just turned on or off.  They are all
+off by default.  <P>
+
+The <EM>feature-list</EM> variable is different from all other
+configuration variables in that its value is additive.  That is, the
+system-wide configuration file can have some features turned on by
+default.  The user can select other features in their personal
+configuration file and those features will be <STRONG>added</STRONG> to
+the set of features turned on in the system-wide configuration file. 
+(With all other configuration variables, the user's values
+<STRONG>replace</STRONG> the system-wide values.) Likewise, additional
+features may be set on the command-line with the argument
+"-feature-list=".  These will be added to the others.  <P>
+
+The treatment of <EM>feature-list</EM> in the system-wide <EM>fixed</EM>
+configuration file is also different from other variables.  The system
+management can fix the value of individual features by placing them in the
+fixed configuration file.  Users will not be able to alter those features,
+but will still be able to set the other non-restricted features the way
+they like.  <P>
+
+Because <EM>feature-list</EM> is additive, there is a way to turn features
+off as well as on.  Prepending the prefix "no-" to any feature sets it to
+off.  This is useful for over-riding the system-wide default in the
+personal configuration file or for over-riding the system-wide default or
+the personal configuration value on the command line.  For example, if the
+system-wide default configuration has the <EM>quit-without-confirm</EM>
+feature set, the user can over-ride that (and turn it off) by including
+<EM>no-quit-without-confirm</EM> in the personal configuration file or by
+giving the command line argument
+<EM>-feature-list=no-quit-without-confirm.</EM> More features (options)
+will no doubt continue to be added.  <P>
+
+<HR>
+
+<H2><A NAME="smtp-server">SMTP Servers</A></H2>
+
+It is sometimes desireable to set <CODE>smtp-server=localhost</CODE>
+instead of setting <EM>sendmail-path</EM> to overcome the inability to
+negotiate ESMTP options when <EM>sendmail</EM> is invoked with the
+<EM>-t</EM> option.  Sendmail can also be subject to unacceptable delays
+due to slow DNS lookups and other problems. <P>
+
+It is sometimes desireable to configure an SMTP server on a port other
+than the default port 25.  This may be used to provide an alternate
+service that is optimized for a particular environment or provides
+different features from the port 25 server.  An example would be a program
+that negotiates ESMTP options and queues a message, but does not attempt
+to deliver messages.  This would avoid delays frequently encountered when
+invoking <EM>sendmail</EM> directly. <P>
+
+A typical configuration would consist of
+
+<UL>
+
+<LI> A program that implements the SMTP or ESMTP protocol via stdio.
+
+<LI> An entry in <CODE>/etc/services</CODE> for the alternate service.
+
+<LI> An entry in <CODE>/etc/inetd.conf</CODE> for the alternate service.
+
+<LI> An entry in <CODE>/usr/local/lib/pine.conf</CODE>,
+<CODE>/usr/local/lib/pine.conf.fixed</CODE> or <CODE>~/.pinerc</CODE>. 
+
+</UL>
+
+<HR>
+
+<H2><A NAME="mime.types">MIME.Types file</A></H2>
+
+Pine's MIME-TYPE support is based on code contributed by Hans Drexler
+&LT;drexler@mpi.nl&GT;.  Pine assigns MIME Content-Types types according
+to file name extensions found in a system wide files
+<CODE>/usr/local/lib/mime.types</CODE> and <CODE>/etc/mime.types</CODE>,
+and a user specific <CODE>~/.mime.types</CODE> file.  <P>
+
+In DOS and OS/2, Pine looks in the same directory as the PINERC file and
+the same dir as PINE.EXE.  This is similar to the UNIX situation with
+personal config info coming before potentially shared config data.  An
+alternate search path can be specified by setting
+<CODE>mimetype-search-path</CODE> variable in the user or system-wide
+configuration or by setting the <CODE>MIMETYPES</CODE> environment
+variable. <P>
+
+These files specify file extensions that will be connected to a mime type. 
+Lines beginning with a '<CODE>#</CODE>' character are treated as comments
+and ignored.  All other lines are treated as a mime type definition.  The
+first word is a <EM>type/subtype</EM> specification.  All following words
+are file <EM>extensions</EM> belonging to that type/subtype. Words are
+separated by whitespace characters.  If a file extension occurs more than
+once, then the first definition determines the file type and subtype. <P>
+
+<HR>
+
+<H2><A NAME="pc-notes">Additional Notes on PC-Pine</A></H2>
+
+Below are a few odds and ends worth mentioning about PC-Pine.  They have
+to do with DOS-specific behavior that is either necessary or useful (and
+sometimes both!).  <P>
+
+As PC-Pine runs in an environment with limited access control, accounting
+or auditing, an additional line is automatically inserted into the header
+of mail messages generated by PC-Pine: 
+
+<PRE>
+	X-Sender: &lt;userid&gt;@&lt;imap.host&gt;<BR>
+</PRE>
+<P>
+
+By popular demand of system administrators, PC-Pine has been modified to
+prevent sending messages until the user has successfully logged into a
+remote mail server.  Even though PC-Pine cannot prevent users from
+changing the apparent identity of the sender of a message, the IMAP server
+login name host name included in the X-Sender line provide some level of
+traceability by the recipient.  However, this should not be considered a
+rigorous form of authentication.  It is extremely lightweight, and is not
+a replacement for true authentication.  <P>
+
+Hand in hand with authentication and accounting is user information. 
+Since PC-Pine has no user database to consult for <EM>user-id</EM>,
+<EM>personal-name</EM>, etc., necessary information must be provided by
+the user/installer before PC-Pine can properly construct the "From"
+address required for outbound messages.  PC-Pine will, by default, prompt
+for the requisite pieces as they are needed.  This information corresponds
+to the <EM>PINERC</EM> variables <EM>user-id</EM>, <EM>personal-name</EM>,
+<EM>user-domain</EM>, and <EM>smtp-server</EM>.  <P>
+
+The user is then asked whether or not this information should
+automatically be saved to the <EM>PINERC</EM>.  This is useful behavior in
+general, but can lead to problems in a lab or other shared environment. 
+Hence, these prompts and automatic saving of configuration can be turned
+off on an entry by entry basis by setting any of the above values in the
+<EM>PINERC</EM> to the null string (i.e., a pair of double quotes).  This
+means that the user will be prompted for the information once during each
+pine session, and no opportunity to save them in the <EM>PINERC</EM> will
+be offered.  <P>
+
+Along similar lines, a feature allowing automatic login to the imap-server
+containing the user's <EM>INBOX</EM> has also been requested.  This
+feature is not enabled by default, but requires the existence of the file
+named <EM>PINE.PWD</EM> in the same directory as the <EM>PINERC</EM>. 
+Even with the existence of this file, the user must still acknowledge a
+prompt before the password is saved to the file.  If PC-Pine is configured
+to access several different IMAP servers, each password entered will be
+kept (associated with the corresponding host name) in memory during the
+current session, and optionally, in the <EM>PINE.PWD</EM> file for use in
+subsequent sessions.  <P>
+
+<EM>WARNING</EM>!  Use this feature with caution!  It effectively makes
+the user's mail no more secure than the physical security of the machine
+running PC-Pine.  What's more, while the password is cloaked by a mild
+(some might say, feeble) encryption scheme, it is nonetheless sitting in a
+file on the PC's disk and subject to cracking by anyone with access to it. 
+<EM>BEWARE</EM>!  <P>
+
+Another feature of DOS is the lack of standard scratch area for temporary
+files.  During the course of a session, PC-Pine may require numerous
+temporary files (large message texts, various caches, etc.).  Where to
+create them can be a problem, particularly when running under certain
+network operating systems.  PC-Pine observes the <EM>TMP</EM> and
+<EM>TEMP</EM> environment variables, and creates temporary files in the
+directory specified by either.  In their absence, PC-Pine creates these
+files in the root of the current working drive.  <P>
+ 
+<!-- pnuts -->
+
+</BODY>
+</HTML>

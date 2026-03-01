@@ -1,0 +1,14 @@
+Notes on web stuff:
+
+1.  files in ~user/WWW  are visible.
+
+2.  index.html is the default place the browser looks if pointed to a directory
+
+3.  if there is no index.html then it provides a directory list, as for my
+lecture notes.
+
+4.  the default link for www.econ.uiuc.edu is the soft link index.html in 
+/services/www/htdocs that points to ~roger/WWW/home.html  this file has
+some broken gif links that should be fixed one fine day.
+
+5.  the econ dept website is www.economics.uiuc.edu

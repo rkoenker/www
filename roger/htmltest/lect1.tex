@@ -1,0 +1,160 @@
+
+\documentclass[12pt]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{sw20etpl}
+
+%TCIDATA{TCIstyle=book/book.lat,etpl,sw20etp}
+
+%TCIDATA{Created=Sat Aug 30 22:02:35 1997}
+%TCIDATA{LastRevised=Mon Sep 01 00:05:13 1997}
+
+%\input{tcilatex}
+\begin{document}
+
+
+\chapter{Review on Hypothesis Testing}
+
+\section{Some Important Concepts}
+
+\begin{description}
+\item[Null Hypothesis $\left( H_{0}\right) $]  A maintained hypothesis that
+is held to be true unless sufficient evidence to the contrary is presented.
+This maintained claim usually carries some form of \emph{significance} or 
+\emph{importance}.
+
+\item[Alternative Hypothesis $\left( H_{1}\right) $]  A hypothesis that is
+held to be true when the null hypothesis is rejected.
+
+\item[Simple Hypothesis]  A hypothesis that specifies a single value for a
+population parameter of interest.
+
+\item[Composite Hypothesis]  A hypothesis that specifices a range of values
+for a population parameter of interest.
+
+\item[One-sided Alternative]  An alternative hypothesis involving all
+possible values of a population parameter on either one side or the other of
+the value specified by a simple null hypothesis.
+
+\item[Two-sided Alternative]  An alternative hypothesis involving all
+possible values of a population parameter other than the value specified by
+a simple null hypothesis.
+
+\item[Type I Error]  The mistake of rejecting a true null hypothesis.
+
+\item[Type II Error]  The mistake of accepting a false null hypothesis.
+
+\item[Significance Level $\left( \alpha \right) $]  The probability of
+rejecting a true null hypothesis. This is usually kept at a lower value
+closer to zero.
+
+\item[Power $\left( 1-\beta \right) $]  The probability of rejecting a false
+null hypothesis. This is determined by both the chosen $\alpha $ level and
+the testing procedure.
+
+\item[$p$-value / probability value]  The smallest significance level at
+which a null hypothesis can be rejected. Alternative, one can think of it as
+the level of significance $\alpha $ when the evidence is used as a critical
+value.
+\end{description}
+
+\section{The 2x2 Decision Paradigm}
+
+\begin{center}
+\begin{tabular}{|ll|c|c|}
+\hline
+& \multicolumn{1}{l|}{} & \multicolumn{2}{|c|}{True State of Nature} \\ 
+\cline{3-4}\cline{4-4}
+& \multicolumn{1}{l|}{} & $H_{0}\,$true & $H_{0}$ false \\ \hline
+\multicolumn{1}{|c}{Decision} & \multicolumn{1}{|c|}{
+\begin{tabular}{l}
+Accept $H_{0}$ \\ 
+Reject $H_{0}$%
+\end{tabular}
+} & 
+\begin{tabular}{l}
+\begin{tabular}{l}
+Correct \\ 
+Probability $=\left( 1-\alpha \right) $%
+\end{tabular}
+\\ 
+\begin{tabular}{l}
+Wrong (type I error) \\ 
+Level of significance $=\alpha $%
+\end{tabular}
+\end{tabular}
+& 
+\begin{tabular}{l}
+\begin{tabular}{l}
+Wrong (type II\ error) \\ 
+Probability $=\beta $%
+\end{tabular}
+\\ 
+\begin{tabular}{l}
+Correct \\ 
+Power $=1-\beta $%
+\end{tabular}
+\end{tabular}
+\\ \hline
+\end{tabular}
+\end{center}
+
+\section{Various Types of $H_{0}$ and $H_{1}$}
+
+\begin{description}
+\item[Case I]  A simple null vs. a one-sided upper-tailed composit
+alternative:
+
+$H_{0}:\theta =\theta _{0};\qquad H_{1}:\theta >\theta _{0}$
+
+\item[Case II]  A simple null vs. a one-sided lower-tailed composit
+alternative:
+
+$H_{0}:\theta =\theta _{0};\qquad H_{1}:\theta <\theta _{0}$
+
+\textbf{Remark: }Testing procedure is equivalent to Case I.
+
+\item[Case III]  A composit null vs. a one-sided upper-tailed composit
+alternative:
+
+$H_{0}:\theta \leq \theta _{0};\qquad H_{1}:\theta >\theta _{0}$
+
+\item  \textbf{Remark: }Testing procedure is exact opposite of Case I.
+
+\item[Case IV]  A composit null vs. a one-sided lower-tailed composit
+alternative:
+
+$H_{0}:\theta \geq \theta _{0};\qquad H_{1}:\theta <\theta _{0}$
+
+\item  \textbf{Remark: }Testing procedure is equivalent to Case III or exact
+opposite of Case I.
+
+\item[Case V]  A simple null vs. a two-sided composit alternative:
+
+$H_{0}:\theta =\theta _{0};\qquad H_{1}:\theta \neq \theta _{0}$
+
+\textbf{Remark: }Testing procedure is the combination of Case I and III.
+\end{description}
+
+\section{General Hypothesis Testing Procedure}
+
+\begin{description}
+\item[Step 1:]  Write down $H_{0}$ and $H_{1}$ (i.e. express the claim in
+terms of the population paramter(s)).
+
+\item[Step 2:]  Identify the sample and test statistics (i.e. the evidence)
+to be used.
+
+\item[Step 3:]  Determine the sampling distribution of the sample and/or
+test statistics under $H_{0}$ (i.e. plot the distribution assuming $H_{0}$
+is true). Block out the acceptance and rejection regions in the domain of
+the sampling distribution.
+
+\item[Step 4:]  If $\alpha \,$is given, determine the critical value(s) in
+terms of the sample and/or test statistics. If $\alpha $ is not provided,
+find the $p$-value using the evidence as a critical value.
+
+\item[Step 5]  Make decision and draw your conclusion in the context of the
+problem.
+\end{description}
+
+\end{document}

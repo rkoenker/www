@@ -1,0 +1,145 @@
+This is TeX, Version 3.14159 (C version 6.1e) (format=latex 95.9.4)  3 SEP 1997 14:18
+**./images.tex
+(images.tex
+LaTeX2e <1995/06/01> patch level 3
+
+(/opt/texmf/tex/latex/unpacked/book.cls
+Document Class: book 1995/06/26 v1.3g Standard LaTeX document class
+(/opt/texmf/tex/latex/unpacked/bk12.clo
+File: bk12.clo 1995/06/26 v1.3g Standard LaTeX file (size option)
+)
+\c@part=\count82
+\c@chapter=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+\sizebox=\box26
+\lthtmlwrite=\write3
+(images.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+latex2htmlLength hsize=349.0pt
+latex2htmlLength vsize=630.3738pt
+latex2htmlLength hoffset=0.0pt
+latex2htmlLength voffset=0.0pt
+latex2htmlLength topmargin=0.0pt
+latex2htmlLength topskip=0.00002pt
+latex2htmlLength headheight=0.0pt
+latex2htmlLength headsep=0.0pt
+latex2htmlLength parskip=0.0pt plus 1.0pt
+latex2htmlLength oddsidemargin=17.0pt
+latex2htmlLength evensidemargin=62.0pt
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 80.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 80.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 80.
+l2hSize :tex2html_wrap_inline96:9.0pt::9.0pt::23.6242pt.
+[1
+
+
+]
+l2hSize :tex2html_wrap_inline98:9.0pt::9.0pt::23.6242pt.
+[2
+
+
+]
+l2hSize :tex2html_wrap_inline100:9.0pt::9.0pt::16.68872pt.
+[3
+
+
+]
+l2hSize :tex2html_wrap_inline102:9.0pt::9.0pt::36.97888pt.
+[4
+
+
+]
+l2hSize :tex2html_wrap_inline104:7.75pt::0.0pt::7.54993pt.
+[5
+
+
+]
+l2hSize :tex2html_wrap_inline110:8.2pt::8.2pt::16.48538pt.
+[6
+
+
+]
+l2hSize :tex2html_wrap_inline118:9.0pt::9.0pt::49.70235pt.
+[7
+
+
+]
+l2hSize :tex2html_wrap_inline120:7.75pt::0.0pt::20.022pt.
+[8
+
+
+]
+l2hSize :tex2html_wrap_inline122:8.33331pt::8.33331pt::19.77061pt.
+[9
+
+
+]
+l2hSize :tex2html_wrap_inline124:8.33331pt::8.33331pt::40.31216pt.
+[10
+
+
+]
+l2hSize :tex2html_wrap_inline130:8.33331pt::8.33331pt::141.26138pt.
+[11
+
+
+]
+l2hSize :tex2html_wrap_inline132:8.33331pt::8.33331pt::141.26138pt.
+[12
+
+
+]
+l2hSize :tex2html_wrap_inline134:8.33331pt::8.33331pt::141.45595pt.
+[13
+
+
+]
+l2hSize :tex2html_wrap_inline136:8.33331pt::8.33331pt::141.45595pt.
+[14
+
+
+]
+l2hSize :tex2html_wrap_inline138:8.33333pt::8.33333pt::141.26138pt.
+[15
+
+
+]
+l2hSize :tex2html_wrap_inline148:7.75pt::0.0pt::9.5499pt.
+[16
+
+
+] (images.aux) ) 
+Here is how much of TeX's memory you used:
+ 280 strings out of 10957
+ 2756 string characters out of 72967
+ 44910 words of memory out of 262141
+ 3175 multiletter control sequences out of 9500
+ 6376 words of font info for 23 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 22i,4n,21p,155b,167s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on images.dvi (16 pages, 2740 bytes).

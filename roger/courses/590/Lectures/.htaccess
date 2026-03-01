@@ -1,0 +1,17 @@
+allow from .uiuc.edu 
+allow from .illinois.edu 
+allow from .centril.net
+allow from .insightbb.com
+allow from il.comcast.net
+allow from 23.249.32
+AuthType Basic
+AddDescription "L1 Tangent Spaces" tangent.pdf
+AddDescription "L2 TMLE" tmle.pdf
+AddDescription "L3 QTET" QTET.pdf
+AddDescription "L4 Density Estimation" Oberwolfach.pdf
+AddDescription "L5 Shape Constraints" shape.pdf
+AddDescription "L6 Bayesball" tokyo.pdf
+AddDescription "L7 Income Dynamics" jhu.pdf
+AddDescription "L8 Medflies" talk.pdf
+AddDescription "L9 Optimal Transport" transport.pdf
+AddDescription "L10 QR Computation" NDQR.pdf

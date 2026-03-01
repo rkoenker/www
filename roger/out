@@ -1,0 +1,165 @@
+18,36c18,45
+< <!img src="pics/nedkelly.jpg" align=center 
+< alt="Kelly">
+< <img src="pics/rothko7.jpg" align=center
+< alt="Roy">
+< <p>
+< <font face="helvetica, arial" size=2>
+< <font color=009900>
+< <!Ned Kelly>
+< <!Le Therapeute>
+< </font>
+< </a>
+< <br>
+< by
+< <font color=0000ff>
+< <!Sidney Nolan>
+< <!Rene Magritte>
+< Mark Rothko<br>
+< </font>
+< </font>
+---
+> <Script Language="JavaScript">
+> <!--
+> function random_imglink(){
+> var myimages=new Array()
+> //specify random images below. You can have as many as you wish
+> myimages[1]="pics/magritte.jpg"
+> myimages[2]="pics/magritte1.jpg"
+> myimages[3]="pics/lichtenstein.jpg"
+> myimages[4]="pics/13_numbers.jpg"
+> myimages[5]="pics/rothko7.jpg"
+> myimages[6]="pics/malevich.jpg"
+> myimages[7]="pics/NedKelly2.jpg"
+> myimages[8]="pics/thumb.jpg"
+> myimages[9]="pics/nose.jpg"
+> myimages[10]="pics/nose.jpg"
+> myimages[11]="pics/saul_steinbergmask.jpg"
+> myimages[12]="pics/SaulSteinberg82.jpg"
+> myimages[13]="pics/rwk.jpg"
+> 
+> var ry=Math.floor(Math.random()*myimages.length)
+> if (ry==0)
+> ry=1
+> document.write('<a <img src="'+myimages[ry]+'" border=0></a>')
+> }
+> random_imglink()
+> //-->
+> </Script>
+> </td>
+60c69
+< <b>CV:</b> &nbsp;<a href=cv/vitae04.ps>PostScript</a>&nbsp;|&nbsp;<a href=cv/vitae04.pdf>PDF</a>&nbsp;
+---
+> <b>CV:</b> &nbsp;<a href=cv/vitae10.pdf>PDF</a>&nbsp;
+62c71
+< <b><a href=http://www.uiuc.edu>UIUC:</a>&nbsp</b> &nbsp;<a href=http:www.economics.uiuc.edu>Econ</a>&nbsp;|&nbsp;<a href=http://www.stat.uiuc.edu>Stat</a>&nbsp;
+---
+> <b>UIUC:</b> &nbsp;<a href=http://www.economics.uiuc.edu>Econ</a>&nbsp;|&nbsp;<a href=http://www.stat.uiuc.edu>Stat</a>&nbsp;
+72,75c81
+< <b><a href=http://www.econ.uiuc.edu/~roger/courses/371/ec371.html> 371</b>  Spring, 2004
+< </li>
+< <li>
+< <b><a href=http://www.econ.uiuc.edu/~econ472/ec472.html> 508</b>  Fall, 2004
+---
+> <b><a href=http://www.econ.uiuc.edu/~econ508/ec508.html> 508</b>  Fall, 2010
+78,84c84
+< <b><a href="courses/476/ec476.html"> 476</b>  Spring, 2004   
+< </li>
+< <li>
+< <b><a href="courses/478/ec478.html"> 478</b>  Spring, 2004
+< </li>
+< <li>
+< <b><a href="seminar.html"> Workshop</b>  Spring, 2004
+---
+> <b><a href="courses/574/ec574.html"> 574</b>  Spring, 2010   
+98c98
+< <b><a href="lab/eclab.html"> Lab</b>
+---
+> <b><a href="http://www.econ.uiuc.edu/~lab/eclab"> Lab</b>
+118c118
+< <b><a href="http://www.slowfood.com"> Slowfood</b> 
+---
+> <b><a href="http://kalman.blogs.nytimes.com/2009/11/26/back-to-the-land/"> Slowfood</b> 
+124c124
+< <b><a href="dict.html"> Idees Recues</b> 
+---
+> <b><a href="dict.html"> Id&eacute;es Re&ccedil;ues</b> 
+127c127
+< <b><a href="patent.html"> Patent Nonsense </b> 
+---
+> <b><a href="movies/tibet.mov">Tibet</b> 
+130c130,133
+< <b><a href=" http://www.math.columbia.edu/~bayer/coffee.html ">Coffee</b> 
+---
+> <b><a href="bikes.html"> Bike Curation</b> 
+> </li>
+> <li>
+> <b><a href="undata.html"> Undata </b> 
+133c136
+< <b><a href=" attin.html ">Atlantic Retinning</b> 
+---
+> <b><a href=" http://www.math.columbia.edu/~bayer/coffee.html ">Coffee</b> 
+160,162c163,167
+< <b> 
+< <a href= http://www.eswc2005.com >
+< Econometric Society World Congress, London, 18-25 August, 2005</a>
+---
+> <b>
+> <a href= https://www.rmetrics.org/meielisalp2011>
+> 5th Rmetrics Workshop on Computational Finance,
+> Meielisalp, Switzerland, 26-30 June 2011</a>
+> <a href= https://www.econ.uiuc.edu/~roger/courses/RMetrics> [slides]</a>
+166,168c171,175
+< <b> 
+< <a href= http://www.stat.uiuc.edu/icors04/ >
+< ICORS: International Conference on Robust Statistics, Beijing,July 12-16, 2004</a>
+---
+> <b>
+> <a href= http://www.cemmap.ac.uk/conferences.php?event_id=657>
+> CeMMAP Horowitz Conference:
+> UCL, 23-24 June 2011</a>
+> <a href= https://www.econ.uiuc.edu/~roger/research/ebayes/joelfest.pdf> [slides]</a>
+172,174c179,182
+< <b> 
+< <a href= http://www.ci.tuwien.ac.at/Conferences/useR-2004/ >
+< useR! The R User Conference, Vienna, May 19-21, 2004</a>
+---
+> <b>
+> <a href= http://www.econ.uiuc.edu/~roger/courses/LSE/>
+> LSE Short Course on Quantile Regression, LSE May 16-17 2011</a>
+> <a href= https://www.econ.uiuc.edu/~roger/courses/LSE> [slides]</a>
+179,180c187,190
+< <a href= NAKE/NAKE.html >
+< NAKE Workshop December 8-12, 2003</a>
+---
+> <a href= http://www.wcas.northwestern.edu/cfe/ConfPage.pdf>
+> Conference on Shape Restrictions:
+> Northwestern University, 5-6 November 2010</a>
+> <a href= https://www.econ.uiuc.edu/~roger/research/densiles/shape.pdf> [slides]</a>
+185,186c195,197
+< <a href= http://sankhya.isical.ac.in/index.html >
+< Sankhya Special Issue on Quantile Regression and Related Methods</a>
+---
+> <a href= http://www.case.hu-berlin.de/events/quantile%20workshop/events/HOH10/index_html> 
+> H.O. Hirschfeld Lectures:
+> Berlin, 7-8 October 2010</a>
+191,192c202,204
+< <a href= http://www.pims.math.ca/birs/workshops/2003/03w5089/ >
+< Oberbanff Regularization Workshop September 6-11, 2003</a>
+---
+> <a href= http://www.cemmap.ac.uk/forms/quantile_regression_2010.pdf>
+> Workshop on Quantile Regression:
+> Berlin, 8-9 October 2010</a>
+196,198c208,210
+< <b> 
+< <a href= http://cemmap.ifs.org.uk/mc_koenker.shtml >
+< Short Course on Quantile Regression, UCL, February 20-22, 2003</a>
+---
+> <b>
+> <a href= http://www.stat.tamu.edu/events/parzenprize/PPrize2010.pdf>
+> Parzen Prize: Texas A&M University, 24 March 2010</a>
+202,205d213
+< <b> 
+< <a href= http://cemmap.ifs.org.uk/qr.shtml >
+< Quantile Regression Methods and Applications, CEMMAP/UCL, April 10, 2003</a>
+< </b> 

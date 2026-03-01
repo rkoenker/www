@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<html>
+
+
+
+<head>
+
+<title>FAQs and Fixes</title>
+
+<meta name="Author" content>
+
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+
+</head>
+
+
+
+<body text="#000000" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="../images/misc/home-back.jpeg">
+
+
+
+<p><font size="-1" color="#000080"><i>Econometrics Lab at UIUC</i></font></p>
+
+
+
+<hr width="100%">
+
+
+
+<p align="center"><font size="+2" color="#000080"><b>Running OX 2.10</b></font></p>
+
+
+
+<p align="center">We run version 2.1x of Ox on both the solaris machines and the
+linux machine. Here are the
+
+instructions on how to get it running from your account: </p>
+
+
+
+<ul>
+
+  <li><p align="left">OX needs to know where its include files are. To do this you need to add
+
+    the following line to your &quot;.cshrc&quot; file (note that unix is case sensitive!):</p>
+
+  </li>
+
+</ul>
+
+
+
+<p align="center"><strong>SETENV OXPATH /usr/local/ox/include</strong> </p>
+
+
+
+<ul>
+
+  <li><p align="left">Most of the documentation available for this version of OX was installed
+
+    in HTML format in the directory <em>/usr/local/ox/doc</em>. You can use Netscape to
+
+    view this files, starting with the file &quot;ox.htm&quot;.</p>
+
+  </li>
+
+  <li><p align="left">The other thing that is important is to have ox know where its compile
+
+    libraries are. In the <b><i>solaris machines</i></b>, we have put them in the same place most other libraries
+
+    are. To make sure this works, you should include the following line on your
+
+    &quot;.cshrc&quot; file</p>
+
+  </li>
+
+</ul>
+
+
+
+<p align="center"><strong>SETENV LD_LIBRARY_PATH</strong> <strong>/usr/openwin/lib</strong></p>
+
+
+
+<ul>
+
+  <li><p align="left">Remember that in this version of Ox, most statistical commands
+
+    (including random number generation&nbsp; commands) are no longer in the
+
+    &quot;oxstd.h&quot; include file. In order to use these commands, you must also use the
+
+    &quot;oxprob.h&quot; include file</p>
+
+  </li>
+
+</ul>
+
+
+
+<p align="left">&nbsp;</p>
+
+
+
+<p align="left">Please contact <a href="mailto:morillo@ux6.cso.uiuc.edu">Daniel Morillo</a>
+
+for questions related to this.</p>
+
+
+
+<hr width="100%">
+
+
+
+<p>Back to the <a href="eclab.html">Econometrics Lab</a></p>
+
+
+
+<hr width="100%">
+
+
+
+<p align="center"><img src="../images/misc/envelope.gif" alt="envelope.gif (68 bytes)" width="16" height="10"> <strong>Send
+
+comments and suggestions to <a href="mailto:morillo@ragnar.econ.uiuc.edu">morillo@ragnar.econ.uiuc.edu</a></strong><br>
+
+- Last updated on October 25, 1999. This page is now mantained by Roger Koenker and Daniel
+
+Morillo -</p>
+
+</body>
+
+</html>
+

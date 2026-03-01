@@ -1,0 +1,10 @@
+AuthType Basic
+AddDescription "Introduction" L1.pdf
+AddDescription "Inference" L2.pdf
+AddDescription "Nonparametric QR" L3.pdf
+AddDescription "Endogoneity" L4.pdf
+AddDescription "Survival" L5.pdf
+AddDescription "Time-Series" L6.pdf
+AddDescription "Longitudinal Data" L7.pdf
+AddDescription "Risk" L8.pdf
+AddDescription "Computation" L9.pdf

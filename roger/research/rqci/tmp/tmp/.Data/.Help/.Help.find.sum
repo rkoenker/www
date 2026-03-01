@@ -1,0 +1,6 @@
+qrq~~~Linearized Quantile Estimation~~~
+ranks~~~Function to compute ranks from the dual (regression rankscore) process~~~regression quantiles, ranks, regression rankscores
+rq~~~Quantile Regression~~~regression quantiles, robust estimation, L-estimators
+rrs.test~~~Function to compute regression rankscore test of linear hypothesis~~~regression quantiles, ranks, regresion rankscores
+trq.print~~~Print a Trimmed Regression Quantile Summary~~~~keyword
+trq~~~Function to compute analogues of the trimmed mean for the linear regression model.~~~regression quantiles, robust regression, trimmed mean

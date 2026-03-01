@@ -1,0 +1,20 @@
+#~New session: Version: S Wed Sep 16 16:21:23 PDT 1998, Time: Fri Apr 23 17:41:14 2004
+#~
+data.restore("natality")
+#~
+ls()
+#~
+dim(natality)
+#~error: Problem: Not an S object: ./natalit
+#~
+dim(natality)
+#~error: Problem: Not an S object: ./natalit
+#~
+dim(d)
+#~
+attach(d)
+#~
+ls()
+#~
+q()
+#~End session: Time: 1082760255; Process: 22058

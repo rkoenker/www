@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<title>FAQs and Fixes</title>
+<meta name="Author" content>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body text="#000000" bgcolor="#C0C0C0" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="../images/misc/home-back.jpeg">
+
+<p><font size="-1" color="#000080"><i>Econometrics Lab at UIUC</i></font></p>
+
+<hr width="100%">
+
+<p align="center"><font size="+2" color="#000080"><b>Some notes about using Splus in
+Ragnar</b></font></p>
+
+<p align="center">For reasons known to all, Splus is the most used program in Ragnar and
+so I thought i would start a list of some of themost frequently asked questions about
+Splus:</p>
+
+<ul>
+  <li><p align="left">Roger Koenker has installed a number of new libraries for use in Splus.
+    A library for estimating <font color="#FF0000">log-spline</font> models can be accessed by
+    typing <strong><em>library(&quot;logspline2&quot;)</em></strong>. On-line help for the
+    functions contained in this library is accessed normally with the help command, for
+    example typing <em><strong>help(lsd.fit)</strong></em> </p>
+  </li>
+</ul>
+
+<blockquote>
+  <p align="left">The functions and procedures used in <font color="#FF0000">Venables and
+  Ripley's &quot;Modern Applied Statistics with S-Plus&quot;</font> (1994,1997) can also be
+  accessed with the library command. Here's a list of the available libraries:</p>
+  <div align="center"><center><table border="0" width="50%" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="50%">MASS</td>
+      <td width="50%">Main Library</td>
+    </tr>
+    <tr>
+      <td width="50%">class</td>
+      <td width="50%">Classification Methods</td>
+    </tr>
+    <tr>
+      <td width="50%">nnet</td>
+      <td width="50%">Neural networks</td>
+    </tr>
+    <tr>
+      <td width="50%">spatial</td>
+      <td width="50%">Spatial statistics</td>
+    </tr>
+    <tr>
+      <td width="50%">treefix</td>
+      <td width="50%">Fixes for tree pruning</td>
+    </tr>
+  </table>
+  </center></div>
+</blockquote>
+
+<blockquote>
+  <p align="left">For example, if you want to use the main library, you would type <strong><em>library(&quot;MASS&quot;)</em></strong></p>
+</blockquote>
+
+<ul>
+  <li><p align="left">If you are having problems bringing up a motif graphics window for use
+    with Splus, you should try adding the following line to your &quot;.cshrc&quot; file:</p>
+  </li>
+</ul>
+
+<p align="center"><strong><small><tt>LD_LIBRARY_PATH /usr/openwin/lib</tt></small></strong>
+</p>
+
+<ul>
+  <li><p align="left">If you need to run the Splus implementation of the quantile regression
+    algorithm, you need to invoke Splus with the command <em>Splus.local</em></p>
+  </li>
+  <li><p align="left">When you are running memory intensive processes, Splus sometimes does
+    not kill the allocated memory after you close the program, so please make sure that you
+    check if you have left any &quot;ghost processes&quot; running. To check what processes
+    are running in your account, you can use the following command</p>
+  </li>
+</ul>
+
+<p align="center"><strong>ps -aux |grep [your login name]</strong></p>
+
+<blockquote>
+  <p align="left">If any of the processes shown with this command are related to Splus, even
+  after you have closed the program, please write me an email at <a href="mailto:morillo@ux6.cso.uiuc.edu">morillo@ux6.cso.uiuc.edu</a></p>
+</blockquote>
+
+<p align="center">&nbsp;</p>
+
+<p align="left">Please contact <a href="mailto:morillo@ux6.cso.uiuc.edu">Daniel Morillo</a>
+for questions related to this page. </p>
+
+<hr width="100%">
+
+<p>Back to the <a href="eclab.html">Econometrics Lab</a></p>
+
+<hr width="100%">
+
+<p align="center"><img src="../images/misc/envelope.gif" alt="envelope.gif (68 bytes)" width="16" height="10"> <strong>Send
+comments and suggestions to <a href="mailto:morillo@ragnar.econ.uiuc.edu">morillo@ragnar.econ.uiuc.edu</a></strong><br>
+- Last updated on September 7, 1998. This page is now mantained by Roger Koenker and
+Daniel Morillo -</p>
+</body>
+</html>

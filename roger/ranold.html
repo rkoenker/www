@@ -1,0 +1,24 @@
+<script language="JavaScript">
+<!--
+
+/*
+Random Image Link Script- By Website Abstraction(http://www.wsabstract.com)
+Over 200+ free JavaScripts here!
+Updated: 00/04/25
+*/
+ 
+function random_imglink(){
+var myimages=new Array()
+//specify random images below. You can have as many as you wish
+myimages[1]="pics/magritte.jpg"
+myimages[2]="pics/nedkelly.jpg"
+myimages[3]="pics/lichtenstein.jpg"
+var ry=Math.floor(Math.random()*myimages.length)
+if (ry==0)
+ry=1
+document.write('<a <img src="'+myimages[ry]+'" border=0></a>')
+}
+random_imglink()
+//-->
+</script>
+
