@@ -13,16 +13,6 @@ out of this line of research.
 
 <br>
 <br>
-<STRONG> Robustifying Empirical Bayes</STRONG>
-<br>
-<br>
-This note explores two strategies for robustifying empirical Bayes methods
-for denoising in the Gaussian sequence model.  It is available from
-<a href="https://arxiv.org/pdf/2603.00704".>arXiv.</a>  Code to reproduce
-the figures and tables of the paper are available in a compressed 
-<a href="https://REBR.tar.gz".> tarball.</a>  
-<br>
-<br>
 <STRONG> Empirical Bayes for the Reluctant Frequentist</STRONG>
 <br>
 <br>
@@ -31,7 +21,7 @@ decision problems. In this tutorial we describe some basic principles of the
 empirical Bayes paradigm stressing their frequentist interpretation. Emphasis is
 placed on recent developments of nonparametric maximum likelihood methods for
 estimating mixture models. A more extensive introductory treatment will eventually
-be available in Koenker and Gu (2026). The methods are illustrated with an
+be available in Koenker and Gu (2024). The methods are illustrated with an
 extended application to models of heterogeneous income dynamics based on PSID
 data.
 <br>
